@@ -1,0 +1,21 @@
+# ***************************************************************************  #
+#                   MySQL Database Spring configuration properties             #
+# ***************************************************************************  #
+
+spring:
+  datasource:
+    url: @dataSource.url@
+    username: @dataSource.user@
+    password: @dataSource.password@
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+      format-sql: true
+      use-sql-comments: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+project:
+  jwt:
+    signKey: Bu:GW8bgPlEw
+    expirationMinutes: 1440

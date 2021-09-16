@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.figueiras</groupId>
+	<artifactId>photocontest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>photocontest</name>
+	<description>Photography Contest Application</description>
+
+
+	<properties>
+		<!-- Version de Java -->
+		<java.version>11</java.version>
+
+		<!-- Propiedades generales de la fuente de datos -->
+
+		<dataSource.user>root</dataSource.user>
+		<dataSource.password>root</dataSource.password>
+		<testDataSource.user>${dataSource.user}</testDataSource.user>
+		<testDataSource.password>${dataSource.password}</testDataSource.password>
+
+		<sqlPlugin.version>1.5</sqlPlugin.version>
+
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>MySQL</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Propiedades del driver de JDBC -->
+				<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
+				<jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
+				<jdbcDriver.version>8.0.25</jdbcDriver.version>
+				<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
+
+				<!-- Propiedades de la fuente de datos -->
+				<dataSource.baseUrl>jdbc:mysql://localhost/photocontest</dataSource.baseUrl>
+				<dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid</dataSource.url>
+				<testDataSource.url>${dataSource.baseUrl}_test?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid</testDataSource.url>
+				<dataSource.createTablesScript>1-MySQLCreateTables.sql</dataSource.createTablesScript>
+				<dataSource.createDataScript>2-MySQLCreateData.sql</dataSource.createDataScript>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${jdbcDriver.groupId}</groupId>
+			<artifactId>${jdbcDriver.artifactId}</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Validation API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<!-- Validation implementation -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.13.Final</version>
+		</dependency>
+
+		<!-- Jason Web Token para autenticacion -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+    </dependencies>
+
+	<build>
+		<plugins>
+			<!-- Plugin de SQL para maven -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<version>${sqlPlugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>${jdbcDriver.groupId}</groupId>
+						<artifactId>${jdbcDriver.artifactId}</artifactId>
+						<version>${jdbcDriver.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<driver>${jdbcDriver.className}</driver>
+					<url>${dataSource.url}</url>
+					<username>${dataSource.user}</username>
+					<password>${dataSource.password}</password>
+					<autocommit>true</autocommit>
+					<!-- OnError está a true porque al hacer los Drops
+					si las tablas no están creadas devuelve un error-->
+					<onError>continue</onError>
+					<orderFile>ascending</orderFile>
+					<fileset>
+						<basedir>${basedir}</basedir>
+						<includes>
+							<include>
+								src/sql/${dataSource.createTablesScript}
+							</include>
+							<include>
+								src/sql/${dataSource.createDataScript}
+							</include>
+						</includes>
+					</fileset>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-tables-for-testing</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<driver>${jdbcDriver.className}</driver>
+							<url>${dataSource.url}</url>
+							<username>${dataSource.user}</username>
+							<password>${dataSource.password}</password>
+							<autocommit>true</autocommit>
+							<onError>continue</onError>
+							<fileset>
+								<basedir>${basedir}</basedir>
+								<includes>
+									<include>
+										src/sql/${dataSource.createTablesScript}
+									</include>
+								</includes>
+							</fileset>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
