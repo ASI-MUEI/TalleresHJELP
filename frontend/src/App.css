@@ -1,0 +1,200 @@
+Jumbotron {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.centering {
+  width: 50%;
+  text-align: center;
+  padding: 70px 0;
+
+  height: auto;
+}
+
+img {
+  max-width: 148px;
+}
+
+.profileImg {
+  vertical-align: middle;
+  object-fit: cover;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.photographyGridImages {
+  vertical-align: middle;
+  object-fit: cover;
+  max-height: 300px;
+  max-width: 400px;
+}
+
+.photographyDetail {
+  vertical-align: middle;
+  object-fit: cover;
+  max-height: 600px;
+  max-width: 700px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));;
+}
+
+.notificationImg {
+  vertical-align: middle;
+  object-fit: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.contestsListImg {
+  vertical-align: middle;
+  object-fit: cover;
+  height: 140px;
+  width: 200px;
+}
+
+.signUpLogInDivFirst {
+  height: 90px;
+  width: 300px;
+}
+
+.signUpDivSecond {
+  height: 570px;
+  width: 300px;
+}
+
+.LogInDivSecond {
+  height: 350px;
+  width: 300px;
+}
+
+.contestPresentation {
+  display: flex;
+  flex-direction: column;
+  height: 555px;
+  width: 600px;
+}
+
+.contestPresentationAndButtons {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  width: 600px;
+}
+
+.contestHeader {
+  display: flex;
+  height: 590px;
+  width: 1200px;
+}
+
+.contestInfoTable {
+  display: flex;
+  flex-direction: column;
+  height: 595px;
+  width: 400px;
+}
+
+.contestHeaderImg {
+  vertical-align: middle;
+  object-fit: cover;
+  max-height: 320px;
+  max-width: 320px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));;
+}
+
+hr {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.hWithoutLineBreak {
+  display: inline-block;
+}
+
+.contestHeaderButtons {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.centeredHorizontalDiv {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centeredLink {
+  margin: auto;
+}
+
+.centeredParagraph {
+  text-align: center;
+}
+
+.centeredImg {
+  display: block;
+  margin: auto;
+}
+
+.p2 {
+  display: inline;
+  font-family: Helvetica, sans-serif;
+  margin-left: auto;
+}
+
+.p2bold {
+  display: inline;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.centeredDiv {
+  margin:auto
+}
+
+.photographyDescDiv {
+  margin: auto;
+  height: 100px;
+  width: 700px;
+}
+
+.exifDataDiv {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  height: 80px;
+  width: 700px;
+}
+
+.photographyPresentationUserData {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  height: 50px;
+  width: 700px;
+}
+
+.photographySupervisionControl {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 300px;
+  width: 700px;
+}
+
+.divFlexDirectionColumn{
+  display: flex;
+  flex-direction: column;
+}
+
+.photograhyPresentationProfileImg {
+  vertical-align: middle;
+  object-fit: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
