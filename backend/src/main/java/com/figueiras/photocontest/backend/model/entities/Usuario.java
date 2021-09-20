@@ -18,19 +18,11 @@ public class Usuario {
     private String nombrePilaUsuario;
     @Size(max = 100)
     private String apellidosUsuario;
-    @Size(max = 500)
-    private String biografiaUsuario;
     @Size(max = 90)
     @Email
     private String correoElectronicoUsuario;
     @Size(max = 100)
     private String contrasenaUsuario;
-    @Size(max = 200)
-    private String enlaceTwitterUsuario;
-    @Size(max = 200)
-    private String enlaceFacebookUsuario;
-    @Size(max = 200)
-    private String enlaceInstagramUsuario;
     private boolean cuentaEliminada;
     private Lenguaje lenguaje;
     private RolUsuarioSistema rolUsuarioSistema;
@@ -75,14 +67,6 @@ public class Usuario {
         this.apellidosUsuario = apellidosUsuario;
     }
 
-    public String getBiografiaUsuario() {
-        return biografiaUsuario;
-    }
-
-    public void setBiografiaUsuario(String biografiaUsuario) {
-        this.biografiaUsuario = biografiaUsuario;
-    }
-
     public String getCorreoElectronicoUsuario() {
         return correoElectronicoUsuario;
     }
@@ -97,30 +81,6 @@ public class Usuario {
 
     public void setContrasenaUsuario(String contrasenaUsuario) {
         this.contrasenaUsuario = contrasenaUsuario;
-    }
-
-    public String getEnlaceTwitterUsuario() {
-        return enlaceTwitterUsuario;
-    }
-
-    public void setEnlaceTwitterUsuario(String enlaceTwitterUsuario) {
-        this.enlaceTwitterUsuario = enlaceTwitterUsuario;
-    }
-
-    public String getEnlaceFacebookUsuario() {
-        return enlaceFacebookUsuario;
-    }
-
-    public void setEnlaceFacebookUsuario(String enlaceFacebookUsuario) {
-        this.enlaceFacebookUsuario = enlaceFacebookUsuario;
-    }
-
-    public String getEnlaceInstagramUsuario() {
-        return enlaceInstagramUsuario;
-    }
-
-    public void setEnlaceInstagramUsuario(String enlaceInstagramUsuario) {
-        this.enlaceInstagramUsuario = enlaceInstagramUsuario;
     }
 
     public boolean isCuentaEliminada() {

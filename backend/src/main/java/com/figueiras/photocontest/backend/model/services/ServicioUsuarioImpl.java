@@ -236,9 +236,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         // Borrado de datos personales en BBDD
         usuario.setNombrePilaUsuario("");
         usuario.setApellidosUsuario("");
-        usuario.setBiografiaUsuario("");
-        usuario.setEnlaceTwitterUsuario("");
-        usuario.setEnlaceFacebookUsuario("");
         usuario.setCorreoElectronicoUsuario(null);
         usuario.setCuentaEliminada(true);
 

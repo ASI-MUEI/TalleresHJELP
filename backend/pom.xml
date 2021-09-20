@@ -8,11 +8,11 @@
 		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.figueiras</groupId>
-	<artifactId>photocontest</artifactId>
+	<groupId>com.ASI-MUEI-BRAVO</groupId>
+	<artifactId>talleres-hjelp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>photocontest</name>
-	<description>Photography Contest Application</description>
+	<name>talleres-hjelp</name>
+	<description>Practica para ASI MUEI equipo Bravo</description>
 
 
 	<properties>

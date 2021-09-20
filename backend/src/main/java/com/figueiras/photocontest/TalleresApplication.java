@@ -9,11 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @SpringBootApplication
-public class PhotocontestApplication {
+public class TalleresApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(PhotocontestApplication.class, args);
+		SpringApplication.run(TalleresApplication.class, args);
 	}
 
 
