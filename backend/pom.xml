@@ -22,6 +22,7 @@
 		<!-- Propiedades generales de la fuente de datos -->
 		<!-- CREATE USER 'hjelp'@'localhost' IDENTIFIED BY 'hjelp'; -->
 		<!-- GRANT ALL ON hjelp.* TO 'hjelp'@'localhost'; -->
+		<!-- CREATE DATABASE menagerie; -->
 		<dataSource.user>hjelp</dataSource.user>
 		<dataSource.password>hjelp</dataSource.password>
 		<testDataSource.user>${dataSource.user}</testDataSource.user>
