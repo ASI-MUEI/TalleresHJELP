@@ -81,8 +81,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
         Optional<Usuario> usuarioOptionalNombreUsuario = usuarioDao.findByNombreUsuario(usuarioDto.getNombreUsuario());
+        Optional<Usuario> usuarioOptionalCorreoElectronico = usuarioDao.findByCorreoElectronicoUsuario(usuarioDto.getNombreUsuario());
+        // Se valida que el nombre de usuario sea único
         if(usuarioOptionalNombreUsuario.isPresent()){
             throw new CampoDuplicadoException("entidades.usuario.nombreusuario", usuarioDto.getNombreUsuario());
+        }
+        // Se valida que el correo electrónico sea único
+        if(usuarioOptionalCorreoElectronico.isPresent()){
+            throw new CampoDuplicadoException("entidades.usuario.correoelectronicousuario", usuarioDto.getEmail());
         }
 
         Optional<Usuario> usuarioOptionalCorreo = usuarioDao.findByCorreoElectronicoUsuario(usuarioDto.getEmail());

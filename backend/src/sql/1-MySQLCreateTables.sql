@@ -7,7 +7,7 @@ CREATE TABLE Usuario(
     nombreUsuario VARCHAR(50),
     nombrePilaUsuario VARCHAR(50),
     apellidosUsuario VARCHAR(100),
-    correoElectronicoUsuario VARCHAR(90),
+    correoElectronicoUsuario VARCHAR(90) UNIQUE,
     contrasenaUsuario VARCHAR(100),
     lenguaje int,
     rolUsuarioSistema int,
