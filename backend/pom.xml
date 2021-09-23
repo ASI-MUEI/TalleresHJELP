@@ -20,9 +20,10 @@
 		<java.version>11</java.version>
 
 		<!-- Propiedades generales de la fuente de datos -->
-
-		<dataSource.user>root</dataSource.user>
-		<dataSource.password>root</dataSource.password>
+		<!-- CREATE USER 'hjelp'@'localhost' IDENTIFIED BY 'hjelp'; -->
+		<!-- GRANT ALL ON hjelp.* TO 'hjelp'@'localhost'; -->
+		<dataSource.user>hjelp</dataSource.user>
+		<dataSource.password>hjelp</dataSource.password>
 		<testDataSource.user>${dataSource.user}</testDataSource.user>
 		<testDataSource.password>${dataSource.password}</testDataSource.password>
 
@@ -44,7 +45,7 @@
 				<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 				<!-- Propiedades de la fuente de datos -->
-				<dataSource.baseUrl>jdbc:mysql://localhost/photocontest</dataSource.baseUrl>
+				<dataSource.baseUrl>jdbc:mysql://localhost/hjelp</dataSource.baseUrl>
 				<dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid</dataSource.url>
 				<testDataSource.url>${dataSource.baseUrl}_test?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid</testDataSource.url>
 				<dataSource.createTablesScript>1-MySQLCreateTables.sql</dataSource.createTablesScript>
