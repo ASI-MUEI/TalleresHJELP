@@ -10,8 +10,8 @@ import ChanguePassword from '../../user/components/ChanguePassword';
 import ChangueProfileData from '../../user/components/ChangueProfileData';
 import RecoverUser from '../../user/components/RecoverUser';
 import ResetPassword from '../../user/components/ResetPassword';
-import Horario from '../../horario/components/Horario';
-import Reparacion from '../../reparacion/componentsç/Reparacion';
+import PaginaHorario from '../../horario/components/PaginaHorario';
+import Reparacion from '../../reparacion/components/Reparacion';
 
 const Body = () => {
 
@@ -29,7 +29,7 @@ const Body = () => {
                 <Route exact path="/users/:userName/changue-password"><ChanguePassword /></Route>
                 <Route exact path="/users/:userName/reset-password/:token"><ResetPassword /></Route>
                 <Route exact path="/users/:userName/changue-data"><ChangueProfileData /></Route>
-                <Route exact path="/horario"><Horario /></Route>
+                <Route exact path="/horario"><PaginaHorario/></Route>
                 <Route exact path="/reparacion"><Reparacion /></Route>
                 <Route><Home /></Route>
             </Switch>

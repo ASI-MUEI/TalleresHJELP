@@ -102,4 +102,11 @@ export default {
     'user.ChangueData.FacebookLink': 'Facebook link',
     'user.ChangueData.InstagramLink': 'Instagram link',
 
+
+    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'New repair',
+    'paginaHorario.nuevaReparacion.selectorCliente' : 'Select a client',
+    'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Select a vehicle',
+    'paginaHorario.nuevaReparacion.selectorElevador' : 'Select an elevator',
+    'paginaHorario.nuevaReparacion.selectorHorario' : 'Select the working times',
+
 }

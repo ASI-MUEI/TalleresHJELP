@@ -104,4 +104,10 @@ export default {
     'user.ChangueData.TwitterLink': 'Enlace a Twitter',
     'user.ChangueData.FacebookLink': 'Enlace a Facebook',
     'user.ChangueData.InstagramLink': 'Enlace a Instagram',
+
+    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Nueva reparación',
+    'paginaHorario.nuevaReparacion.selectorCliente' : 'Seleccione un cliente',
+    'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Seleccione un vehículo',
+    'paginaHorario.nuevaReparacion.selectorElevador' : 'Seleccione un elevador',
+    'paginaHorario.nuevaReparacion.selectorHorario' : 'Seleccione las horas de trabajo',
 }
