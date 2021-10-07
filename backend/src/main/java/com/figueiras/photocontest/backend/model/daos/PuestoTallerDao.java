@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface PuestoTallerDao extends PagingAndSortingRepository<PuestoTaller, Long> {
-    @Query("SELECT pt FROM PuestoTaller pt WHERE pt.vehiculo = %:vehiculo%")
+    @Query("SELECT pt FROM PuestoTallerVehiculo pt WHERE pt.vehiculo.idVehiculo = :vehiculo")
     Slice<Vehiculo> findByVehiculo(Long vehiculo, Pageable pageable);
 }
