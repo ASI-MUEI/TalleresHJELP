@@ -6,6 +6,7 @@ import com.figueiras.photocontest.backend.model.services.Block;
 import com.figueiras.photocontest.backend.model.services.ServicioUsuario;
 import com.figueiras.photocontest.backend.rest.common.JwtGenerator;
 import com.figueiras.photocontest.backend.rest.common.JwtInfo;
+import com.figueiras.photocontest.backend.rest.conversor.UsuarioConversor;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -60,11 +61,8 @@ public class ControladorUsuarios {
                                                  @RequestParam(defaultValue = "5") int size){
         Block<Usuario> blockUsuarios = servicioUsuario.recuperarUsuarios(nombreUsuario, page, size);
 
-        Block<UsuarioTablaDto> usuarioDtoBlock =
-                new Block<>(UsuarioConversor.toUsuariosTablaDto(blockUsuarios.getItems()),
-                        blockUsuarios.getExistMoreItems());
-
-        return usuarioDtoBlock;
+        return new Block<>(UsuarioConversor.toUsuariosTablaDto(blockUsuarios.getItems()),
+                blockUsuarios.getExistMoreItems());
     }
 
     @GetMapping("/usuarios/nombresUsuario")

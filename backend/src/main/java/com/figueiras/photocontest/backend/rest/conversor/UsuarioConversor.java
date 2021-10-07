@@ -1,6 +1,9 @@
-package com.figueiras.photocontest.backend.rest.dtos;
+package com.figueiras.photocontest.backend.rest.conversor;
 
 import com.figueiras.photocontest.backend.model.entities.Usuario;
+import com.figueiras.photocontest.backend.rest.dtos.UsuarioAutenticadoDto;
+import com.figueiras.photocontest.backend.rest.dtos.UsuarioDto;
+import com.figueiras.photocontest.backend.rest.dtos.UsuarioTablaDto;
 
 import java.util.ArrayList;
 import java.util.List;

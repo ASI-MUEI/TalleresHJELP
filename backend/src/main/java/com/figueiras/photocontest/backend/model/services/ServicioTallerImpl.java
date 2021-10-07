@@ -10,6 +10,8 @@ import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundExcep
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
 import com.figueiras.photocontest.backend.rest.dtos.PuestoTallerVehiculoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 
 import java.text.SimpleDateFormat;
 import java.util.Optional;
@@ -64,5 +66,12 @@ public class ServicioTallerImpl implements ServicioTaller{
 
 
 
+    }
+
+    @Override
+    public Block<PuestoTallerVehiculo> findAllPuestosTVehiculos(int page, int size) {
+        Slice<PuestoTallerVehiculo> puestosVehiculos = puestoTallerVehiculoDao.findAllByDay(PageRequest.of(page, size));
+
+        return new Block<>(puestosVehiculos.getContent(), puestosVehiculos.hasNext());
     }
 }

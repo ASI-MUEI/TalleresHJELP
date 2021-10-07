@@ -83,7 +83,7 @@ CREATE TABLE PuestoTallerVehiculo(
   fechaComienzo DATE,
   fechaFinal DATE,
   CONSTRAINT PuestoTallerVehiculo_pk PRIMARY KEY(idPuestoVehiculo),
-  CONSTRAINT vehiculo_fk_puestoTallerVehiculo FOREIGN KEY(idVechiculo) REFERENCES Vehiculo(idVehiculo),
+  CONSTRAINT vehiculo_fk_puestoTallerVehiculo FOREIGN KEY(idVehiculo) REFERENCES Vehiculo(idVehiculo),
   CONSTRAINT puesto_fk_puestoTallerVehiculo FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
 
 );
