@@ -1,4 +1,4 @@
-package com.figueiras.photocontest.backend.model.entities;
+package com.figueiras.photocontest.backend.model.daos;
 
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import org.springframework.data.domain.Pageable;

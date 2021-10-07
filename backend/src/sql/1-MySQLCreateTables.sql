@@ -56,7 +56,9 @@ CREATE TABLE Vehiculo(
     CONSTRAINT usuario_fk FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT marca_fk FOREIGN KEY(idMarca) REFERENCES Marca(idMarca),
     CONSTRAINT modelo_fk FOREIGN KEY(idModelo) REFERENCES Modelo(idModelo),
-    CONSTRAINT flota_fk FOREIGN KEY(idFlota) REFERENCES Flota(idFlota)
+    CONSTRAINT flota_fk FOREIGN KEY(idFlota) REFERENCES Flota(idFlota),
+    CONSTRAINT matricula_unique UNIQUE(matricula),
+    CONSTRAINT numBastidor_unique UNIQUE(numBastidor)
 );
 
 CREATE TABLE Documento(
@@ -73,3 +75,16 @@ CREATE TABLE PuestoTaller(
     descripcion VARCHAR(255),
     CONSTRAINT PuestoTaller_pk PRIMARY KEY(idPuesto)
 );
+
+CREATE TABLE PuestoTallerVehiculo(
+  idPuestoVehiculo BIGINT NOT NULL AUTO_INCREMENT,
+  idPuesto BIGINT NOT NULL,
+  idVehiculo BIGINT NOT NULL,
+  fechaComienzo DATE,
+  fechaFinal DATE,
+  CONSTRAINT PuestoTallerVehiculo_pk PRIMARY KEY(idPuestoVehiculo),
+  CONSTRAINT vehiculo_fk_puestoTallerVehiculo FOREIGN KEY(idVechiculo) REFERENCES Vehiculo(idVehiculo),
+  CONSTRAINT puesto_fk_puestoTallerVehiculo FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
+
+);
+

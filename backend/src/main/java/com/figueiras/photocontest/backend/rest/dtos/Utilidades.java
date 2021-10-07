@@ -1,8 +1,6 @@
 package com.figueiras.photocontest.backend.rest.dtos;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 

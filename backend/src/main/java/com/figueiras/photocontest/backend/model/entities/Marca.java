@@ -11,6 +11,12 @@ public class Marca {
     private String nombre;
     private String descripcion;
 
+    public Marca(Long idMarca, String nombre, String descripcion) {
+        this.idMarca = idMarca;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public Marca() {
     }
 

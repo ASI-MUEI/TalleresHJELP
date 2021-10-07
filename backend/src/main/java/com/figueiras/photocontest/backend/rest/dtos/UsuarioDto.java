@@ -1,7 +1,5 @@
 package com.figueiras.photocontest.backend.rest.dtos;
 
-import java.util.List;
-
 public class UsuarioDto {
 
     private Long idUsuario;

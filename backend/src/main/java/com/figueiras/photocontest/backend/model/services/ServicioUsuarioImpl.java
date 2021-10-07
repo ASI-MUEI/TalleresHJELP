@@ -1,13 +1,14 @@
 package com.figueiras.photocontest.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.entities.*;
+import com.figueiras.photocontest.backend.model.daos.UsuarioDao;
+import com.figueiras.photocontest.backend.model.entities.Lenguaje;
+import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.rest.common.JwtGenerator;
 import com.figueiras.photocontest.backend.rest.common.JwtInfo;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioCambioContraseñaDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioLoginDto;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
@@ -15,8 +16,8 @@ import org.springframework.data.domain.Slice;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicioUsuarioImpl implements ServicioUsuario {

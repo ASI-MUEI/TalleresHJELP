@@ -1,6 +1,8 @@
 package com.figueiras.photocontest.backend.rest.controllers;
 
-import com.figueiras.photocontest.backend.model.exceptions.*;
+import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoException;
+import com.figueiras.photocontest.backend.model.exceptions.CamposIntroducidosNoValidosException;
+import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.rest.dtos.ErroresDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

@@ -4,7 +4,6 @@ import com.figueiras.photocontest.backend.model.entities.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class UsuarioConversor {
 
