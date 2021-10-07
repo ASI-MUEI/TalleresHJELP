@@ -4,6 +4,7 @@ export default {
     'app.Header.Title': 'PhotoContest',
     'app.Header.Home': 'Inicio',
     'app.Header.Contests': 'Concursos',
+    'app.Header.Horarios' : 'Horarios',
     'app.Header.People': 'Xente',
     'app.Header.Profile': 'Perfil',
     'app.Header.Notifications': 'Notificacións',

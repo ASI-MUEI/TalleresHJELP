@@ -3,6 +3,7 @@ export default {
     'app.Commons.Save': 'Guardar',
     'app.Header.Title': 'PhotoContest',
     'app.Header.Home': 'Inicio',
+    'app.Header.Horarios' : 'Horarios',
     'app.Header.Contests': 'Concursos',
     'app.Header.People': 'Gente',
     'app.Header.Profile': 'Perfil',

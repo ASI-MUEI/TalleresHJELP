@@ -20,6 +20,9 @@ const Header = () => {
         <Container>
           <Link className="navbar-brand" to="/">Taleres HJELP</Link>
           <Nav className="me-auto">
+            <Link className="nav-link" to="/horario">
+              <FormattedMessage id="app.Header.Horarios" />
+            </Link>
           </Nav>
 
           {
