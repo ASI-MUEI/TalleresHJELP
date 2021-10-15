@@ -5,7 +5,6 @@ import com.figueiras.photocontest.backend.model.daos.MarcaDao;
 import com.figueiras.photocontest.backend.model.daos.ModeloDao;
 import com.figueiras.photocontest.backend.model.daos.VehiculoDao;
 import com.figueiras.photocontest.backend.model.entities.Flota;
-import com.figueiras.photocontest.backend.model.entities.Marca;
 import com.figueiras.photocontest.backend.model.entities.Modelo;
 import com.figueiras.photocontest.backend.model.entities.Vehiculo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoException;
@@ -43,14 +42,6 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
             throw new CampoDuplicadoException("entidades.vehiculo.numBastidor", vehiculoDto.getNumBastidor());
         }
 
-        Optional<Marca> vehMarca = Optional.empty();
-        if (vehiculoDto.getMarca() != null){
-            vehMarca = marcaDao.findById(vehiculoDto.getMarca());
-            if(vehMarca.isEmpty()){
-                throw new InstanceNotFoundException("entidades.marca.idMarca", vehiculoDto.getMarca());
-            }
-        }
-
         Optional<Modelo> vehModelo = Optional.empty();
         if (vehiculoDto.getModelo() != null) {
             vehModelo = modeloDao.findById(vehiculoDto.getModelo());
@@ -71,7 +62,6 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         vehiculo.setMatricula(vehiculoDto.getMatricula());
         vehiculo.setNumBastidor(vehiculoDto.getNumBastidor());
         vehModelo.ifPresent(vehiculo::setModelo);
-        vehMarca.ifPresent(vehiculo::setMarca);
         vehFlota.ifPresent(vehiculo::setFlota);
         vehiculoDao.save(vehiculo);
     }

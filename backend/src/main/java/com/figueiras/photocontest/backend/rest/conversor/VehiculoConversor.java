@@ -15,7 +15,6 @@ public class VehiculoConversor {
         VehiculoCompletoDto vehiculoDto = new VehiculoCompletoDto();
         vehiculoDto.setIdVehiculo(vehiculo.getIdVehiculo());
         vehiculoDto.setMatricula(vehiculo.getMatricula());
-        vehiculoDto.setMarca(toMarcaDto(vehiculo.getMarca()));
         vehiculoDto.setModelo(toModeloDto(vehiculo.getModelo()));
         vehiculoDto.setFlota(toFlotaDto(vehiculo.getFlota()));
         vehiculoDto.setNumBastidor(vehiculo.getNumBastidor());
