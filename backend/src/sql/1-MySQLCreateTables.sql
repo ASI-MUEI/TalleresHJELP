@@ -1,11 +1,13 @@
 -- noinspection SqlNoDataSourceInspectionForFile
+DROP TABLE PuestoTallerVehiculo;
+DROP TABLE PuestoTaller;
 DROP TABLE Vehiculo;
 DROP TABLE Flota;
 DROP TABLE Modelo;
 DROP TABLE Marca;
 DROP TABLE Usuario;
 DROP TABLE Documento;
-DROP TABLE PuestoTaller;
+
 
 CREATE TABLE Usuario(
     idUsuario BIGINT NOT NULL AUTO_INCREMENT,
