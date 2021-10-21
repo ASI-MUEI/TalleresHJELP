@@ -11,9 +11,11 @@ import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoExcepti
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.rest.dtos.VehiculoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class ServicioVehiculoImpl implements ServicioVehiculo{
 
     @Autowired
