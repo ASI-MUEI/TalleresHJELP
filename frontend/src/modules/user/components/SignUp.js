@@ -5,6 +5,7 @@ import backend from "../../../backend";
 import { useHistory } from 'react-router-dom';
 import Errors from "../../commons/components/Errors";
 import LenguagueSelector from "./LenguagueSelector";
+import RolSelector from "./RolSelector";
 
 const SignUp = () => {
 
@@ -17,6 +18,7 @@ const SignUp = () => {
     const [surnames, setSurnames] = useState("");
     const [email, setEmail] = useState("");
     const [lenguague, setLenguague] = useState("");
+    const [rol, setRol] = useState("");
     const [backendErrors, setBackendErrors] = useState(null);
 
     const checkPassword = () => {
@@ -41,7 +43,8 @@ const SignUp = () => {
                     nombrePilaUsuario: name.trim(),
                     apellidosUsuario: surnames.trim(),
                     email: email.trim(),
-                    lenguaje: lenguague
+                    lenguaje: lenguague,
+                    rolUsuario: rol
                 },
                 () => history.push("/users/logIn"),
                 errors => setBackendErrors(errors)
@@ -110,6 +113,10 @@ const SignUp = () => {
                     <div className="input-group mb-3">
                         <LenguagueSelector id="lenguagueId" className="custom-select my-1 mr-sm-2"
                             value={lenguague} onChange={e => setLenguague(e.target.value)} required />
+                    </div>
+                    <div className="input-group mb-3">
+                        <RolSelector id="rolId" className="custom-select my-1 mr-sm-2"
+                            value={rol} onChange={e => setRol(e.target.value)} required />
                     </div>
                     <br />
                     <div className="d-flex justify-content-center">

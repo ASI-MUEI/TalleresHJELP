@@ -2,6 +2,7 @@ package com.figueiras.photocontest.backend.model.services;
 
 import com.figueiras.photocontest.backend.model.daos.UsuarioDao;
 import com.figueiras.photocontest.backend.model.entities.Lenguaje;
+import com.figueiras.photocontest.backend.model.entities.RolUsuarioSistema;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.rest.common.JwtGenerator;
@@ -105,6 +106,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         usuario.setApellidosUsuario(usuarioDto.getApellidosUsuario());
         usuario.setCorreoElectronicoUsuario(usuarioDto.getEmail());
         usuario.setLenguaje(Lenguaje.values()[usuarioDto.getLenguaje()]);
+        usuario.setRolUsuarioSistema(RolUsuarioSistema.values()[Integer.valueOf(usuarioDto.getRolUsuario())]);
 
         usuarioDao.save(usuario);
     }

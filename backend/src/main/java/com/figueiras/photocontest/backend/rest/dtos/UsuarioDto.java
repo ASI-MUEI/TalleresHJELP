@@ -10,6 +10,7 @@ public class UsuarioDto {
     private String apellidosUsuario;
     private boolean cuentaEliminada;
     private int lenguaje;
+    private String rolUsuario;
 
     public UsuarioDto() {
     }
@@ -78,4 +79,11 @@ public class UsuarioDto {
         this.lenguaje = lenguaje;
     }
 
+    public String getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public void setRolUsuario(String rolUsuario) {
+        this.rolUsuario = rolUsuario.toUpperCase();
+    }
 }

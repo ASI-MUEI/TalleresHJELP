@@ -8,39 +8,20 @@ export default {
     'app.Header.People': 'Xente',
     'app.Header.Profile': 'Perfil',
     'app.Header.Notifications': 'Notificacións',
-    'app.Header.SignIn': 'Rexistrarse',
+    'app.Header.SignIn': 'Rexistrar Usuario',
     'app.Header.LogIn': 'Iniciar sesión',
     'app.Header.MyProfile': 'O meu perfil',
     'app.Header.Config': 'Configuración',
     'app.Header.LogOut': 'Pechar sesión',
 
-    'app.Home.Contests': 'Os concursos máis recentes',
     'app.Home.WelcomeBack': 'Benvido',
     'app.Home.Welcome': 'Benvido a Talleres HJELP',
 
-    'app.RedirectHome.paragraphContests': 'Bota un vistazo a todos os concursos ou crea ti un concurso',
-    'app.RedirectHome.paragraphAccount': 'Inicia sesión ou rexístrate se non tes conta',
-    'app.RedirectHome.ButtonContests': 'Atopar concursos',
-    'app.RedirectHome.ButtonCreateContest': 'Crear concurso',
+    'app.RedirectHome.paragraphAccount': 'Inicia sesión en talleres HJELP',
     'app.RedirectHome.LogIn': 'Iniciar sesión',
-    'app.RedirectHome.SignIn': 'Rexistrarse',
-
-    'app.ContestTable.Photo': 'Imaxe',
-    'app.ContestTable.Name': 'Nome',
-    'app.ContestTable.Status': 'Estado',
-    'app.ContestTable.Category': 'Categoria',
-    'app.ContestTable.InitialDate': 'Fecha de inicio',
-    'app.ContestTable.EndDate': 'Fecha de fin',
-    'app.ContestTable.Status.EN_PREPARACION': 'En preparación',
-    'app.ContestTable.Status.ABIERTO': 'Aberto',
-    'app.ContestTable.Status.VOTACION': 'Votación',
-    'app.ContestTable.Status.FINALIZADO': 'Finalizado',
+    'app.RedirectHome.SignIn': 'Rexistrar Usuario',
 
     'app.Home.NoContests': 'Vaia! Parece que non hai concursos recentes',
-
-    'app.FindContests.CleanSearch': 'Limpar resultados',
-    'app.FindContestsResult.NoContests': 'Vaia! Parece que non hai concursos que concorden co teu criterio de búsqueda',
-    'app.FindContests.PlaceHolder': 'Nome do concurso',
 
     'global.buttons.search': 'Procurar',
 
@@ -57,16 +38,12 @@ export default {
 
     'user.FindUsers.PlaceHolder': 'Nome de usuario',
 
-    'user.Profile.ContestTable.Title': 'Concursos nos que participa',
-    'user.Profile.ContestTable.Name': 'Nome do concurso',
-    'user.Profile.ContestTable.role': 'Rol no concurso',
-    'user.Profile.ContestTable.fecha': 'Participa desde',
     'user.Profile.Follow': 'Seguir',
     'user.Profile.Unfollow': 'Deixar de seguir',
     'user.Profile.Delete': 'Eliminar conta',
     'user.Profile.DeleteMsg': 'Está seguro de que quere eliminar esta conta?',
 
-    'user.SignUp.Welcome': 'Rexístrate para descubrir o mellor taller.',
+    'user.SignUp.Welcome': 'Rexístra novo personal.',
     'user.SignUp.UserName': 'Nome de usuario',
     'user.SignUp.Password': 'Contrasinal',
     'user.SignUp.RepeatPassword': 'Repita o contrasinal',
@@ -74,13 +51,14 @@ export default {
     'user.SignUp.Name': 'Nome',
     'user.SignUp.Surnames': 'Apelidos',
     'user.SignUp.Email': 'Correo electrónico',
-    'user.SignUp.SignUp': 'Rexistrarse',
+    'user.SignUp.SignUp': 'Rexistrar',
     'user.SignUp.Login': 'Iniciar sesión',
     'user.SignUp.Lenguagues': 'Escolla a linguaxe',
+    'user.SignUp.Rol': 'Escolla o rol',
 
     'user.LogIn.Welcome': 'Inicia sesion en Talleres HJELP',
     'user.Login.ForgotPassword': 'Olvidaches o teu contrasinal?',
-    'user.Login.RegisterMsg': 'Necesitas unha conta?',
+    'user.Login.RegisterMsg': 'Necesitas unha conta? Pregunta ao personal de administración',
 
     'user.RecoverUser.UserName': 'Introduzca o seu nome de usuario',
     'user.RecoverUser.SendRecoveryLink': 'Enviar correo de recuperación',
@@ -101,13 +79,12 @@ export default {
     'user.ChangueData.Email': 'Correo electrónico',
     'user.ChangueData.Surnames': 'Apelidos',
     'user.ChangueData.Biography': 'Biografía',
-    'user.ChangueData.TwitterLink': 'Enlace a Twitter',
-    'user.ChangueData.FacebookLink': 'Enlace a Facebook',
-    'user.ChangueData.InstagramLink': 'Enlace a Instagram',
 
     'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Nova reparación',
     'paginaHorario.nuevaReparacion.selectorCliente' : 'Escolla un cliente',
     'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Escolla un coche',
     'paginaHorario.nuevaReparacion.selectorElevador' : 'Escolla un elevador',
     'paginaHorario.nuevaReparacion.selectorHorario' : 'Escolla as horas de traballo',
+
+    'paginaPrincipal.administrativos.tareasAdministrativas' : 'Tareas do personal administrativo',
 }

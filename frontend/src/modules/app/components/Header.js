@@ -52,9 +52,9 @@ const Header = () => {
                 <Link className="dropdown-item" to="/users/logIn">
                   <FormattedMessage id="app.Header.LogIn" />
                 </Link>
-                <Link className="dropdown-item" to="/users/signUp">
+                {/* <Link className="dropdown-item" to="/users/signUp">
                   <FormattedMessage id="app.Header.SignIn" />
-                </Link>
+                </Link> */}
               </NavDropdown>
 
           }

@@ -83,10 +83,6 @@ const LogIn = () => {
                 <br/>
                 <div className="d-flex justify-content-center">
                     <FormattedMessage id='user.Login.RegisterMsg'/>
-                    &nbsp;
-                    <Link to={"/users/signUp"}>
-                        <FormattedMessage id='user.SignUp.SignUp'/>
-                    </Link>
                 </div>
             </Container>
 

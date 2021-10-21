@@ -21,13 +21,6 @@ const SessionButtons = () => {
                     </Button>
                 </form>
                 &emsp;
-                <div className="d-flex justify-content-center">
-                    <form onSubmit={() => history.push('/users/signUp')}>
-                        <Button type="submit" className="d-flex justify-content-center" variant="info">
-                            <FormattedMessage id="app.RedirectHome.SignIn" />
-                        </Button>
-                    </form>
-                </div>
             </div>
         </div>
     )

@@ -4,26 +4,22 @@ export default {
     'app.Header.Title': 'PhotoContest',
     'app.Header.Home': 'Inicio',
     'app.Header.Horarios' : 'Horarios',
-    'app.Header.Contests': 'Concursos',
     'app.Header.People': 'Gente',
     'app.Header.Profile': 'Perfil',
     'app.Header.Notifications': 'Notificaciones',
     'app.Header.LogIn': 'Iniciar sesión',
-    'app.Header.SignIn': 'Registrarse',
+    'app.Header.SignIn': 'Registrar Usuario',
     'app.Header.MyProfile': 'Mi perfil',
     'app.Header.Config': 'Configuración',
     'app.Header.LogOut': 'Cerrar sesión',
 
-    'app.Home.Contests': 'Los concursos más recientes',
     'app.Home.WelcomeBack': 'Bienvenido',
     'app.Home.Welcome': 'Bienvenido a Talleres HJELP',
 
     'app.RedirectHome.paragraphContests': 'Echa un vistazo a todos los concursos o crea uno tú mismo',
-    'app.RedirectHome.paragraphAccount': 'Inicia sesión o regístrate si no tienes cuenta',
-    'app.RedirectHome.ButtonContests': 'Buscar concursos',
-    'app.RedirectHome.ButtonCreateContest': 'Crear concurso',
+    'app.RedirectHome.paragraphAccount': 'Inicia sesión en talleres HJELP',
     'app.RedirectHome.LogIn': 'Iniciar sesión',
-    'app.RedirectHome.SignIn': 'Registrarse',
+    'app.RedirectHome.SignIn': 'Registrar Usuario',
 
     'app.ContestTable.Photo': 'Foto',
     'app.ContestTable.Name': 'Nombre',
@@ -37,10 +33,6 @@ export default {
     'app.ContestTable.Status.FINALIZADO': 'Finalizado',
 
     'app.Home.NoContests': '¡Vaya! Parece que no hay concursos recientes',
-
-    'app.FindContests.CleanSearch': 'Limpiar resultados',
-    'app.FindContests.PlaceHolder': 'Nombre del concurso',
-    'app.FindContestsResult.NoContests': '¡Vaya! Parece que no hay concursos que concuerden con tu criterio de búsqueda',
 
     'global.buttons.search': 'Buscar',
 
@@ -56,14 +48,10 @@ export default {
 
     'user.FindUsers.PlaceHolder': 'Nombre de usuario',
 
-    'user.Profile.ContestTable.Title': 'Concursos en los que participa',
-    'user.Profile.ContestTable.Name': 'Nombre del concurso',
-    'user.Profile.ContestTable.role': 'Rol en concurso',
-    'user.Profile.ContestTable.fecha': 'Participa desde',
     'user.Profile.Delete': 'Eliminar cuenta',
     'user.Profile.DeleteMsg': '¿Está seguro de que quiere eliminar esta cuenta?',
 
-    'user.SignUp.Welcome': 'Regístrate para descubrir el mejor taller.',
+    'user.SignUp.Welcome': 'Regístro de nuevo personal.',
     'user.SignUp.UserName': 'Nombre de usuario',
     'user.SignUp.Password': 'Contraseña',
     'user.SignUp.RepeatPassword': 'Repita la contraseña',
@@ -72,11 +60,12 @@ export default {
     'user.SignUp.Surnames': 'Apellidos',
     'user.SignUp.Email': 'Correo electrónico',
     'user.SignUp.Login': 'Iniciar sesión',
-    'user.SignUp.SignUp': 'Registrarse',
+    'user.SignUp.SignUp': 'Registrar',
     'user.SignUp.Lenguagues': 'Seleccione el lenguaje',
+    'user.SignUp.Rol': 'Seleccione el rol',
 
     'user.LogIn.Welcome': 'Inicia sesión en Talleres HJELP',
-    'user.Login.RegisterMsg': '¿Necesitas una cuenta?',
+    'user.Login.RegisterMsg': '¿Necesitas una cuenta? Pregunta al personal de administración',
     'user.Login.ForgotPassword': '¿Olvidaste tu contraseña?',
 
     'user.RecoverUser.UserName': 'Introduzca su nombre de usuario',
@@ -110,4 +99,6 @@ export default {
     'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Seleccione un vehículo',
     'paginaHorario.nuevaReparacion.selectorElevador' : 'Seleccione un elevador',
     'paginaHorario.nuevaReparacion.selectorHorario' : 'Seleccione las horas de trabajo',
+
+    'paginaPrincipal.administrativos.tareasAdministrativas' : 'Tareas del personal administrativo',
 }
