@@ -1,8 +1,7 @@
 -- noinspection SqlNoDataSourceInspectionForFile
-DROP TABLE PuestoTallerVehiculo;
-DROP TABLE PuestoTaller;
 DROP TABLE PlanHorarios;
 DROP TABLE Asistencia;
+DROP TABLE PuestoTaller;
 DROP TABLE EstadosAsistencias;
 DROP TABLE TiposAsistencias;
 DROP TABLE Horarios;
