@@ -19,11 +19,17 @@ const Header = () => {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Link className="navbar-brand" to="/">Taleres HJELP</Link>
-          <Nav className="me-auto">
-            <Link className="nav-link" to="/horario">
-              <FormattedMessage id="app.Header.Horarios" />
-            </Link>
-          </Nav>
+          {
+            userName ?
+              <Nav className="me-auto">
+                <Link className="nav-link" to="/horario">
+                  <FormattedMessage id="app.Header.Horarios" />
+                </Link>
+              </Nav>
+              :
+              null
+          }
+
 
           {
             userName ?
