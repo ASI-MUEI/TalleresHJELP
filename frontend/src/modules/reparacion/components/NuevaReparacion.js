@@ -16,7 +16,7 @@ const NuevaReparacion = () => {
     return(
         <Container>
             <br/>
-            <h2 className="centeredParagraph">{intl.formatMessage({ id: 'paginaHorario.nuevaReparacion.nuevaReparacion' })}</h2>
+            <h4 className="centeredParagraph">{intl.formatMessage({ id: 'paginaHorario.nuevaReparacion.nuevaReparacion' })}</h4>
             <br/>
             <Form>
                 <Multiselect

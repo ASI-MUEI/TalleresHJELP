@@ -22,14 +22,25 @@ const FuncionesAdministrativas = () => {
                                     <FormattedMessage id="paginaPrincipal.administrativos.tareasAdministrativas" />
                                 </h5>
                             </div>
-                            <br/>
-                            <div className="d-flex justify-content-center">
-                                <form onSubmit={() => history.push('/users/signUp')}>
-                                    <Button type="submit" className="d-flex justify-content-center" variant="info">
-                                        <FormattedMessage id="app.RedirectHome.SignIn" />
-                                    </Button>
-                                </form>
+                            <br />
+                            <div className="centeredHorizontalDiv">
+                                <div className="d-flex justify-content-center">
+                                    <form onSubmit={() => history.push('/users/signUp')}>
+                                        <Button type="submit" className="d-flex justify-content-center" variant="info">
+                                            <FormattedMessage id="app.RedirectHome.SignIn" />
+                                        </Button>
+                                    </form>
+                                </div>
+                                &nbsp;&nbsp;
+                                <div className="d-flex justify-content-center">
+                                    <form onSubmit={() => history.push('/vehicle/newVehicle')}>
+                                        <Button type="submit" className="d-flex justify-content-center" variant="info">
+                                            <FormattedMessage id="vehiculo.registroVehiculo" />
+                                        </Button>
+                                    </form>
+                                </div>
                             </div>
+
                         </Container>
                     </Jumbotron>
                     :

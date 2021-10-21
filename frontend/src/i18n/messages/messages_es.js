@@ -101,4 +101,13 @@ export default {
     'paginaHorario.nuevaReparacion.selectorHorario' : 'Seleccione las horas de trabajo',
 
     'paginaPrincipal.administrativos.tareasAdministrativas' : 'Tareas del personal administrativo',
+
+    'vehiculo.registroVehiculo' : 'Nuevo vehículo',
+    'vehiculo.registroVehiculo.usuario' : 'Usuario del vehículo',
+    'vehiculo.registroVehiculo.numBastidor' : 'Numero de bastidor',
+    'vehiculo.registroVehiculo.matricula' : 'Número de matrícula',
+    'vehiculo.registroVehiculo.marca' : 'Marca',
+    'vehiculo.registroVehiculo.modelo' : 'Modelo',
+    'vehiculo.registroVehiculo.flota' : 'Flota',
+    
 }

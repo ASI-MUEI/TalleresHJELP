@@ -122,8 +122,7 @@ hr {
 
 .centeredHorizontalDiv {
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left:36%;
 }
 
 .centeredLink {
@@ -197,4 +196,9 @@ hr {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
 }

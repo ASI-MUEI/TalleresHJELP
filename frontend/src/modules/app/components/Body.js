@@ -12,6 +12,7 @@ import RecoverUser from '../../user/components/RecoverUser';
 import ResetPassword from '../../user/components/ResetPassword';
 import PaginaHorario from '../../horario/components/PaginaHorario';
 import Reparacion from '../../reparacion/components/Reparacion';
+import NewVehicle from '../../vehicle/components/NewVehicle';
 
 const Body = () => {
 
@@ -30,7 +31,8 @@ const Body = () => {
                 <Route exact path="/users/:userName/reset-password/:token"><ResetPassword /></Route>
                 <Route exact path="/users/:userName/changue-data"><ChangueProfileData /></Route>
                 <Route exact path="/horario"><PaginaHorario/></Route>
-                <Route exact path="/reparacion"><Reparacion /></Route>
+                <Route exact path="/reparacion"><Reparacion/></Route>
+                <Route exact path="/vehicle/newVehicle"><NewVehicle/></Route>
                 <Route><Home /></Route>
             </Switch>
         </Container>
