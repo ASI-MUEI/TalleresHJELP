@@ -9,7 +9,6 @@ public class Vehiculo {
     private Usuario usuario;
     private String numBastidor;
     private String matricula;
-    private Marca marca;
     private Modelo modelo;
     private Flota flota;
 
@@ -50,16 +49,6 @@ public class Vehiculo {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
-    }
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idMarca")
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
     }
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
