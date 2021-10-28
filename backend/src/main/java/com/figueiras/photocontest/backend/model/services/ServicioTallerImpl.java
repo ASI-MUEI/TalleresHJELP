@@ -14,7 +14,9 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -190,5 +192,19 @@ public class ServicioTallerImpl implements ServicioTaller{
         Slice<Asistencia> asistencias = asistenciaDao.findAll(PageRequest.of(page, size));
 
         return new Block<>(asistencias.getContent(), asistencias.hasNext());
+    }
+
+    @Override
+    public List<Asistencia> findAllAsistenciasPorFecha(String fecha) {
+
+        String[] fecha_tabla = fecha.split("/");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]) - 1,
+                Integer.valueOf(fecha_tabla[0]), 0, 0);
+
+        List<Asistencia> asistencias = asistenciaDao.findAsistenciasPorFecha(c.getTime());
+
+        return asistencias;
     }
 }

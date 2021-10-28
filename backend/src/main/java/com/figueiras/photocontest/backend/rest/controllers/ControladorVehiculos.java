@@ -21,7 +21,7 @@ public class ControladorVehiculos {
 
 
     @PostMapping("/registrarVeh")
-    public ResponseEntity registrarUsuario(@RequestBody VehiculoDto vehiculoDto)
+    public ResponseEntity registrarVehiculo(@RequestBody VehiculoDto vehiculoDto)
             throws CampoDuplicadoException,  InstanceNotFoundException {
 
         servicioVehiculo.registrarVehiculo(vehiculoDto);

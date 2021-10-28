@@ -4,6 +4,7 @@ public class TrabajoDto {
     private String nombre;
     private String descripcion;
     private Long vehiculo;
+    private String matricula;
 
     public TrabajoDto(String nombre, String descripcion) {
         this.nombre = nombre;

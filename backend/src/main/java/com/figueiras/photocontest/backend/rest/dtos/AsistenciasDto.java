@@ -7,6 +7,7 @@ public class AsistenciasDto {
     private Long estado;
     private Long puestoTaller;
     private Long idTrabajo;
+    private String matricula;
 
     public Long getTipo() {
         return tipo;
@@ -54,5 +55,13 @@ public class AsistenciasDto {
 
     public void setIdTrabajo(Long idTrabajo) {
         this.idTrabajo = idTrabajo;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }
