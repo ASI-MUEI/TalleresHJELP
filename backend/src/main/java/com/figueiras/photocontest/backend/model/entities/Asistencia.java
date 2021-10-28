@@ -10,8 +10,8 @@ public class Asistencia {
     private TipoAsistencias tipo;
     private Usuario mecanico;
     private EstadoAsistencias estado;
-    private Vehiculo vehiculo;
     private Date fecha;
+    private Trabajo trabajo;
 
     public Asistencia() {
     }
@@ -66,21 +66,21 @@ public class Asistencia {
         this.estado = estado;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idVechiculo")
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
     public Date getFecha() {
         return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idTrabajo")
+    public Trabajo getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
     }
 }

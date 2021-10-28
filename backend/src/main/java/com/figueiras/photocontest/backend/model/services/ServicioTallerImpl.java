@@ -2,14 +2,12 @@ package com.figueiras.photocontest.backend.model.services;
 
 import com.figueiras.photocontest.backend.model.daos.*;
 import com.figueiras.photocontest.backend.model.entities.*;
+import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
 import com.figueiras.photocontest.backend.rest.conversor.TallerConversor;
 import com.figueiras.photocontest.backend.rest.conversor.UsuarioConversor;
-import com.figueiras.photocontest.backend.rest.dtos.AsistenciaCompletaFranjaHDto;
-import com.figueiras.photocontest.backend.rest.dtos.AsistenciaFranjaHorariaDto;
-import com.figueiras.photocontest.backend.rest.dtos.AsistenciaPuestoTDto;
-import com.figueiras.photocontest.backend.rest.dtos.AsistenciasDto;
+import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
@@ -45,6 +43,9 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Autowired
     private TipoAsistenciasDao tipoAsistenciasDao;
+
+    @Autowired
+    private TrabajoDao trabajoDao;
 
     @Override
     public Asistencia asignarAsistenciaPuesto(AsistenciaPuestoTDto asistenciaPuestoTDto) throws InstanceNotFoundException {
@@ -115,11 +116,6 @@ public class ServicioTallerImpl implements ServicioTaller{
             throw new InstanceNotFoundException("entidades.estadoAsistencias.idEstado", asistenciasDto.getEstado());
         }
 
-        Optional<Vehiculo> veh = vehiculoDao.findById(asistenciasDto.getIdVehiculo());
-        if(veh.isEmpty()){
-            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", asistenciasDto.getIdVehiculo());
-        }
-
         Optional<Usuario> usuario = usuarioDao.findById(asistenciasDto.getMecanico());
         if(usuario.isEmpty()){
             throw new InstanceNotFoundException("entidades.usuario.idUsuario", asistenciasDto.getMecanico());
@@ -135,6 +131,11 @@ public class ServicioTallerImpl implements ServicioTaller{
             throw new InstanceNotFoundException("entidades.puestoTaller.idPuestoTaller", asistenciasDto.getPuestoTaller());
         }
 
+        Optional<Trabajo> trabajo = trabajoDao.findById(asistenciasDto.getIdTrabajo());
+        if(trabajo.isEmpty()){
+            throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", asistenciasDto.getIdTrabajo());
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat();
         Date date;
         try{
@@ -146,10 +147,10 @@ public class ServicioTallerImpl implements ServicioTaller{
         Asistencia asistencia = new Asistencia();
         asistencia.setEstado(estadoAsistencias.get());
         asistencia.setMecanico(usuario.get());
-        asistencia.setVehiculo(veh.get());
         asistencia.setPuesto(puestoTaller.get());
         asistencia.setFecha(date);
         asistencia.setTipo(tipoAsistencia.get());
+        asistencia.setTrabajo(trabajo.get());
         asistenciaDao.save(asistencia);
 
 
@@ -159,6 +160,29 @@ public class ServicioTallerImpl implements ServicioTaller{
     @Override
     public Slice<Horarios> getHorariosDisponibles(int page, int size) {
         return horariosDao.getEtiquetasOrderById(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException {
+        Optional<Usuario> usuario = usuarioDao.findById(trabajoDto.getVehiculo());
+        if(usuario.isEmpty())
+            throw new InstanceNotFoundException("entidades.usuario.idUsuario", trabajoDto.getVehiculo());
+
+        Optional<Vehiculo> veh = vehiculoDao.findById(trabajoDto.getVehiculo());
+        if(veh.isEmpty()){
+            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", trabajoDto.getVehiculo());
+        }
+
+        if (trabajoDto.getNombre().isEmpty())
+            throw new CampoVacioException("entidades.trabajo.nombre", trabajoDto.getNombre());
+
+        Trabajo trabajo = new Trabajo();
+        trabajo.setVehiculo(veh.get());
+        trabajo.setNombre(trabajoDto.getNombre());
+        trabajo.setDescripcion(trabajoDto.getDescripcion());
+        trabajoDao.save(trabajo);
+
+        return trabajo;
     }
 
     @Override

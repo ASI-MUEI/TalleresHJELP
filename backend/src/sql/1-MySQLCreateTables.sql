@@ -1,17 +1,17 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 DROP TABLE PlanHorarios;
 DROP TABLE Asistencia;
-DROP TABLE PuestoTaller;
 DROP TABLE EstadosAsistencias;
 DROP TABLE TiposAsistencias;
 DROP TABLE Horarios;
+DROP TABLE Trabajo;
 DROP TABLE Vehiculo;
 DROP TABLE Flota;
 DROP TABLE Modelo;
 DROP TABLE Marca;
 DROP TABLE Usuario;
 DROP TABLE Documento;
-
+DROP TABLE PuestoTaller;
 
 CREATE TABLE Usuario(
     idUsuario BIGINT NOT NULL AUTO_INCREMENT,
@@ -82,17 +82,6 @@ CREATE TABLE PuestoTaller(
     CONSTRAINT PuestoTaller_pk PRIMARY KEY(idPuesto)
 );
 
-/*CREATE TABLE PuestoTallerVehiculo(
-  idPuestoVehiculo BIGINT NOT NULL AUTO_INCREMENT,
-  idPuesto BIGINT NOT NULL,
-  idVehiculo BIGINT NOT NULL,
-  fechaComienzo DATE,
-  fechaFinal DATE,
-  CONSTRAINT PuestoTallerVehiculo_pk PRIMARY KEY(idPuestoVehiculo),
-  CONSTRAINT vehiculo_fk_puestoTallerVehiculo FOREIGN KEY(idVehiculo) REFERENCES Vehiculo(idVehiculo),
-  CONSTRAINT puesto_fk_puestoTallerVehiculo FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
-);*/
-
 CREATE TABLE Horarios(
     idFranjaHoraria BIGINT NOT NULL AUTO_INCREMENT,
     franjaHoraria VARCHAR(255),
@@ -113,19 +102,28 @@ CREATE TABLE EstadosAsistencias(
    CONSTRAINT EstadosAsistencias_pk PRIMARY KEY(idEstado)
 );
 
+CREATE TABLE Trabajo(
+	idTrabajo BIGINT NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255),
+    vehiculo BIGINT NOT NULL,
+    CONSTRAINT Trabajo_pk PRIMARY KEY(idTrabajo),
+    CONSTRAINT vehiculo_fk FOREIGN KEY(vehiculo) REFERENCES Vehiculo(idVehiculo)
+);
+
 CREATE TABLE Asistencia(
     idAsistencia BIGINT NOT NULL AUTO_INCREMENT,
     tipo BIGINT NOT NULL,
     fecha DATE,
-    vehiculo BIGINT,
     mecanico BIGINT,
     estado BIGINT(255),
     puestoTaller BIGINT,
+    trabajo BIGINT, 
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
     CONSTRAINT tipoAsistencia_fk FOREIGN KEY(tipo) REFERENCES TiposAsistencias(idTipo),
-    CONSTRAINT vehiculo_fk FOREIGN KEY(vehiculo) REFERENCES Vehiculo(idVehiculo),
     CONSTRAINT mecanico_fk FOREIGN KEY(mecanico) REFERENCES Usuario(idUsuario),
     CONSTRAINT estado_fk FOREIGN KEY(estado) REFERENCES EstadosAsistencias(idEstado),
+    CONSTRAINT trabajo_fk FOREIGN KEY(trabajo) REFERENCES Trabajo(idTrabajo),
     CONSTRAINT PuestoTaller_fk FOREIGN KEY(puestoTaller) REFERENCES PuestoTaller(idPuesto)
 );
 
