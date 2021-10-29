@@ -1,17 +1,23 @@
 package com.figueiras.photocontest.backend.model.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Asistencia {
     private Long idAsistencia;
     private PuestoTaller puesto;
     private TipoAsistencias tipo;
-    private Usuario mecanico;
+    private List<Usuario> mecanicos;
     private EstadoAsistencias estado;
-    private Date fecha;
+    private LocalDateTime fecha;
     private Trabajo trabajo;
+    private Float precio;
+    private Long duracionEstimada;
+    private Boolean peritaje;
+    private String descripcion;
 
     public Asistencia() {
     }
@@ -46,14 +52,18 @@ public class Asistencia {
         this.tipo = tipo;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUsuario")
-    public Usuario getMecanico() {
-        return mecanico;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "AsistenciaMecanico",
+            joinColumns = { @JoinColumn(name = "idAsistencia") },
+            inverseJoinColumns = { @JoinColumn(name = "idMecanico") }
+    )
+    public List<Usuario> getMecanicos() {
+        return mecanicos;
     }
 
-    public void setMecanico(Usuario mecanico) {
-        this.mecanico = mecanico;
+    public void setMecanicos(List<Usuario> mecanicos) {
+        this.mecanicos = mecanicos;
     }
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -66,11 +76,11 @@ public class Asistencia {
         this.estado = estado;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
@@ -82,5 +92,37 @@ public class Asistencia {
 
     public void setTrabajo(Trabajo trabajo) {
         this.trabajo = trabajo;
+    }
+
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+
+    public Long getDuracionEstimada() {
+        return duracionEstimada;
+    }
+
+    public void setDuracionEstimada(Long duracionEstimada) {
+        this.duracionEstimada = duracionEstimada;
+    }
+
+    public Boolean getPeritaje() {
+        return peritaje;
+    }
+
+    public void setPeritaje(Boolean peritaje) {
+        this.peritaje = peritaje;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

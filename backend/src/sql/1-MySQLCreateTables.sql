@@ -1,5 +1,6 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 DROP TABLE PlanHorarios;
+DROP TABLE AsistenciaMecanico;
 DROP TABLE Asistencia;
 DROP TABLE EstadosAsistencias;
 DROP TABLE TiposAsistencias;
@@ -106,32 +107,42 @@ CREATE TABLE Trabajo(
 	idTrabajo BIGINT NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(255) NOT NULL,
     descripcion VARCHAR(255),
-    vehiculo BIGINT NOT NULL,
+    idVehiculo BIGINT NOT NULL,
     CONSTRAINT Trabajo_pk PRIMARY KEY(idTrabajo),
-    CONSTRAINT vehiculo_fk FOREIGN KEY(vehiculo) REFERENCES Vehiculo(idVehiculo)
+    CONSTRAINT idVehiculo_fk FOREIGN KEY(idVehiculo) REFERENCES Vehiculo(idVehiculo)
 );
 
 CREATE TABLE Asistencia(
     idAsistencia BIGINT NOT NULL AUTO_INCREMENT,
-    tipo BIGINT NOT NULL,
-    fecha DATE,
-    mecanico BIGINT,
-    estado BIGINT(255),
-    puestoTaller BIGINT,
-    trabajo BIGINT, 
+    idTipo BIGINT NOT NULL,
+    fecha DATETIME,
+    idEstado BIGINT(255),
+    idPuesto BIGINT,
+    idTrabajo BIGINT,
+    precio FLOAT,
+    duracionEstimada BIGINT,
+    peritaje INT,
+    descripcion VARCHAR(500),
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
-    CONSTRAINT tipoAsistencia_fk FOREIGN KEY(tipo) REFERENCES TiposAsistencias(idTipo),
-    CONSTRAINT mecanico_fk FOREIGN KEY(mecanico) REFERENCES Usuario(idUsuario),
-    CONSTRAINT estado_fk FOREIGN KEY(estado) REFERENCES EstadosAsistencias(idEstado),
-    CONSTRAINT trabajo_fk FOREIGN KEY(trabajo) REFERENCES Trabajo(idTrabajo),
-    CONSTRAINT PuestoTaller_fk FOREIGN KEY(puestoTaller) REFERENCES PuestoTaller(idPuesto)
+    CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TiposAsistencias(idTipo),
+    CONSTRAINT idEstado_fk FOREIGN KEY(idEstado) REFERENCES EstadosAsistencias(idEstado),
+    CONSTRAINT trabajo_fk FOREIGN KEY(idTrabajo) REFERENCES Trabajo(idTrabajo),
+    CONSTRAINT idPuesto_fk FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
+);
+
+CREATE TABLE AsistenciaMecanico(
+    idAsistencia BIGINT NOT NULL,
+    idMecanico BIGINT NOT NULL,
+    CONSTRAINT asistenciamecanico_pk PRIMARY KEY(idAsistencia, idMecanico),
+    CONSTRAINT asistenciamecanico_idAsistencia_fk FOREIGN KEY(idAsistencia) REFERENCES Asistencia(idAsistencia),
+    CONSTRAINT asistenciamecanico_idMecanico_fk FOREIGN KEY(idMecanico) REFERENCES Usuario(idUsuario)
 );
 
 CREATE TABLE PlanHorarios(
     idPlan BIGINT NOT NULL AUTO_INCREMENT,
     asistencia BIGINT NOT NULL,
     franjaHoraria BIGINT NOT NULL,
-    CONSTRAINT PlanHoratios_pk PRIMARY KEY(idPlan),
+    CONSTRAINT PlanHorarios_pk PRIMARY KEY(idPlan),
     CONSTRAINT fk_asistencia FOREIGN KEY(asistencia) REFERENCES Asistencia(idAsistencia),
     CONSTRAINT fk_franjaHoraria FOREIGN KEY(franjaHoraria) REFERENCES Horarios(idFranjaHoraria)
 );

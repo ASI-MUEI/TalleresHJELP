@@ -5,6 +5,10 @@ Jumbotron {
   justify-content: center;
 }
 
+.center{
+  margin: auto;
+}
+
 .centering {
   width: 50%;
   text-align: center;
@@ -152,7 +156,7 @@ hr {
 }
 
 .centeredDiv {
-  margin:auto
+  margin: auto
 }
 
 .photographyDescDiv {

@@ -28,20 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtFilter(authenticationManager(), jwtGenerator))
                 .authorizeRequests()
                 .antMatchers("/catalogo-usuarios/usuarios").permitAll()
-                .antMatchers("/catalogo-concursos/concursos/*/fotografias/*/votar").permitAll()
-                .antMatchers("/catalogo-concursos/concursos/*/fotografias/ganadoras").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*").permitAll()
                 .antMatchers("/catalogo-usuarios/registrarse").permitAll()
                 .antMatchers("/catalogo-usuarios/iniciar-sesion").permitAll()
-                .antMatchers("/catalogo-usuarios/usuarios/*/following").permitAll()
-                .antMatchers("/catalogo-usuarios/usuarios/*/followers").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/cambio-contrasena").permitAll()
-                .antMatchers("/catalogo-usuarios/usuarios/*/dejar-seguir/*").permitAll()
-                .antMatchers("/catalogo-usuarios/usuarios/*/seguir/*").permitAll()
-                .antMatchers("/catalogo-usuarios/usuarios/*/sigue/*").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/recuperar-cuenta").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/eliminar-cuenta").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/restablecer-contrasena/*").permitAll()
+                .antMatchers("/taller/asistencias/*").permitAll()
                 .anyRequest().hasRole("USER");
 
     }

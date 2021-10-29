@@ -9,7 +9,7 @@ public class AsistenciaCompletaFranjaHDto {
     private Long idAsistencia;
     private PuestoTallerDto puesto;
     private TipoAsistenciasDto tipo;
-    private UsuarioDto mecanico;
+    private List<UsuarioDto> mecanicos;
     private EstadoAsistenciasDto estado;
     private VehiculoDto vehiculo;
     private String fecha;
@@ -39,12 +39,12 @@ public class AsistenciaCompletaFranjaHDto {
         this.tipo = tipo;
     }
 
-    public UsuarioDto getMecanico() {
-        return mecanico;
+    public List<UsuarioDto> getMecanicos() {
+        return mecanicos;
     }
 
-    public void setMecanico(UsuarioDto mecanico) {
-        this.mecanico = mecanico;
+    public void setMecanicos(List<UsuarioDto> mecanicos) {
+        this.mecanicos = mecanicos;
     }
 
     public EstadoAsistenciasDto getEstado() {

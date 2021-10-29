@@ -1,11 +1,9 @@
 package com.figueiras.photocontest.backend.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -27,6 +25,7 @@ public class Usuario {
     private boolean cuentaEliminada;
     private Lenguaje lenguaje;
     private RolUsuarioSistema rolUsuarioSistema;
+    private List<Asistencia> reparaciones;
 
     public Usuario() {
         rolUsuarioSistema = RolUsuarioSistema.ESTANDAR;
@@ -106,5 +105,14 @@ public class Usuario {
 
     public void setRolUsuarioSistema(RolUsuarioSistema rolUsuarioSistema) {
         this.rolUsuarioSistema = rolUsuarioSistema;
+    }
+
+    @ManyToMany(mappedBy = "mecanicos")
+    public List<Asistencia> getReparaciones() {
+        return reparaciones;
+    }
+
+    public void setReparaciones(List<Asistencia> reparaciones) {
+        this.reparaciones = reparaciones;
     }
 }

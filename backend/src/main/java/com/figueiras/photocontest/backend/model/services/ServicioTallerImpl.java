@@ -14,10 +14,8 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class ServicioTallerImpl implements ServicioTaller{
@@ -98,7 +96,13 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistenciaC.setIdAsistencia(asisOptional.get().getIdAsistencia());
         asistenciaC.setEstado(TallerConversor.toEstAsistenciasDto(asisOptional.get().getEstado()));
         asistenciaC.setPuesto(TallerConversor.toPuestoTDto(asisOptional.get().getPuesto()));
-        asistenciaC.setMecanico(UsuarioConversor.toUsuarioDto(asisOptional.get().getMecanico()));
+        List<UsuarioDto> mecanicos = new ArrayList<>();
+        for (Usuario u : asisOptional.get().getMecanicos()) {
+            UsuarioDto uDto = UsuarioConversor.toUsuarioDto(u);
+            mecanicos.add(uDto);
+
+        }
+        asistenciaC.setMecanicos(mecanicos);
         asistenciaC.setTipo(TallerConversor.toTiposAsistenciasDto(asisOptional.get().getTipo()));
         asistenciaC.setFecha(asisOptional.get().getFecha().toString());
         asistenciaC.setFranjasHorarias(TallerConversor.toFranjasHorariasDto(findHoraByAsistencia(asisOptional.get().getIdAsistencia())));
@@ -113,15 +117,20 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Override
     public Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException {
+        List<Usuario> mecanicos = new ArrayList<>();
         Optional<EstadoAsistencias> estadoAsistencias = estadoAsistenciasDAO.findById(asistenciasDto.getEstado());
         if(estadoAsistencias.isEmpty()){
             throw new InstanceNotFoundException("entidades.estadoAsistencias.idEstado", asistenciasDto.getEstado());
         }
 
-        Optional<Usuario> usuario = usuarioDao.findById(asistenciasDto.getMecanico());
-        if(usuario.isEmpty()){
-            throw new InstanceNotFoundException("entidades.usuario.idUsuario", asistenciasDto.getMecanico());
+        for (MecanicoDto mDto : asistenciasDto.getMecanicos()) {
+            Optional<Usuario> usuario = usuarioDao.findById(mDto.getIdMecanico());
+            if(usuario.isEmpty()){
+                throw new InstanceNotFoundException("entidades.usuario.idUsuario", mDto.getIdMecanico());
+            }
+            mecanicos.add(usuario.get());
         }
+
 
         Optional<TipoAsistencias> tipoAsistencia = tipoAsistenciasDao.findById(asistenciasDto.getTipo());
         if(tipoAsistencia.isEmpty()){
@@ -138,19 +147,16 @@ public class ServicioTallerImpl implements ServicioTaller{
             throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", asistenciasDto.getIdTrabajo());
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat();
-        Date date;
-        try{
-            date = sdf.parse(asistenciasDto.getFecha());
-        }catch (Exception e){
-            throw new ParseFormatException(asistenciasDto.getFecha());
-        }
+        String[] fecha_tabla = asistenciasDto.getFecha().split("-");
+
+        LocalDateTime fecha = LocalDateTime.of(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]),
+                Integer.valueOf(fecha_tabla[0]), 0, 0, 0, 0);
 
         Asistencia asistencia = new Asistencia();
         asistencia.setEstado(estadoAsistencias.get());
-        asistencia.setMecanico(usuario.get());
+        asistencia.setMecanicos(mecanicos);
         asistencia.setPuesto(puestoTaller.get());
-        asistencia.setFecha(date);
+        asistencia.setFecha(fecha);
         asistencia.setTipo(tipoAsistencia.get());
         asistencia.setTrabajo(trabajo.get());
         asistenciaDao.save(asistencia);
@@ -197,13 +203,12 @@ public class ServicioTallerImpl implements ServicioTaller{
     @Override
     public List<Asistencia> findAllAsistenciasPorFecha(String fecha) {
 
-        String[] fecha_tabla = fecha.split("/");
+        String[] fecha_tabla = fecha.split("-");
 
-        Calendar c = Calendar.getInstance();
-        c.set(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]) - 1,
-                Integer.valueOf(fecha_tabla[0]), 0, 0);
+        LocalDateTime fechaFiltrado = LocalDateTime.of(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]) + 1,
+                Integer.valueOf(fecha_tabla[0]), 0, 0, 0, 0);
 
-        List<Asistencia> asistencias = asistenciaDao.findAsistenciasPorFecha(c.getTime());
+        List<Asistencia> asistencias = asistenciaDao.findAsistenciasPorFecha(fechaFiltrado);
 
         return asistencias;
     }
