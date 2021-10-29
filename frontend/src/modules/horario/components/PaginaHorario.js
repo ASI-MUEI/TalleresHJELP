@@ -6,22 +6,31 @@ import { Spinner } from "react-bootstrap";
 import backend from "../../../backend";
 
 const PaginaHorario = () => {
-
     var fechaHoy = new Date();
     const [reparaciones, setReparaciones] = useState(null);
-    const [fechaReparaciones, setFechaReparaciones] = useState(fechaHoy.getDate() + "-" +
-        fechaHoy.getMonth() + "-" + fechaHoy.getFullYear());
 
     const getFechaFormateada = (fecha) => {
-        var fechaFormatoDate = new Date(fecha)
-        return fechaFormatoDate.getDate() + "-" + fechaFormatoDate.getMonth()
-            + "-" + fechaFormatoDate.getFullYear()
+
+        var mes = fecha.getMonth()+1; //obteniendo mes
+        var dia = fecha.getDate(); //obteniendo dia
+        var ano = fecha.getFullYear(); //obteniendo año
+        if(dia<10)
+            dia='0'+dia; //agrega cero si el menor de 10
+        if(mes<10)
+            mes='0'+mes //agrega cero si el menor de 10
+
+        return `${ano}-${mes}-${dia}`;
     }
 
+    const [fechaReparaciones, setFechaReparaciones] = useState(getFechaFormateada(fechaHoy));
+
+
     useEffect(() => {
+        setReparaciones(null)
         backend.tallerService.buscarAsistenciasPorFecha(
             fechaReparaciones,
-            resultado => setReparaciones(resultado))
+            resultado => setReparaciones(resultado)
+        )
     }, [fechaReparaciones])
 
     return (
@@ -30,8 +39,8 @@ const PaginaHorario = () => {
                 <input
                     type="date"
                     value={fechaReparaciones}
-                    onChange={(nuevaFecha) =>
-                        setFechaReparaciones(getFechaFormateada(nuevaFecha))} />
+                    onChange={event =>
+                        setFechaReparaciones(event.target.value)} />
             </div>
             <br />
 

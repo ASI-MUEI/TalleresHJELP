@@ -1,14 +1,13 @@
 package com.figueiras.photocontest.backend.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Horarios {
     private Long idFranjaHoraria;
     private String franjaHoraria;
+    private List<Asistencia> asistencias;
 
     public Horarios() {
     }
@@ -34,5 +33,14 @@ public class Horarios {
 
     public void setFranjaHoraria(String franjaHoraria) {
         this.franjaHoraria = franjaHoraria;
+    }
+
+    @ManyToMany(mappedBy = "mecanicos")
+    public List<Asistencia> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(List<Asistencia> asistencias) {
+        this.asistencias = asistencias;
     }
 }

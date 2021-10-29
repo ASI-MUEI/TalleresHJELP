@@ -1,7 +1,6 @@
 package com.figueiras.photocontest.backend.rest.conversor;
 
 import com.figueiras.photocontest.backend.model.entities.EstadoAsistencias;
-import com.figueiras.photocontest.backend.model.entities.PlanHorarios;
 import com.figueiras.photocontest.backend.model.entities.PuestoTaller;
 import com.figueiras.photocontest.backend.model.entities.TipoAsistencias;
 import com.figueiras.photocontest.backend.model.services.Block;
@@ -53,13 +52,13 @@ public class TallerConversor {
         return new TipoAsistenciasDto(tipos.getIdTipo(), tipos.getNombre(), tipos.getDescripcion());
     }
 
-    public static List<FranjaHorariaDto> toFranjasHorariasDto(Block<PlanHorarios> planHorarios){
-        List<FranjaHorariaDto> franjasH = new ArrayList<>();
-        Iterator< PlanHorarios > it = planHorarios.getItems().iterator();
-        while (it.hasNext()) {
-            franjasH.add(new FranjaHorariaDto(it.next().getFranjaHoraria().getIdFranjaHoraria(), it.next().getFranjaHoraria().getFranjaHoraria()));
-        }
-        return franjasH;
-    }
+//   public static List<FranjaHorariaDto> toFranjasHorariasDto(Block<PlanHorarios> planHorarios){
+//       List<FranjaHorariaDto> franjasH = new ArrayList<>();
+//       Iterator< PlanHorarios > it = planHorarios.getItems().iterator();
+//       while (it.hasNext()) {
+//           franjasH.add(new FranjaHorariaDto(it.next().getFranjaHoraria().getIdFranjaHoraria(), it.next().getFranjaHoraria().getFranjaHoraria()));
+//       }
+//       return franjasH;
+//   }
 
 }

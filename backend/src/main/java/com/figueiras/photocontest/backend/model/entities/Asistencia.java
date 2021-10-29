@@ -11,6 +11,7 @@ public class Asistencia {
     private PuestoTaller puesto;
     private TipoAsistencias tipo;
     private List<Usuario> mecanicos;
+    private List<Horarios> horarios;
     private EstadoAsistencias estado;
     private LocalDateTime fecha;
     private Trabajo trabajo;
@@ -64,6 +65,22 @@ public class Asistencia {
 
     public void setMecanicos(List<Usuario> mecanicos) {
         this.mecanicos = mecanicos;
+    }
+
+
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "AsistenciaHorario",
+            joinColumns = { @JoinColumn(name = "idAsistencia") },
+            inverseJoinColumns = { @JoinColumn(name = "idHorario") }
+    )
+    public List<Horarios> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horarios> horarios) {
+        this.horarios = horarios;
     }
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

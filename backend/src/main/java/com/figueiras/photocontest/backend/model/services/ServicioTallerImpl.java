@@ -30,9 +30,6 @@ public class ServicioTallerImpl implements ServicioTaller{
     private HorariosDao horariosDao;
 
     @Autowired
-    private PlanHorariosDao planHorariosDao;
-
-    @Autowired
     private VehiculoDao vehiculoDao;
 
     @Autowired
@@ -84,13 +81,13 @@ public class ServicioTallerImpl implements ServicioTaller{
         if (idHorarioExcepcion[0] == -1L)
             throw new InstanceNotFoundException("entidades.horarios.idHorario", idHorarioExcepcion[0]);
 
-        asistenciaFranjaHDto.getFranjasHorarias().forEach((idHorario, franjaHoraria) -> {
-            Optional<Horarios> horarioOpt = horariosDao.findById(idHorario);
-            PlanHorarios planH = new PlanHorarios();
-            planH.setAsistencia(asisOptional.get());
-            planH.setFranjaHoraria(horarioOpt.get());
-            planHorariosDao.save(planH);
-        });
+//        asistenciaFranjaHDto.getFranjasHorarias().forEach((idHorario, franjaHoraria) -> {
+//            Optional<Horarios> horarioOpt = horariosDao.findById(idHorario);
+//           PlanHorarios planH = new PlanHorarios();
+//           planH.setAsistencia(asisOptional.get());
+//           planH.setFranjaHoraria(horarioOpt.get());
+//           planHorariosDao.save(planH);
+//       });
 
         AsistenciaCompletaFranjaHDto asistenciaC = new AsistenciaCompletaFranjaHDto();
         asistenciaC.setIdAsistencia(asisOptional.get().getIdAsistencia());
@@ -105,14 +102,9 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistenciaC.setMecanicos(mecanicos);
         asistenciaC.setTipo(TallerConversor.toTiposAsistenciasDto(asisOptional.get().getTipo()));
         asistenciaC.setFecha(asisOptional.get().getFecha().toString());
-        asistenciaC.setFranjasHorarias(TallerConversor.toFranjasHorariasDto(findHoraByAsistencia(asisOptional.get().getIdAsistencia())));
+//        asistenciaC.setFranjasHorarias(TallerConversor.toFranjasHorariasDto(findHoraByAsistencia(asisOptional.get().getIdAsistencia())));
 
         return asistenciaC;
-    }
-
-    @Override
-    public Block<PlanHorarios> findHoraByAsistencia(Long idAsistencia){
-        return planHorariosDao.findByIdAsistencia(idAsistencia);
     }
 
     @Override
@@ -205,11 +197,57 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         String[] fecha_tabla = fecha.split("-");
 
-        LocalDateTime fechaFiltrado = LocalDateTime.of(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]) + 1,
-                Integer.valueOf(fecha_tabla[0]), 0, 0, 0, 0);
+        LocalDateTime fechaFiltrado = LocalDateTime.of(Integer.valueOf(fecha_tabla[0]), Integer.valueOf(fecha_tabla[1]),
+                Integer.valueOf(fecha_tabla[2]), 0, 0, 0, 0);
 
         List<Asistencia> asistencias = asistenciaDao.findAsistenciasPorFecha(fechaFiltrado);
 
-        return asistencias;
+        // Las asistencias se pasarán a un array en donde estén ordenadas por franja horaria
+        // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
+
+        List<Asistencia> resultado = ordenarAsistenciasParaTabla(asistencias);
+
+        return resultado;
+    }
+
+    // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
+    // Se ordenan tal u como quedarían en la tabla
+    private List<Asistencia> ordenarAsistenciasParaTabla(List<Asistencia> asistencias){
+        final int SLOTS_HORARIOS = 115;
+        List<Asistencia> resultado = new ArrayList<>(SLOTS_HORARIOS);
+
+        // Inicializacion de ArrayList para que tenga tamaño 100
+        for(int i = 0; i < SLOTS_HORARIOS; i++)
+        {
+            resultado.add(i, null);
+        }
+
+        for (Asistencia a : asistencias) {
+            for (Horarios h:a.getHorarios()) {
+                resultado.add(
+                        calcularIndiceInsercion(
+                                a.getPuesto().getIdPuestoTaller().intValue(), h.getIdFranjaHoraria().intValue()), a);
+            }
+        }
+        return resultado;
+    }
+
+    private int calcularIndiceInsercion(int elevador, int idranjaHoraria){
+        int resultado = 0;
+
+        switch(elevador){
+            case 1 :    resultado = idranjaHoraria;
+            break;
+            case 2 :    resultado = 20 + idranjaHoraria;
+            break;
+            case 3 :    resultado = 40 + idranjaHoraria;
+            break;
+            case 4 :    resultado = 60 + idranjaHoraria;
+            break;
+            case 5 :    resultado = 80 + idranjaHoraria;
+            break;
+        }
+
+        return resultado;
     }
 }

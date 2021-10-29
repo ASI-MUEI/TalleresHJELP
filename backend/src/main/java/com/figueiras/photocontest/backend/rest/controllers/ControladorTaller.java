@@ -59,7 +59,9 @@ public class ControladorTaller {
     @GetMapping("/asistencias/{fecha}")
     public List<AsistenciasDto> recuperarAsistenciasPorFecha(@PathVariable String fecha){
         List<Asistencia> asistencias = servicioTaller.findAllAsistenciasPorFecha(fecha);
-        List<AsistenciasDto> resultado = asistencias.stream().map( a -> AsistenciaConversor.toAsistenciasDto(a))
+        // Si la asistencia llega nula, se pone nulo en la salida. Es la manera de indicar que ese slot no está asignado
+        // al frontend.
+        List<AsistenciasDto> resultado = asistencias.stream().map( a -> a==null? null : AsistenciaConversor.toAsistenciasDto(a))
                 .collect(Collectors.toList());
 
         return resultado;

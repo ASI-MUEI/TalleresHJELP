@@ -1,6 +1,6 @@
 -- noinspection SqlNoDataSourceInspectionForFile
-DROP TABLE PlanHorarios;
 DROP TABLE AsistenciaMecanico;
+DROP TABLE AsistenciaHorario;
 DROP TABLE Asistencia;
 DROP TABLE EstadosAsistencias;
 DROP TABLE TiposAsistencias;
@@ -138,12 +138,10 @@ CREATE TABLE AsistenciaMecanico(
     CONSTRAINT asistenciamecanico_idMecanico_fk FOREIGN KEY(idMecanico) REFERENCES Usuario(idUsuario)
 );
 
-CREATE TABLE PlanHorarios(
-    idPlan BIGINT NOT NULL AUTO_INCREMENT,
-    asistencia BIGINT NOT NULL,
-    franjaHoraria BIGINT NOT NULL,
-    CONSTRAINT PlanHorarios_pk PRIMARY KEY(idPlan),
-    CONSTRAINT fk_asistencia FOREIGN KEY(asistencia) REFERENCES Asistencia(idAsistencia),
-    CONSTRAINT fk_franjaHoraria FOREIGN KEY(franjaHoraria) REFERENCES Horarios(idFranjaHoraria)
+CREATE TABLE AsistenciaHorario(
+    idAsistencia BIGINT NOT NULL,
+    idHorario BIGINT NOT NULL,
+    CONSTRAINT asistenciaHorario_pk PRIMARY KEY(idAsistencia, idHorario),
+    CONSTRAINT asistenciaHorario_idAsistencia_fk FOREIGN KEY(idAsistencia) REFERENCES Asistencia(idAsistencia),
+    CONSTRAINT asistenciaHorario_idHorario_fk FOREIGN KEY(idHorario) REFERENCES Horarios(idFranjaHoraria)
 );
-

@@ -113,11 +113,36 @@ INSERT INTO Trabajo
 VALUES
 (1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1);
 
+-- Insercion de Asistencia
+
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idEstado, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
 (1, 1, CURRENT_DATE(), 1,  1, 1, 250, 2, 0, 'Se procede a cambiar los neumáticos de verano a invierno');
 
+INSERT INTO Asistencia
+(idAsistencia, idTipo, fecha, idEstado, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
+VALUES
+(2, 1, CURRENT_DATE(), 1,  1, 1, 250, 2, 0, 'Se procede a cambiar los neumáticos de verano a invierno');
+
+-- Asignacion de horarios a asistencias
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(1, 1);
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(1, 2);
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(2, 4);
+
+-- Asignacion de mecanicos a asistencias
 INSERT INTO AsistenciaMecanico
 (idAsistencia, idMecanico)
 VALUES
