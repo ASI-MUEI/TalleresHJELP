@@ -38,6 +38,7 @@ export default {
     'user.SignUp.Email': 'Email',
     'user.SignUp.SignUp': 'Sign up',
     'user.SignUp.Login': 'Login',
+    'user.SignUp.Dni': 'DNI',
 
     'user.LogIn.Welcome': 'Login into Talleres HJELP',
     'user.Login.RegisterMsg': 'You need an account? Ask the administrative personel',

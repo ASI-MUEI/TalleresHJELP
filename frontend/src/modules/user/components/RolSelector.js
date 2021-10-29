@@ -3,9 +3,9 @@ import { FormattedMessage } from "react-intl";
 const RolSelector = (selectProps) => {
 
     const lenguagues = [
-        {id: 0, value: "Administrativo."},
-        {id: 1, value: "Estandar"},
-        {id: 2, value: "Desarrollador"},
+        {id: 0, value: "Administrativo"},
+        {id: 1, value: "Mecánico"},
+        {id: 2, value: "Cliente"},
     ]
     
     return (

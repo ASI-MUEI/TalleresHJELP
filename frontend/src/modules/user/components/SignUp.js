@@ -19,6 +19,7 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [lenguague, setLenguague] = useState("");
     const [rol, setRol] = useState("");
+    const [dni, setDni] = useState("");
     const [backendErrors, setBackendErrors] = useState(null);
 
     const checkPassword = () => {
@@ -52,86 +53,105 @@ const SignUp = () => {
         }
     }
 
-    return (
 
-        <Container>
-            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)} />
-            <Container className="signUpLogInDivFirst bg-light border border-secondary ">
-                <br />
-                <div className="d-flex justify-content-center">
-                    <h3>Talleres HJELP</h3>
-                </div>
-            </Container>
-            <br />
-            <Container className="signUpDivSecond bg-light border border-secondary ">
-                <form onSubmit={e => handleSubmit(e)}>
-                    <br />
-                    <div className="d-flex justify-content-center">
-                        <h6><FormattedMessage id='user.SignUp.Welcome' /></h6>
-                    </div>
-                    <br />
 
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">@</span>
-                        </div>
-                        <FormattedMessage id='user.SignUp.UserName'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" value={userName} onChange={e => setUserName(e.target.value)} required />}
-                        </FormattedMessage>
+    if(rol === ""){
+        return (
+            <div className="input-group mb-3">
+                <RolSelector id="rolId" className="custom-select my-1 mr-sm-2"
+                             value={rol} onChange={e => setRol(e.target.value)} required />
+            </div>
+        )
+    }
 
-                    </div>
 
-                    <div className="input-group mb-3">
-                        <FormattedMessage id='user.SignUp.Password'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" type="password" value={password} onChange={e => setPassword(e.target.value)} required />}
-                        </FormattedMessage>
-                    </div>
+    if(rol === "0" || rol === "1"){
+            return(
 
-                    <div className="input-group mb-3">
-                        <FormattedMessage id='user.SignUp.RepeatPassword'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} required />}
-                        </FormattedMessage>
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <FormattedMessage id='user.SignUp.Name'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" value={name} onChange={e => setName(e.target.value)} required />}
-                        </FormattedMessage>
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <FormattedMessage id='user.SignUp.Surnames'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" value={surnames} onChange={e => setSurnames(e.target.value)} required />}
-                        </FormattedMessage>
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <FormattedMessage id='user.SignUp.Email'>
-                            {placeholder => <input placeholder={placeholder} className="form-control" type="email" value={email} onChange={e => setEmail(e.target.value)} required />}
-                        </FormattedMessage>
-                    </div>
-                    <div className="input-group mb-3">
-                        <LenguagueSelector id="lenguagueId" className="custom-select my-1 mr-sm-2"
-                            value={lenguague} onChange={e => setLenguague(e.target.value)} required />
-                    </div>
+                <Container>
                     <div className="input-group mb-3">
                         <RolSelector id="rolId" className="custom-select my-1 mr-sm-2"
-                            value={rol} onChange={e => setRol(e.target.value)} required />
+                                     value={rol} onChange={e => setRol(e.target.value)} required />
                     </div>
+                    <Errors errors={backendErrors} onClose={() => setBackendErrors(null)} />
+                    <Container className="signUpLogInDivFirst bg-light border border-secondary ">
+                        <br />
+                        <div className="d-flex justify-content-center">
+                            <h3>Talleres HJELP</h3>
+                        </div>
+                    </Container>
                     <br />
-                    <div className="d-flex justify-content-center">
-                        <Button type="submit" className="d-flex justify-content-center" variant="success">
-                            <FormattedMessage id='user.SignUp.SignUp' />
-                        </Button>
-                    </div>
+                    <Container className="signUpDivSecond bg-light border border-secondary ">
+                        <form onSubmit={e => handleSubmit(e)}>
+                            <br />
+                            <div className="d-flex justify-content-center">
+                                <h6><FormattedMessage id='user.SignUp.Welcome' /></h6>
+                            </div>
+                            <br />
 
-                </form>
-            </Container>
+                            <div className="input-group mb-3">
+                                <div className="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <FormattedMessage id='user.SignUp.UserName'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" value={userName} onChange={e => setUserName(e.target.value)} required />}
+                                </FormattedMessage>
 
-        </Container>
+                            </div>
 
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.Password'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" type="password" value={password} onChange={e => setPassword(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
 
-    );
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.RepeatPassword'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
+
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.Name'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" value={name} onChange={e => setName(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
+
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.Surnames'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" value={surnames} onChange={e => setSurnames(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
+
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.Dni'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" value={dni} onChange={e => setDni(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
+
+                            <div className="input-group mb-3">
+                                <FormattedMessage id='user.SignUp.Email'>
+                                    {placeholder => <input placeholder={placeholder} className="form-control" type="email" value={email} onChange={e => setEmail(e.target.value)} required />}
+                                </FormattedMessage>
+                            </div>
+                            <div className="input-group mb-3">
+                                <LenguagueSelector id="lenguagueId" className="custom-select my-1 mr-sm-2"
+                                                   value={lenguague} onChange={e => setLenguague(e.target.value)} required />
+                            </div>
+                            <br />
+                            <div className="d-flex justify-content-center">
+                                <Button type="submit" className="d-flex justify-content-center" variant="success">
+                                    <FormattedMessage id='user.SignUp.SignUp' />
+                                </Button>
+                            </div>
+
+                        </form>
+                    </Container>
+
+                </Container>
+            );
+        }
+
 }
 
 export default SignUp;

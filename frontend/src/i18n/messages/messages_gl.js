@@ -55,6 +55,7 @@ export default {
     'user.SignUp.Login': 'Iniciar sesión',
     'user.SignUp.Lenguagues': 'Escolla a linguaxe',
     'user.SignUp.Rol': 'Escolla o rol',
+    'user.SignUp.Dni': 'DNI',
 
     'user.LogIn.Welcome': 'Inicia sesion en Talleres HJELP',
     'user.Login.ForgotPassword': 'Olvidaches o teu contrasinal?',

@@ -63,6 +63,7 @@ export default {
     'user.SignUp.SignUp': 'Registrar',
     'user.SignUp.Lenguagues': 'Seleccione el lenguaje',
     'user.SignUp.Rol': 'Seleccione el rol',
+    'user.SignUp.Dni': 'DNI',
 
     'user.LogIn.Welcome': 'Inicia sesión en Talleres HJELP',
     'user.Login.RegisterMsg': '¿Necesitas una cuenta? Pregunta al personal de administración',
