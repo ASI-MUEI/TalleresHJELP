@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,8 +62,16 @@ public class ControladorTaller {
         List<Asistencia> asistencias = servicioTaller.findAllAsistenciasPorFecha(fecha);
         // Si la asistencia llega nula, se pone nulo en la salida. Es la manera de indicar que ese slot no está asignado
         // al frontend.
-        List<AsistenciasDto> resultado = asistencias.stream().map( a -> a==null? null : AsistenciaConversor.toAsistenciasDto(a))
-                .collect(Collectors.toList());
+        List<AsistenciasDto> resultado = new ArrayList<>(101);
+
+        for(Asistencia a : asistencias){
+            if(a == null){
+                resultado.add(null);
+            } else {
+                AsistenciasDto aDto = AsistenciaConversor.toAsistenciasDto(a);
+                resultado.add(aDto);
+            }
+        }
 
         return resultado;
     }

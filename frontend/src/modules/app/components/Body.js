@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import FindUsers from '../../user/components/FindUsers';
 import User from '../../user/components/User';
 import Home from './Home';
-import SignUp from '../../user/components/SignUp';
+import Registrar from '../../user/components/Registrar';
 import LogIn from '../../user/components/LogIn';
 import ChanguePassword from '../../user/components/ChanguePassword';
 import ChangueProfileData from '../../user/components/ChangueProfileData';
@@ -13,6 +13,9 @@ import ResetPassword from '../../user/components/ResetPassword';
 import PaginaHorario from '../../horario/components/PaginaHorario';
 import Reparacion from '../../reparacion/components/Reparacion';
 import NewVehicle from '../../vehicle/components/NewVehicle';
+import RegistrarMecanico from "../../user/components/RegistrarMecanico";
+import RegistrarCliente from "../../user/components/RegistrarCliente";
+import RegistrarAdministrativo from "../../user/components/RegistrarAdministrativo";
 
 const Body = () => {
 
@@ -23,7 +26,10 @@ const Body = () => {
             <Switch>
                 <Route exact path="/"><Home /></Route>
                 <Route exact path="/users/find-users"><FindUsers /></Route>
-                <Route exact path="/users/signUp"><SignUp /></Route>
+                <Route exact path="/usuarios/registrar"><Registrar /></Route>
+                <Route exact path="/usuarios/registrar/mec"><RegistrarMecanico/></Route>
+                <Route exact path="/usuarios/registrar/cli"><RegistrarCliente/></Route>
+                <Route exact path="/usuarios/registrar/adm"><RegistrarAdministrativo/></Route>
                 <Route exact path="/users/login"><LogIn /></Route>
                 <Route exact path="/users/recover"><RecoverUser /></Route>
                 <Route exact path="/users/:userName"><User /></Route>

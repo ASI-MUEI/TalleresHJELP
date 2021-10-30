@@ -25,7 +25,7 @@ const FuncionesAdministrativas = () => {
                             <br />
                             <div className="centeredHorizontalDiv">
                                 <div className="d-flex justify-content-center">
-                                    <form onSubmit={() => history.push('/users/signUp')}>
+                                    <form onSubmit={() => history.push('/usuarios/registrar')}>
                                         <Button type="submit" className="d-flex justify-content-center" variant="info">
                                             <FormattedMessage id="app.RedirectHome.SignIn" />
                                         </Button>

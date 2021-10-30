@@ -65,6 +65,14 @@ export default {
     'user.SignUp.Rol': 'Seleccione el rol',
     'user.SignUp.Dni': 'DNI',
 
+    'user.SignUp.Mecanico.Dni': 'Número de DNI',
+    'user.SignUp.Mecanico.Name': 'Nombre del mecánico',
+    'user.SignUp.Mecanico.Surname': 'Apellidos del mecánico',
+
+    'user.SignUp.Cliente.Dni': 'Número del DNI',
+    'user.SignUp.Cliente.Name': 'Nombre del cliente',
+    'user.SignUp.Cliente.Surname': 'Apellidos del cliente',
+
     'user.LogIn.Welcome': 'Inicia sesión en Talleres HJELP',
     'user.Login.RegisterMsg': '¿Necesitas una cuenta? Pregunta al personal de administración',
     'user.Login.ForgotPassword': '¿Olvidaste tu contraseña?',
@@ -110,5 +118,6 @@ export default {
     'vehiculo.registroVehiculo.marca' : 'Marca',
     'vehiculo.registroVehiculo.modelo' : 'Modelo',
     'vehiculo.registroVehiculo.flota' : 'Flota',
-    
+
+    'back' : 'Atrás',
 }

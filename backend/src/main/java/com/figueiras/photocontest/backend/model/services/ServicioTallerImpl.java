@@ -213,7 +213,7 @@ public class ServicioTallerImpl implements ServicioTaller{
     // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
     // Se ordenan tal u como quedarían en la tabla
     private List<Asistencia> ordenarAsistenciasParaTabla(List<Asistencia> asistencias){
-        final int SLOTS_HORARIOS = 115;
+        final int SLOTS_HORARIOS = 101;
         List<Asistencia> resultado = new ArrayList<>(SLOTS_HORARIOS);
 
         // Inicializacion de ArrayList para que tenga tamaño 100
