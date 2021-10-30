@@ -57,11 +57,11 @@ export default {
     'user.SignUp.Rol': 'Escolla o rol',
     'user.SignUp.Dni': 'DNI',
 
-    'user.SignUp.Mecanico.Dni': 'Número do DNI',
+    'user.SignUp.Mecanico.Dni': 'DNI',
     'user.SignUp.Mecanico.Name': 'Nome do mecánico',
     'user.SignUp.Mecanico.Surname': 'Apelidos do mecánico',
 
-    'user.SignUp.Cliente.Dni': 'Número do DNI',
+    'user.SignUp.Cliente.Dni': 'DNI',
     'user.SignUp.Cliente.Name': 'Nome do cliente',
     'user.SignUp.Cliente.Surname': 'Apelidos do cliente',
 

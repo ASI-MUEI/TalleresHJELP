@@ -40,11 +40,11 @@ export default {
     'user.SignUp.Login': 'Login',
     'user.SignUp.Dni': 'DNI',
 
-    'user.SignUp.Mecanico.Dni': 'DNI Number',
+    'user.SignUp.Mecanico.Dni': 'DNI',
     'user.SignUp.Mecanico.Name': 'Mechanic\'s name',
     'user.SignUp.Mecanico.Surname': 'Mechanic\'s surname',
 
-    'user.SignUp.Cliente.Dni': 'DNI Number',
+    'user.SignUp.Cliente.Dni': 'DNI',
     'user.SignUp.Cliente.Name': 'Client\'s name',
     'user.SignUp.Cliente.Surname': 'Client\'s surname',
 
