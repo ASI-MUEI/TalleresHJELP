@@ -62,13 +62,13 @@ public class ControladorTaller {
         List<Asistencia> asistencias = servicioTaller.findAllAsistenciasPorFecha(fecha);
         // Si la asistencia llega nula, se pone nulo en la salida. Es la manera de indicar que ese slot no está asignado
         // al frontend.
-        List<AsistenciasDto> resultado = new ArrayList<>(101);
+        List<AsistenciasDto> resultado = new ArrayList<>();
 
-        for(Asistencia a : asistencias){
-            if(a == null){
+        for(int i = 0; i <= 100; i ++){
+            if(asistencias.get(i) == null){
                 resultado.add(null);
             } else {
-                AsistenciasDto aDto = AsistenciaConversor.toAsistenciasDto(a);
+                AsistenciasDto aDto = AsistenciaConversor.toAsistenciasDto(asistencias.get(i));
                 resultado.add(aDto);
             }
         }

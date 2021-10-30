@@ -1,5 +1,8 @@
 package com.figueiras.photocontest.backend.model.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -66,8 +69,6 @@ public class Asistencia {
     public void setMecanicos(List<Usuario> mecanicos) {
         this.mecanicos = mecanicos;
     }
-
-
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

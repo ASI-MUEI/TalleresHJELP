@@ -20,10 +20,11 @@ public class AsistenciaConversor {
         resultado.setIdTrabajo(asistencia.getTrabajo().getIdTrabajo());
         resultado.setPuestoTaller(asistencia.getPuesto().getIdPuestoTaller());
         List<Usuario> mecanicos = asistencia.getMecanicos();
-        for (Usuario u : mecanicos) {
+        int numMecanicos = mecanicos.size();
+        for (int i = 0; i<numMecanicos; i++) {
             MecanicoDto mecanicoDto = new MecanicoDto();
-            mecanicoDto.setIdMecanico(u.getIdUsuario());
-            mecanicoDto.setNombreMecanico(u.getNombreUsuario());
+            mecanicoDto.setIdMecanico(mecanicos.get(i).getIdUsuario());
+            mecanicoDto.setNombreMecanico(mecanicos.get(i).getNombreUsuario());
             mecanicosDto.add(mecanicoDto);
         }
         resultado.setMecanicos(mecanicosDto);

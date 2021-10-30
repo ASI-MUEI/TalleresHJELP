@@ -200,12 +200,14 @@ public class ServicioTallerImpl implements ServicioTaller{
         LocalDateTime fechaFiltrado = LocalDateTime.of(Integer.valueOf(fecha_tabla[0]), Integer.valueOf(fecha_tabla[1]),
                 Integer.valueOf(fecha_tabla[2]), 0, 0, 0, 0);
 
-        List<Asistencia> asistencias = asistenciaDao.findAsistenciasPorFecha(fechaFiltrado);
+        List<Asistencia> asistencias = new ArrayList<>(101);
+        asistencias = asistenciaDao.findAsistenciasPorFecha(fechaFiltrado);
 
         // Las asistencias se pasarán a un array en donde estén ordenadas por franja horaria
         // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
 
-        List<Asistencia> resultado = ordenarAsistenciasParaTabla(asistencias);
+        List<Asistencia> resultado = new ArrayList<>();
+        resultado = ordenarAsistenciasParaTabla(asistencias);
 
         return resultado;
     }
@@ -213,23 +215,24 @@ public class ServicioTallerImpl implements ServicioTaller{
     // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
     // Se ordenan tal u como quedarían en la tabla
     private List<Asistencia> ordenarAsistenciasParaTabla(List<Asistencia> asistencias){
-        final int SLOTS_HORARIOS = 101;
-        List<Asistencia> resultado = new ArrayList<>(SLOTS_HORARIOS);
+        final int SLOTS_HORARIOS = 500;
+        Asistencia[] resultado = new Asistencia[SLOTS_HORARIOS];
 
         // Inicializacion de ArrayList para que tenga tamaño 100
         for(int i = 0; i < SLOTS_HORARIOS; i++)
         {
-            resultado.add(i, null);
+            resultado[i] =  null;
         }
 
         for (Asistencia a : asistencias) {
             for (Horarios h:a.getHorarios()) {
-                resultado.add(
-                        calcularIndiceInsercion(
-                                a.getPuesto().getIdPuestoTaller().intValue(), h.getIdFranjaHoraria().intValue()), a);
+                resultado[calcularIndiceInsercion(
+                        a.getPuesto().getIdPuestoTaller().intValue(), h.getIdFranjaHoraria().intValue())] = a;
             }
         }
-        return resultado;
+
+        List<Asistencia> listaResultado = Arrays.asList(resultado);
+        return listaResultado;
     }
 
     private int calcularIndiceInsercion(int elevador, int idranjaHoraria){

@@ -6,7 +6,7 @@ VALUES
 INSERT INTO Usuario
 (idUsuario, nombreUsuario, nombrePilaUsuario, apellidosUsuario, correoElectronicoUsuario, contrasenaUsuario, lenguaje, rolUsuarioSistema, cuentaEliminada)
 VALUES
-(2, "Pepe", "pepe", "Gómez", "pgomez@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 4, 0);
+(2, "Pepe", "pepe", "Gómez", "pgomez@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 2, 0);
 
 
 INSERT INTO Horarios(franjaHoraria) values('8:30-9:00');
