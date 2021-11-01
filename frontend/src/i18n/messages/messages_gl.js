@@ -89,11 +89,16 @@ export default {
     'user.ChangueData.Surnames': 'Apelidos',
     'user.ChangueData.Biography': 'Biografía',
 
-    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Nova reparación',
-    'paginaHorario.nuevaReparacion.selectorCliente' : 'Escolla un cliente',
-    'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Escolla un coche',
-    'paginaHorario.nuevaReparacion.selectorElevador' : 'Escolla un elevador',
-    'paginaHorario.nuevaReparacion.selectorHorario' : 'Escolla as horas de traballo',
+    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Engadir reparación',
+    'paginaHorario.nuevaReparacion.selectorMatrícula' : 'Seleccione matrícula',
+    'paginaHorario.nuevaReparacion.selectorMecanicos' : 'Seleccione mecánicos',
+    'paginaHorario.nuevaReparacion.selectorPrecio' : 'Prezo',
+    'paginaHorario.nuevaReparacion.selectorFecha' : 'Data',
+    'paginaHorario.nuevaReparacion.selectorElevador' : 'Seleccione un elevador',
+    'paginaHorario.nuevaReparacion.selectorHorario' : 'Horas de traballo',
+    'paginaHorario.nuevaReparacion.horasEstimadas' : 'Duración estimada',
+    'paginaHorario.nuevaReparacion.checkBoxPeritaje' : 'Peritaxe',
+    'paginaHorario.nuevaReparacion.Descripcion' : 'Descripción',
 
     'paginaPrincipal.administrativos.tareasAdministrativas' : 'Tareas do personal administrativo',
 

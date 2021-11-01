@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import NuevaReparacion from "../../reparacion/components/NuevaReparacion";
+import AnadirReparacion from "../../reparacion/components/AnadirReparacion";
 import Horario from "./Horario";
 import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
@@ -59,7 +59,7 @@ const PaginaHorario = () => {
             }
             <br />
             <hr />
-            <NuevaReparacion />
+            <AnadirReparacion />
         </Container>
     )
 }

@@ -76,11 +76,16 @@ export default {
     'user.ChangueData.Email': 'Email',
     'user.ChangueData.Biography': 'Biography',
 
-    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'New repair',
-    'paginaHorario.nuevaReparacion.selectorCliente' : 'Select a client',
-    'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Select a vehicle',
-    'paginaHorario.nuevaReparacion.selectorElevador' : 'Select an elevator',
-    'paginaHorario.nuevaReparacion.selectorHorario' : 'Select the working times',
+    'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Add reparation',
+    'paginaHorario.nuevaReparacion.selectorMatrícula' : 'Pick numberplate',
+    'paginaHorario.nuevaReparacion.selectorMecanicos' : 'Pick workers',
+    'paginaHorario.nuevaReparacion.selectorPrecio' : 'Price',
+    'paginaHorario.nuevaReparacion.selectorFecha' : 'Date',
+    'paginaHorario.nuevaReparacion.selectorElevador' : 'Pick an elevator',
+    'paginaHorario.nuevaReparacion.selectorHorario' : 'Working hours',
+    'paginaHorario.nuevaReparacion.horasEstimadas' : 'Estimated duration',
+    'paginaHorario.nuevaReparacion.checkBoxPeritaje' : 'Expertise',
+    'paginaHorario.nuevaReparacion.Descripcion' : 'Description',
 
     'paginaPrincipal.administrativos.tareasAdministrativas' : 'Administrative personel tasks',
     

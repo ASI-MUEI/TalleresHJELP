@@ -191,7 +191,6 @@ hr {
 
 .divFlexDirectionColumn{
   display: flex;
-  flex-direction: column;
 }
 
 .photograhyPresentationProfileImg {
@@ -203,6 +202,12 @@ hr {
 }
 
 .center {
+  display: table;
+  margin: 0 auto;
+}
+
+.añadirReparacionDiv1{
+  width: 300px;
   display: table;
   margin: 0 auto;
 }

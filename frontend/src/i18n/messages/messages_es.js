@@ -104,10 +104,15 @@ export default {
     'user.ChangueData.InstagramLink': 'Enlace a Instagram',
 
     'paginaHorario.nuevaReparacion.nuevaReparacion' : 'Nueva reparación',
-    'paginaHorario.nuevaReparacion.selectorCliente' : 'Seleccione un cliente',
-    'paginaHorario.nuevaReparacion.selectorVehiculo' : 'Seleccione un vehículo',
+    'paginaHorario.nuevaReparacion.selectorMatrícula' : 'Seleccione matrícula',
+    'paginaHorario.nuevaReparacion.selectorMecanicos' : 'Seleccione mecánicos',
+    'paginaHorario.nuevaReparacion.selectorPrecio' : 'Precio',
+    'paginaHorario.nuevaReparacion.selectorFecha' : 'Fecha',
     'paginaHorario.nuevaReparacion.selectorElevador' : 'Seleccione un elevador',
-    'paginaHorario.nuevaReparacion.selectorHorario' : 'Seleccione las horas de trabajo',
+    'paginaHorario.nuevaReparacion.selectorHorario' : 'Horas de trabajo',
+    'paginaHorario.nuevaReparacion.horasEstimadas' : 'Duración estimada',
+    'paginaHorario.nuevaReparacion.checkBoxPeritaje' : 'Peritaje',
+    'paginaHorario.nuevaReparacion.Descripcion' : 'Descripción',
 
     'paginaPrincipal.administrativos.tareasAdministrativas' : 'Tareas del personal administrativo',
 
