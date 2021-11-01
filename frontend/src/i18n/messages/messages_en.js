@@ -43,6 +43,7 @@ export default {
     'user.SignUp.Mecanico.Dni': 'DNI',
     'user.SignUp.Mecanico.Name': 'Mechanic\'s name',
     'user.SignUp.Mecanico.Surname': 'Mechanic\'s surname',
+    'user.SignUp.Mecanico.SignUpMechanic': 'Create mechanic',
 
     'user.SignUp.Cliente.Dni': 'DNI',
     'user.SignUp.Cliente.Name': 'Client\'s name',
@@ -86,6 +87,7 @@ export default {
     'paginaHorario.nuevaReparacion.horasEstimadas' : 'Estimated duration',
     'paginaHorario.nuevaReparacion.checkBoxPeritaje' : 'Expertise',
     'paginaHorario.nuevaReparacion.Descripcion' : 'Description',
+    'paginaHorario.nuevaReparacion.CrearTrabajo' : 'Create new job',
 
     'paginaPrincipal.administrativos.tareasAdministrativas' : 'Administrative personel tasks',
     
@@ -97,6 +99,19 @@ export default {
     'vehiculo.registroVehiculo.modelo' : 'Model',
     'vehiculo.registroVehiculo.flota' : 'Fleet',
 
+    'trabajos.nuevo.nombreTrabajo' : 'Job name',
+    'trabajos.nuevo.matricula' : 'Number plate',
+    'trabajos.nuevo.descripcionTrabajo' : 'Description',
+    'trabajos.nuevo.registrarCliente' : 'Sign Up a client',
+    'trabajos.nuevo.registrarTrabajo' : 'Create Job',
+
     'back' : 'Back',
+
+    'registrarUsuario' : 'User registration page',
+    'registrarUsuario.Asministrativo' : 'Registrate a new administrative',
+    'registrarUsuario.Mecanico' : 'Registrate a new mechanic',
+    'registrarUsuario.Cliente' : 'Registrate a new client',
+
+    'panelDeControlHorario' : 'Hour control panel',
 
 }

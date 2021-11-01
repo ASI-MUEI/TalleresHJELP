@@ -1,9 +1,10 @@
 import { Container } from "react-bootstrap";
 import AnadirReparacion from "../../reparacion/components/AnadirReparacion";
 import Horario from "./Horario";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import backend from "../../../backend";
+import {FormattedMessage} from "react-intl";
 
 const PaginaHorario = () => {
     var fechaHoy = new Date();
@@ -35,6 +36,9 @@ const PaginaHorario = () => {
 
     return (
         <Container>
+            <h3 className={"centeredParagraph"}>
+                <FormattedMessage id={"panelDeControlHorario"}/>
+            </h3>
             <div>
                 <input
                     type="date"

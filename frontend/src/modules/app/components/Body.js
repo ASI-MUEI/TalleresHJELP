@@ -16,6 +16,7 @@ import NewVehicle from '../../vehicle/components/NewVehicle';
 import RegistrarMecanico from "../../user/components/RegistrarMecanico";
 import RegistrarCliente from "../../user/components/RegistrarCliente";
 import RegistrarAdministrativo from "../../user/components/RegistrarAdministrativo";
+import AnadirTrabajo from "../../reparacion/components/AnadirTrabajo";
 
 const Body = () => {
 
@@ -25,7 +26,7 @@ const Body = () => {
             <br />
             <Switch>
                 <Route exact path="/"><Home /></Route>
-                <Route exact path="/users/find-users"><FindUsers /></Route>
+                <Route exact path="/trabajos/nuevo"><AnadirTrabajo/></Route>
                 <Route exact path="/usuarios/registrar"><Registrar /></Route>
                 <Route exact path="/usuarios/registrar/mec"><RegistrarMecanico/></Route>
                 <Route exact path="/usuarios/registrar/cli"><RegistrarCliente/></Route>

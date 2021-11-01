@@ -18,6 +18,9 @@ const Registrar = () => {
     if(rol === ""){
         return (
             <Container>
+                <h3 className={"centeredParagraph"}>
+                    <FormattedMessage id={"registrarUsuario"}/>
+                </h3>
                 <div>
                     <Link to="/"><FormattedMessage id={"back"}/></Link>
                 </div>

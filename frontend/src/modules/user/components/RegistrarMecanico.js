@@ -20,6 +20,9 @@ const RegistrarMecanico = () => {
 
     return(
         <Container>
+            <h3 className={"centeredParagraph"}>
+                <FormattedMessage id={"registrarUsuario.Mecanico"}/>
+            </h3>
             <div>
                 <Link to="/usuarios/registrar"><FormattedMessage id={"back"}/></Link>
             </div>

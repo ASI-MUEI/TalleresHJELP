@@ -20,6 +20,9 @@ const RegistrarCliente = () => {
 
     return(
         <Container>
+            <h3 className={"centeredParagraph"}>
+                <FormattedMessage id={"registrarUsuario.Cliente"}/>
+            </h3>
             <div>
                 <Link to="/usuarios/registrar"><FormattedMessage id={"back"}/></Link>
             </div>
@@ -40,7 +43,7 @@ const RegistrarCliente = () => {
                                       onChange={e => setApellidosUsuario(e.target.value)}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        <FormattedMessage id={'user.SignUp.SignUp'}/>
+                        <FormattedMessage id={'trabajos.nuevo.registrarCliente'}/>
                     </Button>
                 </Form>
             </div>

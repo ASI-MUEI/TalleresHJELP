@@ -1,7 +1,8 @@
 import {Button, Container, Form} from "react-bootstrap";
-import {useIntl} from "react-intl";
+import {FormattedMessage, useIntl} from "react-intl";
 import {Multiselect} from 'multiselect-react-dropdown';
-import {useState} from "react";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 const AnadirReparacion = () => {
 
@@ -39,10 +40,15 @@ const AnadirReparacion = () => {
                             isObject={false}
                             options={listaMatricula}
                             showArrow="true"
-                            singleSelect="true"
+                            selectionLimit ={1}
                             onSelect={selectedList => setMatricula(Array.from(selectedList))}
                             onRemove={selectedList => setMatricula(Array.from(selectedList))}
                         />
+                        &nbsp;
+                        <br/>
+                        <Link
+                            to="/trabajos/nuevo"><FormattedMessage id={'paginaHorario.nuevaReparacion.CrearTrabajo'}/>
+                        </Link>
                     </div>
                     <div className="añadirReparacionDiv1">
                         <Multiselect
@@ -86,6 +92,7 @@ const AnadirReparacion = () => {
                             isObject={false}
                             options={listaElevadores}
                             showArrow="true"
+                            selectionLimit ={1}
                             onSelect={selectedList => setElevador(Array.from(selectedList))}
                             onRemove={selectedList => setElevador(Array.from(selectedList))}
                         />
@@ -130,13 +137,13 @@ const AnadirReparacion = () => {
                 <br/>
                 <div>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>{intl.formatMessage({id: 'paginaHorario.nuevaReparacion.Descripcion'})}</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
                             maxlength={"1000"}
                             value={descripcion}
                             onChange={event => setDescripcion(event.target.value)}
+                            placeholder={intl.formatMessage({id: 'trabajos.nuevo.descripcionTrabajo'})}
                         />
                     </Form.Group>
                 </div>
