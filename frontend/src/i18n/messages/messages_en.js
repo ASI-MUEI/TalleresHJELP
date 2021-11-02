@@ -99,6 +99,20 @@ export default {
     'vehiculo.registroVehiculo.modelo' : 'Model',
     'vehiculo.registroVehiculo.flota' : 'Fleet',
 
+    'trabajos.cabecera' : 'Jobs',
+    'trabajos.apartado' : 'Jobs page',
+    'trabajo.vacia' : 'There is no jobs available',
+    'trabajo.nombreLista' : 'Jobs list',
+
+    'trabajo.matricula' : 'Number plate',
+    'trabajo.cliente' : 'Client',
+    'trabajo.estado' : 'State',
+    'trabajo.fechaCreacion' : 'Creation date',
+    'trabajo.verDetalle' : 'View details',
+    'trabajo.estado.ABIERTO' : 'Open',
+    'trabajo.estado.CERRADO' : 'Close',
+
+
     'trabajos.nuevo.nombreTrabajo' : 'Job name',
     'trabajos.nuevo.matricula' : 'Number plate',
     'trabajos.nuevo.descripcionTrabajo' : 'Description',

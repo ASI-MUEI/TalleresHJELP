@@ -126,6 +126,19 @@ export default {
     'vehiculo.registroVehiculo.modelo' : 'Modelo',
     'vehiculo.registroVehiculo.flota' : 'Flota',
 
+    'trabajos.cabecera' : 'Trabajos',
+    'trabajos.apartado' : 'Página de trabajos',
+    'trabajo.vacia' : 'No hay ningún trabajo disponible para listar',
+    'trabajo.nombreLista' : 'Lista de trabajos',
+
+    'trabajo.matricula' : 'Matrícula',
+    'trabajo.cliente' : 'Cliente',
+    'trabajo.estado' : 'Estado',
+    'trabajo.fechaCreacion' : 'Fecha de creación',
+    'trabajo.verDetalle' : 'Ver detalles',
+    'trabajo.estado.ABIERTO' : 'Abierto',
+    'trabajo.estado.CERRADO' : 'Cerrado',
+
     'trabajos.nuevo.nombreTrabajo' : 'Nombre del trabajo',
     'trabajos.nuevo.matricula' : 'Matrícula',
     'trabajos.nuevo.descripcionTrabajo' : 'Descripción',

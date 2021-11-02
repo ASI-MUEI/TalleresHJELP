@@ -112,11 +112,24 @@ export default {
     'vehiculo.registroVehiculo.modelo' : 'Modelo',
     'vehiculo.registroVehiculo.flota' : 'Flota',
 
+    'trabajos.cabecera' : 'Traballos',
+    'trabajos.apartado' : 'Páxina de traballos',
+    'trabajo.vacia' : 'Non hai ningún traballo disponible para listar',
+
+    'trabajo.nombreLista' : 'Lista de traballos',
+    'trabajo.matricula' : 'Matrícula',
+    'trabajo.cliente' : 'Cliente',
+    'trabajo.estado' : 'Estado',
+    'trabajo.fechaCreacion' : 'Data de creación',
+    'trabajo.verDetalle' : 'Ver detalles',
+
     'trabajos.nuevo.nombreTrabajo' : 'Nome do traballo',
     'trabajos.nuevo.matricula' : 'Matrícula',
     'trabajos.nuevo.descripcionTrabajo' : 'Descripción',
     'trabajos.nuevo.registrarCliente' : 'Rexistrar cliente',
     'trabajos.nuevo.registrarTrabajo' : 'Crear traballo',
+    'trabajo.estado.ABIERTO' : 'Aberto',
+    'trabajo.estado.CERRADO' : 'Cerrado',
 
     'registrarUsuario' : 'Páxina de rexistro de usuarios',
     'registrarUsuario.Asministrativo' : 'Rexistrar un novo administrativo',

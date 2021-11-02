@@ -25,6 +25,9 @@ const Header = () => {
                 <Link className="nav-link" to="/horario">
                   <FormattedMessage id="app.Header.Horarios" />
                 </Link>
+                  <Link className="nav-link" to="/trabajos">
+                      <FormattedMessage id='trabajos.cabecera'/>
+                  </Link>
               </Nav>
               :
               null

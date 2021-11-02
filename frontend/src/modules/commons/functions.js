@@ -9,11 +9,11 @@ const tipoLabelConcurso = (estado) => {
     }
 }
 
-const tipoLabelAcceso = (estado) => {
+const tipoLabelTrabajo = (estado) => {
 
     switch(estado){
-        case "PUBLICO" : return "success"
-        case "PRIVADO" : return "warning"
+        case "ABIERTO" : return "warning"
+        case "CERRADO" : return "success"
         default : return "success"
     }
 }
@@ -54,6 +54,6 @@ const calculateDiffBetweenDates = (date2, date1) => {
     }
 }
 
-let exportObj = {tipoLabelConcurso, tipoLabelAcceso, tipoLabelVotante, fileToBase64, calculateDiffBetweenDates}
+let exportObj = {tipoLabelTrabajo, tipoLabelVotante, fileToBase64, calculateDiffBetweenDates}
 
 export default exportObj;
