@@ -128,4 +128,12 @@ export default {
 
     'panelDeControlHorario' : 'Hour control panel',
 
+    'reparacion.fecha' : 'Date',
+    'reparacion.duracion' : 'Duration',
+    'reparacion.precio' : 'Price',
+    'reparacion.detalle' : 'Detail',
+    'reparacion.verDetalle' : 'See detail',
+    'reparacion.asociadas' : 'Asociated reparations',
+    'reparacion.vacia' : 'There is no reparations available',
+
 }

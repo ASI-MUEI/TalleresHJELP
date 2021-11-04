@@ -139,4 +139,12 @@ export default {
     'back' : 'Atrás',
 
     'panelDeControlHorario' : 'Panel de control horario',
+
+    'reparacion.fecha' : 'Data',
+    'reparacion.duracion' : 'Duración',
+    'reparacion.precio' : 'Prezo',
+    'reparacion.detalle' : 'Detalle',
+    'reparacion.verDetalle' : 'Ver detalle',
+    'reparacion.asociadas' : 'Reparacións asociadas',
+    'reparacion.vacia' : 'No hay reparaciones disponibles',
 }

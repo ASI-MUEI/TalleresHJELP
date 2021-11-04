@@ -41,7 +41,7 @@ const Trabajos = ({listaTrabajos}) =>{
                         </Badge>
                     </td>
                     <td className="align-middle">
-                        <FormattedDate value={new Date(trabajo.fechaConcurso)} />
+                        <FormattedDate value={new Date(trabajo.fechaCreacion)} />
                     </td>
                 </tr>
             )}
