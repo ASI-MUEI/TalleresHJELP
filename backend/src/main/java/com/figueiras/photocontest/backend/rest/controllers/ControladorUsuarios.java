@@ -139,4 +139,9 @@ public class ControladorUsuarios {
     public void eliminarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
         servicioUsuario.eliminarUsuario(nombreUsuario);
     }
+
+    @GetMapping("/usuarios/mecanicos")
+    public List<MecanicoDto> getMecanicos(){
+        return UsuarioConversor.toMecanicoDto(servicioUsuario.findMecanicos());
+    }
 }

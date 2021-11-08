@@ -3,25 +3,17 @@ package com.figueiras.photocontest.backend.rest.dtos;
 import java.util.List;
 
 public class AsistenciasDto {
-    private Long tipo;
     private String fecha;
-    private List<MecanicoDto> mecanicos;
-    private Long estado;
-    private Long puestoTaller;
+    private List<MecanicoAsistenciaDto> mecanicos;
+    private Long elevador;
     private Long idTrabajo;
     private String matricula;
     private Float precio;
     private Long duracionEstimada;
     private String descripcion;
     private Boolean peritaje;
+    private List<HorariosAsistenciasDto> horasDeTrabajo;
 
-    public Long getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Long tipo) {
-        this.tipo = tipo;
-    }
 
     public String getFecha() {
         return fecha;
@@ -31,28 +23,20 @@ public class AsistenciasDto {
         this.fecha = fecha;
     }
 
-    public List<MecanicoDto> getMecanicos() {
+    public List<MecanicoAsistenciaDto> getMecanicos() {
         return mecanicos;
     }
 
-    public void setMecanicos(List<MecanicoDto> mecanicos) {
+    public void setMecanicos(List<MecanicoAsistenciaDto> mecanicos) {
         this.mecanicos = mecanicos;
     }
 
-    public Long getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Long estado) {
-        this.estado = estado;
-    }
-
     public Long getPuestoTaller() {
-        return puestoTaller;
+        return elevador;
     }
 
-    public void setPuestoTaller(Long puestoTaller) {
-        this.puestoTaller = puestoTaller;
+    public void setPuestoTaller(Long elevador) {
+        this.elevador = elevador;
     }
 
     public Long getIdTrabajo() {
@@ -101,5 +85,13 @@ public class AsistenciasDto {
 
     public void setPeritaje(Boolean peritaje) {
         this.peritaje = peritaje;
+    }
+
+    public List<HorariosAsistenciasDto> getHorasDeTrabajo() {
+        return horasDeTrabajo;
+    }
+
+    public void setHorasDeTrabajo(List<HorariosAsistenciasDto> horasDeTrabajo) {
+        this.horasDeTrabajo = horasDeTrabajo;
     }
 }

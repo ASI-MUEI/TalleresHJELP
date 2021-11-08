@@ -5,6 +5,7 @@ import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioCambioContraseñaDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioLoginDto;
+import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface ServicioUsuario {
     boolean comprobarEnlaceRecuperacionContrasena(String jwt) throws InstanceNotFoundException;
     void eliminarUsuario(String nombreUsuario) throws InstanceNotFoundException;
     Usuario actualizarUsuario(Usuario usuario);
+    Slice<Usuario> findMecanicos();
 }

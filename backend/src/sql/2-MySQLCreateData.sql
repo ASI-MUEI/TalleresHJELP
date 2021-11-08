@@ -45,20 +45,16 @@ VALUES
 
 -- Estados de asistencias
 
-INSERT INTO EstadosAsistencias
+INSERT INTO EstadoTrabajo
 (idEstado, nombre, descripcion)
 VALUES
-(1, 'En Espera', 'El vehículo está esperando para su reparación');
+(1, 'Abierto', 'El vehículo está en reparación');
 
 INSERT INTO EstadosAsistencias
 (idEstado, nombre, descripcion)
 VALUES
-(2, 'En reparación', 'El vehículo se está reparando');
+(2, 'Cerrado', 'El vehículo está listo');
 
-INSERT INTO EstadosAsistencias
-(idEstado, nombre, descripcion)
-VALUES
-(3, 'Listo', 'El vehículo está listo');
 
 -- Insercion de puestos del taller
 INSERT INTO PuestoTaller

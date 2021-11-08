@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface AsistenciasDao extends PagingAndSortingRepository<Asistencia, Long> {

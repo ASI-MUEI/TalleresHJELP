@@ -1,9 +1,11 @@
 package com.figueiras.photocontest.backend.rest.conversor;
 
 import com.figueiras.photocontest.backend.model.entities.Usuario;
+import com.figueiras.photocontest.backend.rest.dtos.MecanicoDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioAutenticadoDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioDto;
 import com.figueiras.photocontest.backend.rest.dtos.UsuarioTablaDto;
+import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,5 +72,13 @@ public class UsuarioConversor {
         usuarioAutenticadoDto.setTokenJwt(token);
 
         return usuarioAutenticadoDto;
+    }
+
+    public static List<MecanicoDto> toMecanicoDto(Slice<Usuario> usuarios){
+        List <MecanicoDto> mecanicos = new ArrayList<>();
+        for (Usuario mecanico : usuarios){
+            mecanicos.add(new MecanicoDto(mecanico.getIdUsuario(), mecanico.getNombreUsuario()));
+        }
+        return mecanicos;
     }
 }

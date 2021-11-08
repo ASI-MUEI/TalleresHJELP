@@ -2,7 +2,7 @@
 DROP TABLE AsistenciaMecanico;
 DROP TABLE AsistenciaHorario;
 DROP TABLE Asistencia;
-DROP TABLE EstadosAsistencias;
+DROP TABLE EstadoTrabajo;
 DROP TABLE TiposAsistencias;
 DROP TABLE Horarios;
 DROP TABLE Trabajo;
@@ -96,11 +96,11 @@ CREATE TABLE TiposAsistencias(
      CONSTRAINT TiposAsistencias_pk PRIMARY KEY(idTipo)
 );
 
-CREATE TABLE EstadosAsistencias(
+CREATE TABLE EstadoTrabajo(
    idEstado BIGINT NOT NULL AUTO_INCREMENT,
    nombre VARCHAR(255),
    descripcion VARCHAR(255),
-   CONSTRAINT EstadosAsistencias_pk PRIMARY KEY(idEstado)
+   CONSTRAINT EstadosTrabajo_pk PRIMARY KEY(idEstado)
 );
 
 CREATE TABLE Trabajo(
@@ -108,7 +108,9 @@ CREATE TABLE Trabajo(
 	nombre VARCHAR(255) NOT NULL,
     descripcion VARCHAR(255),
     idVehiculo BIGINT NOT NULL,
+    idEstado BIGINT(255),
     CONSTRAINT Trabajo_pk PRIMARY KEY(idTrabajo),
+    CONSTRAINT idEstado_fk FOREIGN KEY(idEstado) REFERENCES EstadoTrabajo(idEstado),
     CONSTRAINT idVehiculo_fk FOREIGN KEY(idVehiculo) REFERENCES Vehiculo(idVehiculo)
 );
 
@@ -116,7 +118,6 @@ CREATE TABLE Asistencia(
     idAsistencia BIGINT NOT NULL AUTO_INCREMENT,
     idTipo BIGINT NOT NULL,
     fecha DATETIME,
-    idEstado BIGINT(255),
     idPuesto BIGINT,
     idTrabajo BIGINT,
     precio FLOAT,
@@ -125,7 +126,6 @@ CREATE TABLE Asistencia(
     descripcion VARCHAR(500),
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
     CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TiposAsistencias(idTipo),
-    CONSTRAINT idEstado_fk FOREIGN KEY(idEstado) REFERENCES EstadosAsistencias(idEstado),
     CONSTRAINT trabajo_fk FOREIGN KEY(idTrabajo) REFERENCES Trabajo(idTrabajo),
     CONSTRAINT idPuesto_fk FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
 );

@@ -8,6 +8,7 @@ public class Trabajo {
     private String nombre;
     private String descripcion;
     private Vehiculo vehiculo;
+    private EstadoTrabajo estado;
 
     public Trabajo() {
     }
@@ -46,5 +47,15 @@ public class Trabajo {
 
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEstado")
+    public EstadoTrabajo getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoTrabajo estado) {
+        this.estado = estado;
     }
 }

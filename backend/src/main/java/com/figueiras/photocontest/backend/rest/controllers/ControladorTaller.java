@@ -8,6 +8,7 @@ import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
 import com.figueiras.photocontest.backend.model.services.Block;
 import com.figueiras.photocontest.backend.model.services.ServicioTaller;
 import com.figueiras.photocontest.backend.rest.conversor.AsistenciaConversor;
+import com.figueiras.photocontest.backend.rest.conversor.TallerConversor;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/taller")
@@ -80,5 +80,15 @@ public class ControladorTaller {
     public Slice<Horarios> recuperarHorariosDisp(@RequestParam(defaultValue = "0") int page,
                                                  @RequestParam(defaultValue = "5") int size) {
         return servicioTaller.getHorariosDisponibles(page, size);
+    }
+
+    @GetMapping("/trabajo/activos")
+    public List<MatriculasActivasDto> getTrabajosActivos() {
+        return TallerConversor.toMatriculasActivasDto(servicioTaller.getTrabajosAbiertos());
+    }
+
+    @GetMapping("/elevadores")
+    public List<PuestoTallerDto> getElevadores() {
+        return TallerConversor.toPuestosDto(servicioTaller.getElevadores());
     }
 }

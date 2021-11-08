@@ -1,16 +1,16 @@
 package com.figueiras.photocontest.backend.rest.conversor;
 
-import com.figueiras.photocontest.backend.model.entities.EstadoAsistencias;
+import com.figueiras.photocontest.backend.model.entities.EstadoTrabajo;
 import com.figueiras.photocontest.backend.model.entities.PuestoTaller;
 import com.figueiras.photocontest.backend.model.entities.TipoAsistencias;
-import com.figueiras.photocontest.backend.model.services.Block;
+import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.rest.dtos.EstadoAsistenciasDto;
-import com.figueiras.photocontest.backend.rest.dtos.FranjaHorariaDto;
+import com.figueiras.photocontest.backend.rest.dtos.MatriculasActivasDto;
 import com.figueiras.photocontest.backend.rest.dtos.PuestoTallerDto;
 import com.figueiras.photocontest.backend.rest.dtos.TipoAsistenciasDto;
+import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TallerConversor {
@@ -36,6 +36,14 @@ public class TallerConversor {
         return puestoTallerVehiculosDto;
     }*/
 
+    public static List<PuestoTallerDto> toPuestosDto(Slice<PuestoTaller> elevadores){
+        List<PuestoTallerDto> puestosDto = new ArrayList<>();
+        for (PuestoTaller elevador : elevadores){
+            puestosDto.add(toPuestoTDto(elevador));
+        }
+        return puestosDto;
+    }
+
     public static PuestoTallerDto toPuestoTDto(PuestoTaller puestoTaller){
         PuestoTallerDto puestoTallerDto = new PuestoTallerDto();
         puestoTallerDto.setIdPuestoTaller(puestoTaller.getIdPuestoTaller());
@@ -44,7 +52,7 @@ public class TallerConversor {
         return puestoTallerDto;
     }
 
-    public static EstadoAsistenciasDto toEstAsistenciasDto(EstadoAsistencias estado){
+    public static EstadoAsistenciasDto toEstAsistenciasDto(EstadoTrabajo estado){
         return new EstadoAsistenciasDto(estado.getIdEstado(), estado.getNombre(), estado.getDescripcion());
     }
 
@@ -60,5 +68,13 @@ public class TallerConversor {
 //       }
 //       return franjasH;
 //   }
+
+    public static List<MatriculasActivasDto> toMatriculasActivasDto(Slice<Trabajo> trabajos){
+        List<MatriculasActivasDto> result = new ArrayList<>();
+        for (Trabajo trabajo : trabajos){
+            result.add(new MatriculasActivasDto(trabajo.getIdTrabajo(), trabajo.getVehiculo().getMatricula()));
+        }
+        return result;
+    }
 
 }

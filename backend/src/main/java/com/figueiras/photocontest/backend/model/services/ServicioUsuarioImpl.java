@@ -255,4 +255,9 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     public Usuario actualizarUsuario(Usuario usuario) {
         return usuarioDao.save(usuario);
     }
+
+    @Override
+    public Slice<Usuario> findMecanicos() {
+        return usuarioDao.findByRolUsuario(RolUsuarioSistema.MECANICO);
+    }
 }

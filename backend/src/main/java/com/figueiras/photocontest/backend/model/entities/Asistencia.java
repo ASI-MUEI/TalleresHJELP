@@ -1,11 +1,7 @@
 package com.figueiras.photocontest.backend.model.entities;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,7 +11,6 @@ public class Asistencia {
     private TipoAsistencias tipo;
     private List<Usuario> mecanicos;
     private List<Horarios> horarios;
-    private EstadoAsistencias estado;
     private LocalDateTime fecha;
     private Trabajo trabajo;
     private Float precio;
@@ -82,16 +77,6 @@ public class Asistencia {
 
     public void setHorarios(List<Horarios> horarios) {
         this.horarios = horarios;
-    }
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idEstado")
-    public EstadoAsistencias getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoAsistencias estado) {
-        this.estado = estado;
     }
 
     public LocalDateTime getFecha() {

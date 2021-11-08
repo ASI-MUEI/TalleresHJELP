@@ -13,9 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicioTallerImpl implements ServicioTaller{
@@ -33,7 +35,7 @@ public class ServicioTallerImpl implements ServicioTaller{
     private VehiculoDao vehiculoDao;
 
     @Autowired
-    private EstadoAsistenciasDao estadoAsistenciasDAO;
+    private EstadoTrabajosDao estadoAsistenciasDAO;
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -91,7 +93,7 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         AsistenciaCompletaFranjaHDto asistenciaC = new AsistenciaCompletaFranjaHDto();
         asistenciaC.setIdAsistencia(asisOptional.get().getIdAsistencia());
-        asistenciaC.setEstado(TallerConversor.toEstAsistenciasDto(asisOptional.get().getEstado()));
+        //asistenciaC.setEstado(TallerConversor.toEstAsistenciasDto(asisOptional.get().getEstado()));
         asistenciaC.setPuesto(TallerConversor.toPuestoTDto(asisOptional.get().getPuesto()));
         List<UsuarioDto> mecanicos = new ArrayList<>();
         for (Usuario u : asisOptional.get().getMecanicos()) {
@@ -110,23 +112,13 @@ public class ServicioTallerImpl implements ServicioTaller{
     @Override
     public Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException {
         List<Usuario> mecanicos = new ArrayList<>();
-        Optional<EstadoAsistencias> estadoAsistencias = estadoAsistenciasDAO.findById(asistenciasDto.getEstado());
-        if(estadoAsistencias.isEmpty()){
-            throw new InstanceNotFoundException("entidades.estadoAsistencias.idEstado", asistenciasDto.getEstado());
-        }
 
-        for (MecanicoDto mDto : asistenciasDto.getMecanicos()) {
+        for (MecanicoAsistenciaDto mDto : asistenciasDto.getMecanicos()) {
             Optional<Usuario> usuario = usuarioDao.findById(mDto.getIdMecanico());
             if(usuario.isEmpty()){
                 throw new InstanceNotFoundException("entidades.usuario.idUsuario", mDto.getIdMecanico());
             }
             mecanicos.add(usuario.get());
-        }
-
-
-        Optional<TipoAsistencias> tipoAsistencia = tipoAsistenciasDao.findById(asistenciasDto.getTipo());
-        if(tipoAsistencia.isEmpty()){
-            throw new InstanceNotFoundException("entidades.tiposAsistencias.idTipo", asistenciasDto.getTipo());
         }
 
         Optional<PuestoTaller> puestoTaller = puestoTallerDao.findById(asistenciasDto.getPuestoTaller());
@@ -145,11 +137,9 @@ public class ServicioTallerImpl implements ServicioTaller{
                 Integer.valueOf(fecha_tabla[0]), 0, 0, 0, 0);
 
         Asistencia asistencia = new Asistencia();
-        asistencia.setEstado(estadoAsistencias.get());
         asistencia.setMecanicos(mecanicos);
         asistencia.setPuesto(puestoTaller.get());
         asistencia.setFecha(fecha);
-        asistencia.setTipo(tipoAsistencia.get());
         asistencia.setTrabajo(trabajo.get());
         asistenciaDao.save(asistencia);
 
@@ -210,6 +200,18 @@ public class ServicioTallerImpl implements ServicioTaller{
         resultado = ordenarAsistenciasParaTabla(asistencias);
 
         return resultado;
+    }
+
+
+
+    @Override
+    public Slice<Trabajo> getTrabajosAbiertos() {
+        return trabajoDao.findByEstado("Abierto");
+    }
+
+    @Override
+    public Slice<PuestoTaller> getElevadores() {
+        return puestoTallerDao.findAll(PageRequest.of(10,10));
     }
 
     // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **

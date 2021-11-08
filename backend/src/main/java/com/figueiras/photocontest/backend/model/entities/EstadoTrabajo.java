@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class EstadoAsistencias {
+public class EstadoTrabajo {
     private Long idEstado;
     private String nombre;
     private String descripcion;
 
-    public EstadoAsistencias() {
+    public EstadoTrabajo() {
     }
 
     @Id

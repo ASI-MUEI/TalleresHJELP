@@ -5,6 +5,11 @@ public class MecanicoDto {
     private Long idMecanico;
     private String nombreMecanico;
 
+    public MecanicoDto(Long idMecanico, String nombreMecanico) {
+        this.idMecanico = idMecanico;
+        this.nombreMecanico = nombreMecanico;
+    }
+
     public Long getIdMecanico() {
         return idMecanico;
     }

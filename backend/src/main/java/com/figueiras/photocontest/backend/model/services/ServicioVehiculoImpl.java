@@ -68,6 +68,4 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         vehiculoDao.save(vehiculo);
     }
 
-
-
 }

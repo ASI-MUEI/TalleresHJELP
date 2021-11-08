@@ -2,6 +2,7 @@ package com.figueiras.photocontest.backend.model.services;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Horarios;
+import com.figueiras.photocontest.backend.model.entities.PuestoTaller;
 import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
@@ -19,4 +20,6 @@ public interface ServicioTaller {
     Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException;
     Slice<Horarios> getHorariosDisponibles(int page, int size);
     Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException;
+    Slice<Trabajo> getTrabajosAbiertos();
+    Slice<PuestoTaller> getElevadores();
 }
