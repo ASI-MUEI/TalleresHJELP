@@ -1,8 +1,5 @@
 package com.figueiras.photocontest.backend.rest.dtos;
 
-import com.figueiras.photocontest.backend.model.entities.*;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class AsistenciaCompletaDto {
