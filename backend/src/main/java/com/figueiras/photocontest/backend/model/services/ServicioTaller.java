@@ -22,4 +22,6 @@ public interface ServicioTaller {
     Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException;
     Slice<Trabajo> getTrabajosAbiertos();
     Slice<PuestoTaller> getElevadores();
+    Slice<Trabajo> getTrabajosOrderByFecha(int page, int size);
+    Slice<Asistencia> getAsistenciasOrderByFecha(int page, int size);
 }

@@ -170,6 +170,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         trabajo.setVehiculo(veh.get());
         trabajo.setNombre(trabajoDto.getNombre());
         trabajo.setDescripcion(trabajoDto.getDescripcion());
+        trabajo.setFecha(LocalDateTime.now());
         trabajoDao.save(trabajo);
 
         return trabajo;
@@ -212,6 +213,16 @@ public class ServicioTallerImpl implements ServicioTaller{
     @Override
     public Slice<PuestoTaller> getElevadores() {
         return puestoTallerDao.findAll(PageRequest.of(10,10));
+    }
+
+    @Override
+    public Slice<Trabajo> getTrabajosOrderByFecha(int page, int size) {
+        return trabajoDao.findTrabajosOrderByFecha(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Slice<Asistencia> getAsistenciasOrderByFecha(int page, int size) {
+        return trabajoDao.findAsistenciasOrderByFecha(PageRequest.of(page, size));
     }
 
     // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **

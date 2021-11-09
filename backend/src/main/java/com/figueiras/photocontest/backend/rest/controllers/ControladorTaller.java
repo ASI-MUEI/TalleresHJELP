@@ -87,6 +87,18 @@ public class ControladorTaller {
         return TallerConversor.toMatriculasActivasDto(servicioTaller.getTrabajosAbiertos());
     }
 
+    @GetMapping("/trabajo")
+    public List<ListadoTrabajosDto> listarTrabajos(@RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "5") int size) {
+        return TallerConversor.toListadoTrabajosDto(servicioTaller.getTrabajosOrderByFecha(page, size));
+    }
+
+    @GetMapping("/trabajo/reparaciones")
+    public List<ListarReparacionesDto> listarReparaciones(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "5") int size) {
+        return AsistenciaConversor.toListarAsistenciasDto(servicioTaller.getAsistenciasOrderByFecha(page, size));
+    }
+
     @GetMapping("/elevadores")
     public List<PuestoTallerDto> getElevadores() {
         return TallerConversor.toPuestosDto(servicioTaller.getElevadores());

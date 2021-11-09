@@ -1,6 +1,7 @@
 package com.figueiras.photocontest.backend.model.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Trabajo {
@@ -9,6 +10,7 @@ public class Trabajo {
     private String descripcion;
     private Vehiculo vehiculo;
     private EstadoTrabajo estado;
+    private LocalDateTime fecha;
 
     public Trabajo() {
     }
@@ -57,5 +59,13 @@ public class Trabajo {
 
     public void setEstado(EstadoTrabajo estado) {
         this.estado = estado;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 }

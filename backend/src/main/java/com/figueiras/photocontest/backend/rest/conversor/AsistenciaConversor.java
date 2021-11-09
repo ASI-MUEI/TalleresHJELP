@@ -3,7 +3,9 @@ package com.figueiras.photocontest.backend.rest.conversor;
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.rest.dtos.AsistenciasDto;
+import com.figueiras.photocontest.backend.rest.dtos.ListarReparacionesDto;
 import com.figueiras.photocontest.backend.rest.dtos.MecanicoAsistenciaDto;
+import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +36,22 @@ public class AsistenciaConversor {
         resultado.setPrecio(asistencia.getPrecio());
 
         return resultado;
+    }
+
+    public static List<ListarReparacionesDto> toListarAsistenciasDto(Slice<Asistencia> asistencias){
+        List<ListarReparacionesDto> result = new ArrayList<>();
+        for (Asistencia asistencia : asistencias){
+            result.add(new ListarReparacionesDto(asistencia.getIdAsistencia(), asistencia.getFecha().toString(), asistencia.getDuracionEstimada(),
+                    asistencia.getPuesto().getIdPuestoTaller(), asistencia.getPuesto().getNombre(), asistencia.getPrecio(), toMecanicosAsistenciaDto(asistencia.getMecanicos()), asistencia.getDescripcion()));
+        }
+        return  result;
+    }
+
+    private static List<MecanicoAsistenciaDto> toMecanicosAsistenciaDto(List<Usuario> usuarios){
+        List<MecanicoAsistenciaDto> mecanicos = new ArrayList<>();
+        for (Usuario usuario : usuarios){
+            mecanicos.add(new MecanicoAsistenciaDto(usuario.getIdUsuario(), usuario.getNombreUsuario()));
+        }
+        return mecanicos;
     }
 }

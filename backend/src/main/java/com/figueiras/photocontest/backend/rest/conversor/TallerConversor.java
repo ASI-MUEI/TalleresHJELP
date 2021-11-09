@@ -4,10 +4,7 @@ import com.figueiras.photocontest.backend.model.entities.EstadoTrabajo;
 import com.figueiras.photocontest.backend.model.entities.PuestoTaller;
 import com.figueiras.photocontest.backend.model.entities.TipoAsistencias;
 import com.figueiras.photocontest.backend.model.entities.Trabajo;
-import com.figueiras.photocontest.backend.rest.dtos.EstadoAsistenciasDto;
-import com.figueiras.photocontest.backend.rest.dtos.MatriculasActivasDto;
-import com.figueiras.photocontest.backend.rest.dtos.PuestoTallerDto;
-import com.figueiras.photocontest.backend.rest.dtos.TipoAsistenciasDto;
+import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
@@ -73,6 +70,16 @@ public class TallerConversor {
         List<MatriculasActivasDto> result = new ArrayList<>();
         for (Trabajo trabajo : trabajos){
             result.add(new MatriculasActivasDto(trabajo.getIdTrabajo(), trabajo.getVehiculo().getMatricula()));
+        }
+        return result;
+    }
+
+    public static List<ListadoTrabajosDto> toListadoTrabajosDto(Slice<Trabajo> trabajos){
+        List<ListadoTrabajosDto> result = new ArrayList<>();
+        for (Trabajo trabajo : trabajos){
+            result.add(new ListadoTrabajosDto(trabajo.getVehiculo().getMatricula(),
+                    trabajo.getEstado().getNombre(),trabajo.getVehiculo().getUsuario().getIdUsuario(),
+                    trabajo.getVehiculo().getUsuario().getNombreUsuario(), trabajo.getFecha().toString()));
         }
         return result;
     }
