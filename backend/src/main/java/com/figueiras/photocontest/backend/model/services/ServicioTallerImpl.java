@@ -225,6 +225,22 @@ public class ServicioTallerImpl implements ServicioTaller{
         return trabajoDao.findAsistenciasOrderByFecha(PageRequest.of(page, size));
     }
 
+    @Override
+    public Trabajo getTrabajoByID(Long idTrabajo) throws InstanceNotFoundException{
+        Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
+        if (trabajoOpt.isEmpty())
+            throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", idTrabajo);
+        return trabajoOpt.get();
+    }
+
+    @Override
+    public Asistencia getAsistenciaByID(Long idAsistencia) throws InstanceNotFoundException{
+        Optional<Asistencia> asistenciaOpt = asistenciaDao.findById(idAsistencia);
+        if (asistenciaOpt.isEmpty())
+            throw new InstanceNotFoundException("entidades.asistencia.idAsistencia", idAsistencia);
+        return asistenciaOpt.get();
+    }
+
     // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **
     // Se ordenan tal u como quedarían en la tabla
     private List<Asistencia> ordenarAsistenciasParaTabla(List<Asistencia> asistencias){

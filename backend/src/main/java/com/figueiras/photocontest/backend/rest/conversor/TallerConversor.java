@@ -84,4 +84,10 @@ public class TallerConversor {
         return result;
     }
 
+    public static TrabajoCompletoDto toTrabajoCompletoDto(Trabajo trabajo){
+        return new TrabajoCompletoDto(trabajo.getIdTrabajo(), trabajo.getNombre(),trabajo.getDescripcion(),
+                trabajo.getVehiculo().getMatricula(), trabajo.getVehiculo().getUsuario().getNombreUsuario(),
+                trabajo.getEstado().getNombre(), trabajo.getFecha().toString());
+    }
+
 }

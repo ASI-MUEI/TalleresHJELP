@@ -24,4 +24,6 @@ public interface ServicioTaller {
     Slice<PuestoTaller> getElevadores();
     Slice<Trabajo> getTrabajosOrderByFecha(int page, int size);
     Slice<Asistencia> getAsistenciasOrderByFecha(int page, int size);
+    Trabajo getTrabajoByID(Long idTrabajo)throws InstanceNotFoundException;
+    Asistencia getAsistenciaByID(Long idAsistencia)throws InstanceNotFoundException;
 }

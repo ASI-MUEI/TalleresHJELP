@@ -1,10 +1,9 @@
 package com.figueiras.photocontest.backend.rest.conversor;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
+import com.figueiras.photocontest.backend.model.entities.Horarios;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
-import com.figueiras.photocontest.backend.rest.dtos.AsistenciasDto;
-import com.figueiras.photocontest.backend.rest.dtos.ListarReparacionesDto;
-import com.figueiras.photocontest.backend.rest.dtos.MecanicoAsistenciaDto;
+import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
@@ -53,5 +52,20 @@ public class AsistenciaConversor {
             mecanicos.add(new MecanicoAsistenciaDto(usuario.getIdUsuario(), usuario.getNombreUsuario()));
         }
         return mecanicos;
+    }
+
+    private static List<HorariosAsistenciasDto> toHorariosAsistenciaDto(List<Horarios> horarios){
+        List<HorariosAsistenciasDto> result = new ArrayList<>();
+        for (Horarios hor : horarios){
+            result.add(new HorariosAsistenciasDto(hor.getIdFranjaHoraria(), hor.getFranjaHoraria()));
+        }
+        return result;
+    }
+
+    public static AsistenciaCompletaDto toAsistenciaCompletaDto(Asistencia asistencia){
+        return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuestoTaller(),
+                toMecanicosAsistenciaDto(asistencia.getMecanicos()), toHorariosAsistenciaDto(asistencia.getHorarios()),
+                asistencia.getFecha().toString(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
+                asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion());
     }
 }

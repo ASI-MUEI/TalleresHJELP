@@ -99,6 +99,17 @@ public class ControladorTaller {
         return AsistenciaConversor.toListarAsistenciasDto(servicioTaller.getAsistenciasOrderByFecha(page, size));
     }
 
+    @GetMapping("/trabajo/{idTrabajo}")
+    public TrabajoCompletoDto getTrabajoByID(@PathVariable Long idTrabajo) throws InstanceNotFoundException {
+        return TallerConversor.toTrabajoCompletoDto(servicioTaller.getTrabajoByID(idTrabajo));
+    }
+
+    @GetMapping("/reparacion/{idReparacion}}")
+    public AsistenciaCompletaDto getReparacionByID(@PathVariable Long idReparacion) throws InstanceNotFoundException {
+        return AsistenciaConversor.toAsistenciaCompletaDto(servicioTaller.getAsistenciaByID(idReparacion));
+    }
+
+
     @GetMapping("/elevadores")
     public List<PuestoTallerDto> getElevadores() {
         return TallerConversor.toPuestosDto(servicioTaller.getElevadores());
