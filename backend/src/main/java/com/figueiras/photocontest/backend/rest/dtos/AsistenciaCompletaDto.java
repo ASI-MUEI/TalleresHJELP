@@ -13,11 +13,13 @@ public class AsistenciaCompletaDto {
     private Long duracionEstimada;
     private Boolean peritaje;
     private String descripcion;
+    private String matricula;
+    private String nombreCliente;
+    private Long idCliente;
 
-    public AsistenciaCompletaDto() {
-    }
+    public AsistenciaCompletaDto() {}
 
-    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, String fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion) {
+    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, String fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente) {
         this.idAsistencia = idAsistencia;
         this.elevador = elevador;
         this.mecanicos = mecanicos;
@@ -28,6 +30,9 @@ public class AsistenciaCompletaDto {
         this.duracionEstimada = duracionEstimada;
         this.peritaje = peritaje;
         this.descripcion = descripcion;
+        this.matricula = matricula;
+        this.nombreCliente = nombreCliente;
+        this.idCliente = idCliente;
     }
 
     public Long getIdAsistencia() {
@@ -108,5 +113,29 @@ public class AsistenciaCompletaDto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 }

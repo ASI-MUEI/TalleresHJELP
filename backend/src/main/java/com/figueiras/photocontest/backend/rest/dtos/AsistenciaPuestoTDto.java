@@ -4,6 +4,14 @@ public class AsistenciaPuestoTDto {
     private Long idPuesto;
     private Long idAsistencia;
 
+    public AsistenciaPuestoTDto(Long idPuesto, Long idAsistencia) {
+        this.idPuesto = idPuesto;
+        this.idAsistencia = idAsistencia;
+    }
+
+    public AsistenciaPuestoTDto() {
+    }
+
     public Long getIdPuesto() {
         return idPuesto;
     }

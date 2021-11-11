@@ -143,10 +143,13 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistencia.setMecanicos(mecanicos);
         asistencia.setPuesto(puestoTaller.get());
         asistencia.setFecha(fecha);
+        asistencia.setPrecio(asistenciasDto.getPrecio());
+        asistencia.setDuracionEstimada(asistenciasDto.getDuracionEstimada());
         asistencia.setTrabajo(trabajo.get());
         asistencia.setTipo(tipo);
+        asistencia.setDescripcion(asistenciasDto.getDescripcion());
+        asistencia.setPeritaje(asistenciasDto   .getPeritaje());
         asistenciaDao.save(asistencia);
-
 
         return asistencia;
     }

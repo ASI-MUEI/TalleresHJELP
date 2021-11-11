@@ -24,7 +24,7 @@ CREATE TABLE Usuario(
     lenguaje int,
     rolUsuarioSistema int,
     cuentaEliminada TINYINT,
-    dni VARCHAR(50),
+    dni VARCHAR(50) UNIQUE,
     CONSTRAINT Usuario_pk PRIMARY KEY(idUsuario),
     CONSTRAINT Nombre_usuario_unique UNIQUE(nombreUsuario)
 );
