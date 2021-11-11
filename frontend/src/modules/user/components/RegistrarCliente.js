@@ -4,6 +4,7 @@ import {Button, Form} from "react-bootstrap";
 import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
+import {useHistory} from "react-router";
 
 const RegistrarCliente = () => {
 
@@ -11,11 +12,19 @@ const RegistrarCliente = () => {
     const [dni, setDni] = useState("");
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [apellidosUsuario, setApellidosUsuario] = useState("");
+    const history = useHistory();
 
     const handleSubmit = event => {
-
         event.preventDefault();
-        //TODO llamar a backend
+        backend.userService.signUp({
+                nombreUsuario: nombreUsuario.trim(),
+                apellidosUsuario: apellidosUsuario.trim(),
+                dni,
+                rolUsuario: rol
+            },
+            () => history.push("/"),
+            () => history.push("/")
+        );
     }
 
     return(

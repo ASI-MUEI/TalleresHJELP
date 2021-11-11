@@ -19,11 +19,12 @@ CREATE TABLE Usuario(
     nombreUsuario VARCHAR(50),
     nombrePilaUsuario VARCHAR(50),
     apellidosUsuario VARCHAR(100),
-    correoElectronicoUsuario VARCHAR(90) UNIQUE,
+    correoElectronicoUsuario VARCHAR(90),
     contrasenaUsuario VARCHAR(100),
     lenguaje int,
     rolUsuarioSistema int,
     cuentaEliminada TINYINT,
+    dni VARCHAR(50),
     CONSTRAINT Usuario_pk PRIMARY KEY(idUsuario),
     CONSTRAINT Nombre_usuario_unique UNIQUE(nombreUsuario)
 );

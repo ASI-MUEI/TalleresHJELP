@@ -26,6 +26,7 @@ public class Usuario {
     private Lenguaje lenguaje;
     private RolUsuarioSistema rolUsuarioSistema;
     private List<Asistencia> reparaciones;
+    private String dni;
 
     public Usuario() {
         rolUsuarioSistema = RolUsuarioSistema.ESTANDAR;
@@ -114,5 +115,13 @@ public class Usuario {
 
     public void setReparaciones(List<Asistencia> reparaciones) {
         this.reparaciones = reparaciones;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

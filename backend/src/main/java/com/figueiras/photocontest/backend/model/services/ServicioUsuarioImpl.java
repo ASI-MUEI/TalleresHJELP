@@ -78,9 +78,9 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             CamposIntroducidosNoValidosException, InstanceNotFoundException {
 
         // Petición no permitida en la aplicación.
-        if(!esValidoFormRegistro(usuarioDto)){
-            throw new CamposIntroducidosNoValidosException();
-        }
+        //if(!esValidoFormRegistro(usuarioDto)){
+        //    throw new CamposIntroducidosNoValidosException();
+        //}
 
         Optional<Usuario> usuarioOptionalNombreUsuario = usuarioDao.findByNombreUsuario(usuarioDto.getNombreUsuario());
         Optional<Usuario> usuarioOptionalCorreoElectronico = usuarioDao.findByCorreoElectronicoUsuario(usuarioDto.getNombreUsuario());
@@ -89,24 +89,22 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new CampoDuplicadoException("entidades.usuario.nombreusuario", usuarioDto.getNombreUsuario());
         }
         // Se valida que el correo electrónico sea único
-        if(usuarioOptionalCorreoElectronico.isPresent()){
-            throw new CampoDuplicadoException("entidades.usuario.correoelectronicousuario", usuarioDto.getEmail());
-        }
-
-        Optional<Usuario> usuarioOptionalCorreo = usuarioDao.findByCorreoElectronicoUsuario(usuarioDto.getEmail());
-        if(usuarioOptionalCorreo.isPresent()){
-            throw new CampoDuplicadoException("entidades.usuario.correoelectronicousuario", usuarioDto.getEmail());
-        }
+        //if(usuarioOptionalCorreoElectronico.isPresent()){
+        //    throw new CampoDuplicadoException("entidades.usuario.correoelectronicousuario", usuarioDto.getEmail());
+        //}
 
         Usuario usuario = new Usuario();
 
         usuario.setNombreUsuario(usuarioDto.getNombreUsuario());
-        usuario.setContrasenaUsuario(passwordEncoder.encode(usuarioDto.getContraseña()));
+        if(usuarioDto.getRolUsuario().equals("0")){
+            usuario.setContrasenaUsuario(passwordEncoder.encode(usuarioDto.getContraseña()));
+        }
         usuario.setNombrePilaUsuario(usuarioDto.getNombrePilaUsuario());
         usuario.setApellidosUsuario(usuarioDto.getApellidosUsuario());
         usuario.setCorreoElectronicoUsuario(usuarioDto.getEmail());
         usuario.setLenguaje(Lenguaje.values()[usuarioDto.getLenguaje()]);
         usuario.setRolUsuarioSistema(RolUsuarioSistema.values()[Integer.valueOf(usuarioDto.getRolUsuario())]);
+        usuario.setDni(usuarioDto.getDni());
 
         usuarioDao.save(usuario);
     }

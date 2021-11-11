@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Alert, Form, Spinner} from "react-bootstrap";
+import {Alert, Spinner} from "react-bootstrap";
 import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
 import Trabajos from "./Trabajos";
 import Pager from "../../commons/components/Pager"
 
-const BuscarTrabajos = () =>{
+const BuscarTrabajos = () => {
 
     // TODO: Deberia ser nulo para cargar spinner antes de la primera llamada a backend
     const [trabajos, setTrabajos] = useState(null)
@@ -20,20 +20,20 @@ const BuscarTrabajos = () =>{
 
     const cabecera = () => {
 
-        return(
+        return (
             <h3 className={"centeredParagraph"}><FormattedMessage id={'trabajos.apartado'}/></h3>
         )
     }
 
     // Mientras no se inicializa, se devuelve un Spinner
-    if(trabajos === null){
-        return(
+    if (trabajos === null) {
+        return (
             <Container>
                 {cabecera()}
                 <br/>
                 <div className="center">
                     <Spinner animation="border" role="status">
-                        <span className="visually-hidden" />
+                        <span className="visually-hidden"/>
                     </Spinner>
                 </div>
             </Container>
@@ -42,8 +42,8 @@ const BuscarTrabajos = () =>{
     }
 
     // Si no hay trabajos
-    if(trabajos.length === 0){
-        return(
+    if (trabajos.length === 0) {
+        return (
             <Container>
                 {cabecera()}
                 <br/>
@@ -55,16 +55,18 @@ const BuscarTrabajos = () =>{
         )
     }
 
-    return(
+    return (
         <div>
             <Trabajos datosTrabajos={trabajos.result.items}/>
             <Pager
                 back={{
                     enabled: trabajos.criteria.page >= 1,
-                    onClick: () => page -=1}}
+                    onClick: () => page -= 1
+                }}
                 next={{
                     enabled: trabajos.result.existMoreItems,
-                    onClick: () => page +=1}}/>
+                    onClick: () => page += 1
+                }}/>
         </div>
     )
 }

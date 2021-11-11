@@ -1,5 +1,4 @@
 import {Button, Container, Form} from "react-bootstrap";
-import RolSelector from "./RolSelector";
 import Errors from "../../commons/components/Errors";
 import {FormattedMessage, useIntl} from "react-intl";
 import LenguagueSelector from "./LenguagueSelector";
@@ -25,8 +24,8 @@ const RegistrarAdministrativo = () => {
 
     const checkPassword = () => {
 
-        if(password !== repeatPassword){
-            setBackendErrors({"errorGlobal" : intl.formatMessage({id:'user.SignUp.Error.PasswordsDoNotMatch'})});
+        if (password !== repeatPassword) {
+            setBackendErrors({"errorGlobal": intl.formatMessage({id: 'user.SignUp.Error.PasswordsDoNotMatch'})});
             return false;
         }
 
@@ -37,7 +36,7 @@ const RegistrarAdministrativo = () => {
 
         event.preventDefault();
 
-        if(checkPassword()){
+        if (checkPassword()) {
             backend.userService.signUp(
                 {
                     nombreUsuario: userName.trim(),
@@ -54,7 +53,7 @@ const RegistrarAdministrativo = () => {
         }
     }
 
-    return(
+    return (
 
         <Container>
             <h3 className={"centeredParagraph"}>
@@ -63,8 +62,8 @@ const RegistrarAdministrativo = () => {
             <div>
                 <Link to="/usuarios/registrar"><FormattedMessage id={"back"}/></Link>
             </div>
-            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)} />
-            <br />
+            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
+            <br/>
             <Container>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
@@ -104,7 +103,7 @@ const RegistrarAdministrativo = () => {
                     </Form.Group>
                     <div className="input-group mb-3">
                         <LenguagueSelector id="lenguagueId" className="custom-select my-1 mr-sm-2"
-                                           value={lenguague} onChange={e => setLenguague(e.target.value)} required />
+                                           value={lenguague} onChange={e => setLenguague(e.target.value)} required/>
                     </div>
                     <Button variant="primary" type="submit">
                         <FormattedMessage id={'user.SignUp.SignUp'}/>

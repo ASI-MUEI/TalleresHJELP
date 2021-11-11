@@ -49,6 +49,7 @@ public class UsuarioConversor {
         usuarioDto.setCuentaEliminada(usuario.isCuentaEliminada());
         usuarioDto.setLenguaje(usuario.getLenguaje().ordinal());
         usuarioDto.setRolUsuario(usuario.getRolUsuarioSistema().toString());
+        usuarioDto.setDni(usuario.getDni());
         return usuarioDto;
     }
 

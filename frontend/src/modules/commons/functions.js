@@ -1,14 +1,3 @@
-const tipoLabelConcurso = (estado) => {
-
-    switch(estado){
-        case "EN_PREPARACION" : return "info"
-        case "ABIERTO" : return "success"
-        case "VOTACION": return "warning"
-        case "FINALIZADO" : return "secondary"
-        default : return "success"
-    }
-}
-
 const tipoLabelTrabajo = (estado) => {
 
     switch(estado){

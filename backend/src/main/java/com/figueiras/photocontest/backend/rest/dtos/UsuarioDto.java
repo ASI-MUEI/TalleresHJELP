@@ -11,6 +11,7 @@ public class UsuarioDto {
     private boolean cuentaEliminada;
     private int lenguaje;
     private String rolUsuario;
+    private String dni;
 
     public UsuarioDto() {
     }
@@ -85,5 +86,13 @@ public class UsuarioDto {
 
     public void setRolUsuario(String rolUsuario) {
         this.rolUsuario = rolUsuario.toUpperCase();
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }
