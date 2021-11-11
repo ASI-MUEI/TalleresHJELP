@@ -10,7 +10,6 @@ import java.util.List;
 public class Horarios {
     private Long idFranjaHoraria;
     private String franjaHoraria;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Asistencia> asistencias;
 
     public Horarios() {
