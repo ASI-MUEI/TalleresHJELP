@@ -10,7 +10,7 @@ public class Trabajo {
     private String descripcion;
     private Vehiculo vehiculo;
     private EstadoTrabajo estado;
-    private LocalDateTime fecha;
+    private LocalDateTime fechaCreado;
 
     public Trabajo() {
     }
@@ -61,11 +61,11 @@ public class Trabajo {
         this.estado = estado;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getFechaCreado() {
+        return fechaCreado;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaCreado(LocalDateTime fechaCreado) {
+        this.fechaCreado = fechaCreado;
     }
 }

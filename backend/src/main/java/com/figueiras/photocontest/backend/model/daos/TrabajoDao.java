@@ -10,7 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface TrabajoDao extends PagingAndSortingRepository<Trabajo, Long> {
     @Query("SELECT t FROM Trabajo t WHERE t.estado.nombre LIKE %:estado%")
     Slice<Trabajo> findByEstado(String estado);
-    @Query("SELECT t FROM Trabajo t ORDER BY t.fecha ASC")
+    @Query("SELECT t FROM Trabajo t ORDER BY t.fechaCreado ASC")
     Slice<Trabajo> findTrabajosOrderByFecha(Pageable pageable);
     @Query("SELECT a FROM Asistencia a ORDER BY a.fecha ASC")
     Slice<Asistencia> findAsistenciasOrderByFecha(Pageable pageable);

@@ -170,7 +170,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         trabajo.setVehiculo(veh.get());
         trabajo.setNombre(trabajoDto.getNombre());
         trabajo.setDescripcion(trabajoDto.getDescripcion());
-        trabajo.setFecha(LocalDateTime.now());
+        trabajo.setFechaCreado(LocalDateTime.now());
         trabajoDao.save(trabajo);
 
         return trabajo;

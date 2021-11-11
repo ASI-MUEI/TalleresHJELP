@@ -79,7 +79,7 @@ public class TallerConversor {
         for (Trabajo trabajo : trabajos){
             result.add(new ListadoTrabajosDto(trabajo.getVehiculo().getMatricula(),
                     trabajo.getEstado().getNombre(),trabajo.getVehiculo().getUsuario().getIdUsuario(),
-                    trabajo.getVehiculo().getUsuario().getNombreUsuario(), trabajo.getFecha().toString()));
+                    trabajo.getVehiculo().getUsuario().getNombreUsuario(), trabajo.getFechaCreado().toString()));
         }
         return result;
     }
@@ -87,7 +87,7 @@ public class TallerConversor {
     public static TrabajoCompletoDto toTrabajoCompletoDto(Trabajo trabajo){
         return new TrabajoCompletoDto(trabajo.getIdTrabajo(), trabajo.getNombre(),trabajo.getDescripcion(),
                 trabajo.getVehiculo().getMatricula(), trabajo.getVehiculo().getUsuario().getNombreUsuario(),
-                trabajo.getEstado().getNombre(), trabajo.getFecha().toString());
+                trabajo.getEstado().getNombre(), trabajo.getFechaCreado().toString());
     }
 
 }
