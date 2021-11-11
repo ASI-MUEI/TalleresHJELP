@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class PuestoTaller {
-    private Long idPuestoTaller;
+    private Long idPuesto;
     private String nombre;
     private String descripcion;
 
@@ -16,12 +16,12 @@ public class PuestoTaller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getIdPuestoTaller() {
-        return idPuestoTaller;
+    public Long getIdPuesto() {
+        return idPuesto;
     }
 
-    public void setIdPuestoTaller(Long idMarca) {
-        this.idPuestoTaller = idMarca;
+    public void setIdPuesto(Long idMarca) {
+        this.idPuesto = idMarca;
     }
 
     public String getNombre() {

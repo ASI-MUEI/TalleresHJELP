@@ -36,8 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/catalogo-usuarios/usuarios/*/eliminar-cuenta").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/restablecer-contrasena/*").permitAll()
                 .antMatchers("/taller/asistencias/*").permitAll()
+                .antMatchers("/taller/asistencia").permitAll()
+                .antMatchers("/taller/trabajo/*").permitAll()
+                .antMatchers("/taller/elevadores").permitAll()
                 .anyRequest().hasRole("USER");
-
     }
 
     @Bean

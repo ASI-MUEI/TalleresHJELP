@@ -77,9 +77,8 @@ public class ControladorTaller {
     }
 
     @GetMapping("/asistencias/horarios")
-    public Slice<Horarios> recuperarHorariosDisp(@RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "5") int size) {
-        return servicioTaller.getHorariosDisponibles(page, size);
+    public List<HorariosAsistenciasDto> recuperarHorariosDisp() {
+        return AsistenciaConversor.toHorariosAsistenciaDto(servicioTaller.getHorariosDisponibles());
     }
 
     @GetMapping("/trabajo/activos")

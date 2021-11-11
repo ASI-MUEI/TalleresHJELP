@@ -121,9 +121,9 @@ public class ServicioTallerImpl implements ServicioTaller{
             mecanicos.add(usuario.get());
         }
 
-        Optional<PuestoTaller> puestoTaller = puestoTallerDao.findById(asistenciasDto.getPuestoTaller());
+        Optional<PuestoTaller> puestoTaller = puestoTallerDao.findById(asistenciasDto.getElevador());
         if(puestoTaller.isEmpty()){
-            throw new InstanceNotFoundException("entidades.puestoTaller.idPuestoTaller", asistenciasDto.getPuestoTaller());
+            throw new InstanceNotFoundException("entidades.puestoTaller.idPuestoTaller", asistenciasDto.getElevador());
         }
 
         Optional<Trabajo> trabajo = trabajoDao.findById(asistenciasDto.getIdTrabajo());
@@ -133,14 +133,18 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         String[] fecha_tabla = asistenciasDto.getFecha().split("-");
 
-        LocalDateTime fecha = LocalDateTime.of(Integer.valueOf(fecha_tabla[2]), Integer.valueOf(fecha_tabla[1]),
-                Integer.valueOf(fecha_tabla[0]), 0, 0, 0, 0);
+        LocalDateTime fecha = LocalDateTime.of(Integer.valueOf(fecha_tabla[0]), Integer.valueOf(fecha_tabla[1]),
+                Integer.valueOf(fecha_tabla[2]), 0, 0, 0, 0);
+
+        //TODO: seleccionar por tipos
+        TipoAsistencias tipo = tipoAsistenciasDao.findById(new Long(1)).get();
 
         Asistencia asistencia = new Asistencia();
         asistencia.setMecanicos(mecanicos);
         asistencia.setPuesto(puestoTaller.get());
         asistencia.setFecha(fecha);
         asistencia.setTrabajo(trabajo.get());
+        asistencia.setTipo(tipo);
         asistenciaDao.save(asistencia);
 
 
@@ -148,8 +152,8 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Slice<Horarios> getHorariosDisponibles(int page, int size) {
-        return horariosDao.getEtiquetasOrderById(PageRequest.of(page, size));
+    public List<Horarios> getHorariosDisponibles() {
+        return horariosDao.getEtiquetasOrderById();
     }
 
     @Override
@@ -212,7 +216,7 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Override
     public Slice<PuestoTaller> getElevadores() {
-        return puestoTallerDao.findAll(PageRequest.of(10,10));
+        return puestoTallerDao.findAll(PageRequest.of(0,10));
     }
 
     @Override
@@ -256,7 +260,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         for (Asistencia a : asistencias) {
             for (Horarios h:a.getHorarios()) {
                 resultado[calcularIndiceInsercion(
-                        a.getPuesto().getIdPuestoTaller().intValue(), h.getIdFranjaHoraria().intValue())] = a;
+                        a.getPuesto().getIdPuesto().intValue(), h.getIdFranjaHoraria().intValue())] = a;
             }
         }
 

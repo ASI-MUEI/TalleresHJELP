@@ -147,4 +147,5 @@ export default {
     'reparacion.verDetalle' : 'Ver detalle',
     'reparacion.asociadas' : 'Reparacións asociadas',
     'reparacion.vacia' : 'No hay reparaciones disponibles',
+    'reparacion.trabajo' : 'Job',
 }

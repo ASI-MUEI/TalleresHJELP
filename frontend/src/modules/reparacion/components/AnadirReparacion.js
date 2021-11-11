@@ -1,8 +1,10 @@
 import {Button, Container, Form} from "react-bootstrap";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Multiselect} from 'multiselect-react-dropdown';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import backend from "../../../backend";
+import {useHistory} from "react-router";
 
 const AnadirReparacion = () => {
 
@@ -22,10 +24,34 @@ const AnadirReparacion = () => {
     const [listaHorarios, setListaHorarios] = useState([])
 
     const intl = useIntl();
+    const history = useHistory();
 
-    const handleSubmit = event =>{
-        // TODO: conexion backend
+    const handleSubmit = event => {
+        backend.tallerService.crearReparacion(
+            {
+                fecha,
+                mecanicos,
+                elevador: elevador[0].idPuestoTaller,
+                idTrabajo: matricula[0].idTrabajo,
+                matricula: matricula[0].matricula,
+                precio,
+                duracionEstimada,
+                descripcion,
+                peritaje,
+                horasDeTrabajo
+            },
+            () => history.push("/horario"),
+        )
     }
+
+    useEffect(() => {
+        backend.userService.buscarMecanicos(result => setListaMecanicos(result))
+        backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
+        backend.tallerService.buscarElevadores(result => setListaElevadores(result))
+        backend.tallerService.buscarHorarios(result => setListaHorarios(result))
+
+
+    }, [])
 
     return (
         <Container>
@@ -37,10 +63,11 @@ const AnadirReparacion = () => {
                     <div className="añadirReparacionDiv1">
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorMatrícula'})}
-                            isObject={false}
+                            isObject={true}
+                            displayValue={"matricula"}
                             options={listaMatricula}
                             showArrow="true"
-                            selectionLimit ={1}
+                            selectionLimit={1}
                             onSelect={selectedList => setMatricula(Array.from(selectedList))}
                             onRemove={selectedList => setMatricula(Array.from(selectedList))}
                         />
@@ -53,7 +80,8 @@ const AnadirReparacion = () => {
                     <div className="añadirReparacionDiv1">
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorMecanicos'})}
-                            isObject={false}
+                            isObject={true}
+                            displayValue={"nombreMecanico"}
                             options={listaMecanicos}
                             showArrow="true"
                             onSelect={selectedList => setMecanicos(Array.from(selectedList))}
@@ -70,6 +98,8 @@ const AnadirReparacion = () => {
                                 value={precio}
                                 onChange={event => setPrecio(event.target.value)}
                             />
+                            Precio en €
+
                         </Form.Group>
                     </div>
                     <br/>
@@ -89,10 +119,11 @@ const AnadirReparacion = () => {
                     <div className="añadirReparacionDiv1">
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorElevador'})}
-                            isObject={false}
+                            isObject={true}
+                            displayValue={"nombre"}
                             options={listaElevadores}
                             showArrow="true"
-                            selectionLimit ={1}
+                            selectionLimit={1}
                             onSelect={selectedList => setElevador(Array.from(selectedList))}
                             onRemove={selectedList => setElevador(Array.from(selectedList))}
                         />
@@ -100,7 +131,8 @@ const AnadirReparacion = () => {
                     <div className={"añadirReparacionDiv1"}>
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorHorario'})}
-                            isObject={false}
+                            isObject={true}
+                            displayValue={"nombre"}
                             options={listaHorarios}
                             showArrow="true"
                             onSelect={selectedList => setHorasDeTrabajo(Array.from(selectedList))}
@@ -147,13 +179,14 @@ const AnadirReparacion = () => {
                         />
                     </Form.Group>
                 </div>
+
+                <br/>
+                <div className="d-flex justify-content-center">
+                    <Button variant="success" type="submit">
+                        {intl.formatMessage({id: 'app.Commons.Save'})}
+                    </Button>
+                </div>
             </Form>
-            <br/>
-            <div className="d-flex justify-content-center">
-                <Button variant="success" type="submit">
-                    {intl.formatMessage({id: 'app.Commons.Save'})}
-                </Button>
-            </div>
             <br/><br/><br/><br/>
         </Container>
 

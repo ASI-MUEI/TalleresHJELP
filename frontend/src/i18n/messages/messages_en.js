@@ -135,5 +135,6 @@ export default {
     'reparacion.verDetalle' : 'See detail',
     'reparacion.asociadas' : 'Asociated reparations',
     'reparacion.vacia' : 'There is no reparations available',
+    'reparacion.trabajo' : 'Job',
 
 }

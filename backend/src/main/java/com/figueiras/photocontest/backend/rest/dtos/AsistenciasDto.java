@@ -31,11 +31,11 @@ public class AsistenciasDto {
         this.mecanicos = mecanicos;
     }
 
-    public Long getPuestoTaller() {
+    public Long getElevador() {
         return elevador;
     }
 
-    public void setPuestoTaller(Long elevador) {
+    public void setElevador(Long elevador) {
         this.elevador = elevador;
     }
 

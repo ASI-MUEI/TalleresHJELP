@@ -1,5 +1,7 @@
 package com.figueiras.photocontest.backend.model.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

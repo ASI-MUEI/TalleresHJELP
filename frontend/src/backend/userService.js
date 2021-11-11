@@ -10,6 +10,13 @@ export const findUsers = ({ nombre, page = 0, size }, onSuccess) => {
     appFetch(path, config('GET'), onSuccess);
 }
 
+export const buscarMecanicos = (onSuccess) => {
+
+    let path = `/catalogo-usuarios/usuarios/mecanicos`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
 export const findUserNames = (onSuccess) => {
 
     let path = `/catalogo-usuarios/usuarios/nombresUsuario`;

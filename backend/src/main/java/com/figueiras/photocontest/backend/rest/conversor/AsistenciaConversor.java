@@ -19,7 +19,7 @@ public class AsistenciaConversor {
         //resultado.setEstado(asistencia.getEstado().getIdEstado());
         resultado.setFecha(asistencia.getFecha().toString());
         resultado.setIdTrabajo(asistencia.getTrabajo().getIdTrabajo());
-        resultado.setPuestoTaller(asistencia.getPuesto().getIdPuestoTaller());
+        resultado.setElevador(asistencia.getPuesto().getIdPuesto());
         List<Usuario> mecanicos = asistencia.getMecanicos();
         int numMecanicos = mecanicos.size();
         for (int i = 0; i<numMecanicos; i++) {
@@ -41,7 +41,7 @@ public class AsistenciaConversor {
         List<ListarReparacionesDto> result = new ArrayList<>();
         for (Asistencia asistencia : asistencias){
             result.add(new ListarReparacionesDto(asistencia.getIdAsistencia(), asistencia.getFecha().toString(), asistencia.getDuracionEstimada(),
-                    asistencia.getPuesto().getIdPuestoTaller(), asistencia.getPuesto().getNombre(), asistencia.getPrecio(), toMecanicosAsistenciaDto(asistencia.getMecanicos()), asistencia.getDescripcion()));
+                    asistencia.getPuesto().getIdPuesto(), asistencia.getPuesto().getNombre(), asistencia.getPrecio(), toMecanicosAsistenciaDto(asistencia.getMecanicos()), asistencia.getDescripcion()));
         }
         return  result;
     }
@@ -54,7 +54,7 @@ public class AsistenciaConversor {
         return mecanicos;
     }
 
-    private static List<HorariosAsistenciasDto> toHorariosAsistenciaDto(List<Horarios> horarios){
+    public static List<HorariosAsistenciasDto> toHorariosAsistenciaDto(List<Horarios> horarios){
         List<HorariosAsistenciasDto> result = new ArrayList<>();
         for (Horarios hor : horarios){
             result.add(new HorariosAsistenciasDto(hor.getIdFranjaHoraria(), hor.getFranjaHoraria()));
@@ -63,7 +63,7 @@ public class AsistenciaConversor {
     }
 
     public static AsistenciaCompletaDto toAsistenciaCompletaDto(Asistencia asistencia){
-        return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuestoTaller(),
+        return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuesto(),
                 toMecanicosAsistenciaDto(asistencia.getMecanicos()), toHorariosAsistenciaDto(asistencia.getHorarios()),
                 asistencia.getFecha().toString(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
                 asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion());

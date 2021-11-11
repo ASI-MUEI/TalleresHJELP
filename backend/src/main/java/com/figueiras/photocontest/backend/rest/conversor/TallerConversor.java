@@ -43,7 +43,7 @@ public class TallerConversor {
 
     public static PuestoTallerDto toPuestoTDto(PuestoTaller puestoTaller){
         PuestoTallerDto puestoTallerDto = new PuestoTallerDto();
-        puestoTallerDto.setIdPuestoTaller(puestoTaller.getIdPuestoTaller());
+        puestoTallerDto.setIdPuestoTaller(puestoTaller.getIdPuesto());
         puestoTallerDto.setNombre(puestoTaller.getNombre());
         puestoTallerDto.setDescripcion(puestoTaller.getDescripcion());
         return puestoTallerDto;

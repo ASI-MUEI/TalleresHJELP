@@ -1,5 +1,8 @@
 package com.figueiras.photocontest.backend.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
 public class Horarios {
     private Long idFranjaHoraria;
     private String franjaHoraria;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Asistencia> asistencias;
 
     public Horarios() {
@@ -35,7 +39,7 @@ public class Horarios {
         this.franjaHoraria = franjaHoraria;
     }
 
-    @ManyToMany(mappedBy = "mecanicos")
+    @ManyToMany(mappedBy = "mecanicos", fetch = FetchType.EAGER)
     public List<Asistencia> getAsistencias() {
         return asistencias;
     }

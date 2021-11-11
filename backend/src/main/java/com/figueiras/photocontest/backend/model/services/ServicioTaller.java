@@ -18,7 +18,7 @@ public interface ServicioTaller {
     List<Asistencia> findAllAsistenciasPorFecha(String fecha);
     AsistenciaCompletaFranjaHDto asignarAsistenciaFranjaHoraria(AsistenciaFranjaHorariaDto asistenciaFranjaHDto) throws InstanceNotFoundException;
     Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException;
-    Slice<Horarios> getHorariosDisponibles(int page, int size);
+    List<Horarios> getHorariosDisponibles();
     Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException;
     Slice<Trabajo> getTrabajosAbiertos();
     Slice<PuestoTaller> getElevadores();
