@@ -2,10 +2,10 @@
 DROP TABLE AsistenciaMecanico;
 DROP TABLE AsistenciaHorario;
 DROP TABLE Asistencia;
-DROP TABLE EstadoTrabajo;
 DROP TABLE TiposAsistencias;
 DROP TABLE Horarios;
 DROP TABLE Trabajo;
+DROP TABLE EstadoTrabajo;
 DROP TABLE Vehiculo;
 DROP TABLE Flota;
 DROP TABLE Modelo;

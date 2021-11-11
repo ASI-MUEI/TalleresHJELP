@@ -50,7 +50,7 @@ INSERT INTO EstadoTrabajo
 VALUES
 (1, 'Abierto', 'El vehículo está en reparación');
 
-INSERT INTO EstadosAsistencias
+INSERT INTO EstadoTrabajo
 (idEstado, nombre, descripcion)
 VALUES
 (2, 'Cerrado', 'El vehículo está listo');
@@ -112,14 +112,14 @@ VALUES
 -- Insercion de Asistencia
 
 INSERT INTO Asistencia
-(idAsistencia, idTipo, fecha, idEstado, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
+(idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(1, 1, CURRENT_DATE(), 1,  1, 1, 250, 2, 0, 'Se procede a cambiar los neumáticos de verano a invierno');
+(1, 1, CURRENT_DATE(),  1, 1, 250, 2, 0, 'Se procede a cambiar los neumáticos de verano a invierno');
 
 INSERT INTO Asistencia
-(idAsistencia, idTipo, fecha, idEstado, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
+(idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(2, 1, CURRENT_DATE(), 1,  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
+(2, 1, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
 
 -- Asignacion de horarios a asistencias
 
