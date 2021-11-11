@@ -7,7 +7,7 @@ public class AsistenciaCompletaDto {
     private Long elevador;
     private List<MecanicoAsistenciaDto> mecanicos;
     private List<HorariosAsistenciasDto> horarios;
-    private String fecha;
+    private Long fecha;
     private Long idTrabajo;
     private Float precio;
     private Long duracionEstimada;
@@ -19,7 +19,7 @@ public class AsistenciaCompletaDto {
 
     public AsistenciaCompletaDto() {}
 
-    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, String fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente) {
+    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, Long fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente) {
         this.idAsistencia = idAsistencia;
         this.elevador = elevador;
         this.mecanicos = mecanicos;
@@ -67,11 +67,11 @@ public class AsistenciaCompletaDto {
         this.horarios = horarios;
     }
 
-    public String getFecha() {
+    public Long getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Long fecha) {
         this.fecha = fecha;
     }
 

@@ -29,8 +29,8 @@ const Body = () => {
             <Switch>
                 <Route exact path="/"><Home /></Route>
                 <Route exact path="/trabajos"><BuscarTrabajos/></Route>
-                <Route exact path="/trabajos/:idTrabajo"><Trabajo/></Route>
                 <Route exact path="/trabajos/nuevo"><AnadirTrabajo/></Route>
+                <Route exact path="/trabajos/:idTrabajo"><Trabajo/></Route>
                 <Route exact path="/usuarios/registrar"><Registrar /></Route>
                 <Route exact path="/usuarios/registrar/mec"><RegistrarMecanico/></Route>
                 <Route exact path="/usuarios/registrar/cli"><RegistrarCliente/></Route>

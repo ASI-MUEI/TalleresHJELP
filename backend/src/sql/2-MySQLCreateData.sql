@@ -152,4 +152,9 @@ VALUES
 INSERT INTO AsistenciaMecanico
 (idAsistencia, idMecanico)
 VALUES
-(1, 2);
+(1, 3);
+
+INSERT INTO AsistenciaMecanico
+(idAsistencia, idMecanico)
+VALUES
+(1, 4);

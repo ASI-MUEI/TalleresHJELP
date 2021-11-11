@@ -33,7 +33,7 @@ const Reparaciones = ({listaReparaciones}) =>{
             {listaReparaciones.map(reparacion =>
                 <tr key={reparacion.id}>
                     <td>
-                        <FormattedDate value={new Date(reparacion.fecha)} />
+                        <FormattedDate value={new Date(reparacion.fecha)}/>
                     </td>
                     <td>
                         {reparacion.duracionEstimada} horas

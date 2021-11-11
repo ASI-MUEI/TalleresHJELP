@@ -16,7 +16,7 @@ const Horario = ({reparaciones}) => {
         } else {
             resultado = (
                 <div>
-                    <Link to={`/trabajos/${asistencia.idTrabajo}`}>{asistencia.matricula}</Link>
+                    <Link to={`/reparaciones/${asistencia.idAsistencia}`}>{asistencia.matricula}</Link>
 
                     {
                         // Si la asistencia está peritada, se muestra un indicativo

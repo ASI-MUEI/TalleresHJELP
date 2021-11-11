@@ -162,7 +162,7 @@ const AnadirReparacion = () => {
                             type="checkbox"
                             label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
                             value={peritaje}
-                            onChange={event => setPeritaje(event.target.value)}
+                            onChange={event => setPeritaje(!peritaje)}
                         />
                     </div>
                 </div>

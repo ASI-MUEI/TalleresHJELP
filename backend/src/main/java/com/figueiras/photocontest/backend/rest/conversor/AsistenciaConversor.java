@@ -34,6 +34,7 @@ public class AsistenciaConversor {
         resultado.setDuracionEstimada(asistencia.getDuracionEstimada());
         resultado.setDescripcion(asistencia.getDescripcion());
         resultado.setPrecio(asistencia.getPrecio());
+        resultado.setIdAsistencia(asistencia.getIdAsistencia());
 
         return resultado;
     }
@@ -81,7 +82,7 @@ public class AsistenciaConversor {
     public static AsistenciaCompletaDto toAsistenciaCompletaDto(Asistencia asistencia){
         return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuesto(),
                 toMecanicosAsistenciaDto(asistencia.getMecanicos()), toHorariosAsistenciaDto(asistencia.getHorarios()),
-                asistencia.getFecha().toString(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
+                asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
                 asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion(),
                 asistencia.getTrabajo().getVehiculo().getMatricula(), asistencia.getTrabajo().getVehiculo().getUsuario().getNombreUsuario(),
                 asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario());

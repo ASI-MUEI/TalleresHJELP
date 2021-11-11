@@ -3,6 +3,7 @@ package com.figueiras.photocontest.backend.rest.dtos;
 import java.util.List;
 
 public class AsistenciasDto {
+    private Long idAsistencia;
     private String fecha;
     private List<MecanicoAsistenciaDto> mecanicos;
     private Long elevador;
@@ -14,6 +15,13 @@ public class AsistenciasDto {
     private Boolean peritaje;
     private List<HorariosAsistenciasDto> horasDeTrabajo;
 
+    public Long getIdAsistencia() {
+        return idAsistencia;
+    }
+
+    public void setIdAsistencia(Long idAsistencia) {
+        this.idAsistencia = idAsistencia;
+    }
 
     public String getFecha() {
         return fecha;

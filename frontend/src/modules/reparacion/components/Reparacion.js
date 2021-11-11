@@ -1,7 +1,7 @@
 import { Jumbotron } from "react-bootstrap";
 import { Container } from "react-bootstrap"
 import { useParams } from "react-router";
-import { FormattedMessage } from "react-intl";
+import {FormattedDate, FormattedMessage} from "react-intl";
 import { BMW_SERIES_1 } from "../../commons/constants";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -51,11 +51,11 @@ const Reparacion = () => {
             <Jumbotron fluid>
                 <Container>
                     <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.trabajo'/>:</h5> {datosReparacion.idTrabajo}
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.trabajo'/>:</h5> {datosReparacion.matricula}
                     <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='user.SignUp.Cliente.Name'/>:</h5> datosReparacion
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='user.SignUp.Cliente.Name'/>:</h5> {datosReparacion.nombreCliente}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.fecha'/>:</h5> {datosReparacion.fecha}
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.fecha'/>:</h5> <FormattedDate value={datosReparacion.fecha}/>
                     <br/>
                     <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.duracion'/>:</h5> {datosReparacion.duracionEstimada}
                     <br/>
