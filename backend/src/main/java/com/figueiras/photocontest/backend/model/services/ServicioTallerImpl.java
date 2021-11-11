@@ -151,11 +151,11 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistencia.setTrabajo(trabajo.get());
         asistencia.setTipo(tipo);
         asistencia.setDescripcion(asistenciasDto.getDescripcion());
-        asistencia.setPeritaje(asistenciasDto   .getPeritaje());
+        asistencia.setPeritaje(asistenciasDto.getPeritaje());
         asistencia = asistenciaDao.save(asistencia);
 
-        for (Horarios horario : asistencia.getHorarios()) {
-            asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getIdFranjaHoraria()));
+        for (HorariosAsistenciasDto horario : asistenciasDto.getHorasDeTrabajo()) {
+            asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getId()));
         }
 
         return asistencia;
