@@ -2,7 +2,7 @@
 DROP TABLE AsistenciaMecanico;
 DROP TABLE AsistenciaHorario;
 DROP TABLE Asistencia;
-DROP TABLE TiposAsistencias;
+DROP TABLE TipoAsistencias;
 DROP TABLE Horarios;
 DROP TABLE Trabajo;
 DROP TABLE EstadoTrabajo;
@@ -89,11 +89,11 @@ CREATE TABLE Horarios(
     CONSTRAINT pk_Horarios PRIMARY KEY(idFranjaHoraria)
 );
 
-CREATE TABLE TiposAsistencias(
+CREATE TABLE TipoAsistencias(
      idTipo BIGINT NOT NULL AUTO_INCREMENT,
      nombre VARCHAR(255),
      descripcion VARCHAR(255),
-     CONSTRAINT TiposAsistencias_pk PRIMARY KEY(idTipo)
+     CONSTRAINT TipoAsistencias_pk PRIMARY KEY(idTipo)
 );
 
 CREATE TABLE EstadoTrabajo(
@@ -126,7 +126,7 @@ CREATE TABLE Asistencia(
     peritaje INT,
     descripcion VARCHAR(500),
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
-    CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TiposAsistencias(idTipo),
+    CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TipoAsistencias(idTipo),
     CONSTRAINT trabajo_fk FOREIGN KEY(idTrabajo) REFERENCES Trabajo(idTrabajo),
     CONSTRAINT idPuesto_fk FOREIGN KEY(idPuesto) REFERENCES PuestoTaller(idPuesto)
 );

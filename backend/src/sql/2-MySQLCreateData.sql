@@ -8,6 +8,16 @@ INSERT INTO Usuario
 VALUES
 (2, "Pepe", "pepe", "Gómez", "pgomez@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 2, 0);
 
+INSERT INTO Usuario
+(idUsuario, nombreUsuario, nombrePilaUsuario, apellidosUsuario, correoElectronicoUsuario, contrasenaUsuario, lenguaje, rolUsuarioSistema, cuentaEliminada)
+VALUES
+(3, "Fernando", "fernadno", "Gómez", "fernadno@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 1, 0);
+
+INSERT INTO Usuario
+(idUsuario, nombreUsuario, nombrePilaUsuario, apellidosUsuario, correoElectronicoUsuario, contrasenaUsuario, lenguaje, rolUsuarioSistema, cuentaEliminada)
+VALUES
+(4, "Ismael", "ismael", "Gómez", "ismael@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 1, 0);
+
 
 INSERT INTO Horarios(franjaHoraria) values('8:30-9:00');
 INSERT INTO Horarios(franjaHoraria) values('9:00-9:30');
@@ -33,12 +43,12 @@ INSERT INTO Horarios(franjaHoraria) values('20:00-20:30');
 
 -- Tipos de asistencias
 
-INSERT INTO TiposAsistencias
+INSERT INTO TipoAsistencias
 (idTipo, nombre, descripcion)
 VALUES
 (1, 'Cambio de neumáticos', 'Se cambian los neumáticos del vehículo');
 
-INSERT INTO TiposAsistencias
+INSERT INTO TipoAsistencias
 (idTipo, nombre, descripcion)
 VALUES
 (2, 'Cambio de aceite', 'Se cambian el aceite del vehículo');
@@ -105,9 +115,9 @@ VALUES
 
 -- Inserción de trabajo
 INSERT INTO Trabajo
-(idTrabajo, nombre, descripcion, idVehiculo)
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado)
 VALUES
-(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1);
+(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1);
 
 -- Insercion de Asistencia
 
