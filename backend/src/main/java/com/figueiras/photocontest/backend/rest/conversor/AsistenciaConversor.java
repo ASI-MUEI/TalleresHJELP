@@ -66,6 +66,8 @@ public class AsistenciaConversor {
         return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuesto(),
                 toMecanicosAsistenciaDto(asistencia.getMecanicos()), toHorariosAsistenciaDto(asistencia.getHorarios()),
                 asistencia.getFecha().toString(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
-                asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion());
+                asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion(),
+                asistencia.getTrabajo().getVehiculo().getMatricula(), asistencia.getTrabajo().getVehiculo().getUsuario().getNombreUsuario(),
+                asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario());
     }
 }
