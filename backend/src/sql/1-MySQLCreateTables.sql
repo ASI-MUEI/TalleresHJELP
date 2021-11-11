@@ -141,9 +141,10 @@ CREATE TABLE AsistenciaMecanico(
 );
 
 CREATE TABLE AsistenciaHorario(
+    idAsistenciaHorario BIGINT NOT NULL AUTO_INCREMENT,
     idAsistencia BIGINT NOT NULL,
     idHorario BIGINT NOT NULL,
-    CONSTRAINT asistenciaHorario_pk PRIMARY KEY(idAsistencia, idHorario),
+    CONSTRAINT asistenciaHorario_pk PRIMARY KEY(idAsistenciaHorario),
     CONSTRAINT asistenciaHorario_idAsistencia_fk FOREIGN KEY(idAsistencia) REFERENCES Asistencia(idAsistencia),
     CONSTRAINT asistenciaHorario_idHorario_fk FOREIGN KEY(idHorario) REFERENCES Horarios(idFranjaHoraria)
 );

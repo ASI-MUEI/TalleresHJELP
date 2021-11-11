@@ -35,6 +35,9 @@ public class ServicioTallerImpl implements ServicioTaller{
     private VehiculoDao vehiculoDao;
 
     @Autowired
+    private AsistenciaHorarioDao asistenciaHorarioDao;
+
+    @Autowired
     private EstadoTrabajosDao estadoAsistenciasDAO;
 
     @Autowired
@@ -149,7 +152,11 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistencia.setTipo(tipo);
         asistencia.setDescripcion(asistenciasDto.getDescripcion());
         asistencia.setPeritaje(asistenciasDto   .getPeritaje());
-        asistenciaDao.save(asistencia);
+        asistencia = asistenciaDao.save(asistencia);
+
+        for (Horarios horario : asistencia.getHorarios()) {
+            asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getIdFranjaHoraria()));
+        }
 
         return asistencia;
     }
