@@ -2,6 +2,7 @@ package com.figueiras.photocontest.backend.rest.controllers;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Horarios;
+import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
@@ -87,23 +88,32 @@ public class ControladorTaller {
     }
 
     @GetMapping("/trabajo")
-    public List<ListadoTrabajosDto> listarTrabajos(@RequestParam(defaultValue = "0") int page,
+    public Block<ListadoTrabajosDto> listarTrabajos(@RequestParam(defaultValue = "0") int page,
                                                      @RequestParam(defaultValue = "5") int size) {
-        return TallerConversor.toListadoTrabajosDto(servicioTaller.getTrabajosOrderByFecha(page, size));
+        Slice<Trabajo> trabajos = servicioTaller.getTrabajosOrderByFecha(page, size);
+        List<ListadoTrabajosDto> trabajosDto = TallerConversor.toListadoTrabajosDto(trabajos.getContent());
+        Block<ListadoTrabajosDto> resultado = new Block<>(trabajosDto, trabajos.hasNext());
+        return resultado;
     }
 
-    @GetMapping("/trabajo/reparaciones")
-    public List<ListarReparacionesDto> listarReparaciones(@RequestParam(defaultValue = "0") int page,
+    @GetMapping("/trabajo/{idTrabajo}/reparaciones")
+    public Block<ListarReparacionesDto> listarReparaciones(@PathVariable Long idTrabajo,
+                                                   @RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "5") int size) {
-        return AsistenciaConversor.toListarAsistenciasDto(servicioTaller.getAsistenciasOrderByFecha(page, size));
+        Slice<Asistencia> asistencias = servicioTaller.getAsistenciasOrderByFecha(idTrabajo, page, size);
+        List<ListarReparacionesDto> reparacionesDto = AsistenciaConversor.toListarAsistenciasDto(asistencias.getContent());
+        Block<ListarReparacionesDto> resultado = new Block<>(reparacionesDto, asistencias.hasNext());
+
+        return resultado;
     }
 
     @GetMapping("/trabajo/{idTrabajo}")
     public TrabajoCompletoDto getTrabajoByID(@PathVariable Long idTrabajo) throws InstanceNotFoundException {
-        return TallerConversor.toTrabajoCompletoDto(servicioTaller.getTrabajoByID(idTrabajo));
+        TrabajoCompletoDto resultado = TallerConversor.toTrabajoCompletoDto(servicioTaller.getTrabajoByID(idTrabajo));
+        return resultado;
     }
 
-    @GetMapping("/reparacion/{idReparacion}}")
+    @GetMapping("/reparacion/{idReparacion}")
     public AsistenciaCompletaDto getReparacionByID(@PathVariable Long idReparacion) throws InstanceNotFoundException {
         return AsistenciaConversor.toAsistenciaCompletaDto(servicioTaller.getAsistenciaByID(idReparacion));
     }

@@ -33,7 +33,7 @@ public class Asistencia {
         this.idAsistencia = idAsistencia;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idPuesto")
     public PuestoTaller getPuesto() {
         return puesto;
@@ -43,7 +43,7 @@ public class Asistencia {
         this.puesto = puesto;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipo")
     public TipoAsistencias getTipo() {
         return tipo;
@@ -53,7 +53,7 @@ public class Asistencia {
         this.tipo = tipo;
     }
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "AsistenciaMecanico",
             joinColumns = { @JoinColumn(name = "idAsistencia") },

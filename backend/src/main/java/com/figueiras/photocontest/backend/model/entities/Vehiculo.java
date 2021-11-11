@@ -24,7 +24,7 @@ public class Vehiculo {
         this.idVehiculo = idVehiculo;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario")
     public Usuario getUsuario() {
         return usuario;
@@ -51,7 +51,7 @@ public class Vehiculo {
         this.matricula = matricula;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idModelo")
     public Modelo getModelo() {
         return modelo;
@@ -70,4 +70,5 @@ public class Vehiculo {
     public void setFlota(Flota flota) {
         this.flota = flota;
     }
+
 }

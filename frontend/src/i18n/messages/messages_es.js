@@ -136,8 +136,8 @@ export default {
     'trabajo.estado' : 'Estado',
     'trabajo.fechaCreacion' : 'Fecha de creación',
     'trabajo.verDetalle' : 'Ver detalles',
-    'trabajo.estado.ABIERTO' : 'Abierto',
-    'trabajo.estado.CERRADO' : 'Cerrado',
+    'trabajo.estado.Abierto' : 'Abierto',
+    'trabajo.estado.Cerrado' : 'Cerrado',
 
     'trabajos.nuevo.nombreTrabajo' : 'Nombre del trabajo',
     'trabajos.nuevo.matricula' : 'Matrícula',
@@ -162,5 +162,11 @@ export default {
     'reparacion.asociadas' : 'Reparaciones asociadas',
     'reparacion.vacia' : 'Non hai reparacións dispoñibles',
     'reparacion.trabajo' : 'Trabajo',
+    'reparacion.puesto' : 'Puesto',
+
+    'trabajo.bienvenida' : 'Página de detalle del trabajo',
+    'trabajo.nombre' : 'Nombre del trabajo',
+    'trabajo.descripcion' : 'Descripción',
+    'trabajo.fecha' : 'Fecha de creación',
 
 }

@@ -4,6 +4,7 @@ import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
 import Trabajos from "./Trabajos";
 import Pager from "../../commons/components/Pager"
+import backend from "../../../backend"
 
 const BuscarTrabajos = () => {
 
@@ -15,7 +16,9 @@ const BuscarTrabajos = () => {
     const size = 5
 
     useEffect(() => {
-        // TODO: conexión con backend para pedir trabajos
+        backend.tallerService.buscarTrabajos(
+            (resultado) => setTrabajos(resultado)
+        )
     }, [page])
 
     const cabecera = () => {
@@ -42,7 +45,7 @@ const BuscarTrabajos = () => {
     }
 
     // Si no hay trabajos
-    if (trabajos.length === 0) {
+    if (trabajos.items.length === 0) {
         return (
             <Container>
                 {cabecera()}
@@ -57,14 +60,14 @@ const BuscarTrabajos = () => {
 
     return (
         <div>
-            <Trabajos datosTrabajos={trabajos.result.items}/>
+            <Trabajos listaTrabajos={trabajos.items}/>
             <Pager
                 back={{
-                    enabled: trabajos.criteria.page >= 1,
+                    enabled: page >= 1,
                     onClick: () => page -= 1
                 }}
                 next={{
-                    enabled: trabajos.result.existMoreItems,
+                    enabled: trabajos.existMoreItems,
                     onClick: () => page += 1
                 }}/>
         </div>

@@ -30,7 +30,7 @@ const Trabajos = ({listaTrabajos}) =>{
             {listaTrabajos.map(trabajo =>
                 <tr key={trabajo.matricula}>
                     <td>
-                        <Link to={`trabajos/${trabajo.matricula}`}>{trabajo.matricula}</Link>
+                        <Link to={`trabajos/${trabajo.idTrabajo}`}>{trabajo.matricula}</Link>
                     </td>
                     <td>
                         {trabajo.nombreCliente}
@@ -41,7 +41,7 @@ const Trabajos = ({listaTrabajos}) =>{
                         </Badge>
                     </td>
                     <td className="align-middle">
-                        <FormattedDate value={new Date(trabajo.fechaCreacion)} />
+                        <FormattedDate value={new Date(trabajo.fecha)}/>
                     </td>
                 </tr>
             )}

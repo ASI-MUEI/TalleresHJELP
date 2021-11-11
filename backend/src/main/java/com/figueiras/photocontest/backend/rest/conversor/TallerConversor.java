@@ -7,6 +7,7 @@ import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,20 +75,33 @@ public class TallerConversor {
         return result;
     }
 
-    public static List<ListadoTrabajosDto> toListadoTrabajosDto(Slice<Trabajo> trabajos){
+    public static List<ListadoTrabajosDto> toListadoTrabajosDto(List<Trabajo> trabajos){
         List<ListadoTrabajosDto> result = new ArrayList<>();
         for (Trabajo trabajo : trabajos){
-            result.add(new ListadoTrabajosDto(trabajo.getVehiculo().getMatricula(),
-                    trabajo.getEstado().getNombre(),trabajo.getVehiculo().getUsuario().getIdUsuario(),
-                    trabajo.getVehiculo().getUsuario().getNombreUsuario(), trabajo.getFechaCreado().toString()));
+            ListadoTrabajosDto trabajoDto = toListadoTrabajoDto(trabajo);
+            result.add(trabajoDto);
         }
+        return result;
+    }
+
+    public static ListadoTrabajosDto toListadoTrabajoDto(Trabajo trabajo){
+        ListadoTrabajosDto result = new ListadoTrabajosDto();
+
+        result.setIdTrabajo(trabajo.getIdTrabajo());
+        result.setFecha(trabajo.getFechaCreado().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        result.setIdCliente(trabajo.getVehiculo().getUsuario().getIdUsuario());
+        result.setNombreCliente(trabajo.getVehiculo().getUsuario().getNombreUsuario());
+        result.setEstado(trabajo.getEstado().getNombre());
+        result.setMatricula(trabajo.getVehiculo().getMatricula());
+
         return result;
     }
 
     public static TrabajoCompletoDto toTrabajoCompletoDto(Trabajo trabajo){
         return new TrabajoCompletoDto(trabajo.getIdTrabajo(), trabajo.getNombre(),trabajo.getDescripcion(),
                 trabajo.getVehiculo().getMatricula(), trabajo.getVehiculo().getUsuario().getNombreUsuario(),
-                trabajo.getEstado().getNombre(), trabajo.getFechaCreado().toString());
+                trabajo.getEstado().getNombre(),
+                trabajo.getFechaCreado().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
     }
 
 }

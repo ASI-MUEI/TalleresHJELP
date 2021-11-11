@@ -4,24 +4,33 @@ import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
 import Trabajos from "./Trabajos";
 import Pager from "../../commons/components/Pager"
+import backend from "../../../backend"
+import {useParams} from "react-router";
+import Reparaciones from "./Reparaciones";
+
 
 const BuscarReparaciones = () =>{
 
     // TODO: Deberia ser nulo para cargar spinner antes de la primera llamada a backend
     const [reparaciones, setReparaciones] = useState(null)
 
+    const {idTrabajo} = useParams();
+
     // Paginacion
     var page = 0
     const size = 5
 
     useEffect(() => {
-        // TODO: conexión con backend para pedir reparaciones
+        backend.tallerService.buscarReparaciones(
+            idTrabajo,
+            resultado => setReparaciones(resultado)
+        )
     }, [page])
 
     const cabecera = () => {
 
         return(
-            <h3 className={"centeredParagraph"}><FormattedMessage id={'reparaciones.asociadas'}/></h3>
+            <h3 className={"centeredParagraph"}><FormattedMessage id={'reparacion.asociadas'}/></h3>
         )
     }
 
@@ -42,7 +51,7 @@ const BuscarReparaciones = () =>{
     }
 
     // Si no hay reparaciones
-    if(reparaciones.length === 0){
+    if(reparaciones.items.length === 0){
         return(
             <Container>
                 {cabecera()}
@@ -57,13 +66,13 @@ const BuscarReparaciones = () =>{
 
     return(
         <div>
-            <Trabajos datosTrabajos={reparaciones.result.items}/>
+            <Reparaciones listaReparaciones={reparaciones.items}/>
             <Pager
                 back={{
-                    enabled: reparaciones.criteria.page >= 1,
+                    enabled: page >= 1,
                     onClick: () => page -=1}}
                 next={{
-                    enabled: reparaciones.result.existMoreItems,
+                    enabled: reparaciones.existMoreItems,
                     onClick: () => page +=1}}/>
         </div>
     )

@@ -5,6 +5,7 @@ import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 import {useHistory} from "react-router";
+import Errors from "../../commons/components/Errors";
 
 const RegistrarMecanico = () => {
 
@@ -12,6 +13,8 @@ const RegistrarMecanico = () => {
     const [dni, setDni] = useState("");
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [apellidosUsuario, setApellidosUsuario] = useState("");
+    const [backendErrors, setBackendErrors] = useState(null);
+
     const history = useHistory();
 
     const handleSubmit = event => {
@@ -23,7 +26,7 @@ const RegistrarMecanico = () => {
                 rolUsuario: rol
             },
             () => history.push("/"),
-            () => history.push("/")
+            errors => setBackendErrors(errors)
         );
     }
 
@@ -35,6 +38,7 @@ const RegistrarMecanico = () => {
             <div>
                 <Link to="/usuarios/registrar"><FormattedMessage id={"back"}/></Link>
             </div>
+            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
             <br/>
             <div>
                 <Form onSubmit={handleSubmit}>

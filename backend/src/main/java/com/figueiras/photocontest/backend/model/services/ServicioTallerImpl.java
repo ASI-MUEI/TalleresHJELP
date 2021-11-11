@@ -225,8 +225,8 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Slice<Asistencia> getAsistenciasOrderByFecha(int page, int size) {
-        return trabajoDao.findAsistenciasOrderByFecha(PageRequest.of(page, size));
+    public Slice<Asistencia> getAsistenciasOrderByFecha(Long idTrabajo, int page, int size) {
+        return trabajoDao.findAsistenciasOrderByFecha(idTrabajo, PageRequest.of(page, size));
     }
 
     @Override

@@ -128,8 +128,8 @@ export default {
     'trabajos.nuevo.descripcionTrabajo' : 'Descripción',
     'trabajos.nuevo.registrarCliente' : 'Rexistrar cliente',
     'trabajos.nuevo.registrarTrabajo' : 'Crear traballo',
-    'trabajo.estado.ABIERTO' : 'Aberto',
-    'trabajo.estado.CERRADO' : 'Cerrado',
+    'trabajo.estado.Abierto' : 'Aberto',
+    'trabajo.estado.Cerrado' : 'Cerrado',
 
     'registrarUsuario' : 'Páxina de rexistro de usuarios',
     'registrarUsuario.Asministrativo' : 'Rexistrar un novo administrativo',
@@ -147,5 +147,11 @@ export default {
     'reparacion.verDetalle' : 'Ver detalle',
     'reparacion.asociadas' : 'Reparacións asociadas',
     'reparacion.vacia' : 'No hay reparaciones disponibles',
-    'reparacion.trabajo' : 'Job',
+    'reparacion.trabajo' : 'Traballo',
+    'reparacion.puesto' : 'Posto',
+
+    'trabajo.bienvenida' : 'Páxina de detalle do traballo',
+    'trabajo.nombre' : 'Nome do traballo',
+    'trabajo.descripcion' : 'Descripción',
+    'trabajo.fecha' : 'Data de creación',
 }

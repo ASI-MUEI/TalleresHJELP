@@ -39,7 +39,7 @@ public class Modelo {
         this.descripcion = descripcion;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idMarca")
     public Marca getMarca() {
         return marca;

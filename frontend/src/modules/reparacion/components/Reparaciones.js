@@ -18,6 +18,9 @@ const Reparaciones = ({listaReparaciones}) =>{
                     <FormattedMessage id='reparacion.duracion' />
                 </th>
                 <th scope="col">
+                    <FormattedMessage id='reparacion.puesto' />
+                </th>
+                <th scope="col">
                     <FormattedMessage id='reparacion.precio' />
                 </th>
                 <th scope="col">
@@ -30,20 +33,20 @@ const Reparaciones = ({listaReparaciones}) =>{
             {listaReparaciones.map(reparacion =>
                 <tr key={reparacion.id}>
                     <td>
-                        <FormattedDate value={new Date(reparacion.fechaCreacion)} />
+                        <FormattedDate value={new Date(reparacion.fecha)} />
                     </td>
                     <td>
-                        {reparacion.duracion}
+                        {reparacion.duracionEstimada} horas
                     </td>
                     <td>
-                        {reparacion.elevador}
+                        {reparacion.nombreElevador}
                     </td>
                     <td>
                         {reparacion.precio}€
                     </td>
                     <td>
                         <Link
-                            to={`reparaciones/${reparacion.id}`}>
+                            to={`/reparaciones/${reparacion.idReparacion}`}>
                             <FormattedMessage id={"reparacion.verDetalle"}/>
                         </Link>
                     </td>

@@ -6,6 +6,7 @@ import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +38,28 @@ public class AsistenciaConversor {
         return resultado;
     }
 
-    public static List<ListarReparacionesDto> toListarAsistenciasDto(Slice<Asistencia> asistencias){
+    public static List<ListarReparacionesDto> toListarAsistenciasDto(List<Asistencia> asistencias){
         List<ListarReparacionesDto> result = new ArrayList<>();
         for (Asistencia asistencia : asistencias){
-            result.add(new ListarReparacionesDto(asistencia.getIdAsistencia(), asistencia.getFecha().toString(), asistencia.getDuracionEstimada(),
-                    asistencia.getPuesto().getIdPuesto(), asistencia.getPuesto().getNombre(), asistencia.getPrecio(), toMecanicosAsistenciaDto(asistencia.getMecanicos()), asistencia.getDescripcion()));
+            ListarReparacionesDto dto = toListarResistenciaDto(asistencia);
+            result.add(dto);
         }
         return  result;
+    }
+
+    public static ListarReparacionesDto toListarResistenciaDto(Asistencia asistencia){
+        ListarReparacionesDto resultado = new ListarReparacionesDto();
+
+        resultado.setDescripción(asistencia.getDescripcion());
+        resultado.setIdElevador(asistencia.getPuesto().getIdPuesto());
+        resultado.setIdReparacion(asistencia.getIdAsistencia());
+        resultado.setNombreElevador(asistencia.getPuesto().getNombre());
+        resultado.setMecanicos(toMecanicosAsistenciaDto(asistencia.getMecanicos()));
+        resultado.setFecha(asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        resultado.setPrecio(asistencia.getPrecio());
+        resultado.setDuracionEstimada(asistencia.getDuracionEstimada());
+
+        return resultado;
     }
 
     private static List<MecanicoAsistenciaDto> toMecanicosAsistenciaDto(List<Usuario> usuarios){

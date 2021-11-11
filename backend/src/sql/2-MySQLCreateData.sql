@@ -115,9 +115,9 @@ VALUES
 
 -- Inserción de trabajo
 INSERT INTO Trabajo
-(idTrabajo, nombre, descripcion, idVehiculo, idEstado)
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado)
 VALUES
-(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1);
+(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE());
 
 -- Insercion de Asistencia
 

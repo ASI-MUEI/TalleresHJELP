@@ -5,22 +5,28 @@ import { FormattedMessage } from "react-intl";
 import { BMW_SERIES_1 } from "../../commons/constants";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+import backend from "../../../backend"
 
 const Reparacion = () => {
 
     const {idReparacion} = useParams();
-    const [datosReparacion, setDatosReparacion] = useState([]);
+    const [datosReparacion, setDatosReparacion] = useState(null);
 
     const cabecera = () => {
-        <div>
-            <h2 className="centeredParagraph">Datos de la reparación</h2>
-            <br/>
-        </div>
+        return(
+            <div>
+                <h2 className="centeredParagraph">Datos de la reparación</h2>
+                <br/>
+            </div>
+        )
     }
 
     useEffect(() => {
-        //TODO: conectar con backend para cojer datos de reparacion
-    }, [])
+        backend.tallerService.buscarReparacionPorId(
+            idReparacion,
+            resultado => setDatosReparacion(resultado)
+        )
+    }, idReparacion)
 
     if(datosReparacion === null){
         //TODO: activar esto
@@ -41,27 +47,26 @@ const Reparacion = () => {
 
     return (
         <Container>
+            {cabecera()}
             <Jumbotron fluid>
                 <Container>
-                <h5 className="hWithoutLineBreak" >Trabajo:</h5> 9265LLC
                     <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.trabajo'/>:</h5> Elevador 1
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.trabajo'/>:</h5> {datosReparacion.idTrabajo}
                     <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='user.SignUp.Cliente.Name'/>:</h5> Juan Manuel Díaz Ayuso
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='user.SignUp.Cliente.Name'/>:</h5> datosReparacion
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.fecha'/>:</h5> Juan Manuel Díaz Ayuso
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.fecha'/>:</h5> {datosReparacion.fecha}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.duracion'/>:</h5> Juan Manuel Díaz Ayuso
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.duracion'/>:</h5> {datosReparacion.duracionEstimada}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.precio'/>:</h5> Juan Manuel Díaz Ayuso
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.precio'/>:</h5> {datosReparacion.precio}€
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='paginaHorario.nuevaReparacion.Descripcion'/>:</h5> Chasis/Dirección: Se comprueba el estado de la suspensión, (amortiguadores, muelles, puntos de anclaje…) y de la dirección (rótulas, bomba de asistencia…) |
-Motor/sistemas anticontaminación: Se centran en detectar posibles fallos de motor, incluido el sistema de escape, y sistema de transmisión (caja de cambios, diferencial..)
- | Carrocería/interior: Se vigilar su deterioro (corrosión, faros)… así como el cinturón de seguridad y desjustes del salpicadero.
- | Sistema de frenos: Para comprobar su eficacia y posibles fallos en el sistema de frenado (pastillas, discos, servofreno, líquidos…)
- | Electricidad/electrónica: Se localizan posibles fallos eléctricos (luces en el cuadro de mandos, cierre, climatizador..)
+                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='paginaHorario.nuevaReparacion.Descripcion'/>:</h5> {datosReparacion.descripcion}
+                    <h5>Lista de mecanicos:</h5>
                     {
-                        //Todo: lista de mecánicos con un map
+                        datosReparacion.mecanicos.map(mecanico =>
+                            <h5>- {mecanico.nombreMecanico}</h5>
+                        )
                     }
                 </Container>
             </Jumbotron>

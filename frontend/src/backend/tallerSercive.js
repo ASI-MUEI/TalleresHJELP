@@ -36,3 +36,31 @@ export const crearReparacion = (asistenciaDto, onSuccess, onErrors) => {
 
     appFetch(path, config('POST', asistenciaDto), onSuccess, onErrors);
 }
+
+export const buscarTrabajos = (onSuccess) => {
+
+    let path = `/taller/trabajo`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const buscarReparaciones = (idTrabajo, onSuccess) => {
+
+    let path = `/taller/trabajo/${idTrabajo}/reparaciones`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const buscarTrabajoPorId = (id, onSuccess) => {
+
+    let path = `/taller/trabajo/${id}`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const buscarReparacionPorId = (id, onSuccess) => {
+
+    let path = `/taller/reparacion/${id}`;
+
+    appFetch(path, config('GET'), onSuccess);
+}

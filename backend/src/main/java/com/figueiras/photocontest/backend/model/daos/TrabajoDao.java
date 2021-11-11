@@ -12,6 +12,6 @@ public interface TrabajoDao extends PagingAndSortingRepository<Trabajo, Long> {
     Slice<Trabajo> findByEstado(String estado);
     @Query("SELECT t FROM Trabajo t ORDER BY t.fechaCreado ASC")
     Slice<Trabajo> findTrabajosOrderByFecha(Pageable pageable);
-    @Query("SELECT a FROM Asistencia a ORDER BY a.fecha ASC")
-    Slice<Asistencia> findAsistenciasOrderByFecha(Pageable pageable);
+    @Query("SELECT a FROM Asistencia a WHERE a.trabajo.idTrabajo =?1 ORDER BY a.fecha ASC")
+    Slice<Asistencia> findAsistenciasOrderByFecha(Long idTrabajo, Pageable pageable);
 }

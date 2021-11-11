@@ -109,8 +109,8 @@ export default {
     'trabajo.estado' : 'State',
     'trabajo.fechaCreacion' : 'Creation date',
     'trabajo.verDetalle' : 'View details',
-    'trabajo.estado.ABIERTO' : 'Open',
-    'trabajo.estado.CERRADO' : 'Close',
+    'trabajo.estado.Abierto' : 'Open',
+    'trabajo.estado.Cerrado' : 'Close',
 
 
     'trabajos.nuevo.nombreTrabajo' : 'Job name',
@@ -136,5 +136,11 @@ export default {
     'reparacion.asociadas' : 'Asociated reparations',
     'reparacion.vacia' : 'There is no reparations available',
     'reparacion.trabajo' : 'Job',
+    'reparacion.puesto' : 'Place',
+
+    'trabajo.bienvenida' : 'Job detail page',
+    'trabajo.nombre' : 'Name',
+    'trabajo.descripcion' : 'Description',
+    'trabajo.fecha' : 'Date of creation',
 
 }
