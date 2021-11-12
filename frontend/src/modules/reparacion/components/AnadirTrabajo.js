@@ -1,32 +1,57 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Form} from "react-bootstrap";
 import {FormattedMessage, useIntl} from "react-intl";
 import RegistrarCliente from "../../user/components/RegistrarCliente";
 import {Multiselect} from "multiselect-react-dropdown";
-
+import {Link} from "react-router-dom";
+import backend from "../../../backend";
+import {useHistory} from "react-router";
+import Errors from "../../commons/components/Errors";
 
 const AnadirTrabajo = () =>{
 
     const intl = useIntl()
-
+    const history = useHistory();
     const [nombreTrabajo, setNombreTrabajo] = useState("")
     const [matricula, setMatricula] = useState("")
     const [descripcion, setDescripcion] = useState("")
-
     const [anadirCliente, setAnadirCliente] = useState(false);
-
     const [listaMatricula, setListaMatricula] = useState([]);
+    const [backendErrors, setBackendErrors] = useState()
 
     const handleSubmit = event =>{
-        //TODO: conectar backend
+
+        event.preventDefault()
+        backend.tallerService.crearTrabajo(
+            {
+                nombre: nombreTrabajo,
+                descripcion,
+                matricula
+            },
+            () => history.push("/horario"),
+            errors => setBackendErrors(errors)
+        )
     }
+
+    useEffect(() =>{
+        backend.tallerService.recuperarMatriculas(
+            resultado => setListaMatricula(resultado)
+        )
+    },[])
 
     return(
         <Container>
+            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
             <h3 className={"centeredParagraph"}>
                 <FormattedMessage id={"trabajos.nuevo.registrarTrabajo"}/>
             </h3>
+            <br/>
+            <div>
+                <Link to={"/usuarios/registrar/cli"}>
+                    <FormattedMessage id={'trabajos.nuevo.registrarCliente'}/>
+                </Link>
+            </div>
             <br/>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
@@ -35,6 +60,7 @@ const AnadirTrabajo = () =>{
                         value={nombreTrabajo}
                         onChange={event => setNombreTrabajo(event.target.value)}
                         placeholder={intl.formatMessage({id: 'trabajos.nuevo.nombreTrabajo'})}
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -44,23 +70,16 @@ const AnadirTrabajo = () =>{
                         options={listaMatricula}
                         showArrow="true"
                         selectionLimit ={1}
-                        onSelect={selectedList => setMatricula(Array.from(selectedList))}
-                        onRemove={selectedList => setMatricula(Array.from(selectedList))}
+                        onSelect={selectedList => setMatricula(Array.from(selectedList)[0])}
+                        onRemove={selectedList => setMatricula(Array.from(selectedList)[0])}
+                        required
                     />
                     <br/>
-                    <Button
-                        variant="secondary"
-                        value={anadirCliente}
-                        onClick={event => setAnadirCliente(!anadirCliente)}
-                    >
-                        <FormattedMessage id={'trabajos.nuevo.registrarCliente'}/>
-                    </Button>
                 </Form.Group>
 
                 <div hidden={!anadirCliente}>
                     <RegistrarCliente/>
                 </div>
-                <br/>
                 <Form.Group>
                     <Form.Control
                         as="textarea"
@@ -69,15 +88,15 @@ const AnadirTrabajo = () =>{
                         value={descripcion}
                         onChange={event => setDescripcion(event.target.value)}
                         placeholder={intl.formatMessage({id: 'trabajos.nuevo.descripcionTrabajo'})}
+                        required
                     />
                 </Form.Group>
-                <Button type={"submit"}>
+                <Button variant="success" type="submit">
                     <FormattedMessage id={'trabajos.nuevo.registrarTrabajo'}/>
                 </Button>
             </Form>
         </Container>
     )
-
 }
 
 export default AnadirTrabajo;

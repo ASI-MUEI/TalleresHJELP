@@ -38,7 +38,7 @@ public class ServicioTallerImpl implements ServicioTaller{
     private AsistenciaHorarioDao asistenciaHorarioDao;
 
     @Autowired
-    private EstadoTrabajosDao estadoAsistenciasDAO;
+    private EstadoTrabajosDao estadoTrabajosDao;
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -168,23 +168,24 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Override
     public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException {
-        Optional<Usuario> usuario = usuarioDao.findById(trabajoDto.getVehiculo());
-        if(usuario.isEmpty())
-            throw new InstanceNotFoundException("entidades.usuario.idUsuario", trabajoDto.getVehiculo());
+        //Optional<Usuario> usuario = usuarioDao.findById(trabajoDto.getVehiculo());
+        //if(usuario.isEmpty())
+        //    throw new InstanceNotFoundException("entidades.usuario.idUsuario", trabajoDto.getVehiculo());
 
-        Optional<Vehiculo> veh = vehiculoDao.findById(trabajoDto.getVehiculo());
+        Optional<Vehiculo> veh = vehiculoDao.findByMatricula(trabajoDto.getMatricula());
         if(veh.isEmpty()){
-            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", trabajoDto.getVehiculo());
+            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", trabajoDto.getMatricula());
         }
-
-        if (trabajoDto.getNombre().isEmpty())
-            throw new CampoVacioException("entidades.trabajo.nombre", trabajoDto.getNombre());
 
         Trabajo trabajo = new Trabajo();
         trabajo.setVehiculo(veh.get());
         trabajo.setNombre(trabajoDto.getNombre());
         trabajo.setDescripcion(trabajoDto.getDescripcion());
         trabajo.setFechaCreado(LocalDateTime.now());
+        // Trabajo nuevo se crea con estado abierto
+        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(new Long(1));
+        EstadoTrabajo estadoAbierto = estadoOpt.get();
+        trabajo.setEstado(estadoAbierto);
         trabajoDao.save(trabajo);
 
         return trabajo;

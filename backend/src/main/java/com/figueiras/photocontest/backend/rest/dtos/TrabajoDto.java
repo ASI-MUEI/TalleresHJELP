@@ -3,7 +3,6 @@ package com.figueiras.photocontest.backend.rest.dtos;
 public class TrabajoDto {
     private String nombre;
     private String descripcion;
-    private Long vehiculo;
     private String matricula;
 
     public TrabajoDto(String nombre, String descripcion) {
@@ -27,11 +26,11 @@ public class TrabajoDto {
         this.descripcion = descripcion;
     }
 
-    public Long getVehiculo() {
-        return vehiculo;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setVehiculo(Long vehiculo) {
-        this.vehiculo = vehiculo;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }

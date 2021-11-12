@@ -13,6 +13,7 @@ import com.figueiras.photocontest.backend.rest.dtos.VehiculoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,6 +67,12 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         vehModelo.ifPresent(vehiculo::setModelo);
         vehFlota.ifPresent(vehiculo::setFlota);
         vehiculoDao.save(vehiculo);
+    }
+
+    @Override
+    public List<String> getTodasMatriculas() {
+        List<String> matriculas = vehiculoDao.findAllMatriculas();
+        return matriculas;
     }
 
 }

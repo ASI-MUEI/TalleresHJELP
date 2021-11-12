@@ -64,3 +64,17 @@ export const buscarReparacionPorId = (id, onSuccess) => {
 
     appFetch(path, config('GET'), onSuccess);
 }
+
+export const recuperarMatriculas = (onSuccess) => {
+
+    let path = '/catalogo-vehiculos/matriculas';
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const crearTrabajo = (trabajoDto, onSuccess, onErrors) => {
+
+    let path = `/taller/trabajo`;
+
+    appFetch(path, config('POST', trabajoDto), onSuccess, onErrors);
+}

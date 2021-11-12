@@ -1,9 +1,6 @@
 package com.figueiras.photocontest.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.entities.Asistencia;
-import com.figueiras.photocontest.backend.model.entities.Horarios;
-import com.figueiras.photocontest.backend.model.entities.PuestoTaller;
-import com.figueiras.photocontest.backend.model.entities.Trabajo;
+import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
