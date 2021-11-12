@@ -2,25 +2,23 @@ import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Form} from "react-bootstrap";
 import {FormattedMessage, useIntl} from "react-intl";
-import RegistrarCliente from "../../user/components/RegistrarCliente";
 import {Multiselect} from "multiselect-react-dropdown";
 import {Link} from "react-router-dom";
 import backend from "../../../backend";
 import {useHistory} from "react-router";
 import Errors from "../../commons/components/Errors";
 
-const AnadirTrabajo = () =>{
+const AnadirTrabajo = () => {
 
     const intl = useIntl()
     const history = useHistory();
     const [nombreTrabajo, setNombreTrabajo] = useState("")
     const [matricula, setMatricula] = useState("")
     const [descripcion, setDescripcion] = useState("")
-    const [anadirCliente, setAnadirCliente] = useState(false);
     const [listaMatricula, setListaMatricula] = useState([]);
     const [backendErrors, setBackendErrors] = useState()
 
-    const handleSubmit = event =>{
+    const handleSubmit = event => {
 
         event.preventDefault()
         backend.tallerService.crearTrabajo(
@@ -34,13 +32,13 @@ const AnadirTrabajo = () =>{
         )
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         backend.tallerService.recuperarMatriculas(
             resultado => setListaMatricula(resultado)
         )
-    },[])
+    }, [])
 
-    return(
+    return (
         <Container>
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
             <h3 className={"centeredParagraph"}>
@@ -69,17 +67,13 @@ const AnadirTrabajo = () =>{
                         isObject={false}
                         options={listaMatricula}
                         showArrow="true"
-                        selectionLimit ={1}
+                        selectionLimit={1}
                         onSelect={selectedList => setMatricula(Array.from(selectedList)[0])}
                         onRemove={selectedList => setMatricula(Array.from(selectedList)[0])}
                         required
                     />
                     <br/>
                 </Form.Group>
-
-                <div hidden={!anadirCliente}>
-                    <RegistrarCliente/>
-                </div>
                 <Form.Group>
                     <Form.Control
                         as="textarea"

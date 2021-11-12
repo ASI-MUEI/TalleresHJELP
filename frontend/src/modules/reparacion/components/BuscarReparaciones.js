@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {Alert, Form, Spinner} from "react-bootstrap";
+import {Alert, Spinner} from "react-bootstrap";
 import {FormattedMessage} from "react-intl";
 import Container from "react-bootstrap/Container";
-import Trabajos from "./Trabajos";
 import Pager from "../../commons/components/Pager"
 import backend from "../../../backend"
 import {useParams} from "react-router";
 import Reparaciones from "./Reparaciones";
 
 
-const BuscarReparaciones = () =>{
+const BuscarReparaciones = () => {
 
     // TODO: Deberia ser nulo para cargar spinner antes de la primera llamada a backend
     const [reparaciones, setReparaciones] = useState(null)
@@ -23,26 +22,29 @@ const BuscarReparaciones = () =>{
     useEffect(() => {
         backend.tallerService.buscarReparaciones(
             idTrabajo,
+            page,
+            size,
             resultado => setReparaciones(resultado)
         )
+        // eslint-disable-next-line
     }, [page])
 
     const cabecera = () => {
 
-        return(
+        return (
             <h3 className={"centeredParagraph"}><FormattedMessage id={'reparacion.asociadas'}/></h3>
         )
     }
 
     // Mientras no se inicializa, se devuelve un Spinner
-    if(reparaciones === null){
-        return(
+    if (reparaciones === null) {
+        return (
             <Container>
                 {cabecera()}
                 <br/>
                 <div className="center">
                     <Spinner animation="border" role="status">
-                        <span className="visually-hidden" />
+                        <span className="visually-hidden"/>
                     </Spinner>
                 </div>
             </Container>
@@ -51,8 +53,8 @@ const BuscarReparaciones = () =>{
     }
 
     // Si no hay reparaciones
-    if(reparaciones.items.length === 0){
-        return(
+    if (reparaciones.items.length === 0) {
+        return (
             <Container>
                 {cabecera()}
                 <br/>
@@ -64,16 +66,18 @@ const BuscarReparaciones = () =>{
         )
     }
 
-    return(
+    return (
         <div>
             <Reparaciones listaReparaciones={reparaciones.items}/>
             <Pager
                 back={{
                     enabled: page >= 1,
-                    onClick: () => page -=1}}
+                    onClick: () => page -= 1
+                }}
                 next={{
                     enabled: reparaciones.existMoreItems,
-                    onClick: () => page +=1}}/>
+                    onClick: () => page += 1
+                }}/>
         </div>
     )
 }

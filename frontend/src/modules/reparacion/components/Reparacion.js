@@ -1,10 +1,7 @@
-import { Jumbotron } from "react-bootstrap";
-import { Container } from "react-bootstrap"
-import { useParams } from "react-router";
+import {Container, Jumbotron, Spinner} from "react-bootstrap";
+import {useParams} from "react-router";
 import {FormattedDate, FormattedMessage} from "react-intl";
-import { BMW_SERIES_1 } from "../../commons/constants";
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import {useEffect, useState} from "react";
 import backend from "../../../backend"
 
 const Reparacion = () => {
@@ -13,7 +10,7 @@ const Reparacion = () => {
     const [datosReparacion, setDatosReparacion] = useState(null);
 
     const cabecera = () => {
-        return(
+        return (
             <div>
                 <h2 className="centeredParagraph">Datos de la reparación</h2>
                 <br/>
@@ -26,17 +23,17 @@ const Reparacion = () => {
             idReparacion,
             resultado => setDatosReparacion(resultado)
         )
-    }, idReparacion)
+    }, [idReparacion])
 
-    if(datosReparacion === null){
+    if (datosReparacion === null) {
         //TODO: activar esto
-        return(
+        return (
             <Container>
                 {cabecera()}
                 <br/>
                 <div className="center">
                     <Spinner animation="border" role="status">
-                        <span className="visually-hidden" />
+                        <span className="visually-hidden"/>
                     </Spinner>
                 </div>
             </Container>
@@ -44,24 +41,29 @@ const Reparacion = () => {
     }
 
 
-
     return (
         <Container>
             {cabecera()}
             <Jumbotron fluid>
                 <Container>
-                    <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.trabajo'/>:</h5> {datosReparacion.matricula}
-                    <br />
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='user.SignUp.Cliente.Name'/>:</h5> {datosReparacion.nombreCliente}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.fecha'/>:</h5> <FormattedDate value={datosReparacion.fecha}/>
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='reparacion.trabajo'/>:
+                    </h5> {datosReparacion.matricula}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.duracion'/>:</h5> {datosReparacion.duracionEstimada}
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='user.SignUp.Cliente.Name'/>:
+                    </h5> {datosReparacion.nombreCliente}
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='reparacion.precio'/>:</h5> {datosReparacion.precio}€
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='reparacion.fecha'/>:</h5> <FormattedDate
+                    value={datosReparacion.fecha}/>
                     <br/>
-                    <h5 className="hWithoutLineBreak" ><FormattedMessage id='paginaHorario.nuevaReparacion.Descripcion'/>:</h5> {datosReparacion.descripcion}
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='reparacion.duracion'/>:
+                    </h5> {datosReparacion.duracionEstimada}
+                    <br/>
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='reparacion.precio'/>:
+                    </h5> {datosReparacion.precio}€
+                    <br/>
+                    <h5 className="hWithoutLineBreak"><FormattedMessage id='paginaHorario.nuevaReparacion.Descripcion'/>:
+                    </h5> {datosReparacion.descripcion}
                     <h5>Lista de mecanicos:</h5>
                     {
                         datosReparacion.mecanicos.map(mecanico =>

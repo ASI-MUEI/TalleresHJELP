@@ -1,30 +1,26 @@
-import {FormattedDate, FormattedMessage, useIntl} from "react-intl";
+import {FormattedDate, FormattedMessage} from "react-intl";
 import {Link} from "react-router-dom";
-import {Badge} from "react-bootstrap";
-import commonFunctions from "../../commons/functions";
 
-const Reparaciones = ({listaReparaciones}) =>{
+const Reparaciones = ({listaReparaciones}) => {
 
-    const intl = useIntl();
-
-    return(
+    return (
         <table className="table table-striped table-hover">
             <thead>
             <tr>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.fecha' />
+                    <FormattedMessage id='reparacion.fecha'/>
                 </th>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.duracion' />
+                    <FormattedMessage id='reparacion.duracion'/>
                 </th>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.puesto' />
+                    <FormattedMessage id='reparacion.puesto'/>
                 </th>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.precio' />
+                    <FormattedMessage id='reparacion.precio'/>
                 </th>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.detalle' />
+                    <FormattedMessage id='reparacion.detalle'/>
                 </th>
             </tr>
             </thead>

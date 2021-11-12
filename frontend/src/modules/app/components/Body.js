@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import FindUsers from '../../user/components/FindUsers';
+import {Route, Switch} from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 import User from '../../user/components/User';
 import Home from './Home';
 import Registrar from '../../user/components/Registrar';
@@ -25,27 +24,27 @@ const Body = () => {
     return (
 
         <Container>
-            <br />
+            <br/>
             <Switch>
-                <Route exact path="/"><Home /></Route>
+                <Route exact path="/"><Home/></Route>
                 <Route exact path="/trabajos"><BuscarTrabajos/></Route>
                 <Route exact path="/trabajos/nuevo"><AnadirTrabajo/></Route>
                 <Route exact path="/trabajos/:idTrabajo"><Trabajo/></Route>
-                <Route exact path="/usuarios/registrar"><Registrar /></Route>
+                <Route exact path="/usuarios/registrar"><Registrar/></Route>
                 <Route exact path="/usuarios/registrar/mec"><RegistrarMecanico/></Route>
                 <Route exact path="/usuarios/registrar/cli"><RegistrarCliente/></Route>
                 <Route exact path="/usuarios/registrar/adm"><RegistrarAdministrativo/></Route>
-                <Route exact path="/users/login"><LogIn /></Route>
-                <Route exact path="/users/recover"><RecoverUser /></Route>
-                <Route exact path="/users/:userName"><User /></Route>
-                <Route exact path="/users/:userName/changue-password"><ChanguePassword /></Route>
-                <Route exact path="/users/:userName/reset-password/:token"><ResetPassword /></Route>
-                <Route exact path="/users/:userName/changue-data"><ChangueProfileData /></Route>
+                <Route exact path="/users/login"><LogIn/></Route>
+                <Route exact path="/users/recover"><RecoverUser/></Route>
+                <Route exact path="/users/:userName"><User/></Route>
+                <Route exact path="/users/:userName/changue-password"><ChanguePassword/></Route>
+                <Route exact path="/users/:userName/reset-password/:token"><ResetPassword/></Route>
+                <Route exact path="/users/:userName/changue-data"><ChangueProfileData/></Route>
                 <Route exact path="/horario"><PaginaHorario/></Route>
                 <Route exact path="/reparacion"><Reparacion/></Route>
                 <Route exact path="/reparaciones/:idReparacion"><Reparacion/></Route>
                 <Route exact path="/vehicle/newVehicle"><NewVehicle/></Route>
-                <Route><Home /></Route>
+                <Route><Home/></Route>
             </Switch>
         </Container>
 

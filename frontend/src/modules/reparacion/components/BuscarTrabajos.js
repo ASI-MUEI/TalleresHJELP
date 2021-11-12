@@ -8,7 +8,6 @@ import backend from "../../../backend"
 
 const BuscarTrabajos = () => {
 
-    // TODO: Deberia ser nulo para cargar spinner antes de la primera llamada a backend
     const [trabajos, setTrabajos] = useState(null)
 
     // Paginacion
@@ -17,6 +16,8 @@ const BuscarTrabajos = () => {
 
     useEffect(() => {
         backend.tallerService.buscarTrabajos(
+            page,
+            size,
             (resultado) => setTrabajos(resultado)
         )
     }, [page])

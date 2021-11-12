@@ -37,6 +37,7 @@ const Horario = ({reparaciones}) => {
         return resultado;
     }
 
+    // eslint-disable-next-line
     const data = React.useMemo(
         () => [
             {
