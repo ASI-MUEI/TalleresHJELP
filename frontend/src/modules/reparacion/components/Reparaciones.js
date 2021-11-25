@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const Reparaciones = ({listaReparaciones}) => {
 
     return (
-        <table className="table table-striped table-hover">
+        <table className="table table-striped table-hover" >
             <thead>
             <tr>
                 <th scope="col">

@@ -143,6 +143,13 @@ export default {
     'trabajo.nombre' : 'Name',
     'trabajo.descripcion' : 'Description',
     'trabajo.fecha' : 'Date of creation',
+    'trabajo.peritado' : 'Appraised job',
+    'trabajo.noPeritado' : 'Non appraised work',
+    'trabajo.pagado' : 'Payed job',
+    'trabajo.noPagado' : 'Non payed job',
+    'trabajo.cerrar' : 'Close job',
+    'trabajo.verFactura' : 'See billing info',
+    'trabajo.establecerPagado' : 'Stablish as payed',
 
 
 }

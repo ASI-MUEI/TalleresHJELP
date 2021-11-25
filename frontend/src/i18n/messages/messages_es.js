@@ -169,5 +169,12 @@ export default {
     'trabajo.nombre' : 'Nombre del trabajo',
     'trabajo.descripcion' : 'Descripción',
     'trabajo.fecha' : 'Fecha de creación',
+    'trabajo.peritado' : 'Trabajo peritado',
+    'trabajo.noPeritado' : 'Trabajo no peritado',
+    'trabajo.pagado' : 'Trabajo pagado',
+    'trabajo.noPagado' : 'Trabajo no pagado',
+    'trabajo.cerrar' : 'Cerrar Trabajo',
+    'trabajo.verFactura' : 'Ver factura',
+    'trabajo.establecerPagado' : 'Establecer como pagado',
 
 }
