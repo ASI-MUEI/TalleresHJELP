@@ -15,7 +15,8 @@ const AnadirTrabajo = () => {
     const [nombreTrabajo, setNombreTrabajo] = useState("")
     const [matricula, setMatricula] = useState("")
     const [descripcion, setDescripcion] = useState("")
-    const [listaMatricula, setListaMatricula] = useState([]);
+    const [listaMatricula, setListaMatricula] = useState([])
+    const [peritaje, setPeritaje] = useState("")
     const [backendErrors, setBackendErrors] = useState()
 
     const handleSubmit = event => {
@@ -25,7 +26,8 @@ const AnadirTrabajo = () => {
             {
                 nombre: nombreTrabajo,
                 descripcion,
-                matricula
+                matricula,
+                //TODO: enviar peritaje.
             },
             () => history.push("/horario"),
             errors => setBackendErrors(errors)
@@ -61,6 +63,14 @@ const AnadirTrabajo = () => {
                         required
                     />
                 </Form.Group>
+                <div className="centeredDiv">
+                    <Form.Check
+                        type="checkbox"
+                        label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
+                        value={peritaje}
+                    />
+                </div>
+                <br/>
                 <Form.Group>
                     <Multiselect
                         placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorMatrícula'})}

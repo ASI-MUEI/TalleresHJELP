@@ -53,10 +53,16 @@ const AnadirReparacion = () => {
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
         backend.tallerService.buscarHorarios(result => setListaHorarios(result))
         // TODO: cojer lista de tipo de reparaciones
-
-
     }, [])
 
+    useEffect(() => {
+
+        // Si se selecciona un trabajo, hay que verificar si es de tipo peritado para actualizar
+        // el checkbox.
+        if(matricula !== "" && matricula !== undefined && matricula !== null){
+            // TODO: recuperar si el trabajo es peritado o no. setPeritaje()
+        }
+    }, [matricula])
     return (
         <Container>
             <br/>
@@ -166,7 +172,7 @@ const AnadirReparacion = () => {
                             type="checkbox"
                             label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
                             value={peritaje}
-                            onChange={event => setPeritaje(!peritaje)}
+                            disabled={true}
                         />
                     </div>
                 </div>
