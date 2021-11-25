@@ -72,6 +72,8 @@ export const recuperarMatriculas = (onSuccess) => {
     appFetch(path, config('GET'), onSuccess);
 }
 
+//TODO: buscar lista de tipos de reparaciones
+
 export const crearTrabajo = (trabajoDto, onSuccess, onErrors) => {
 
     let path = `/taller/trabajo`;

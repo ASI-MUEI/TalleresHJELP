@@ -163,6 +163,7 @@ export default {
     'reparacion.vacia' : 'Non hai reparacións dispoñibles',
     'reparacion.trabajo' : 'Trabajo',
     'reparacion.puesto' : 'Puesto',
+    'reparacion.tipo' : 'Tipo de trabajo',
 
     'trabajo.bienvenida' : 'Página de detalle del trabajo',
     'trabajo.nombre' : 'Nombre del trabajo',

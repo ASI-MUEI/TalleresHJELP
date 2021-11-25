@@ -137,10 +137,12 @@ export default {
     'reparacion.vacia' : 'There is no reparations available',
     'reparacion.trabajo' : 'Job',
     'reparacion.puesto' : 'Place',
+    'reparacion.tipo' : 'Job type',
 
     'trabajo.bienvenida' : 'Job detail page',
     'trabajo.nombre' : 'Name',
     'trabajo.descripcion' : 'Description',
     'trabajo.fecha' : 'Date of creation',
+
 
 }

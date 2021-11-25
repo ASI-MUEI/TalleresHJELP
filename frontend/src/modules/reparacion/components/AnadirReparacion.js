@@ -17,11 +17,13 @@ const AnadirReparacion = () => {
     const [duracionEstimada, setDuracionEstimada] = useState("")
     const [peritaje, setPeritaje] = useState(false)
     const [descripcion, setDescripcion] = useState("")
+    const [tipoTarea, setTipoTarea] = useState("")
 
     const [listaMatricula, setListaMatricula] = useState([])
     const [listaMecanicos, setListaMecanicos] = useState([])
     const [listaElevadores, setListaElevadores] = useState([])
     const [listaHorarios, setListaHorarios] = useState([])
+    const [listaTipoTarea, setListaTipoTarea] = useState([])
 
     const intl = useIntl();
     const history = useHistory();
@@ -39,6 +41,7 @@ const AnadirReparacion = () => {
                 descripcion,
                 peritaje,
                 horasDeTrabajo
+                // TODO: enviar tipo de reparación
             },
             () => history.push("/horario"),
         )
@@ -49,6 +52,7 @@ const AnadirReparacion = () => {
         backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
         backend.tallerService.buscarHorarios(result => setListaHorarios(result))
+        // TODO: cojer lista de tipo de reparaciones
 
 
     }, [])
@@ -179,7 +183,16 @@ const AnadirReparacion = () => {
                         />
                     </Form.Group>
                 </div>
-
+                <Multiselect
+                    placeholder={intl.formatMessage({id: 'reparacion.tipo'})}
+                    isObject={true}
+                    displayValue={"nombre"}
+                    options={listaTipoTarea}
+                    showArrow="true"
+                    selectionLimit={1}
+                    onSelect={selectedList => setTipoTarea(Array.from(selectedList))}
+                    onRemove={selectedList => setTipoTarea(Array.from(selectedList))}
+                />
                 <br/>
                 <div className="d-flex justify-content-center">
                     <Button variant="success" type="submit">
