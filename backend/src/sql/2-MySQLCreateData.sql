@@ -18,6 +18,11 @@ INSERT INTO Usuario
 VALUES
 (4, "Ismael", "ismael", "Gómez", "ismael@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 1, 0);
 
+INSERT INTO Usuario
+(idUsuario, nombreUsuario, nombrePilaUsuario, apellidosUsuario, correoElectronicoUsuario, contrasenaUsuario, lenguaje, rolUsuarioSistema, cuentaEliminada)
+VALUES
+(5, "Laura", "laura", "Gómez", "lgomez@hjelp.es", "$2a$10$MOTlWknMV4VImu6vTQ9gq.yNIY37MJW4uM1wvBMsf.jRO0oviGyeq", 0, 2, 0);
+
 
 INSERT INTO Horarios(franjaHoraria) values('8:30-9:00');
 INSERT INTO Horarios(franjaHoraria) values('9:00-9:30');
@@ -99,6 +104,11 @@ INSERT INTO Marca
 (idMarca, nombre, descripcion)
 VALUES
 (1, 'BMW', 'Babarian Motors Works');
+
+INSERT INTO Marca
+(idMarca, nombre, descripcion)
+VALUES
+(2, 'Audi', 'Auto Unión');
 -- Insercion de modelos
 
 INSERT INTO Modelo
@@ -106,10 +116,20 @@ INSERT INTO Modelo
 VALUES
 (1, 'Serie 1', 'Hatchback de la marca de Babaria', 1, NULL);
 
+INSERT INTO Modelo
+(idModelo, nombre, descripcion, idMarca, idDocumento)
+VALUES
+(2, 'A3', 'Hatchback de la marca Audi', 2, NULL);
+
 INSERT INTO Vehiculo
 (idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
 VALUES
 (1, 2, 'VSSZZZ1MZ2R040807', '01234LLL', 1, NULL );
+
+INSERT INTO Vehiculo
+(idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
+VALUES
+(2, 5, 'AUDZZZ1MZ2R040807', '91234KLM', 2, NULL );
 
 -- INSERCION DE REPARACIONES
 
@@ -118,6 +138,11 @@ INSERT INTO Trabajo
 (idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado)
 VALUES
 (1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE());
+
+INSERT INTO Trabajo
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado)
+VALUES
+(2, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE());
 
 -- Insercion de Asistencia
 
@@ -130,6 +155,11 @@ INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
 (2, 1, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
+
+INSERT INTO Asistencia
+(idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
+VALUES
+(3, 1, CURRENT_DATE(),  2, 2, 5500, 8, 0, 'Cambio de defensa y difusores frontales, espejo izquierdo');
 
 -- Asignacion de horarios a asistencias
 
@@ -148,6 +178,63 @@ INSERT INTO AsistenciaHorario
 VALUES
 (2, 4);
 
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 1);
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 2);
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 3);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 4);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 5);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 6);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 7);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 8);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 9);
+
+
+INSERT INTO AsistenciaHorario
+(idAsistencia, idHorario)
+VALUES
+(3, 10);
+
 -- Asignacion de mecanicos a asistencias
 INSERT INTO AsistenciaMecanico
 (idAsistencia, idMecanico)
@@ -158,3 +245,8 @@ INSERT INTO AsistenciaMecanico
 (idAsistencia, idMecanico)
 VALUES
 (1, 4);
+
+INSERT INTO AsistenciaMecanico
+(idAsistencia, idMecanico)
+VALUES
+(2, 3);
