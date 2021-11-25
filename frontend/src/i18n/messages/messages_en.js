@@ -12,7 +12,7 @@ export default {
     'app.Header.Config': 'Configuration',
     'app.Header.LogOut': 'Log out',
 
-    'app.Home.WelcomeBack': 'Welcome',
+    'app.Home.WelcomeBack': 'Hello',
     'app.Home.Welcome': 'Welcome to Talleres HJELP',
 
     'app.RedirectHome.paragraphAccount': 'Login in TalleresHJELP',
@@ -128,6 +128,7 @@ export default {
 
     'panelDeControlHorario' : 'Hour control panel',
 
+    'reparacion.cabecera' : 'Reparation details',
     'reparacion.fecha' : 'Date',
     'reparacion.duracion' : 'Duration',
     'reparacion.precio' : 'Price',
@@ -150,6 +151,10 @@ export default {
     'trabajo.cerrar' : 'Close job',
     'trabajo.verFactura' : 'See billing info',
     'trabajo.establecerPagado' : 'Stablish as payed',
+
+    'tabla.sinAsignar' : 'Unassigned',
+
+    'reparacion.prezoEnEuros' : "Cost in €",
 
 
 }

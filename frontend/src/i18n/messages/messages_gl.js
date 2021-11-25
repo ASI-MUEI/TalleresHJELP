@@ -14,7 +14,7 @@ export default {
     'app.Header.Config': 'Configuración',
     'app.Header.LogOut': 'Pechar sesión',
 
-    'app.Home.WelcomeBack': 'Benvido',
+    'app.Home.WelcomeBack': 'Ola',
     'app.Home.Welcome': 'Benvido a Talleres HJELP',
 
     'app.RedirectHome.paragraphAccount': 'Inicia sesión en talleres HJELP',
@@ -116,7 +116,7 @@ export default {
     'trabajos.apartado' : 'Páxina de traballos',
     'trabajo.vacia' : 'Non hai ningún traballo disponible para listar',
 
-    'trabajo.nombreLista' : 'Lista de traballos',
+    'trabajo.nombreLista' : 'Listaxe de traballos',
     'trabajo.matricula' : 'Matrícula',
     'trabajo.cliente' : 'Cliente',
     'trabajo.estado' : 'Estado',
@@ -140,6 +140,7 @@ export default {
 
     'panelDeControlHorario' : 'Panel de control horario',
 
+    'reparacion.cabecera' : 'Detalles da reparación',
     'reparacion.fecha' : 'Data',
     'reparacion.duracion' : 'Duración',
     'reparacion.precio' : 'Prezo',
@@ -162,4 +163,9 @@ export default {
     'trabajo.cerrar' : 'Cerrar traballo',
     'trabajo.verFactura' : 'Ver factura',
     'trabajo.establecerPagado' : 'Establecer como pagado',
+
+    'tabla.sinAsignar' : 'Sen asignar',
+
+    'reparacion.prezoEnEuros' : "Prezo en €",
+
 }

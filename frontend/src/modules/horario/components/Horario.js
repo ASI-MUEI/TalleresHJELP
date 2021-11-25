@@ -2,6 +2,7 @@ import React from 'react';
 import {Table} from 'react-bootstrap';
 import {useTable} from 'react-table'
 import {Link} from 'react-router-dom';
+import {FormattedMessage} from "react-intl";
 
 const Horario = ({reparaciones}) => {
 
@@ -12,7 +13,7 @@ const Horario = ({reparaciones}) => {
         var resultado;
 
         if (asistencia === null) {
-            resultado = <h6>Sin asignar</h6>
+            resultado = <h6><FormattedMessage id={"tabla.sinAsignar"}/></h6>
         } else {
             resultado = (
                 <div>

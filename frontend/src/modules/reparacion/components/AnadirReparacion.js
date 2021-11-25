@@ -108,7 +108,7 @@ const AnadirReparacion = () => {
                                 value={precio}
                                 onChange={event => setPrecio(event.target.value)}
                             />
-                            Precio en €
+                            <FormattedMessage id={"reparacion.prezoEnEuros"}/>
 
                         </Form.Group>
                     </div>

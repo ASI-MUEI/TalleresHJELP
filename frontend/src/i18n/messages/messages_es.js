@@ -13,7 +13,7 @@ export default {
     'app.Header.Config': 'Configuración',
     'app.Header.LogOut': 'Cerrar sesión',
 
-    'app.Home.WelcomeBack': 'Bienvenido',
+    'app.Home.WelcomeBack': 'Hola',
     'app.Home.Welcome': 'Bienvenido a Talleres HJELP',
 
     'app.RedirectHome.paragraphContests': 'Echa un vistazo a todos los concursos o crea uno tú mismo',
@@ -154,6 +154,7 @@ export default {
 
     'panelDeControlHorario' : 'Panel de control horario',
 
+    'reparacion.cabecera' : 'Detalles de la reparación',
     'reparacion.fecha' : 'Fecha',
     'reparacion.duracion' : 'Duración',
     'reparacion.precio' : 'Precio',
@@ -176,5 +177,9 @@ export default {
     'trabajo.cerrar' : 'Cerrar Trabajo',
     'trabajo.verFactura' : 'Ver factura',
     'trabajo.establecerPagado' : 'Establecer como pagado',
+
+    'tabla.sinAsignar' : 'Sin asignar',
+
+    'reparacion.prezoEnEuros' : "Precio en €",
 
 }

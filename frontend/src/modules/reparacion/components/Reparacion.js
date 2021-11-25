@@ -12,7 +12,7 @@ const Reparacion = () => {
     const cabecera = () => {
         return (
             <div>
-                <h2 className="centeredParagraph">Datos de la reparación</h2>
+                <h2 className="centeredParagraph"><FormattedMessage id={"reparacion.cabecera"}/></h2>
                 <br/>
             </div>
         )

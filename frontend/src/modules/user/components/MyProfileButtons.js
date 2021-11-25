@@ -9,14 +9,14 @@ const MyProfileButtons = ({userName}) => {
     return (
         <div className="d-flex justify-content-center">
             <form onSubmit={() => history.push(`/users/${userName}/changue-data`)}>
-                <Button type="submit" className="d-flex justify-content-center" variant="success">
+                <Button type="submit" className="d-flex justify-content-center" variant="primary">
                     <FormattedMessage id="user.Profile.EditData" />
                 </Button>
             </form>
             &nbsp;
             &nbsp;
             <form onSubmit={() => history.push(`/users/${userName}/changue-password`)}>
-                <Button type="submit" className="d-flex justify-content-center" variant="success">
+                <Button type="submit" className="d-flex justify-content-center" variant="primary">
                     <FormattedMessage id="user.Profile.ChanguePassword" />
                 </Button>
             </form>
