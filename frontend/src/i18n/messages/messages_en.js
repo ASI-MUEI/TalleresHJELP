@@ -151,6 +151,7 @@ export default {
     'trabajo.cerrar' : 'Close job',
     'trabajo.verFactura' : 'See billing info',
     'trabajo.establecerPagado' : 'Stablish as payed',
+    'trabajo.listaReparaciones' : 'Reparations list',
 
     'tabla.sinAsignar' : 'Unassigned',
 

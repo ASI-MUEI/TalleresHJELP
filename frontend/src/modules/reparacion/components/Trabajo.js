@@ -119,7 +119,10 @@ const Trabajo = () => {
             </Jumbotron>
 
             <div>
+                <h3 className={"center"}><FormattedMessage id={"trabajo.listaReparaciones"}/></h3>
+                <br/>
                 <BuscarReparaciones/>
+                <br/><br/><br/><br/><br/><br/>
             </div>
         </Container>
     )

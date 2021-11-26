@@ -177,6 +177,7 @@ export default {
     'trabajo.cerrar' : 'Cerrar Trabajo',
     'trabajo.verFactura' : 'Ver factura',
     'trabajo.establecerPagado' : 'Establecer como pagado',
+    'trabajo.listaReparaciones' : 'Lista de reparaciones',
 
     'tabla.sinAsignar' : 'Sin asignar',
 
