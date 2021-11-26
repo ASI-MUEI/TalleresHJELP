@@ -136,9 +136,15 @@ export default {
     'reparacion.verDetalle' : 'See detail',
     'reparacion.asociadas' : 'Asociated reparations',
     'reparacion.vacia' : 'There is no reparations available',
+    'reparacion.sinPiezas' : 'There is no parts assigned',
     'reparacion.trabajo' : 'Job',
     'reparacion.puesto' : 'Place',
     'reparacion.tipo' : 'Job type',
+    'reparacion.modeloVehiculo' : 'Car model',
+    'reparacion.elevador' : 'Elevator',
+    'reparacion.marcarRetrasada' : 'Set as delayed',
+    'reparacion.verManual' : 'See car manual',
+    'reparacion.listadoPiezas' : 'Parts list',
 
     'trabajo.bienvenida' : 'Job detail page',
     'trabajo.nombre' : 'Name',
@@ -156,6 +162,12 @@ export default {
     'tabla.sinAsignar' : 'Unassigned',
 
     'reparacion.prezoEnEuros' : "Cost in €",
+
+    'piezaReparacion.idPiezaReparacion' : 'Identification',
+    'piezaReparacion.nombre' : 'Name',
+    'piezaReparacion.numeroUnidades' : 'Number of units',
+    'piezaReparacion.manual' : 'Manual',
+    'piezaReparacion.eliminar' : 'Delete',
 
 
 }

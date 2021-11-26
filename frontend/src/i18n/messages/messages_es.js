@@ -161,10 +161,16 @@ export default {
     'reparacion.detalle' : 'Detalle',
     'reparacion.verDetalle' : 'Ver detalle',
     'reparacion.asociadas' : 'Reparaciones asociadas',
-    'reparacion.vacia' : 'Non hai reparacións dispoñibles',
+    'reparacion.vacia' : 'No hay reparaciones disponibles',
+    'reparacion.sinPiezas' : 'No hay partes asignadas',
     'reparacion.trabajo' : 'Trabajo',
     'reparacion.puesto' : 'Puesto',
-    'reparacion.tipo' : 'Tipo de trabajo',
+    'reparacion.tipo' : 'Tipo de reparación',
+    'reparacion.modeloVehiculo' : 'Modelo de vehículo',
+    'reparacion.elevador' : 'Elevador',
+    'reparacion.marcarRetrasada' : 'Marcar reparación retrasada',
+    'reparacion.verManual' : 'Ver manual del vehículo',
+    'reparacion.listadoPiezas' : 'Listado de piezas',
 
     'trabajo.bienvenida' : 'Página de detalle del trabajo',
     'trabajo.nombre' : 'Nombre del trabajo',
@@ -182,5 +188,11 @@ export default {
     'tabla.sinAsignar' : 'Sin asignar',
 
     'reparacion.prezoEnEuros' : "Precio en €",
+
+    'piezaReparacion.idPiezaReparacion' : 'Identificador',
+    'piezaReparacion.nombre' : 'Nombre',
+    'piezaReparacion.numeroUnidades' : 'Número de unidades',
+    'piezaReparacion.manual' : 'Manual',
+    'piezaReparacion.eliminar' : 'Eliminar',
 
 }
