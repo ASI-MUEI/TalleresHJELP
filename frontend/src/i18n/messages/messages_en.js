@@ -145,6 +145,8 @@ export default {
     'reparacion.marcarRetrasada' : 'Set as delayed',
     'reparacion.verManual' : 'See car manual',
     'reparacion.listadoPiezas' : 'Parts list',
+    'reparacion.añadirPieza' : 'Add part',
+    'reparacion.numeroPiezas' : 'Number of parts to add',
 
     'trabajo.bienvenida' : 'Job detail page',
     'trabajo.nombre' : 'Name',

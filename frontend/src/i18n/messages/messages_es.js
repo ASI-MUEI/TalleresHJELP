@@ -171,6 +171,8 @@ export default {
     'reparacion.marcarRetrasada' : 'Marcar reparación retrasada',
     'reparacion.verManual' : 'Ver manual del vehículo',
     'reparacion.listadoPiezas' : 'Listado de piezas',
+    'reparacion.añadirPieza' : 'Añadir pieza',
+    'reparacion.numeroPiezas' : 'Número de piezas a añadir',
 
     'trabajo.bienvenida' : 'Página de detalle del trabajo',
     'trabajo.nombre' : 'Nombre del trabajo',

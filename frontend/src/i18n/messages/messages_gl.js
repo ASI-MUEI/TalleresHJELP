@@ -157,6 +157,8 @@ export default {
     'reparacion.marcarRetrasada' : 'Marcar como adiada',
     'reparacion.verManual' : 'Ver o manual do vehículo',
     'reparacion.listadoPiezas' : 'Listado de pezas',
+    'reparacion.añadirPieza' : 'Engadir peza',
+    'reparacion.numeroPiezas' : 'Número de pezas a engadir',
 
     'trabajo.bienvenida' : 'Páxina de detalle do traballo',
     'trabajo.nombre' : 'Nome do traballo',

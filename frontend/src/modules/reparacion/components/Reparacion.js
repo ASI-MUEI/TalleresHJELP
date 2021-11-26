@@ -1,14 +1,20 @@
 import {Badge, Button, Container, Jumbotron, Spinner} from "react-bootstrap";
 import {useParams} from "react-router";
-import {FormattedDate, FormattedMessage} from "react-intl";
-import {useEffect, useState} from "react";
+import {FormattedDate, FormattedMessage, useIntl} from "react-intl";
+import React, {useEffect, useState} from "react";
 import backend from "../../../backend"
 import BuscarPartesReparacion from "./BuscarPartesReparacion";
+import {Multiselect} from "multiselect-react-dropdown";
 
 const Reparacion = () => {
 
     const {idReparacion} = useParams();
     const [datosReparacion, setDatosReparacion] = useState(null);
+    const [listaPiezas, setListaPiezas] = useState([]);
+    const [pieza, setPieza] = useState(null);
+    const [numeroPiezas, setNumeroPiezas] = useState(0);
+
+    const intl = useIntl();
 
     const cabecera = () => {
         return (
@@ -19,12 +25,20 @@ const Reparacion = () => {
         )
     }
 
+    const anadirPieza = () => {
+        //TODO: método que añade una pieza a una reparacion
+    }
+
     useEffect(() => {
         backend.tallerService.buscarReparacionPorId(
             idReparacion,
             resultado => setDatosReparacion(resultado)
         )
     }, [idReparacion])
+
+    useEffect(() =>{
+        //TODO: método que mande buscar el listado de piezas
+    },[])
 
     if (datosReparacion === null) {
         return (
@@ -96,6 +110,33 @@ const Reparacion = () => {
             <h3 className={"center"}><FormattedMessage id={"reparacion.listadoPiezas"}/></h3>
             <br/>
             <BuscarPartesReparacion idReparacion={datosReparacion.idAsistencia}/>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+            <div>
+                <h3 className={"center"}><FormattedMessage id={"reparacion.añadirPieza"}/></h3>
+                <br/>
+                <Multiselect
+                    placeholder={intl.formatMessage({id: 'reparacion.añadirPieza'})}
+                    isObject={true}
+                    displayValue={"nombre"}
+                    options={listaPiezas}
+                    showArrow="true"
+                    selectionLimit={1}
+                    onSelect={selectedList => setPieza(Array.from(selectedList))}
+                    onRemove={selectedList => setPieza(Array.from(selectedList))}
+                />
+                <br/>
+                <div className={"center"}>
+                    <FormattedMessage id={"reparacion.numeroPiezas"}/>:&nbsp;
+                    <input type={"number"} value={numeroPiezas}
+                           onChange={event => setNumeroPiezas(event.target.value)} min={0}
+                    />
+                </div>
+
+                <br/>
+                <Button className={"center"} variant={"success"} onClick={anadirPieza()}>
+                    <FormattedMessage id={"app.Commons.Save"}/>
+                </Button>
+            </div>
             <br/><br/><br/><br/><br/><br/><br/><br/>
 
         </Container>
