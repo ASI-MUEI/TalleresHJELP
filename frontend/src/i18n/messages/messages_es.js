@@ -197,4 +197,7 @@ export default {
     'piezaReparacion.manual' : 'Manual',
     'piezaReparacion.eliminar' : 'Eliminar',
 
+    'crearRetraso.titulo' : 'Marcar reparacion como retrasada',
+    'crearRetraso.motivo' : 'Motivo del retraso',
+
 }

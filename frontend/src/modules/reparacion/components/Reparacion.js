@@ -1,5 +1,5 @@
 import {Badge, Button, Container, Jumbotron, Spinner} from "react-bootstrap";
-import {useParams} from "react-router";
+import {useHistory, useParams} from "react-router";
 import {FormattedDate, FormattedMessage, useIntl} from "react-intl";
 import React, {useEffect, useState} from "react";
 import backend from "../../../backend"
@@ -15,6 +15,7 @@ const Reparacion = () => {
     const [numeroPiezas, setNumeroPiezas] = useState(0);
 
     const intl = useIntl();
+    const history = useHistory();
 
     const cabecera = () => {
         return (
@@ -58,16 +59,26 @@ const Reparacion = () => {
     return (
         <Container>
             {cabecera()}
-            <div className={"divFlexDirectionColumn center"}>
-                <Button variant={"info"}>
-                    <FormattedMessage id={"reparacion.verManual"}/>
-                </Button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button variant={"danger"}>
-                    <FormattedMessage id={"reparacion.marcarRetrasada"}/>
-                </Button>
+            <div className={"divFlexDirectionColumn "}>
+                <div className={"center"}>
+                    <form onSubmit={() => history.push(`/reparacion/${datosReparacion.idAsistencia}/atraso`)}>
+                        <Button variant={"info"}>
+                            <FormattedMessage id={"reparacion.verManual"}/>
+                        </Button>
+                    </form>
+                </div>
+                &nbsp;
+                <div className={"center"}>
+                    <form onSubmit={() => history.push(`/reparaciones/${datosReparacion.idAsistencia}/atraso`)}>
+                        <Button type={"submit"} variant={"danger"}>
+                            <FormattedMessage id={"reparacion.marcarRetrasada"}/>
+                        </Button>
+                    </form>
+                </div>
             </div>
+
             <br/>
+
             <Jumbotron fluid>
                 <Container>
                     <br/>

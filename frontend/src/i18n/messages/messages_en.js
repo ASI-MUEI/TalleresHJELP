@@ -171,5 +171,8 @@ export default {
     'piezaReparacion.manual' : 'Manual',
     'piezaReparacion.eliminar' : 'Delete',
 
+    'crearRetraso.titulo' : 'Set reparation as delayed',
+    'crearRetraso.motivo' : 'Delay explanation',
+
 
 }

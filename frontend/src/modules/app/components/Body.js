@@ -18,6 +18,7 @@ import RegistrarAdministrativo from "../../user/components/RegistrarAdministrati
 import AnadirTrabajo from "../../reparacion/components/AnadirTrabajo";
 import BuscarTrabajos from "../../reparacion/components/BuscarTrabajos";
 import Trabajo from "../../reparacion/components/Trabajo";
+import AnadirAtraso from "../../reparacion/components/AnadirAtraso";
 
 const Body = () => {
 
@@ -43,6 +44,7 @@ const Body = () => {
                 <Route exact path="/horario"><PaginaHorario/></Route>
                 <Route exact path="/reparacion"><Reparacion/></Route>
                 <Route exact path="/reparaciones/:idReparacion"><Reparacion/></Route>
+                <Route exact path="/reparaciones/:idReparacion/atraso"><AnadirAtraso/></Route>
                 <Route exact path="/vehicle/newVehicle"><NewVehicle/></Route>
                 <Route><Home/></Route>
             </Switch>

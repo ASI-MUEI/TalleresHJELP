@@ -23,18 +23,18 @@ const FuncionesAdministrativas = () => {
                                 </h5>
                             </div>
                             <br />
-                            <div className="centeredHorizontalDiv">
-                                <div className="d-flex justify-content-center">
+                            <div className="divFlexDirectionColumn">
+                                <div className="center">
                                     <form onSubmit={() => history.push('/usuarios/registrar')}>
-                                        <Button type="submit" className="d-flex justify-content-center" variant="info">
+                                        <Button type="submit" className="d-flex justify-content-center" variant="primary">
                                             <FormattedMessage id="app.RedirectHome.SignIn" />
                                         </Button>
                                     </form>
                                 </div>
                                 &nbsp;&nbsp;
-                                <div className="d-flex justify-content-center">
+                                <div className="center">
                                     <form onSubmit={() => history.push('/vehicle/newVehicle')}>
-                                        <Button type="submit" className="d-flex justify-content-center" variant="info">
+                                        <Button type="submit" className="d-flex justify-content-center" variant="primary">
                                             <FormattedMessage id="vehiculo.registroVehiculo" />
                                         </Button>
                                     </form>
