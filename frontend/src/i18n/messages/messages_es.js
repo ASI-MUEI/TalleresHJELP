@@ -173,6 +173,10 @@ export default {
     'reparacion.listadoPiezas' : 'Listado de piezas',
     'reparacion.añadirPieza' : 'Añadir pieza',
     'reparacion.numeroPiezas' : 'Número de piezas a añadir',
+    'reparacion.atrasadas.cabecera' : 'Lista de reparacións atrasadas',
+    'reparacion.atrasadas' : 'R. Retrasadas',
+    'reparacion.atrasada.actualizar' : 'Actualizar',
+    'reparacion.atrasada.motivo' : 'Motivo',
 
     'trabajo.bienvenida' : 'Página de detalle del trabajo',
     'trabajo.nombre' : 'Nombre del trabajo',

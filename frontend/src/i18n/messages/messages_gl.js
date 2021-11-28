@@ -159,6 +159,10 @@ export default {
     'reparacion.listadoPiezas' : 'Listado de pezas',
     'reparacion.añadirPieza' : 'Engadir peza',
     'reparacion.numeroPiezas' : 'Número de pezas a engadir',
+    'reparacion.atrasadas.cabecera' : 'Listaxe de reparacións adiadas',
+    'reparacion.atrasadas' : 'R. Adiadas',
+    'reparacion.atrasada.actualizar' : 'Actualizar',
+    'reparacion.atrasada.motivo' : 'Motivo',
 
     'trabajo.bienvenida' : 'Páxina de detalle do traballo',
     'trabajo.nombre' : 'Nome do traballo',

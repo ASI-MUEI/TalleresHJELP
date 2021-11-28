@@ -28,6 +28,9 @@ const Header = () => {
                   <Link className="nav-link" to="/trabajos">
                       <FormattedMessage id='trabajos.cabecera'/>
                   </Link>
+                  <Link className="nav-link" to="/reparaciones-atrasadas">
+                      <FormattedMessage id='reparacion.atrasadas'/>
+                  </Link>
               </Nav>
               :
               null

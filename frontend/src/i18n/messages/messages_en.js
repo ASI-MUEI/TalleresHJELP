@@ -147,6 +147,10 @@ export default {
     'reparacion.listadoPiezas' : 'Parts list',
     'reparacion.añadirPieza' : 'Add part',
     'reparacion.numeroPiezas' : 'Number of parts to add',
+    'reparacion.atrasadas.cabecera' : 'Delayed reparation list',
+    'reparacion.atrasadas' : 'D. Reparations',
+    'reparacion.atrasada.actualizar' : 'Update',
+    'reparacion.atrasada.motivo' : 'Reason',
 
     'trabajo.bienvenida' : 'Job detail page',
     'trabajo.nombre' : 'Name',
