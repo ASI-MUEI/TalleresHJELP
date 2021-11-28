@@ -9,11 +9,12 @@ public class TrabajoCompletoDto {
     private String nombreCliente;
     private String estado;
     private Long fecha;
+    private Boolean peritaje;
 
     public TrabajoCompletoDto() {
     }
 
-    public TrabajoCompletoDto(Long idTrabajo, String nombre, String descripcion, String matricula, String nombreCliente, String estado, Long fecha) {
+    public TrabajoCompletoDto(Long idTrabajo, String nombre, String descripcion, String matricula, String nombreCliente, String estado, Long fecha, Boolean peritaje) {
         this.idTrabajo = idTrabajo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -21,6 +22,15 @@ public class TrabajoCompletoDto {
         this.nombreCliente = nombreCliente;
         this.estado = estado;
         this.fecha = fecha;
+        this.peritaje = peritaje;
+    }
+
+    public Boolean getPeritaje() {
+        return peritaje;
+    }
+
+    public void setPeritaje(Boolean peritaje) {
+        this.peritaje = peritaje;
     }
 
     public Long getIdTrabajo() {

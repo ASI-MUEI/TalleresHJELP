@@ -4,7 +4,6 @@ import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Horarios;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.rest.dtos.*;
-import org.springframework.data.domain.Slice;
 
 import java.time.ZoneId;
 import java.util.ArrayList;

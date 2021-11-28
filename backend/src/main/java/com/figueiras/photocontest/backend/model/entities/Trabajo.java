@@ -11,6 +11,8 @@ public class Trabajo {
     private Vehiculo vehiculo;
     private EstadoTrabajo estado;
     private LocalDateTime fechaCreado;
+    private Boolean peritado;
+
 
     public Trabajo() {
     }
@@ -67,5 +69,13 @@ public class Trabajo {
 
     public void setFechaCreado(LocalDateTime fechaCreado) {
         this.fechaCreado = fechaCreado;
+    }
+
+    public Boolean getPeritado() {
+        return peritado;
+    }
+
+    public void setPeritado(Boolean peritado) {
+        this.peritado = peritado;
     }
 }

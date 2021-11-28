@@ -7,6 +7,7 @@ import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ServicioTaller {
@@ -23,4 +24,7 @@ public interface ServicioTaller {
     Slice<Asistencia> getAsistenciasOrderByFecha(Long idTrabajo, int page, int size);
     Trabajo getTrabajoByID(Long idTrabajo)throws InstanceNotFoundException;
     Asistencia getAsistenciaByID(Long idAsistencia)throws InstanceNotFoundException;
+    ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha);
+    TipoAsistencias crearTipoAsistencia(String nombre, String descripcion);
+    Slice<TipoAsistencias> getTipoAssitencias();
 }

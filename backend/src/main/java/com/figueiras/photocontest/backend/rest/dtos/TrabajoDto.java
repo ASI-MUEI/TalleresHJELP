@@ -4,6 +4,7 @@ public class TrabajoDto {
     private String nombre;
     private String descripcion;
     private String matricula;
+    private Boolean peritado;
 
     public TrabajoDto(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -32,5 +33,13 @@ public class TrabajoDto {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public Boolean getPeritado() {
+        return peritado;
+    }
+
+    public void setPeritado(Boolean peritado) {
+        this.peritado = peritado;
     }
 }

@@ -1,8 +1,5 @@
 package com.figueiras.photocontest.backend.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.persistence.*;
 import java.util.List;
 

@@ -111,6 +111,7 @@ CREATE TABLE Trabajo(
     idVehiculo BIGINT NOT NULL,
     idEstado BIGINT(255),
     fechaCreado DATETIME,
+    peritaje INT,
     CONSTRAINT Trabajo_pk PRIMARY KEY(idTrabajo),
     CONSTRAINT idEstado_fk FOREIGN KEY(idEstado) REFERENCES EstadoTrabajo(idEstado),
     CONSTRAINT idVehiculo_fk FOREIGN KEY(idVehiculo) REFERENCES Vehiculo(idVehiculo)
@@ -126,6 +127,7 @@ CREATE TABLE Asistencia(
     duracionEstimada BIGINT,
     peritaje INT,
     descripcion VARCHAR(500),
+    idTipo BIGINT,
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
     CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TipoAsistencias(idTipo),
     CONSTRAINT trabajo_fk FOREIGN KEY(idTrabajo) REFERENCES Trabajo(idTrabajo),

@@ -2,6 +2,7 @@ package com.figueiras.photocontest.backend.rest.controllers;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Horarios;
+import com.figueiras.photocontest.backend.model.entities.TipoAsistencias;
 import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
@@ -109,8 +110,7 @@ public class ControladorTaller {
 
     @GetMapping("/trabajo/{idTrabajo}")
     public TrabajoCompletoDto getTrabajoByID(@PathVariable Long idTrabajo) throws InstanceNotFoundException {
-        TrabajoCompletoDto resultado = TallerConversor.toTrabajoCompletoDto(servicioTaller.getTrabajoByID(idTrabajo));
-        return resultado;
+        return TallerConversor.toTrabajoCompletoDto(servicioTaller.getTrabajoByID(idTrabajo));
     }
 
     @GetMapping("/reparacion/{idReparacion}")
@@ -122,5 +122,21 @@ public class ControladorTaller {
     @GetMapping("/elevadores")
     public List<PuestoTallerDto> getElevadores() {
         return TallerConversor.toPuestosDto(servicioTaller.getElevadores());
+    }
+
+    @GetMapping("/horariosLibres/{fecha}")
+    public ArrayList<List<Horarios>> getHorariosLibresPorFecha(@PathVariable String fecha) {
+        return servicioTaller.getHorariosLibresporFecha(fecha);
+    }
+
+    @PostMapping("/tipoTarea")
+    public ResponseEntity registrarTipoTarea(@RequestBody TipoTareaDto tipoTareaDto) {
+        servicioTaller.crearTipoAsistencia(tipoTareaDto.getNombre(), tipoTareaDto.getDescripcion());
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/tiposTarea")
+    public Slice<TipoAsistencias> getTiposTarea() {
+        return servicioTaller.getTipoAssitencias();
     }
 }

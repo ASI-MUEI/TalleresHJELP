@@ -70,6 +70,16 @@ INSERT INTO EstadoTrabajo
 VALUES
 (2, 'Cerrado', 'El vehículo está listo');
 
+INSERT INTO EstadoTrabajo
+(idEstado, nombre, descripcion)
+VALUES
+    (3, 'Atrasado', 'El vehículo está listo');
+
+INSERT INTO EstadoTrabajo
+(idEstado, nombre, descripcion)
+VALUES
+    (4, 'Pagado', 'El vehículo está listo');
+
 
 -- Insercion de puestos del taller
 INSERT INTO PuestoTaller

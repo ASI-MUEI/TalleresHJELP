@@ -100,8 +100,8 @@ public class TallerConversor {
     public static TrabajoCompletoDto toTrabajoCompletoDto(Trabajo trabajo){
         return new TrabajoCompletoDto(trabajo.getIdTrabajo(), trabajo.getNombre(),trabajo.getDescripcion(),
                 trabajo.getVehiculo().getMatricula(), trabajo.getVehiculo().getUsuario().getNombreUsuario(),
-                trabajo.getEstado().getNombre(),
-                trabajo.getFechaCreado().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+                trabajo.getEstado().getNombre(), trabajo.getFechaCreado().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                trabajo.getPeritado());
     }
 
 }

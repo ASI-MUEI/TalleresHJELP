@@ -14,6 +14,11 @@ public class TipoAsistencias {
     public TipoAsistencias() {
     }
 
+    public TipoAsistencias(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
