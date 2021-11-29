@@ -68,7 +68,7 @@ public class Asistencia {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "AsistenciaPiezas",
+            name = "AsistenciaPieza",
             joinColumns = { @JoinColumn(name = "idAsistencia") },
             inverseJoinColumns = { @JoinColumn(name = "idPieza") }
     )

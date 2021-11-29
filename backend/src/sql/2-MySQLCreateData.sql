@@ -51,12 +51,17 @@ INSERT INTO Horarios(franjaHoraria) values('20:00-20:30');
 INSERT INTO TipoAsistencias
 (idTipo, nombre, descripcion)
 VALUES
-(1, 'Cambio de neumáticos', 'Se cambian los neumáticos del vehículo');
+(1, 'Neumáticos', 'Se cambian los neumáticos del vehículo');
 
 INSERT INTO TipoAsistencias
 (idTipo, nombre, descripcion)
 VALUES
-(2, 'Cambio de aceite', 'Se cambian el aceite del vehículo');
+(2, 'Aceite', 'Se cambian el aceite del vehículo');
+
+INSERT INTO TipoAsistencias
+(idTipo, nombre, descripcion)
+VALUES
+(3, 'Reparación', 'Reparación genérica');
 
 -- Estados de asistencias
 
@@ -73,12 +78,12 @@ VALUES
 INSERT INTO EstadoTrabajo
 (idEstado, nombre, descripcion)
 VALUES
-    (3, 'Atrasado', 'El vehículo está listo');
+(3, 'Atrasado', 'El vehículo está listo');
 
 INSERT INTO EstadoTrabajo
 (idEstado, nombre, descripcion)
 VALUES
-    (4, 'Pagado', 'El vehículo está listo');
+(4, 'Pagado', 'El vehículo está listo');
 
 
 -- Insercion de puestos del taller
@@ -164,12 +169,12 @@ VALUES
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(2, 1, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
+(2, 2, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
 
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(3, 1, CURRENT_DATE(),  2, 2, 5500, 8, 0, 'Cambio de defensa y difusores frontales, espejo izquierdo');
+(3, 3, CURRENT_DATE(),  2, 2, 5500, 8, 0, 'Cambio de defensa y difusores frontales, espejo izquierdo');
 
 -- Asignacion de horarios a asistencias
 

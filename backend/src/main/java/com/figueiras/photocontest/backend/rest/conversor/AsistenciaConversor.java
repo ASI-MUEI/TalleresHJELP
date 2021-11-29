@@ -36,6 +36,7 @@ public class AsistenciaConversor {
         resultado.setPrecio(asistencia.getPrecio());
         resultado.setIdAsistencia(asistencia.getIdAsistencia());
         resultado.setPiezasReparacion(toPiezasReparacion(asistencia.getPiezas()));
+        resultado.setNombreTipo(asistencia.getTipo().getNombre());
 
         return resultado;
     }

@@ -20,7 +20,7 @@ const Horario = ({reparaciones}) => {
                     <Link to={`/reparaciones/${asistencia.idAsistencia}`}>{asistencia.matricula}</Link>
                     <hr/>
                     <div>
-                        tipo actividad {/* TODO: {asistencia.tipoAsistencia.nombre vaya}*/}
+                        {asistencia.nombreTipo} {/* TODO: {asistencia.tipoAsistencia.nombre vaya}*/}
                     </div>
                     {
                         // Si la asistencia está peritada, se muestra un indicativo
