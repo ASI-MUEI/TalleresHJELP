@@ -15,6 +15,7 @@ public class AsistenciasDto {
     private Boolean peritaje;
     private List<HorariosAsistenciasDto> horasDeTrabajo;
     private Long tipo;
+    private List<PiezasAsistenciasDto> piezasReparacion;
 
     public Long getIdAsistencia() {
         return idAsistencia;
@@ -110,6 +111,14 @@ public class AsistenciasDto {
 
     public void setTipo(Long tipo) {
         this.tipo = tipo;
+    }
+
+    public List<PiezasAsistenciasDto> getPiezasReparacion() {
+        return piezasReparacion;
+    }
+
+    public void setPiezasReparacion(List<PiezasAsistenciasDto> piezasReparacion) {
+        this.piezasReparacion = piezasReparacion;
     }
 }
 

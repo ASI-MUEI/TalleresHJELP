@@ -260,3 +260,8 @@ INSERT INTO AsistenciaMecanico
 (idAsistencia, idMecanico)
 VALUES
 (2, 3);
+
+INSERT INTO Pieza
+(idPieza, nombre, descripcion)
+VALUES
+(1, 'Tubo de escape', 'Tubo de escape descripcion')

@@ -4,6 +4,7 @@ import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
+import com.figueiras.photocontest.backend.model.exceptions.StateErrorException;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 
@@ -27,4 +28,8 @@ public interface ServicioTaller {
     ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha);
     TipoAsistencias crearTipoAsistencia(String nombre, String descripcion);
     Slice<TipoAsistencias> getTipoAssitencias();
+    List<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException;
+    Asistencia asignarAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;
+    Asistencia deleteAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;
+    String getFactura(Long idTrabajo) throws InstanceNotFoundException, StateErrorException;
 }

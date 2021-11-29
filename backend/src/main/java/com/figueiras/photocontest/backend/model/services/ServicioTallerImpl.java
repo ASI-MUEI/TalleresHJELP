@@ -5,6 +5,7 @@ import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
+import com.figueiras.photocontest.backend.model.exceptions.StateErrorException;
 import com.figueiras.photocontest.backend.rest.conversor.TallerConversor;
 import com.figueiras.photocontest.backend.rest.conversor.UsuarioConversor;
 import com.figueiras.photocontest.backend.rest.dtos.*;
@@ -38,6 +39,9 @@ public class ServicioTallerImpl implements ServicioTaller{
     private AsistenciaHorarioDao asistenciaHorarioDao;
 
     @Autowired
+    private AsistenciaPiezaDao asistenciaPiezaDao;
+
+    @Autowired
     private EstadoTrabajosDao estadoTrabajosDao;
 
     @Autowired
@@ -45,6 +49,9 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Autowired
     private TipoAsistenciasDao tipoAsistenciasDao;
+
+    @Autowired
+    private PiezaDao piezaDao;
 
     @Autowired
     private TrabajoDao trabajoDao;
@@ -152,6 +159,10 @@ public class ServicioTallerImpl implements ServicioTaller{
             asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getId()));
         }
 
+        for (PiezasAsistenciasDto pieza : asistenciasDto.getPiezasReparacion()) {
+            asistenciaPiezaDao.save(new AsistenciaPieza(asistencia.getIdAsistencia(),pieza.getId()));
+        }
+
         return asistencia;
     }
 
@@ -201,6 +212,105 @@ public class ServicioTallerImpl implements ServicioTaller{
     @Override
     public Slice<TipoAsistencias> getTipoAssitencias(){
         return tipoAsistenciasDao.findAll(PageRequest.of(1000,1000));
+    }
+
+    @Override
+    public List<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException {
+        Optional<Asistencia> asistenciaOpt = asistenciaDao.findById(idAsistencia);
+        if (asistenciaOpt.isEmpty())
+            throw new InstanceNotFoundException("entidades.asistencia.idAsistencia", idAsistencia);
+        Slice<Pieza> piezas = asistenciaPiezaDao.findPiezasByIdAsistencia(idAsistencia, PageRequest.of(page, size));
+        List<Pieza> piezasList = new ArrayList<>();
+        for (Pieza pieza : piezas){
+            piezasList.add(pieza);
+        }
+        return piezasList;
+    }
+
+    @Override
+    public Asistencia asignarAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException {
+        Optional<Asistencia> asisOptional = asistenciaDao.findById(asistenciaNuevaPiezaDto.getIdAsistencia());
+        if(asisOptional.isEmpty()){
+            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", asistenciaNuevaPiezaDto.getIdAsistencia());
+        }
+
+        Optional<Pieza> pieza = piezaDao.findById(asistenciaNuevaPiezaDto.getIdPieza());
+        if(pieza.isEmpty()){
+            throw new InstanceNotFoundException("entidades.pieza.idpieza", asistenciaNuevaPiezaDto.getIdPieza());
+        }
+
+        Asistencia asistencia = asisOptional.get();
+        List<Pieza> piezas = asistencia.getPiezas();
+        piezas.add(pieza.get());
+        asistencia.setPiezas(piezas);
+        asistenciaDao.save(asistencia);
+
+        return asistencia;
+    }
+
+    @Override
+    public Asistencia deleteAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException {
+        Optional<Asistencia> asisOptional = asistenciaDao.findById(asistenciaNuevaPiezaDto.getIdAsistencia());
+        if(asisOptional.isEmpty()){
+            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", asistenciaNuevaPiezaDto.getIdAsistencia());
+        }
+
+        Optional<Pieza> pieza = asistenciaPiezaDao.findByIdPieza(asistenciaNuevaPiezaDto.getIdPieza());
+        if(pieza.isEmpty()){
+            throw new InstanceNotFoundException("entidades.asistenciaPieza.idPieza", asistenciaNuevaPiezaDto.getIdPieza());
+        }
+
+        Asistencia asistencia = asisOptional.get();
+        List<Pieza> piezas = asistencia.getPiezas();
+        piezas.remove(pieza.get());
+        asistencia.setPiezas(piezas);
+        asistenciaDao.save(asistencia);
+
+        return asistencia;
+    }
+
+    @Override
+    public String getFactura(Long idTrabajo) throws InstanceNotFoundException, StateErrorException {
+        Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
+        if (trabajoOpt.isEmpty())
+            throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", idTrabajo);
+
+        if (trabajoOpt.get().getEstado().getIdEstado() != 2){
+            throw new StateErrorException("entidades.trabajo.estado", trabajoOpt.get().getEstado().getNombre());
+        }
+
+        StringBuilder factura = new StringBuilder();
+        List<Asistencia> asistencias = asistenciaDao.findByIdTrabajo(idTrabajo);
+        for (Asistencia asistencia : asistencias){
+            factura.append("Asistencia ").append(asistencia.getIdAsistencia()).append(":").append(asistencia.getDescripcion()).append("\n");
+            factura.append("Duración: ").append(asistencia.getDuracionEstimada());
+            factura.append("Precio").append(asistencia.getPrecio()).append("\n");
+            if (!asistencia.getPiezas().isEmpty()){
+                factura.append("Piezas utilizadas:\n");
+                for (Pieza pieza : asistencia.getPiezas()){
+                    factura.append("Pieza: ").append(pieza.getNombre()).append("\n");
+                }
+            }
+        }
+
+        /*try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A6);
+            document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Text
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 32);
+            contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 52);
+            contentStream.showText("Hello World!");
+            contentStream.endText();
+
+            contentStream.close();
+
+            document.save("document.pdf");
+        }*/
+        return factura.toString();
     }
 
     @Override

@@ -11,13 +11,12 @@ public class ListarReparacionesDto {
     private Float precio;
     private List<MecanicoAsistenciaDto> mecanicos;
     private String descripción;
+    private List<PiezasAsistenciasDto> piezasReparacion;
 
     public ListarReparacionesDto() {
     }
 
-    public ListarReparacionesDto(Long idReparacion, Long fecha, Long duracionEstimada, Long idElevador,
-                                 String nombreElevador, Float precio, List<MecanicoAsistenciaDto> mecanicos,
-                                 String descripción) {
+    public ListarReparacionesDto(Long idReparacion, Long fecha, Long duracionEstimada, Long idElevador, String nombreElevador, Float precio, List<MecanicoAsistenciaDto> mecanicos, String descripción, List<PiezasAsistenciasDto> piezasReparacion) {
         this.idReparacion = idReparacion;
         this.fecha = fecha;
         this.duracionEstimada = duracionEstimada;
@@ -26,6 +25,7 @@ public class ListarReparacionesDto {
         this.precio = precio;
         this.mecanicos = mecanicos;
         this.descripción = descripción;
+        this.piezasReparacion = piezasReparacion;
     }
 
     public Long getIdReparacion() {
@@ -90,5 +90,13 @@ public class ListarReparacionesDto {
 
     public void setDescripción(String descripción) {
         this.descripción = descripción;
+    }
+
+    public List<PiezasAsistenciasDto> getPiezasReparacion() {
+        return piezasReparacion;
+    }
+
+    public void setPiezasReparacion(List<PiezasAsistenciasDto> piezasReparacion) {
+        this.piezasReparacion = piezasReparacion;
     }
 }

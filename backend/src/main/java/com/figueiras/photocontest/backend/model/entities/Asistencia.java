@@ -17,6 +17,7 @@ public class Asistencia {
     private Long duracionEstimada;
     private Boolean peritaje;
     private String descripcion;
+    private List<Pieza> piezas;
 
     public Asistencia() {
     }
@@ -63,6 +64,20 @@ public class Asistencia {
 
     public void setMecanicos(List<Usuario> mecanicos) {
         this.mecanicos = mecanicos;
+    }
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "AsistenciaPiezas",
+            joinColumns = { @JoinColumn(name = "idAsistencia") },
+            inverseJoinColumns = { @JoinColumn(name = "idPieza") }
+    )
+    public List<Pieza> getPiezas() {
+        return piezas;
+    }
+
+    public void setPiezas(List<Pieza> piezas) {
+        this.piezas = piezas;
     }
 
     @ManyToMany(cascade = { CascadeType.ALL })

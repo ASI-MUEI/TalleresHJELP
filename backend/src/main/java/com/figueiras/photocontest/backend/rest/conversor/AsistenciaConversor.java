@@ -2,6 +2,7 @@ package com.figueiras.photocontest.backend.rest.conversor;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
 import com.figueiras.photocontest.backend.model.entities.Horarios;
+import com.figueiras.photocontest.backend.model.entities.Pieza;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 
@@ -28,12 +29,13 @@ public class AsistenciaConversor {
             mecanicosDto.add(mecanicoDto);
         }
         resultado.setMecanicos(mecanicosDto);
-        //resultado.setTipo(asistencia.getTipo().getIdTipo());
+        resultado.setTipo(asistencia.getTipo().getIdTipo());
         resultado.setPeritaje(asistencia.getPeritaje());
         resultado.setDuracionEstimada(asistencia.getDuracionEstimada());
         resultado.setDescripcion(asistencia.getDescripcion());
         resultado.setPrecio(asistencia.getPrecio());
         resultado.setIdAsistencia(asistencia.getIdAsistencia());
+        resultado.setPiezasReparacion(toPiezasReparacion(asistencia.getPiezas()));
 
         return resultado;
     }
@@ -58,8 +60,18 @@ public class AsistenciaConversor {
         resultado.setFecha(asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
         resultado.setPrecio(asistencia.getPrecio());
         resultado.setDuracionEstimada(asistencia.getDuracionEstimada());
+        resultado.setPiezasReparacion(toPiezasReparacion(asistencia.getPiezas()));
 
         return resultado;
+    }
+
+    public static List<PiezasAsistenciasDto> toPiezasReparacion(List<Pieza> piezas){
+        List<PiezasAsistenciasDto> piezasAsistencia = new ArrayList<>();
+        for (Pieza pieza : piezas){
+            piezasAsistencia.add(new PiezasAsistenciasDto(pieza.getIdPieza(), pieza.getNombre()));
+        }
+
+        return piezasAsistencia;
     }
 
     private static List<MecanicoAsistenciaDto> toMecanicosAsistenciaDto(List<Usuario> usuarios){
@@ -84,6 +96,6 @@ public class AsistenciaConversor {
                 asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
                 asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion(),
                 asistencia.getTrabajo().getVehiculo().getMatricula(), asistencia.getTrabajo().getVehiculo().getUsuario().getNombreUsuario(),
-                asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario());
+                asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario(), toPiezasReparacion(asistencia.getPiezas()));
     }
 }

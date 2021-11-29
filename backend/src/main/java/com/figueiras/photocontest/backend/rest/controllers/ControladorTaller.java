@@ -7,6 +7,7 @@ import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
+import com.figueiras.photocontest.backend.model.exceptions.StateErrorException;
 import com.figueiras.photocontest.backend.model.services.Block;
 import com.figueiras.photocontest.backend.model.services.ServicioTaller;
 import com.figueiras.photocontest.backend.rest.conversor.AsistenciaConversor;
@@ -57,6 +58,24 @@ public class ControladorTaller {
     public Block<Asistencia> recuperarAsistencias(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "5") int size) {
         return servicioTaller.findAllAsistencias(page, size);
+    }
+
+    @GetMapping("/asistencias/{idAsistencia}/piezas")
+    public List<PiezasAsistenciasDto> recuperarPiezasByReparacion(@PathVariable Long idAsistencia, @RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "5") int size) throws InstanceNotFoundException {
+        return AsistenciaConversor.toPiezasReparacion(servicioTaller.getPiezasByAsistencia(idAsistencia, page, size));
+    }
+
+    @PutMapping("/asistencias/updatePieza")
+    public Asistencia anadirPiezasReparacion(@RequestBody AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto)
+            throws InstanceNotFoundException {
+        return servicioTaller.asignarAsistenciaPieza(asistenciaNuevaPiezaDto);
+    }
+
+    @PutMapping("/asistencias/removePieza")
+    public Asistencia eliminarPiezasReparacion(@RequestBody AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto)
+            throws InstanceNotFoundException {
+        return servicioTaller.deleteAsistenciaPieza(asistenciaNuevaPiezaDto);
     }
 
     @GetMapping("/asistencias/{fecha}")
@@ -139,4 +158,10 @@ public class ControladorTaller {
     public Slice<TipoAsistencias> getTiposTarea() {
         return servicioTaller.getTipoAssitencias();
     }
+
+    @GetMapping("/factura/{idTrabajo}")
+    public String getFactura(@PathVariable Long idTrabajo) throws StateErrorException, InstanceNotFoundException {
+        return servicioTaller.getFactura(idTrabajo);
+    }
+
 }

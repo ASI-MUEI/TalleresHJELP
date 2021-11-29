@@ -16,10 +16,11 @@ public class AsistenciaCompletaDto {
     private String matricula;
     private String nombreCliente;
     private Long idCliente;
+    private List<PiezasAsistenciasDto> piezasReparacion;
 
     public AsistenciaCompletaDto() {}
 
-    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, Long fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente) {
+    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, Long fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente, List<PiezasAsistenciasDto> piezasReparacion) {
         this.idAsistencia = idAsistencia;
         this.elevador = elevador;
         this.mecanicos = mecanicos;
@@ -33,6 +34,7 @@ public class AsistenciaCompletaDto {
         this.matricula = matricula;
         this.nombreCliente = nombreCliente;
         this.idCliente = idCliente;
+        this.piezasReparacion = piezasReparacion;
     }
 
     public Long getIdAsistencia() {
@@ -137,5 +139,13 @@ public class AsistenciaCompletaDto {
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public List<PiezasAsistenciasDto> getPiezasReparacion() {
+        return piezasReparacion;
+    }
+
+    public void setPiezasReparacion(List<PiezasAsistenciasDto> piezasReparacion) {
+        this.piezasReparacion = piezasReparacion;
     }
 }
