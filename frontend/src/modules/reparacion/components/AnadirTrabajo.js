@@ -16,7 +16,7 @@ const AnadirTrabajo = () => {
     const [matricula, setMatricula] = useState("")
     const [descripcion, setDescripcion] = useState("")
     const [listaMatricula, setListaMatricula] = useState([])
-    const [peritaje, setPeritaje] = useState("")
+    const [peritado, setPeritado] = useState(false)
     const [backendErrors, setBackendErrors] = useState()
 
     const handleSubmit = event => {
@@ -27,7 +27,7 @@ const AnadirTrabajo = () => {
                 nombre: nombreTrabajo,
                 descripcion,
                 matricula,
-                //TODO: enviar peritaje.
+                peritado
             },
             () => history.push("/horario"),
             errors => setBackendErrors(errors)
@@ -67,7 +67,8 @@ const AnadirTrabajo = () => {
                     <Form.Check
                         type="checkbox"
                         label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
-                        value={peritaje}
+                        value={peritado}
+                        onClick={event => setPeritado(!peritado)}
                     />
                 </div>
                 <br/>
