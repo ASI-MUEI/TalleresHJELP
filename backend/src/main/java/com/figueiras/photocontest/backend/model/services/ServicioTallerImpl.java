@@ -11,7 +11,9 @@ import com.figueiras.photocontest.backend.rest.conversor.UsuarioConversor;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -160,7 +162,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         }
 
         for (PiezasAsistenciasDto pieza : asistenciasDto.getPiezasReparacion()) {
-            asistenciaPiezaDao.save(new AsistenciaPieza(asistencia.getIdAsistencia(),pieza.getId()));
+            asistenciaPiezaDao.save(new AsistenciaPieza(asistencia.getIdAsistencia(),pieza.getIdPieza()));
         }
 
         return asistencia;
@@ -215,16 +217,24 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public List<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException {
+    public Slice<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException {
         Optional<Asistencia> asistenciaOpt = asistenciaDao.findById(idAsistencia);
         if (asistenciaOpt.isEmpty())
             throw new InstanceNotFoundException("entidades.asistencia.idAsistencia", idAsistencia);
-        Slice<Pieza> piezas = asistenciaPiezaDao.findPiezasByIdAsistencia(idAsistencia, PageRequest.of(page, size));
-        List<Pieza> piezasList = new ArrayList<>();
-        for (Pieza pieza : piezas){
-            piezasList.add(pieza);
+        Slice<AsistenciaPieza> piezas = asistenciaPiezaDao.findPiezasByIdAsistencia(idAsistencia, PageRequest.of(page, size));
+
+        List<Pieza> listadoPiezas = new ArrayList<>();
+        for (AsistenciaPieza ap: piezas) {
+            Optional<Pieza> p = piezaDao.findById(ap.getIdPieza());
+            if(p.isPresent()){
+                listadoPiezas.add(p.get());
+            }
         }
-        return piezasList;
+
+        Pageable p = PageRequest.of(1,5);
+        Slice<Pieza> resultado = new SliceImpl<>(listadoPiezas, p, piezas.hasNext());
+
+        return resultado;
     }
 
     @Override
@@ -241,9 +251,23 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         Asistencia asistencia = asisOptional.get();
         List<Pieza> piezas = asistencia.getPiezas();
-        piezas.add(pieza.get());
-        asistencia.setPiezas(piezas);
-        asistenciaDao.save(asistencia);
+        if(piezas.contains(pieza.get())){
+            Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(pieza.get().getIdPieza(), asistencia.getIdAsistencia());
+            if(apOpt.isPresent()){
+                AsistenciaPieza ap = apOpt.get();
+                ap.setNumeroUnidades(ap.getNumeroUnidades() + asistenciaNuevaPiezaDto.getNumeroPiezas());
+                asistenciaPiezaDao.save(ap);
+            }
+        }else{
+            AsistenciaPieza nuevaAp = new AsistenciaPieza();
+            nuevaAp.setIdPieza(pieza.get().getIdPieza());
+            nuevaAp.setIdAsistencia(asistencia.getIdAsistencia());
+            nuevaAp.setNumeroUnidades(asistenciaNuevaPiezaDto.getNumeroPiezas());
+            asistenciaPiezaDao.save(nuevaAp);
+            //piezas.add(pieza.get());
+            //asistencia.setPiezas(piezas);
+            //asistenciaDao.save(asistencia);
+        }
 
         return asistencia;
     }
@@ -255,9 +279,14 @@ public class ServicioTallerImpl implements ServicioTaller{
             throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", asistenciaNuevaPiezaDto.getIdAsistencia());
         }
 
-        Optional<Pieza> pieza = asistenciaPiezaDao.findByIdPieza(asistenciaNuevaPiezaDto.getIdPieza());
+        Optional<Pieza> pieza = piezaDao.findById(asistenciaNuevaPiezaDto.getIdPieza());
         if(pieza.isEmpty()){
             throw new InstanceNotFoundException("entidades.asistenciaPieza.idPieza", asistenciaNuevaPiezaDto.getIdPieza());
+        }
+
+        Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(asistenciaNuevaPiezaDto.getIdPieza(), asistenciaNuevaPiezaDto.getIdAsistencia());
+        if(apOpt.isPresent()){
+            asistenciaPiezaDao.delete(apOpt.get());
         }
 
         Asistencia asistencia = asisOptional.get();
@@ -425,6 +454,48 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         List<Asistencia> listaResultado = Arrays.asList(resultado);
         return listaResultado;
+    }
+
+    public List<PiezasAsistenciasDto> getNumeroUnidadesPiezaAsistencia(List<PiezasAsistenciasDto> asistenciaPiezasDto, Long idAsistencia){
+        for (PiezasAsistenciasDto paDto: asistenciaPiezasDto) {
+            Long idPieza = paDto.getIdPieza();
+            Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(idPieza, idAsistencia);
+            if(apOpt.isPresent()){
+                Long numUnidades = apOpt.get().getNumeroUnidades();
+                paDto.setNumeroUnidades(numUnidades);
+                paDto.setIdAsistencia(idAsistencia);
+            }
+        }
+
+        return asistenciaPiezasDto;
+    }
+
+    @Override
+    public List<PiezasAsistenciasDto> getAllPiezas() {
+        List<Pieza> piezas = (List<Pieza>) piezaDao.findAll();
+        List<PiezasAsistenciasDto> resultado = new ArrayList<>();
+        for (Pieza p : piezas) {
+            PiezasAsistenciasDto paDto = new PiezasAsistenciasDto();
+            paDto.setIdPieza(p.getIdPieza());
+            paDto.setNombre(p.getNombre());
+            resultado.add(paDto);
+        }
+        return resultado;
+    }
+
+    @Override
+    public void cambiarRetraso(Long idAsistencia, String motivo) {
+        Optional<Asistencia> aOpt = asistenciaDao.findById(idAsistencia);
+        if(aOpt.isPresent()){
+            Asistencia a = aOpt.get();
+            if(!motivo.equals("\"null\"")){
+                a.setMotivoRetraso(motivo);
+                a.setRetrasada(true);
+            }else{
+                a.setRetrasada(false);
+            }
+            asistenciaDao.save(a);
+        }
     }
 
     private int calcularIndiceInsercion(int elevador, int idranjaHoraria){

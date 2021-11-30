@@ -5,6 +5,7 @@ import java.util.List;
 public class AsistenciaCompletaDto {
     private Long idAsistencia;
     private Long elevador;
+    private String nombreElevador;
     private List<MecanicoAsistenciaDto> mecanicos;
     private List<HorariosAsistenciasDto> horarios;
     private Long fecha;
@@ -17,6 +18,11 @@ public class AsistenciaCompletaDto {
     private String nombreCliente;
     private Long idCliente;
     private List<PiezasAsistenciasDto> piezasReparacion;
+    private String modeloDeVehiculo;
+    private String manualVehiculo;
+    private String tipoReparacion;
+    private Boolean retrasada;
+
 
     public AsistenciaCompletaDto() {}
 
@@ -147,5 +153,45 @@ public class AsistenciaCompletaDto {
 
     public void setPiezasReparacion(List<PiezasAsistenciasDto> piezasReparacion) {
         this.piezasReparacion = piezasReparacion;
+    }
+
+    public String getNombreElevador() {
+        return nombreElevador;
+    }
+
+    public void setNombreElevador(String nombreElevador) {
+        this.nombreElevador = nombreElevador;
+    }
+
+    public String getModeloDeVehiculo() {
+        return modeloDeVehiculo;
+    }
+
+    public void setModeloDeVehiculo(String modeloDeVehiculo) {
+        this.modeloDeVehiculo = modeloDeVehiculo;
+    }
+
+    public String getManualVehiculo() {
+        return manualVehiculo;
+    }
+
+    public void setManualVehiculo(String manualVehiculo) {
+        this.manualVehiculo = manualVehiculo;
+    }
+
+    public String getTipoReparacion() {
+        return tipoReparacion;
+    }
+
+    public void setTipoReparacion(String tipoReparacion) {
+        this.tipoReparacion = tipoReparacion;
+    }
+
+    public Boolean getRetrasada() {
+        return retrasada;
+    }
+
+    public void setRetrasada(Boolean retrasada) {
+        this.retrasada = retrasada;
     }
 }

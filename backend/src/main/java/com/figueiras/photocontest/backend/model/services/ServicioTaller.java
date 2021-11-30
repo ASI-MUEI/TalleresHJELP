@@ -28,8 +28,11 @@ public interface ServicioTaller {
     ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha);
     TipoAsistencias crearTipoAsistencia(String nombre, String descripcion);
     Slice<TipoAsistencias> getTipoAssitencias();
-    List<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException;
+    Slice<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException;
     Asistencia asignarAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;
     Asistencia deleteAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;
     String getFactura(Long idTrabajo) throws InstanceNotFoundException, StateErrorException;
+    List<PiezasAsistenciasDto> getNumeroUnidadesPiezaAsistencia(List<PiezasAsistenciasDto> asistenciaPiezasDto, Long idAsistencia);
+    List<PiezasAsistenciasDto> getAllPiezas();
+    void cambiarRetraso(Long idAsistencia, String motivo);
 }

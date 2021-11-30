@@ -202,6 +202,7 @@ export default {
     'piezaReparacion.eliminar' : 'Eliminar',
 
     'crearRetraso.titulo' : 'Marcar reparacion como retrasada',
+    'reparacion.marcarNoRetrasada' : 'Marcar como en curso',
     'crearRetraso.motivo' : 'Motivo del retraso',
 
 }

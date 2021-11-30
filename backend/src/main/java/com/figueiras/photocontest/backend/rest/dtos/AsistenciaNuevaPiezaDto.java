@@ -3,6 +3,7 @@ package com.figueiras.photocontest.backend.rest.dtos;
 public class AsistenciaNuevaPiezaDto {
     private Long idAsistencia;
     private Long idPieza;
+    private Long numeroPiezas;
 
     public AsistenciaNuevaPiezaDto(Long idAsistencia, Long idPieza) {
         this.idAsistencia = idAsistencia;
@@ -23,5 +24,13 @@ public class AsistenciaNuevaPiezaDto {
 
     public void setIdPieza(Long idPieza) {
         this.idPieza = idPieza;
+    }
+
+    public Long getNumeroPiezas() {
+        return numeroPiezas;
+    }
+
+    public void setNumeroPiezas(Long numeroPiezas) {
+        this.numeroPiezas = numeroPiezas;
     }
 }

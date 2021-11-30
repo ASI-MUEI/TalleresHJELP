@@ -69,7 +69,7 @@ public class AsistenciaConversor {
     public static List<PiezasAsistenciasDto> toPiezasReparacion(List<Pieza> piezas){
         List<PiezasAsistenciasDto> piezasAsistencia = new ArrayList<>();
         for (Pieza pieza : piezas){
-            piezasAsistencia.add(new PiezasAsistenciasDto(pieza.getIdPieza(), pieza.getNombre()));
+            piezasAsistencia.add(new PiezasAsistenciasDto(pieza.getIdPieza(), pieza.getNombre(), pieza.getManual(), pieza.getPrecio()));
         }
 
         return piezasAsistencia;
@@ -92,11 +92,18 @@ public class AsistenciaConversor {
     }
 
     public static AsistenciaCompletaDto toAsistenciaCompletaDto(Asistencia asistencia){
-        return new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuesto(),
+        AsistenciaCompletaDto acDto = new AsistenciaCompletaDto(asistencia.getIdAsistencia(), asistencia.getPuesto().getIdPuesto(),
                 toMecanicosAsistenciaDto(asistencia.getMecanicos()), toHorariosAsistenciaDto(asistencia.getHorarios()),
                 asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
                 asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion(),
                 asistencia.getTrabajo().getVehiculo().getMatricula(), asistencia.getTrabajo().getVehiculo().getUsuario().getNombreUsuario(),
                 asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario(), toPiezasReparacion(asistencia.getPiezas()));
+        acDto.setTipoReparacion(asistencia.getTipo().getNombre());
+        acDto.setModeloDeVehiculo(asistencia.getTrabajo().getVehiculo().getModelo().getNombre());
+        acDto.setManualVehiculo(asistencia.getTrabajo().getVehiculo().getModelo().getManual());
+        acDto.setNombreElevador(asistencia.getPuesto().getNombre());
+        acDto.setRetrasada(asistencia.getRetrasada());
+
+        return acDto;
     }
 }

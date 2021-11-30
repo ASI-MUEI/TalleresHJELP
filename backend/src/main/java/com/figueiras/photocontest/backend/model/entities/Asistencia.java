@@ -18,6 +18,8 @@ public class Asistencia {
     private Boolean peritaje;
     private String descripcion;
     private List<Pieza> piezas;
+    private Boolean retrasada;
+    private String motivoRetraso;
 
     public Asistencia() {
     }
@@ -142,5 +144,21 @@ public class Asistencia {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Boolean getRetrasada() {
+        return retrasada;
+    }
+
+    public void setRetrasada(Boolean retrasada) {
+        this.retrasada = retrasada;
+    }
+
+    public String getMotivoRetraso() {
+        return motivoRetraso;
+    }
+
+    public void setMotivoRetraso(String motivoRetraso) {
+        this.motivoRetraso = motivoRetraso;
     }
 }

@@ -6,6 +6,7 @@ import Pager from "../../commons/components/Pager"
 import backend from "../../../backend"
 import {useParams} from "react-router";
 import Reparaciones from "./Reparaciones";
+import PartesReparacion from "./PartesReparacion";
 
 
 const BuscarPartesReparacion = ({idReparacion}) => {
@@ -18,7 +19,12 @@ const BuscarPartesReparacion = ({idReparacion}) => {
     const size = 5
 
     useEffect(() => {
-        //TODO: método que recupera todas las partes de una reparacion.
+        backend.tallerService.buscarPiezasReparacion(
+            idReparacion,
+            page,
+            size,
+            result => setPartesReparacion(result)
+        )
         // eslint-disable-next-line
     }, [page])
 
@@ -52,8 +58,9 @@ const BuscarPartesReparacion = ({idReparacion}) => {
     }
 
     return (
+
         <div>
-            <Reparaciones listaReparaciones={partesReparacion.items}/>
+            <PartesReparacion listaPartes={partesReparacion.items}/>
             <Pager
                 back={{
                     enabled: page >= 1,

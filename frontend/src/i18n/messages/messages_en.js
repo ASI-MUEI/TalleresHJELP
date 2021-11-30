@@ -143,6 +143,7 @@ export default {
     'reparacion.modeloVehiculo' : 'Car model',
     'reparacion.elevador' : 'Elevator',
     'reparacion.marcarRetrasada' : 'Set as delayed',
+    'reparacion.marcarNoRetrasada' : 'Set as on course',
     'reparacion.verManual' : 'See car manual',
     'reparacion.listadoPiezas' : 'Parts list',
     'reparacion.añadirPieza' : 'Add part',

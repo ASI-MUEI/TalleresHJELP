@@ -7,9 +7,10 @@ import javax.persistence.Id;
 
 @Entity
 public class AsistenciaPieza {
-    private Long idAsistenciaHorario;
+    private Long idAsistenciaPieza;
     private Long idAsistencia;
     private Long idPieza;
+    private Long numeroUnidades;
 
     public AsistenciaPieza() {
     }
@@ -21,12 +22,12 @@ public class AsistenciaPieza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getIdAsistenciaHorario() {
-        return idAsistenciaHorario;
+    public Long getIdAsistenciaPieza() {
+        return idAsistenciaPieza;
     }
 
-    public void setIdAsistenciaHorario(Long idAsistenciaHorario) {
-        this.idAsistenciaHorario = idAsistenciaHorario;
+    public void setIdAsistenciaPieza(Long idAsistenciaPieza) {
+        this.idAsistenciaPieza = idAsistenciaPieza;
     }
 
     public Long getIdAsistencia() {
@@ -43,6 +44,14 @@ public class AsistenciaPieza {
 
     public void setIdPieza(Long idHorario) {
         this.idPieza = idHorario;
+    }
+
+    public Long getNumeroUnidades() {
+        return numeroUnidades;
+    }
+
+    public void setNumeroUnidades(Long numeroUnidades) {
+        this.numeroUnidades = numeroUnidades;
     }
 }
 

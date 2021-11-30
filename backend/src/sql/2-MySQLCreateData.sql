@@ -127,24 +127,24 @@ VALUES
 -- Insercion de modelos
 
 INSERT INTO Modelo
-(idModelo, nombre, descripcion, idMarca, idDocumento)
+(idModelo, nombre, descripcion, idMarca, manual)
 VALUES
-(1, 'Serie 1', 'Hatchback de la marca de Babaria', 1, NULL);
+(1, 'Serie 1', 'Hatchback de la marca de Babaria', 1, 'https://www.manualpdf.es/bmw/1-series-2009/manual');
 
 INSERT INTO Modelo
-(idModelo, nombre, descripcion, idMarca, idDocumento)
+(idModelo, nombre, descripcion, idMarca, manual)
 VALUES
-(2, 'A3', 'Hatchback de la marca Audi', 2, NULL);
+(2, 'A3', 'Hatchback de la marca Audi', 2, 'https://www.manualpdf.es/audi/a3-2019/manual');
 
 INSERT INTO Vehiculo
 (idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
 VALUES
-(1, 2, 'VSSZZZ1MZ2R040807', '01234LLL', 1, NULL );
+(1, 2, 'VSSZZZ1MZ2R040807', '01234LLL', 1, NULL);
 
 INSERT INTO Vehiculo
 (idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
 VALUES
-(2, 5, 'AUDZZZ1MZ2R040807', '91234KLM', 2, NULL );
+(2, 5, 'AUDZZZ1MZ2R040807', '91234KLM', 2, NULL);
 
 -- INSERCION DE REPARACIONES
 
@@ -267,6 +267,11 @@ VALUES
 (2, 3);
 
 INSERT INTO Pieza
-(idPieza, nombre, descripcion)
+(idPieza, nombre, descripcion, manual, precio)
 VALUES
-(1, 'Tubo de escape', 'Tubo de escape descripcion')
+(1, 'Tubo de escape', 'Tubo de escape descripcion', 'https://www.amazon.es/Compartimiento-Colector-Yamaha-xt600-XT600E/dp/B01DVRGDDQ?ref_=Oct_d_omwf_d_2425134031&pd_rd_w=ZkbDT&pf_rd_p=dbaa2a38-774d-404a-bd20-b06321c0935b&pf_rd_r=VAN0MP7RSJ08R5AS0NE0&pd_rd_r=eadc2bfd-126b-4f3d-8357-f19bbe639d76&pd_rd_wg=w2hug&pd_rd_i=B01DVRGDDQ', 150);
+
+INSERT INTO AsistenciaPieza
+(idAsistenciaPieza, idAsistencia, idPieza, numeroUnidades)
+VALUES
+(1, 1, 1, 1);

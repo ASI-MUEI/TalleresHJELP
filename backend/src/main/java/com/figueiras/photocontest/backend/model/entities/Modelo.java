@@ -9,6 +9,7 @@ public class Modelo {
     private String nombre;
     private String descripcion;
     private Marca marca;
+    private String manual;
 
     public Modelo() {
     }
@@ -48,4 +49,13 @@ public class Modelo {
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
+
+    public String getManual() {
+        return manual;
+    }
+
+    public void setManual(String manual) {
+        this.manual = manual;
+    }
+
 }

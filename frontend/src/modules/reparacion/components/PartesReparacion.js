@@ -1,10 +1,19 @@
-import {FormattedDate, FormattedMessage} from "react-intl";
+import {FormattedMessage} from "react-intl";
 import {Link} from "react-router-dom";
+import backend from "../../../backend"
+
 
 const PartesReparacion = ({listaPartes}) => {
 
-    const eliminarReparacion = (idPieza, idReparacion) => {
-        //TODO: método que elimina una pieza de una reparacion
+
+    const eliminarParteReparacion = (idAsistencia, idPieza) => {
+        backend.tallerService.eliminarPiezaAsistencia(
+            {
+                idAsistencia: idAsistencia,
+                idPieza: idPieza
+            }
+        )
+        window.location.reload()
     }
 
     return (
@@ -24,6 +33,9 @@ const PartesReparacion = ({listaPartes}) => {
                     <FormattedMessage id='piezaReparacion.manual'/>
                 </th>
                 <th scope="col">
+                    <FormattedMessage id='reparacion.precio'/>
+                </th>
+                <th scope="col">
                     <FormattedMessage id='piezaReparacion.eliminar'/>
                 </th>
             </tr>
@@ -31,9 +43,9 @@ const PartesReparacion = ({listaPartes}) => {
 
             <tbody>
             {listaPartes.map(pieza =>
-                <tr key={pieza.idPiezaReparacion}>
+                <tr key={pieza.idPieza}>
                     <td>
-                        {pieza.idPiezaReparacion}
+                        {pieza.idPieza}
                     </td>
                     <td>
                         {pieza.nombre}
@@ -42,10 +54,13 @@ const PartesReparacion = ({listaPartes}) => {
                         {pieza.numeroUnidades}
                     </td>
                     <td>
-                        <a href={pieza.manual}/>
+                        <a href={pieza.manual}>Ver manual</a>
                     </td>
                     <td>
-                        <Link onClick={eliminarReparacion(pieza.idPiezaReparacion, pieza.idReparacion)}> </Link>
+                        {pieza.precio}€
+                    </td>
+                    <td>
+                        <Link onClick={event => eliminarParteReparacion(pieza.idAsistencia, pieza.idPieza)}> Eliminar </Link>
                     </td>
                 </tr>
             )}

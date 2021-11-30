@@ -72,6 +72,13 @@ export const recuperarMatriculas = (onSuccess) => {
     appFetch(path, config('GET'), onSuccess);
 }
 
+export const buscarPiezasReparacion = (idAsistencia, page, size, onSuccess) => {
+
+    let path = `/taller/asistencias/${idAsistencia}/piezas?page=${page}&size=${size}`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
 //TODO: buscar lista de tipos de reparaciones
 
 export const crearTrabajo = (trabajoDto, onSuccess, onErrors) => {
@@ -79,4 +86,32 @@ export const crearTrabajo = (trabajoDto, onSuccess, onErrors) => {
     let path = `/taller/trabajo`;
 
     appFetch(path, config('POST', trabajoDto), onSuccess, onErrors);
+}
+
+export const getAllPiezas = (onSuccess) => {
+
+    let path = `/taller/piezas`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const asignarPiezaAsistencia = (nuevaAsistenciaPiezaDto, onSuccess) => {
+
+    let path = `/taller/asistencias/updatePieza`;
+
+    appFetch(path, config('PUT', nuevaAsistenciaPiezaDto), onSuccess);
+}
+
+export const eliminarPiezaAsistencia = (eliminarAsistenciaPiezaDto, onSuccess) => {
+
+    let path = `/taller/asistencias/removePieza`;
+
+    appFetch(path, config('PUT', eliminarAsistenciaPiezaDto), onSuccess);
+}
+
+export const cambiarRetraso = (idAsistencia, motivo, onSuccess) => {
+
+    let path = `/taller/asistencia/${idAsistencia}/update/retraso`;
+
+    appFetch(path, config('PUT', motivo), onSuccess);
 }

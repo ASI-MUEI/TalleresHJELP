@@ -13,7 +13,6 @@ DROP TABLE Flota;
 DROP TABLE Modelo;
 DROP TABLE Marca;
 DROP TABLE Usuario;
-DROP TABLE Documento;
 DROP TABLE PuestoTaller;
 
 CREATE TABLE Usuario(
@@ -38,23 +37,14 @@ CREATE TABLE Marca(
   CONSTRAINT Marca_pk PRIMARY KEY(idMarca)
 );
 
-CREATE TABLE Documento(
-  idDocumento BIGINT NOT NULL AUTO_INCREMENT,
-  nombre VARCHAR(255),
-  descripcion VARCHAR(255),
-  localizacion VARCHAR(255),
-  CONSTRAINT Documento_pk PRIMARY KEY(idDocumento)
-);
-
 CREATE TABLE Modelo(
    idModelo BIGINT NOT NULL AUTO_INCREMENT,
    nombre VARCHAR(255),
    descripcion VARCHAR(255),
    idMarca BIGINT,
-   idDocumento BIGINT,
+   manual VARCHAR(1000),
    CONSTRAINT Modelo_pk PRIMARY KEY(idModelo),
-   CONSTRAINT Modelo_fk_marca FOREIGN KEY(idMarca) REFERENCES Marca(idMarca),
-   CONSTRAINT Modelo_fk_doc FOREIGN KEY(idDocumento) REFERENCES Documento(idDocumento)
+   CONSTRAINT Modelo_fk_marca FOREIGN KEY(idMarca) REFERENCES Marca(idMarca)
 );
 
 CREATE TABLE Flota(
@@ -129,6 +119,8 @@ CREATE TABLE Asistencia(
     duracionEstimada BIGINT,
     peritaje INT,
     descripcion VARCHAR(500),
+    retrasada TINYINT,
+    motivoRetraso VARCHAR(255),
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
     CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TipoAsistencias(idTipo),
     CONSTRAINT trabajo_fk FOREIGN KEY(idTrabajo) REFERENCES Trabajo(idTrabajo),
@@ -156,6 +148,8 @@ CREATE TABLE Pieza(
     idPieza BIGINT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(255),
     descripcion VARCHAR(255),
+    manual VARCHAR(1000),
+    precio DOUBLE,
     CONSTRAINT pieza_pk PRIMARY KEY(idPieza)
 );
 
@@ -163,6 +157,7 @@ CREATE TABLE AsistenciaPieza(
     idAsistenciaPieza BIGINT NOT NULL AUTO_INCREMENT,
     idAsistencia BIGINT NOT NULL,
     idPieza BIGINT NOT NULL,
+    numeroUnidades BIGINT,
     CONSTRAINT asistenciaPieza_pk PRIMARY KEY(idAsistenciaPieza),
     CONSTRAINT asistenciaPieza_idAsistencia_fk FOREIGN KEY(idAsistencia) REFERENCES Asistencia(idAsistencia),
     CONSTRAINT asistenciaPieza_idPieza_fk FOREIGN KEY(idPieza) REFERENCES Pieza(idPieza)

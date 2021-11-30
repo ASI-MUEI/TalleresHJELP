@@ -1,9 +1,6 @@
 package com.figueiras.photocontest.backend.rest.controllers;
 
-import com.figueiras.photocontest.backend.model.entities.Asistencia;
-import com.figueiras.photocontest.backend.model.entities.Horarios;
-import com.figueiras.photocontest.backend.model.entities.TipoAsistencias;
-import com.figueiras.photocontest.backend.model.entities.Trabajo;
+import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
@@ -61,9 +58,14 @@ public class ControladorTaller {
     }
 
     @GetMapping("/asistencias/{idAsistencia}/piezas")
-    public List<PiezasAsistenciasDto> recuperarPiezasByReparacion(@PathVariable Long idAsistencia, @RequestParam(defaultValue = "0") int page,
+    public Block<PiezasAsistenciasDto> recuperarPiezasByReparacion(@PathVariable Long idAsistencia, @RequestParam(defaultValue = "0") int page,
                                                   @RequestParam(defaultValue = "5") int size) throws InstanceNotFoundException {
-        return AsistenciaConversor.toPiezasReparacion(servicioTaller.getPiezasByAsistencia(idAsistencia, page, size));
+        Slice<Pieza> piezas = servicioTaller.getPiezasByAsistencia(idAsistencia, page, size);
+        List<PiezasAsistenciasDto> listaPiezas =  AsistenciaConversor.toPiezasReparacion(piezas.getContent());
+        List<PiezasAsistenciasDto> listaPiezasTransformadas = servicioTaller.getNumeroUnidadesPiezaAsistencia(listaPiezas, idAsistencia);
+        Block<PiezasAsistenciasDto> resultado = new Block<>(listaPiezasTransformadas, piezas.hasNext());
+
+        return resultado;
     }
 
     @PutMapping("/asistencias/updatePieza")
@@ -162,6 +164,18 @@ public class ControladorTaller {
     @GetMapping("/factura/{idTrabajo}")
     public String getFactura(@PathVariable Long idTrabajo) throws StateErrorException, InstanceNotFoundException {
         return servicioTaller.getFactura(idTrabajo);
+    }
+
+    @GetMapping("/piezas")
+    public List<PiezasAsistenciasDto> getPiezas(){
+        return servicioTaller.getAllPiezas();
+    }
+
+    @PutMapping("/asistencia/{idAsistencia}/update/retraso")
+    public ResponseEntity cambiarRetraso(@PathVariable Long idAsistencia, @RequestBody String motivo){
+        servicioTaller.cambiarRetraso(idAsistencia, motivo);
+
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }

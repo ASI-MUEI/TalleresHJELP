@@ -10,11 +10,15 @@ public class Pieza {
     private Long idPieza;
     private String nombre;
     private String descripcion;
+    private String manual;
+    private float precio;
 
-    public Pieza(Long idMarca, String nombre, String descripcion) {
-        this.idPieza = idMarca;
+    public Pieza(Long idPieza, String nombre, String descripcion, String manual, float precio) {
+        this.idPieza = idPieza;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.manual = manual;
+        this.precio = precio;
     }
 
     public Pieza() {
@@ -44,5 +48,21 @@ public class Pieza {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getManual() {
+        return manual;
+    }
+
+    public void setManual(String manual) {
+        this.manual = manual;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
 }
