@@ -83,7 +83,7 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         List<Vehiculo> vehs = vehiculoDao.findMatriculasByper();
         List<MatrículasDispPorPerDto> result = new ArrayList<>();
         for (Vehiculo vehiculo : vehs){
-            Slice<Trabajo> trabajos = trabajoDao.findByIdVehiculo(vehiculo.getIdVehiculo());
+            Slice<Trabajo> trabajos = trabajoDao.findAbiertosByIdVehiculo(vehiculo.getIdVehiculo());
             for (Trabajo trabajo: trabajos){
                 result.add(new MatrículasDispPorPerDto(vehiculo.getMatricula(), trabajo.getPeritado()));
             }
