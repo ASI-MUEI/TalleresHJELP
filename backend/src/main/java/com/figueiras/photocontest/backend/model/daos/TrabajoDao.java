@@ -14,4 +14,6 @@ public interface TrabajoDao extends PagingAndSortingRepository<Trabajo, Long> {
     Slice<Trabajo> findTrabajosOrderByFecha(Pageable pageable);
     @Query("SELECT a FROM Asistencia a WHERE a.trabajo.idTrabajo =:idTrabajo ORDER BY a.fecha ASC")
     Slice<Asistencia> findAsistenciasOrderByFecha(Long idTrabajo, Pageable pageable);
+    @Query("SELECT a FROM Trabajo a WHERE a.vehiculo.idVehiculo = :idVehiculo")
+    Slice<Trabajo> findByIdVehiculo(Long idVehiculo);
 }

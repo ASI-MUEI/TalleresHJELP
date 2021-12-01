@@ -124,9 +124,8 @@ public class ControladorTaller {
                                                    @RequestParam(defaultValue = "5") int size) {
         Slice<Asistencia> asistencias = servicioTaller.getAsistenciasOrderByFecha(idTrabajo, page, size);
         List<ListarReparacionesDto> reparacionesDto = AsistenciaConversor.toListarAsistenciasDto(asistencias.getContent());
-        Block<ListarReparacionesDto> resultado = new Block<>(reparacionesDto, asistencias.hasNext());
 
-        return resultado;
+        return new Block<>(reparacionesDto, asistencias.hasNext());
     }
 
     @GetMapping("/trabajo/{idTrabajo}")
@@ -172,9 +171,22 @@ public class ControladorTaller {
     }
 
     @PutMapping("/asistencia/{idAsistencia}/update/retraso")
-    public ResponseEntity cambiarRetraso(@PathVariable Long idAsistencia, @RequestBody String motivo){
+    public ResponseEntity cambiarRetraso(@PathVariable Long idAsistencia, @RequestBody String motivo) throws InstanceNotFoundException, CampoVacioException {
         servicioTaller.cambiarRetraso(idAsistencia, motivo);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
 
+    @GetMapping("/asistencias/retrasadas")
+    public Block<AsistenciaCompletaDto> getAsistenciasRetrasadas(@RequestParam(defaultValue = "0") int page,
+                                                                @RequestParam(defaultValue = "5") int size){
+        Slice<Asistencia> asistencias = servicioTaller.getAsistenciasRetrasadas(page, size);
+        List<AsistenciaCompletaDto> asistenciasList = AsistenciaConversor.toListAsistenciaCompletaDto(asistencias);
+        return new Block<>(asistenciasList, asistencias.hasNext());
+    }
+
+    @PutMapping("/trabajo/{idTrabajo}/estado")
+    public ResponseEntity cambiarEstadoTrabajo(@PathVariable Long idTrabajo, @RequestParam Long estado) throws InstanceNotFoundException {
+        servicioTaller.cambiarEstadoTrabajo(idTrabajo, estado);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 

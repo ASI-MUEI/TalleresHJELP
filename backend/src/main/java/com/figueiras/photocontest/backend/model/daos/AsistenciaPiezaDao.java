@@ -1,7 +1,6 @@
 package com.figueiras.photocontest.backend.model.daos;
 
 import com.figueiras.photocontest.backend.model.entities.AsistenciaPieza;
-import com.figueiras.photocontest.backend.model.entities.Pieza;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;

@@ -3,6 +3,7 @@ package com.figueiras.photocontest.backend.rest.controllers;
 import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.model.services.ServicioVehiculo;
+import com.figueiras.photocontest.backend.rest.dtos.MatrículasDispPorPerDto;
 import com.figueiras.photocontest.backend.rest.dtos.VehiculoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class ControladorVehiculos {
     }
 
     @GetMapping("/matriculas")
-    public List<String> recuperarMatriculas(){
-        return servicioVehiculo.getTodasMatriculas();
+    public List<MatrículasDispPorPerDto> recuperarMatriculas(){
+        return servicioVehiculo.getMatriculasByPer();
     }
 }

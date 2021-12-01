@@ -5,6 +5,7 @@ import com.figueiras.photocontest.backend.model.entities.Horarios;
 import com.figueiras.photocontest.backend.model.entities.Pieza;
 import com.figueiras.photocontest.backend.model.entities.Usuario;
 import com.figueiras.photocontest.backend.rest.dtos.*;
+import org.springframework.data.domain.Slice;
 
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -89,6 +90,14 @@ public class AsistenciaConversor {
             result.add(new HorariosAsistenciasDto(hor.getIdFranjaHoraria(), hor.getFranjaHoraria()));
         }
         return result;
+    }
+
+    public static List<AsistenciaCompletaDto> toListAsistenciaCompletaDto(Slice<Asistencia> asistencias){
+        List<AsistenciaCompletaDto> asistenciasResult = new ArrayList<>();
+        for (Asistencia asistencia : asistencias){
+            asistenciasResult.add(toAsistenciaCompletaDto(asistencia));
+        }
+        return asistenciasResult;
     }
 
     public static AsistenciaCompletaDto toAsistenciaCompletaDto(Asistencia asistencia){

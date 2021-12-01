@@ -78,12 +78,7 @@ VALUES
 INSERT INTO EstadoTrabajo
 (idEstado, nombre, descripcion)
 VALUES
-(3, 'Atrasado', 'El vehículo está listo');
-
-INSERT INTO EstadoTrabajo
-(idEstado, nombre, descripcion)
-VALUES
-(4, 'Pagado', 'El vehículo está listo');
+(3, 'Pagado', 'El vehículo está listo');
 
 
 -- Insercion de puestos del taller

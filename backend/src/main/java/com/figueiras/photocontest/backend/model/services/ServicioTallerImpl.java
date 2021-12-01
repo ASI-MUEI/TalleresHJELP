@@ -142,8 +142,8 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         String[] fecha_tabla = asistenciasDto.getFecha().split("-");
 
-        LocalDateTime fecha = LocalDateTime.of(Integer.valueOf(fecha_tabla[0]), Integer.valueOf(fecha_tabla[1]),
-                Integer.valueOf(fecha_tabla[2]), 0, 0, 0, 0);
+        LocalDateTime fecha = LocalDateTime.of(Integer.parseInt(fecha_tabla[0]), Integer.parseInt(fecha_tabla[1]),
+                Integer.parseInt(fecha_tabla[2]), 0, 0, 0, 0);
 
         Asistencia asistencia = new Asistencia();
         asistencia.setMecanicos(mecanicos);
@@ -196,7 +196,7 @@ public class ServicioTallerImpl implements ServicioTaller{
             }
         }
 
-        ArrayList<List<Horarios>> result = new ArrayList();
+        ArrayList result = new ArrayList();
         result.add(hLElevador1);
         result.add(hLElevador2);
         result.add(hLElevador3);
@@ -226,15 +226,12 @@ public class ServicioTallerImpl implements ServicioTaller{
         List<Pieza> listadoPiezas = new ArrayList<>();
         for (AsistenciaPieza ap: piezas) {
             Optional<Pieza> p = piezaDao.findById(ap.getIdPieza());
-            if(p.isPresent()){
-                listadoPiezas.add(p.get());
-            }
+            p.ifPresent(listadoPiezas::add);
         }
 
         Pageable p = PageRequest.of(1,5);
-        Slice<Pieza> resultado = new SliceImpl<>(listadoPiezas, p, piezas.hasNext());
 
-        return resultado;
+        return new SliceImpl<>(listadoPiezas, p, piezas.hasNext());
     }
 
     @Override
@@ -264,9 +261,6 @@ public class ServicioTallerImpl implements ServicioTaller{
             nuevaAp.setIdAsistencia(asistencia.getIdAsistencia());
             nuevaAp.setNumeroUnidades(asistenciaNuevaPiezaDto.getNumeroPiezas());
             asistenciaPiezaDao.save(nuevaAp);
-            //piezas.add(pieza.get());
-            //asistencia.setPiezas(piezas);
-            //asistenciaDao.save(asistencia);
         }
 
         return asistencia;
@@ -285,9 +279,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         }
 
         Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(asistenciaNuevaPiezaDto.getIdPieza(), asistenciaNuevaPiezaDto.getIdAsistencia());
-        if(apOpt.isPresent()){
-            asistenciaPiezaDao.delete(apOpt.get());
-        }
+        apOpt.ifPresent(asistenciaPieza -> asistenciaPiezaDao.delete(asistenciaPieza));
 
         Asistencia asistencia = asisOptional.get();
         List<Pieza> piezas = asistencia.getPiezas();
@@ -321,24 +313,6 @@ public class ServicioTallerImpl implements ServicioTaller{
                 }
             }
         }
-
-        /*try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage(PDRectangle.A6);
-            document.addPage(page);
-
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-            // Text
-            contentStream.beginText();
-            contentStream.setFont(PDType1Font.TIMES_BOLD, 32);
-            contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 52);
-            contentStream.showText("Hello World!");
-            contentStream.endText();
-
-            contentStream.close();
-
-            document.save("document.pdf");
-        }*/
         return factura.toString();
     }
 
@@ -418,6 +392,20 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
+    public void cambiarEstadoTrabajo(Long idTrabajo, Long idEstado) throws InstanceNotFoundException {
+        Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
+        if (trabajoOpt.isEmpty())
+            throw new InstanceNotFoundException("trabajo.idTrabajo", idTrabajo);
+        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(idEstado);
+        if (estadoOpt.isEmpty())
+            throw new InstanceNotFoundException("estadoTrabajo.idEstado", idEstado);
+
+        Trabajo trabajo = trabajoOpt.get();
+        trabajo.setEstado(estadoOpt.get());
+        trabajoDao.save(trabajo);
+    }
+
+    @Override
     public Trabajo getTrabajoByID(Long idTrabajo) throws InstanceNotFoundException{
         Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
         if (trabajoOpt.isEmpty())
@@ -452,8 +440,7 @@ public class ServicioTallerImpl implements ServicioTaller{
             }
         }
 
-        List<Asistencia> listaResultado = Arrays.asList(resultado);
-        return listaResultado;
+        return Arrays.asList(resultado);
     }
 
     public List<PiezasAsistenciasDto> getNumeroUnidadesPiezaAsistencia(List<PiezasAsistenciasDto> asistenciaPiezasDto, Long idAsistencia){
@@ -484,18 +471,26 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public void cambiarRetraso(Long idAsistencia, String motivo) {
-        Optional<Asistencia> aOpt = asistenciaDao.findById(idAsistencia);
-        if(aOpt.isPresent()){
-            Asistencia a = aOpt.get();
-            if(!motivo.equals("\"null\"")){
-                a.setMotivoRetraso(motivo);
-                a.setRetrasada(true);
-            }else{
-                a.setRetrasada(false);
-            }
-            asistenciaDao.save(a);
+    public void cambiarRetraso(Long idAsistencia, String motivo) throws InstanceNotFoundException, CampoVacioException {
+        Optional<Asistencia> asOpt = asistenciaDao.findById(idAsistencia);
+        if (asOpt.isEmpty())
+            throw new InstanceNotFoundException("asistencias.idAsistencia", idAsistencia);
+        if (motivo.equals(""))
+            throw new CampoVacioException("asistencia.motivoRetraso", motivo);
+
+        Asistencia asistencia = asOpt.get();
+        if(!motivo.equals("\"null\"")){
+            asistencia.setMotivoRetraso(motivo);
+            asistencia.setRetrasada(true);
+        }else{
+            asistencia.setRetrasada(false);
         }
+        asistenciaDao.save(asistencia);
+    }
+
+    @Override
+    public Slice<Asistencia> getAsistenciasRetrasadas(int page, int size) {
+        return asistenciaDao.findRetrasadas(PageRequest.of(page, size));
     }
 
     private int calcularIndiceInsercion(int elevador, int idranjaHoraria){

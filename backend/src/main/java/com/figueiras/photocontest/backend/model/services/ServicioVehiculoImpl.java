@@ -1,18 +1,19 @@
 package com.figueiras.photocontest.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.daos.FlotaDao;
-import com.figueiras.photocontest.backend.model.daos.MarcaDao;
-import com.figueiras.photocontest.backend.model.daos.ModeloDao;
-import com.figueiras.photocontest.backend.model.daos.VehiculoDao;
+import com.figueiras.photocontest.backend.model.daos.*;
 import com.figueiras.photocontest.backend.model.entities.Flota;
 import com.figueiras.photocontest.backend.model.entities.Modelo;
+import com.figueiras.photocontest.backend.model.entities.Trabajo;
 import com.figueiras.photocontest.backend.model.entities.Vehiculo;
 import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
+import com.figueiras.photocontest.backend.rest.dtos.MatrículasDispPorPerDto;
 import com.figueiras.photocontest.backend.rest.dtos.VehiculoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,9 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
 
     @Autowired
     private FlotaDao flotaDao;
+
+    @Autowired
+    private TrabajoDao trabajoDao;
 
     @Override
     public void registrarVehiculo(VehiculoDto vehiculoDto) throws CampoDuplicadoException, InstanceNotFoundException {
@@ -71,8 +75,20 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
 
     @Override
     public List<String> getTodasMatriculas() {
-        List<String> matriculas = vehiculoDao.findAllMatriculas();
-        return matriculas;
+        return vehiculoDao.findAllMatriculas();
+    }
+
+    @Override
+    public List<MatrículasDispPorPerDto> getMatriculasByPer() {
+        List<Vehiculo> vehs = vehiculoDao.findMatriculasByper();
+        List<MatrículasDispPorPerDto> result = new ArrayList<>();
+        for (Vehiculo vehiculo : vehs){
+            Slice<Trabajo> trabajos = trabajoDao.findByIdVehiculo(vehiculo.getIdVehiculo());
+            for (Trabajo trabajo: trabajos){
+                result.add(new MatrículasDispPorPerDto(vehiculo.getMatricula(), trabajo.getPeritado()));
+            }
+        }
+        return result;
     }
 
 }

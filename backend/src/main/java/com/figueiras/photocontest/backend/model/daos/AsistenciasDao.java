@@ -1,6 +1,8 @@
 package com.figueiras.photocontest.backend.model.daos;
 
 import com.figueiras.photocontest.backend.model.entities.Asistencia;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -13,4 +15,6 @@ public interface AsistenciasDao extends PagingAndSortingRepository<Asistencia, L
     List<Asistencia> findAsistenciasPorFecha(LocalDateTime fecha);
     @Query("SELECT a FROM Asistencia a WHERE a.trabajo=:idTrabajo")
     List<Asistencia> findByIdTrabajo(Long idTrabajo);
+    @Query("SELECT a FROM Asistencia a WHERE a.retrasada = :true")
+    Slice<Asistencia> findRetrasadas(Pageable pageable);
 }

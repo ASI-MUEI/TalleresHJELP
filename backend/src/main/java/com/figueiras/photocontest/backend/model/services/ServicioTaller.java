@@ -34,5 +34,7 @@ public interface ServicioTaller {
     String getFactura(Long idTrabajo) throws InstanceNotFoundException, StateErrorException;
     List<PiezasAsistenciasDto> getNumeroUnidadesPiezaAsistencia(List<PiezasAsistenciasDto> asistenciaPiezasDto, Long idAsistencia);
     List<PiezasAsistenciasDto> getAllPiezas();
-    void cambiarRetraso(Long idAsistencia, String motivo);
+    void cambiarRetraso(Long idAsistencia, String motivo) throws InstanceNotFoundException, CampoVacioException;
+    Slice<Asistencia> getAsistenciasRetrasadas(int page, int size);
+    void cambiarEstadoTrabajo(Long idTrabajo, Long idEstado) throws InstanceNotFoundException;
 }

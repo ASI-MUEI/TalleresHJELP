@@ -16,5 +16,7 @@ public interface VehiculoDao extends PagingAndSortingRepository<Vehiculo, Long> 
     List<String> findAllVehiculos();
     @Query("SELECT v.matricula FROM Vehiculo v ORDER BY v.matricula")
     List<String> findAllMatriculas();
+    @Query("SELECT v FROM Vehiculo v ORDER BY v.matricula")
+    List<Vehiculo> findMatriculasByper();
 
 }
