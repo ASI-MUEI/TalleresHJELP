@@ -19,7 +19,7 @@ const BuscarReparacionesAtrasadas = () => {
     const size = 5
 
     useEffect(() => {
-        //TODO: buscar en backend reparaciones atrasada
+        backend.tallerService.buscarReparacionesAtrasadas(result => setReparacionesAtrasadas(result))
         // eslint-disable-next-line
     }, [page])
 
@@ -60,9 +60,10 @@ const BuscarReparacionesAtrasadas = () => {
         )
     }
 
+
     return (
         <div>
-            <ReparacionesAtrasadas listaReparaciones={reparacionesAtrasadas.items}/>
+            <ReparacionesAtrasadas listaReparacionesAtrasadas={reparacionesAtrasadas.items}/>
             <Pager
                 back={{
                     enabled: page >= 1,

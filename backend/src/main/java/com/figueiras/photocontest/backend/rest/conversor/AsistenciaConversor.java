@@ -106,7 +106,7 @@ public class AsistenciaConversor {
                 asistencia.getFecha().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), asistencia.getTrabajo().getIdTrabajo(), asistencia.getPrecio(),
                 asistencia.getDuracionEstimada(), asistencia.getPeritaje(), asistencia.getDescripcion(),
                 asistencia.getTrabajo().getVehiculo().getMatricula(), asistencia.getTrabajo().getVehiculo().getUsuario().getNombreUsuario(),
-                asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario(), toPiezasReparacion(asistencia.getPiezas()));
+                asistencia.getTrabajo().getVehiculo().getUsuario().getIdUsuario(), toPiezasReparacion(asistencia.getPiezas()), asistencia.getMotivoRetraso());
         acDto.setTipoReparacion(asistencia.getTipo().getNombre());
         acDto.setModeloDeVehiculo(asistencia.getTrabajo().getVehiculo().getModelo().getNombre());
         acDto.setManualVehiculo(asistencia.getTrabajo().getVehiculo().getModelo().getManual());

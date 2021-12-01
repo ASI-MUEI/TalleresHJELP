@@ -30,7 +30,7 @@ public class ControladorVehiculos {
     }
 
     @GetMapping("/matriculas")
-    public List<MatrículasDispPorPerDto> recuperarMatriculas(){
-        return servicioVehiculo.getMatriculasByPer();
+    public List<String> recuperarMatriculas(){
+        return servicioVehiculo.getTodasMatriculas();
     }
 }

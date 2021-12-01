@@ -36,6 +36,6 @@ public interface ServicioTaller {
     List<PiezasAsistenciasDto> getAllPiezas();
     void cambiarRetraso(Long idAsistencia, String motivo) throws InstanceNotFoundException, CampoVacioException;
     Slice<Asistencia> getAsistenciasRetrasadas(int page, int size);
-    void cambiarEstadoTrabajo(Long idTrabajo, Long idEstado) throws InstanceNotFoundException;
+    void cambiarEstadoTrabajo(Long idTrabajo, String idEstado) throws InstanceNotFoundException;
     void actualizaFechaYHoraAsistencia(AsistenciaFranjaHorariaDto asistenciaFranjaHorariaDto) throws InstanceNotFoundException;
 }

@@ -15,6 +15,6 @@ public interface AsistenciasDao extends PagingAndSortingRepository<Asistencia, L
     List<Asistencia> findAsistenciasPorFecha(LocalDateTime fecha);
     @Query("SELECT a FROM Asistencia a WHERE a.trabajo=:idTrabajo")
     List<Asistencia> findByIdTrabajo(Long idTrabajo);
-    @Query("SELECT a FROM Asistencia a WHERE a.retrasada = :true")
+    @Query("SELECT a FROM Asistencia a WHERE a.retrasada = 1")
     Slice<Asistencia> findRetrasadas(Pageable pageable);
 }

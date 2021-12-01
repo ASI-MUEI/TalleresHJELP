@@ -145,14 +145,24 @@ VALUES
 
 -- Inserción de trabajo
 INSERT INTO Trabajo
-(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado)
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
 VALUES
-(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE());
+(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE(), 0);
 
 INSERT INTO Trabajo
-(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado)
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
 VALUES
-(2, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE());
+(3, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE(), 1);
+
+INSERT INTO Trabajo
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
+VALUES
+(2, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE(), 1);
+
+INSERT INTO Trabajo
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
+VALUES
+    (4, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE(), 0);
 
 -- Insercion de Asistencia
 

@@ -406,13 +406,13 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public void cambiarEstadoTrabajo(Long idTrabajo, Long idEstado) throws InstanceNotFoundException {
+    public void cambiarEstadoTrabajo(Long idTrabajo, String estado) throws InstanceNotFoundException {
         Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
         if (trabajoOpt.isEmpty())
             throw new InstanceNotFoundException("trabajo.idTrabajo", idTrabajo);
-        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(idEstado);
+        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findByNombre(estado.replace("\"", ""));
         if (estadoOpt.isEmpty())
-            throw new InstanceNotFoundException("estadoTrabajo.idEstado", idEstado);
+            throw new InstanceNotFoundException("estadoTrabajo.nombreEstado", estado);
 
         Trabajo trabajo = trabajoOpt.get();
         trabajo.setEstado(estadoOpt.get());

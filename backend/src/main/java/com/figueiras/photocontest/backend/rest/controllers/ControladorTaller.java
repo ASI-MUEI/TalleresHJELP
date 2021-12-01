@@ -185,7 +185,7 @@ public class ControladorTaller {
     }
 
     @PutMapping("/trabajo/{idTrabajo}/estado")
-    public ResponseEntity cambiarEstadoTrabajo(@PathVariable Long idTrabajo, @RequestParam Long estado) throws InstanceNotFoundException {
+    public ResponseEntity cambiarEstadoTrabajo(@PathVariable Long idTrabajo, @RequestBody String estado) throws InstanceNotFoundException {
         servicioTaller.cambiarEstadoTrabajo(idTrabajo, estado);
         return new ResponseEntity(HttpStatus.CREATED);
     }

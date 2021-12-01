@@ -9,18 +9,19 @@ import {FormattedDate, FormattedMessage} from "react-intl";
 const Trabajo = () => {
 
     const [trabajo, setTrabajo] = useState(null);
+    const [factura, setFactura] = useState("");
     const {idTrabajo} = useParams();
 
     const cerrarTrabajo = () => {
-        // Todo: conexion backend
+        //backend.tallerService.cambiarEstadoTrabajo(idTrabajo, "Cerrado");
     }
 
     const verFactura = () => {
-        // Todo: conexion backend
+       //backend.tallerService.getFactura(idTrabajo, result => setFactura(result))
     }
 
     const establecerPagado = () => {
-        // Todo: conexion backend
+        backend.tallerService.cambiarEstadoTrabajo(idTrabajo, "Pagado");
     }
 
     useEffect(() =>{
@@ -60,9 +61,10 @@ const Trabajo = () => {
                     <FormattedMessage id={"trabajo.cerrar"}/>
                 </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button variant={"primary"} onClick={verFactura()}>
+                <Button variant={"primary"} type={"submit"} onSubmit={verFactura()}>
                     <FormattedMessage id={"trabajo.verFactura"}/>
                 </Button>
+                {factura?<h5 className={'hWithoutLineBreak'}>factura/></h5>:""}
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant={"primary"} onClick={establecerPagado()}>
                     <FormattedMessage id={"trabajo.establecerPagado"}/>

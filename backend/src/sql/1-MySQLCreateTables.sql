@@ -119,7 +119,7 @@ CREATE TABLE Asistencia(
     duracionEstimada BIGINT,
     peritaje INT,
     descripcion VARCHAR(500),
-    retrasada TINYINT,
+    retrasada INT,
     motivoRetraso VARCHAR(255),
     CONSTRAINT asistencia_pk PRIMARY KEY(idAsistencia),
     CONSTRAINT tipoAsistencia_fk FOREIGN KEY(idTipo) REFERENCES TipoAsistencias(idTipo),

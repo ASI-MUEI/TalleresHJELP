@@ -35,17 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/catalogo-usuarios/usuarios/*/recuperar-cuenta").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/eliminar-cuenta").permitAll()
                 .antMatchers("/catalogo-usuarios/usuarios/*/restablecer-contrasena/*").permitAll()
+                .antMatchers("/catalogo-vehiculos/matriculas").permitAll()
                 .antMatchers("/taller/asistencias/*").permitAll()
                 .antMatchers("/taller/asistencia").permitAll()
                 .antMatchers("/taller/trabajo/*").permitAll()
+                .antMatchers("/taller/trabajo/*/estado").permitAll()
                 .antMatchers("/taller/trabajo/*/reparaciones").permitAll()
                 .antMatchers("/taller/trabajo").permitAll()
                 .antMatchers("/taller/reparacion/*").permitAll()
-                .antMatchers("/catalogo-vehiculos/matriculas").permitAll()
                 .antMatchers("/taller/asistencias/*/piezas").permitAll()
                 .antMatchers("/taller/piezas").permitAll()
                 .antMatchers("/taller/asistencia/*/update/retraso").permitAll()
-
+                .antMatchers("/taller/factura/*").permitAll()
                 .antMatchers("/taller/elevadores").permitAll()
                 .anyRequest().hasRole("USER");
     }

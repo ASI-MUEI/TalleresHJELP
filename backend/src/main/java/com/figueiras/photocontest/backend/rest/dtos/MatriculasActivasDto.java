@@ -3,10 +3,12 @@ package com.figueiras.photocontest.backend.rest.dtos;
 public class MatriculasActivasDto {
     private Long idTrabajo;
     private String matricula;
+    private Boolean peritado;
 
-    public MatriculasActivasDto(Long idTrabajo, String matricula) {
+    public MatriculasActivasDto(Long idTrabajo, String matricula, Boolean peritado) {
         this.idTrabajo = idTrabajo;
         this.matricula = matricula;
+        this.peritado = peritado;
     }
 
     public Long getIdTrabajo() {
@@ -23,5 +25,13 @@ public class MatriculasActivasDto {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public Boolean getPeritado() {
+        return peritado;
+    }
+
+    public void setPeritado(Boolean peritado) {
+        this.peritado = peritado;
     }
 }

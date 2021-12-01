@@ -16,6 +16,13 @@ export const buscarTrabajosActivos = (onSuccess) => {
     appFetch(path, config('GET'), onSuccess);
 }
 
+export const buscarReparacionesAtrasadas = (onSuccess) => {
+
+    let path = `/taller/asistencias/retrasadas`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
 export const buscarElevadores = (onSuccess) => {
 
     let path = `/taller/elevadores`;
@@ -114,4 +121,18 @@ export const cambiarRetraso = (idAsistencia, motivo, onSuccess) => {
     let path = `/taller/asistencia/${idAsistencia}/update/retraso`;
 
     appFetch(path, config('PUT', motivo), onSuccess);
+}
+
+export const getFactura = (idTrabajo, onSuccess) => {
+
+    let path = `/taller/factura/${idTrabajo}`;
+
+    appFetch(path, config('GET'), onSuccess);
+}
+
+export const cambiarEstadoTrabajo = (idTrabajo, estado, onSuccess) => {
+
+    let path = `/taller/trabajo/${idTrabajo}/estado`;
+
+    appFetch(path, config('PUT', estado), onSuccess);
 }

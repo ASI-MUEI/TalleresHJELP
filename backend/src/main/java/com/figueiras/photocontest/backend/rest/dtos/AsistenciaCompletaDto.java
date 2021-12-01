@@ -22,11 +22,12 @@ public class AsistenciaCompletaDto {
     private String manualVehiculo;
     private String tipoReparacion;
     private Boolean retrasada;
+    private String motivoRetraso;
 
 
     public AsistenciaCompletaDto() {}
 
-    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, Long fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente, List<PiezasAsistenciasDto> piezasReparacion) {
+    public AsistenciaCompletaDto(Long idAsistencia, Long elevador, List<MecanicoAsistenciaDto> mecanicos, List<HorariosAsistenciasDto> horarios, Long fecha, Long idTrabajo, Float precio, Long duracionEstimada, Boolean peritaje, String descripcion, String matricula, String nombreCliente, Long idCliente, List<PiezasAsistenciasDto> piezasReparacion, String motivoRetraso) {
         this.idAsistencia = idAsistencia;
         this.elevador = elevador;
         this.mecanicos = mecanicos;
@@ -41,6 +42,7 @@ public class AsistenciaCompletaDto {
         this.nombreCliente = nombreCliente;
         this.idCliente = idCliente;
         this.piezasReparacion = piezasReparacion;
+        this.motivoRetraso = motivoRetraso;
     }
 
     public Long getIdAsistencia() {
@@ -193,5 +195,13 @@ public class AsistenciaCompletaDto {
 
     public void setRetrasada(Boolean retrasada) {
         this.retrasada = retrasada;
+    }
+
+    public String getMotivoRetraso() {
+        return motivoRetraso;
+    }
+
+    public void setMotivoRetraso(String motivoRetraso) {
+        this.motivoRetraso = motivoRetraso;
     }
 }

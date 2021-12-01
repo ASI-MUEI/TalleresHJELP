@@ -2,13 +2,15 @@ import {FormattedDate, FormattedMessage} from "react-intl";
 import {Link} from "react-router-dom";
 
 const ReparacionesAtrasadas = ({listaReparacionesAtrasadas}) => {
-
     return (
         <table className="table table-striped table-hover" >
             <thead>
             <tr>
                 <th scope="col">
-                    <FormattedMessage id='reparacion.idAsistencia'/>
+                    <FormattedMessage id='reparacion.atrasada.fecha'/>
+                </th>
+                <th scope="col">
+                    <FormattedMessage id='reparacion.atrasada.duracionEstimada'/>
                 </th>
                 <th scope="col">
                     <FormattedMessage id='reparacion.atrasada.motivo'/>
@@ -21,12 +23,12 @@ const ReparacionesAtrasadas = ({listaReparacionesAtrasadas}) => {
 
             <tbody>
             {listaReparacionesAtrasadas.map(reparacion =>
-                <tr key={reparacion.id}>
+                <tr key={reparacion.idAsistencia}>
                     <td>
                         <FormattedDate value={new Date(reparacion.fecha)}/>
                     </td>
                     <td>
-                        {reparacion.idAsistencia} horas
+                        {reparacion.duracionEstimada} horas
                     </td>
                     <td>
                         {reparacion.motivoRetraso}
