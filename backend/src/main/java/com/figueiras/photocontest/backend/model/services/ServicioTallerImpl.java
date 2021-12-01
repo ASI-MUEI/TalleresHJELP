@@ -77,6 +77,22 @@ public class ServicioTallerImpl implements ServicioTaller{
         return asistencia;
     }
 
+    public void actualizaFechaYHoraAsistencia(AsistenciaFranjaHorariaDto asistenciaFranjaHorariaDto) throws InstanceNotFoundException{
+        Optional<Asistencia> asisOptional = asistenciaDao.findById(asistenciaFranjaHorariaDto.getIdAsistencia());
+        if(asisOptional.isEmpty()){
+            throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", asistenciaFranjaHorariaDto.getIdAsistencia());
+        }
+
+        Asistencia asistencia = asisOptional.get();
+        String[] fecha_tabla = asistenciaFranjaHorariaDto.getFecha().split("-");
+        LocalDateTime fecha = LocalDateTime.of(Integer.parseInt(fecha_tabla[0]), Integer.parseInt(fecha_tabla[1]),
+                Integer.parseInt(fecha_tabla[2]), 0, 0, 0, 0);
+        asistencia.setFecha(fecha);
+        asistenciaDao.save(asistencia);
+
+        asignarAsistenciaFranjaHoraria(asistenciaFranjaHorariaDto);
+    }
+
     @Override
     public AsistenciaCompletaFranjaHDto asignarAsistenciaFranjaHoraria(AsistenciaFranjaHorariaDto asistenciaFranjaHDto) throws InstanceNotFoundException {
         Optional<Asistencia> asisOptional = asistenciaDao.findById(asistenciaFranjaHDto.getIdAsistencia());
@@ -97,7 +113,6 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         AsistenciaCompletaFranjaHDto asistenciaC = new AsistenciaCompletaFranjaHDto();
         asistenciaC.setIdAsistencia(asisOptional.get().getIdAsistencia());
-        //asistenciaC.setEstado(TallerConversor.toEstAsistenciasDto(asisOptional.get().getEstado()));
         asistenciaC.setPuesto(TallerConversor.toPuestoTDto(asisOptional.get().getPuesto()));
         List<UsuarioDto> mecanicos = new ArrayList<>();
         for (Usuario u : asisOptional.get().getMecanicos()) {
@@ -108,7 +123,6 @@ public class ServicioTallerImpl implements ServicioTaller{
         asistenciaC.setMecanicos(mecanicos);
         asistenciaC.setTipo(TallerConversor.toTiposAsistenciasDto(asisOptional.get().getTipo()));
         asistenciaC.setFecha(asisOptional.get().getFecha().toString());
-//        asistenciaC.setFranjasHorarias(TallerConversor.toFranjasHorariasDto(findHoraByAsistencia(asisOptional.get().getIdAsistencia())));
 
         return asistenciaC;
     }

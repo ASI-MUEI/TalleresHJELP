@@ -190,4 +190,9 @@ public class ControladorTaller {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @PutMapping("/asistencias/update/horas")
+    public ResponseEntity actualizarHorariosAsistencia(@RequestBody AsistenciaFranjaHorariaDto asistenciaFranjaHorariaDto) throws InstanceNotFoundException {
+        servicioTaller.actualizaFechaYHoraAsistencia(asistenciaFranjaHorariaDto);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
 }
