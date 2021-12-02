@@ -156,8 +156,8 @@ public class ControladorTaller {
     }
 
     @GetMapping("/tiposTarea")
-    public Slice<TipoAsistencias> getTiposTarea() {
-        return servicioTaller.getTipoAssitencias();
+    public List<TipoAsistencias> getTiposTarea() {
+        return servicioTaller.getTipoAsitencias();
     }
 
     @GetMapping("/factura/{idTrabajo}")

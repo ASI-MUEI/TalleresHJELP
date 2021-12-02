@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/taller/asistencia/*/update/retraso").permitAll()
                 .antMatchers("/taller/factura/*").permitAll()
                 .antMatchers("/taller/elevadores").permitAll()
+                .antMatchers("/taller/tiposTarea").permitAll()
                 .anyRequest().hasRole("USER");
     }
 

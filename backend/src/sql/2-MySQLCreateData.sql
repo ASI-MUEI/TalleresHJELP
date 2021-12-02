@@ -63,6 +63,12 @@ INSERT INTO TipoAsistencias
 VALUES
 (3, 'Reparación', 'Reparación genérica');
 
+INSERT INTO TipoAsistencias
+(idTipo, nombre, descripcion)
+VALUES
+(4, 'Escape', 'Se cambia el sistema de escape del vehículo');
+
+
 -- Estados de asistencias
 
 INSERT INTO EstadoTrabajo
@@ -147,12 +153,7 @@ VALUES
 INSERT INTO Trabajo
 (idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
 VALUES
-(1, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE(), 0);
-
-INSERT INTO Trabajo
-(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
-VALUES
-(3, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE(), 1);
+(1, 'Neumáticos + Escape', 'Se procede a cambiar los neumáticos de verano a invierno y al cambio del escape', 1, 1, CURRENT_DATE(), 0);
 
 INSERT INTO Trabajo
 (idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
@@ -162,24 +163,29 @@ VALUES
 INSERT INTO Trabajo
 (idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
 VALUES
-    (4, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE(), 0);
+(3, 'Reparación neumáticos', 'Se procede a cambiar los neumáticos de verano a invierno', 1, 1, CURRENT_DATE(), 1);
+
+INSERT INTO Trabajo
+(idTrabajo, nombre, descripcion, idVehiculo, idEstado, fechaCreado, peritado)
+VALUES
+(4, 'Reparación chapa', 'Se procede a reparar chapa tras accidente frontal', 2, 1, CURRENT_DATE(), 0);
 
 -- Insercion de Asistencia
 
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(1, 1, CURRENT_DATE(),  1, 1, 250, 2, 0, 'Se procede a cambiar los neumáticos de verano a invierno');
+(1, 4, CURRENT_DATE(),  1, 1, 250, 2, 0, 'Cambio de escape a un nuevo escape deportivo.');
 
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(2, 2, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
+(2, 1, CURRENT_DATE(),  1, 1, 250, 2, 1, 'Se procede a cambiar los neumáticos de verano a invierno');
 
 INSERT INTO Asistencia
 (idAsistencia, idTipo, fecha, idPuesto, idTrabajo, precio, duracionEstimada, peritaje, descripcion)
 VALUES
-(3, 3, CURRENT_DATE(),  2, 2, 5500, 8, 0, 'Cambio de defensa y difusores frontales, espejo izquierdo');
+(3, 3, CURRENT_DATE(),  2, 2, 5500, 8, 1, 'Cambio de defensa y difusores frontales, espejo izquierdo');
 
 -- Asignacion de horarios a asistencias
 
@@ -281,7 +287,23 @@ INSERT INTO Pieza
 VALUES
 (2, 'Michelin Pilot Sport 4s ', 'Neumático 235/35 R19', 'https://dcadprod.azureedge.net/b2c-experience-production/attachments/ckcdgp9qq0bnn01pgdqgtangn-ckbs97dw00oiy01o2e0yru8ux-manual-usuario-digital-michelin.pdf', 125);
 
+INSERT INTO Pieza
+(idPieza, nombre, descripcion, manual, precio)
+VALUES
+(3, 'Electrónica grupo VAG ', 'Revisión electrónica', 'https://www.andinos.com.pe/wp-content/uploads/2019/05/MANUAL-DE-FALLAS-AUDI-VOLKSWAGEN-SEAT-2.pdf', 500);
+
+
 INSERT INTO AsistenciaPieza
 (idAsistenciaPieza, idAsistencia, idPieza, numeroUnidades)
 VALUES
 (1, 1, 1, 1);
+
+INSERT INTO AsistenciaPieza
+(idAsistenciaPieza, idAsistencia, idPieza, numeroUnidades)
+VALUES
+(2, 2, 2, 4);
+
+INSERT INTO AsistenciaPieza
+(idAsistenciaPieza, idAsistencia, idPieza, numeroUnidades)
+VALUES
+(3, 3, 3, 1);

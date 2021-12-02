@@ -226,8 +226,8 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Slice<TipoAsistencias> getTipoAssitencias(){
-        return tipoAsistenciasDao.findAll(PageRequest.of(1000,1000));
+    public List<TipoAsistencias> getTipoAsitencias(){
+        return (List<TipoAsistencias>) tipoAsistenciasDao.findAll();
     }
 
     @Override

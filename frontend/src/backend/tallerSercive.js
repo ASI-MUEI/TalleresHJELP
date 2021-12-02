@@ -136,3 +136,10 @@ export const cambiarEstadoTrabajo = (idTrabajo, estado, onSuccess) => {
 
     appFetch(path, config('PUT', estado), onSuccess);
 }
+
+export const getTiposTarea = (onSuccess) => {
+
+    let path = `/taller/tiposTarea`;
+
+    appFetch(path, config('GET'), onSuccess);
+}

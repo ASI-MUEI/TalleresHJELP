@@ -27,7 +27,7 @@ public interface ServicioTaller {
     Asistencia getAsistenciaByID(Long idAsistencia)throws InstanceNotFoundException;
     ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha);
     TipoAsistencias crearTipoAsistencia(String nombre, String descripcion);
-    Slice<TipoAsistencias> getTipoAssitencias();
+    List<TipoAsistencias> getTipoAsitencias();
     Slice<Pieza> getPiezasByAsistencia(Long idAsistencia, int page, int size) throws InstanceNotFoundException;
     Asistencia asignarAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;
     Asistencia deleteAsistenciaPieza(AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto) throws InstanceNotFoundException;

@@ -53,7 +53,6 @@ const ActualizarReparacion = () => {
 
 
     useEffect(() => {
-        backend.tallerService.buscarReparacionPorId(idReparacion, resultado => setDatosReparacion(resultado))
         backend.userService.buscarMecanicos(result => setListaMecanicos(result))
         backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
@@ -62,13 +61,20 @@ const ActualizarReparacion = () => {
     }, [])
 
     useEffect(()=> {
-        //TODO: recuperar información de la tarea y setear los siguientes valores:
-        //setListaMatricula()
+        backend.tallerService.buscarReparacionPorId(idReparacion, resultado => setDatosReparacion(resultado))
         //setListaMecanicos()
         //setListaElevadores()
         //setListaHorarios()
         //setListaTipoTarea()
     }, [])
+
+    useEffect(() => {
+        if(datosReparacion !== null){
+            setPrecio(datosReparacion.precio)
+            setPeritaje(datosReparacion.peritaje)
+            setDescripcion(datosReparacion.descripcion)
+        }
+    }, [datosReparacion])
 
     useEffect(() => {
 
@@ -113,7 +119,7 @@ const ActualizarReparacion = () => {
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorMatrícula'})}
                             isObject={true}
-                            displayValue={"matricula"}
+                            displayValue={"matriculaPeritada"}
                             options={listaMatricula}
                             showArrow="true"
                             selectionLimit={1}

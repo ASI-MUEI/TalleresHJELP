@@ -40,8 +40,8 @@ const AnadirReparacion = () => {
                 duracionEstimada,
                 descripcion,
                 peritaje,
-                horasDeTrabajo
-                // TODO: enviar tipo de reparación
+                horasDeTrabajo,
+                tipo : tipoTarea[0].idTipo
             },
             () => history.push("/horario"),
         )
@@ -52,17 +52,19 @@ const AnadirReparacion = () => {
         backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
         backend.tallerService.buscarHorarios(result => setListaHorarios(result))
-        // TODO: cojer lista de tipo de reparaciones
+        backend.tallerService.getTiposTarea(result => setListaTipoTarea(result))
     }, [])
 
-    useEffect(() => {
 
-        // Si se selecciona un trabajo, hay que verificar si es de tipo peritado para actualizar
-        // el checkbox.
-        if(matricula !== "" && matricula !== undefined && matricula !== null){
-            // TODO: recuperar si el trabajo es peritado o no. setPeritaje()
+    // Verifica si la reparacion debe ser peritada
+    useEffect(() => {
+        if(matricula[0] !== undefined && matricula[0].peritado){
+            setPeritaje(true)
+        }else{
+            setPeritaje(false)
         }
     }, [matricula])
+
     return (
         <Container>
             <br/>
@@ -74,7 +76,7 @@ const AnadirReparacion = () => {
                         <Multiselect
                             placeholder={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.selectorMatrícula'})}
                             isObject={true}
-                            displayValue={"matricula"}
+                            displayValue={"matriculaPeritada"}
                             options={listaMatricula}
                             showArrow="true"
                             selectionLimit={1}
@@ -171,7 +173,7 @@ const AnadirReparacion = () => {
                         <Form.Check
                             type="checkbox"
                             label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
-                            value={peritaje}
+                            checked={peritaje}
                             disabled={true}
                         />
                     </div>
@@ -206,7 +208,7 @@ const AnadirReparacion = () => {
                     </Button>
                 </div>
             </Form>
-            <br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
         </Container>
 
 
