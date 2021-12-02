@@ -1,4 +1,4 @@
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Container, Form, Spinner} from "react-bootstrap";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Multiselect} from 'multiselect-react-dropdown';
 import React, {useEffect, useState} from "react";
@@ -8,6 +8,7 @@ import {useHistory, useParams} from "react-router";
 
 const ActualizarReparacion = () => {
 
+    const [datosReparacion, setDatosReparacion] = useState(null)
     const [matricula, setMatricula] = useState("")
     const [mecanicos, setMecanicos] = useState("")
     const [precio, setPrecio] = useState(0)
@@ -52,6 +53,7 @@ const ActualizarReparacion = () => {
 
 
     useEffect(() => {
+        backend.tallerService.buscarReparacionPorId(idReparacion, resultado => setDatosReparacion(resultado))
         backend.userService.buscarMecanicos(result => setListaMecanicos(result))
         backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
@@ -76,11 +78,35 @@ const ActualizarReparacion = () => {
             // TODO: recuperar si el trabajo es peritado o no. setPeritaje()
         }
     }, [matricula])
+
+    const cabecera = () => {
+        return(
+            <Container>
+                <br/>
+                <h4 className="centeredParagraph">{intl.formatMessage({id: 'reparacion.atrasada.actualizar.cabecera'})}</h4>
+                <br/>
+            </Container>
+        )
+    }
+
+
+    if(datosReparacion === null){
+        return(
+            <Container>
+                {cabecera()}
+                <br/>
+                <div className="center">
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden"/>
+                    </Spinner>
+                </div>
+            </Container>
+        )
+    }
+
     return (
         <Container>
-            <br/>
-            <h4 className="centeredParagraph">{intl.formatMessage({id: 'paginaHorario.nuevaReparacion.nuevaReparacion'})}</h4>
-            <br/>
+            {cabecera()}
             <Form onSubmit={handleSubmit}>
                 <div className="divFlexDirectionColumn">
                     <div className="añadirReparacionDiv1">

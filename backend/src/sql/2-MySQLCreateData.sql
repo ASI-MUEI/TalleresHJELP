@@ -124,7 +124,7 @@ VALUES
 INSERT INTO Modelo
 (idModelo, nombre, descripcion, idMarca, manual)
 VALUES
-(1, 'Serie 1', 'Hatchback de la marca de Babaria', 1, 'https://www.manualpdf.es/bmw/1-series-2009/manual');
+(1, 'Serie 1', 'Hatchback de la marca de Babaria', 1, 'https://www.manualpdf.es/bmw/1-series-2010/manual');
 
 INSERT INTO Modelo
 (idModelo, nombre, descripcion, idMarca, manual)
@@ -274,7 +274,12 @@ VALUES
 INSERT INTO Pieza
 (idPieza, nombre, descripcion, manual, precio)
 VALUES
-(1, 'Tubo de escape', 'Tubo de escape descripcion', 'https://www.amazon.es/Compartimiento-Colector-Yamaha-xt600-XT600E/dp/B01DVRGDDQ?ref_=Oct_d_omwf_d_2425134031&pd_rd_w=ZkbDT&pf_rd_p=dbaa2a38-774d-404a-bd20-b06321c0935b&pf_rd_r=VAN0MP7RSJ08R5AS0NE0&pd_rd_r=eadc2bfd-126b-4f3d-8357-f19bbe639d76&pd_rd_wg=w2hug&pd_rd_i=B01DVRGDDQ', 150);
+(1, 'Tubo de escape (BMW M Performance)', 'Tubo de escape descripcion', 'https://rparts-sites.s3.amazonaws.com/c9da6b63e26b3287a6a68fe8ee3a4330/design/installation%20instructions/F2x%20F3x%20B58%20M%20Performance%20Exhaust%20Installation%20Intructions.PDF', 150);
+
+INSERT INTO Pieza
+(idPieza, nombre, descripcion, manual, precio)
+VALUES
+(2, 'Michelin Pilot Sport 4s ', 'Neumático 235/35 R19', 'https://dcadprod.azureedge.net/b2c-experience-production/attachments/ckcdgp9qq0bnn01pgdqgtangn-ckbs97dw00oiy01o2e0yru8ux-manual-usuario-digital-michelin.pdf', 125);
 
 INSERT INTO AsistenciaPieza
 (idAsistenciaPieza, idAsistencia, idPieza, numeroUnidades)

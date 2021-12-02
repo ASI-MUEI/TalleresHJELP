@@ -306,27 +306,34 @@ public class ServicioTallerImpl implements ServicioTaller{
 
     @Override
     public String getFactura(Long idTrabajo) throws InstanceNotFoundException, StateErrorException {
+        float precioTotal = 0;
         Optional<Trabajo> trabajoOpt = trabajoDao.findById(idTrabajo);
         if (trabajoOpt.isEmpty())
             throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", idTrabajo);
 
-        if (trabajoOpt.get().getEstado().getIdEstado() != 2){
+        if (trabajoOpt.get().getEstado().getIdEstado() == 1){
             throw new StateErrorException("entidades.trabajo.estado", trabajoOpt.get().getEstado().getNombre());
         }
 
         StringBuilder factura = new StringBuilder();
+        factura.append("                                                                            TALLERES HJELP\n\n");
+        factura.append("************************************************************   Factura   ************************************************************\n");
         List<Asistencia> asistencias = asistenciaDao.findByIdTrabajo(idTrabajo);
         for (Asistencia asistencia : asistencias){
-            factura.append("Asistencia ").append(asistencia.getIdAsistencia()).append(":").append(asistencia.getDescripcion()).append("\n");
-            factura.append("Duración: ").append(asistencia.getDuracionEstimada());
-            factura.append("Precio").append(asistencia.getPrecio()).append("\n");
+            factura.append("\nAsistencia ").append(asistencia.getIdAsistencia()).append(": ").append(asistencia.getDescripcion()).append("\n");
+            factura.append("    Duración: ").append(asistencia.getDuracionEstimada()).append("\n");
+            factura.append("    Precio: ").append(asistencia.getPrecio()).append("€").append("\n");
+            precioTotal += asistencia.getPrecio();
             if (!asistencia.getPiezas().isEmpty()){
-                factura.append("Piezas utilizadas:\n");
+                factura.append("    Piezas utilizadas:\n");
                 for (Pieza pieza : asistencia.getPiezas()){
-                    factura.append("Pieza: ").append(pieza.getNombre()).append("\n");
+                    factura.append("        Pieza: ").append(pieza.getNombre()).append("\n");
                 }
             }
         }
+        factura.append("\n                                                                                                                                  Precio total: ").append(precioTotal).append("€");
+        factura.append("\n");
+        factura.append("**************************************************************************************************************************************");
         return factura.toString();
     }
 

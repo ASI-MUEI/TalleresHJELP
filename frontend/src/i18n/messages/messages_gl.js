@@ -130,6 +130,7 @@ export default {
     'trabajos.nuevo.registrarTrabajo' : 'Crear traballo',
     'trabajo.estado.Abierto' : 'Aberto',
     'trabajo.estado.Cerrado' : 'Cerrado',
+    'trabajo.estado.Pagado' : 'Pagado',
 
     'registrarUsuario' : 'Páxina de rexistro de usuarios',
     'registrarUsuario.Asministrativo' : 'Rexistrar un novo administrativo',
@@ -165,6 +166,7 @@ export default {
     'reparacion.retrasada.actualizar': 'Actualizar',
     'reparacion.atrasadas' : 'R. Adiadas',
     'reparacion.atrasada.actualizar' : 'Actualizar',
+    'reparacion.atrasada.actualizar.cabecera' : 'Actualizar reparación',
     'reparacion.atrasada.motivo' : 'Motivo',
 
     'trabajo.bienvenida' : 'Páxina de detalle do traballo',

@@ -138,6 +138,7 @@ export default {
     'trabajo.verDetalle' : 'Ver detalles',
     'trabajo.estado.Abierto' : 'Abierto',
     'trabajo.estado.Cerrado' : 'Cerrado',
+    'trabajo.estado.Pagado' : 'Pagado',
 
     'trabajos.nuevo.nombreTrabajo' : 'Nombre del trabajo',
     'trabajos.nuevo.matricula' : 'Matrícula',
@@ -179,6 +180,7 @@ export default {
     'reparacion.retrasada.actualizar': 'Actualizar',
     'reparacion.atrasadas' : 'R. Retrasadas',
     'reparacion.atrasada.actualizar' : 'Actualizar',
+    'reparacion.atrasada.actualizar.cabecera' : 'Actualizar reparación',
     'reparacion.atrasada.motivo' : 'Motivo',
 
     'trabajo.bienvenida' : 'Página de detalle del trabajo',

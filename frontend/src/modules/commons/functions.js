@@ -1,8 +1,9 @@
 const tipoLabelTrabajo = (estado) => {
 
     switch(estado){
-        case "ABIERTO" : return "warning"
-        case "CERRADO" : return "success"
+        case "Abierto" : return "info"
+        case "Cerrado" : return "danger"
+        case "Pagado" : return "success"
         default : return "success"
     }
 }

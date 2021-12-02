@@ -111,6 +111,7 @@ export default {
     'trabajo.verDetalle' : 'View details',
     'trabajo.estado.Abierto' : 'Open',
     'trabajo.estado.Cerrado' : 'Close',
+    'trabajo.estado.Pagado' : 'Payed',
 
 
     'trabajos.nuevo.nombreTrabajo' : 'Job name',
@@ -154,6 +155,7 @@ export default {
     'reparacion.retrasada.actualizar': 'Update',
     'reparacion.atrasadas' : 'D. Reparations',
     'reparacion.atrasada.actualizar' : 'Update',
+    'reparacion.atrasada.actualizar.cabecera' : 'Update reparation',
     'reparacion.atrasada.motivo' : 'Reason',
 
     'trabajo.bienvenida' : 'Job detail page',

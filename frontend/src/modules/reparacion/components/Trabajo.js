@@ -5,23 +5,35 @@ import React, {useEffect, useState} from "react";
 import backend from "../../../backend"
 import {Badge, Button, Jumbotron, Spinner} from "react-bootstrap";
 import {FormattedDate, FormattedMessage} from "react-intl";
+import { jsPDF } from "jspdf";
 
 const Trabajo = () => {
 
     const [trabajo, setTrabajo] = useState(null);
     const [factura, setFactura] = useState("");
     const {idTrabajo} = useParams();
+    const doc = new jsPDF();
 
     const cerrarTrabajo = () => {
-        //backend.tallerService.cambiarEstadoTrabajo(idTrabajo, "Cerrado");
+        backend.tallerService.cambiarEstadoTrabajo(idTrabajo, "Cerrado");
+        window.location.reload()
     }
 
-    const verFactura = () => {
-       //backend.tallerService.getFactura(idTrabajo, result => setFactura(result))
+    const createPDF = result => {
+        if (result) {
+            doc.setFontSize(11);
+            doc.text(result, 5, 10);
+        }
+    }
+
+    const descargarFactura = () => {
+        createPDF(factura.cuerpoFactura)
+        doc.save(`${trabajo.nombre}-FACTURA.pdf`);
     }
 
     const establecerPagado = () => {
         backend.tallerService.cambiarEstadoTrabajo(idTrabajo, "Pagado");
+        window.location.reload()
     }
 
     useEffect(() =>{
@@ -29,8 +41,13 @@ const Trabajo = () => {
             idTrabajo,
             resultado => setTrabajo(resultado)
         );
-
     }, [idTrabajo])
+
+    useEffect(() =>{
+        if(trabajo !== null && trabajo.estado !== "Abierto"){
+            backend.tallerService.getFactura(idTrabajo, result => setFactura(result))
+        }
+    },[trabajo])
 
     const cabecera = () => {
         return (
@@ -57,18 +74,33 @@ const Trabajo = () => {
             {cabecera()}
             <br/>
             <div className={"divFlexDirectionColumn center"}>
-                <Button variant={"primary"} onClick={cerrarTrabajo()}>
-                    <FormattedMessage id={"trabajo.cerrar"}/>
-                </Button>
+                {
+                    trabajo.estado === "Cerrado" || trabajo.estado === "Pagado"?
+                        null
+                    :
+                        <Button variant={"primary"} onClick={event => cerrarTrabajo()}>
+                            <FormattedMessage id={"trabajo.cerrar"}/>
+                        </Button>
+                }
+
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button variant={"primary"} type={"submit"} onSubmit={verFactura()}>
-                    <FormattedMessage id={"trabajo.verFactura"}/>
-                </Button>
-                {factura?<h5 className={'hWithoutLineBreak'}>factura/></h5>:""}
+                {
+                    trabajo.estado !== "Abierto"?
+                        <Button variant={"primary"} type={"submit"} onClick={event => descargarFactura()}>
+                            <FormattedMessage id={"trabajo.verFactura"}/>
+                        </Button>
+                    :
+                        null
+                }
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button variant={"primary"} onClick={establecerPagado()}>
-                    <FormattedMessage id={"trabajo.establecerPagado"}/>
-                </Button>
+                {
+                    trabajo.estado === "Cerrado"?
+                        <Button variant={"primary"} onClick={event => establecerPagado()}>
+                            <FormattedMessage id={"trabajo.establecerPagado"}/>
+                        </Button>
+                    :
+                        null
+                }
             </div>
             <br/>
             <Jumbotron>
@@ -107,7 +139,7 @@ const Trabajo = () => {
                 </div>
                 <div>
                     {
-                        trabajo.pagado?
+                        trabajo.estado === "Pagado"?
                             <h5>
                                 <Badge variant={"success"}><FormattedMessage id={'trabajo.pagado'}/></Badge>
                             </h5>

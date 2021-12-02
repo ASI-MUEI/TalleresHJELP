@@ -45,7 +45,7 @@ const Body = () => {
                 <Route exact path="/users/:userName/changue-data"><ChangueProfileData/></Route>
                 <Route exact path="/horario"><PaginaHorario/></Route>
                 <Route exact path="/reparacion"><Reparacion/></Route>
-                <Route exact path="/reparacion/:idReparacion/actualizar"><ActualizarReparacion/></Route>
+                <Route exact path="/reparaciones/:idReparacion/actualizar"><ActualizarReparacion/></Route>
                 <Route exact path="/reparaciones/:idReparacion"><Reparacion/></Route>
                 <Route exact path="/reparaciones/:idReparacion/atraso"><AnadirAtraso/></Route>
                 <Route exact path="/reparaciones-atrasadas"><BuscarReparacionesAtrasadas/></Route>

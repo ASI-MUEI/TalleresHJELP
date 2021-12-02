@@ -161,8 +161,10 @@ public class ControladorTaller {
     }
 
     @GetMapping("/factura/{idTrabajo}")
-    public String getFactura(@PathVariable Long idTrabajo) throws StateErrorException, InstanceNotFoundException {
-        return servicioTaller.getFactura(idTrabajo);
+    public FacturaDto getFactura(@PathVariable Long idTrabajo) throws StateErrorException, InstanceNotFoundException {
+        FacturaDto resultado = new FacturaDto();
+        resultado.setCuerpoFactura(servicioTaller.getFactura(idTrabajo));
+        return resultado;
     }
 
     @GetMapping("/piezas")
