@@ -4,6 +4,7 @@ public class MatriculasActivasDto {
     private Long idTrabajo;
     private String matricula;
     private Boolean peritado;
+    private String matriculaPeritada;
 
     public MatriculasActivasDto(Long idTrabajo, String matricula, Boolean peritado) {
         this.idTrabajo = idTrabajo;
@@ -33,5 +34,13 @@ public class MatriculasActivasDto {
 
     public void setPeritado(Boolean peritado) {
         this.peritado = peritado;
+    }
+
+    public String getMatriculaPeritada() {
+        return matriculaPeritada;
+    }
+
+    public void setMatriculaPeritada(String matriculaPeritada) {
+        this.matriculaPeritada = matriculaPeritada;
     }
 }

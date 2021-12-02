@@ -70,7 +70,12 @@ public class TallerConversor {
     public static List<MatriculasActivasDto> toMatriculasActivasDto(Slice<Trabajo> trabajos){
         List<MatriculasActivasDto> result = new ArrayList<>();
         for (Trabajo trabajo : trabajos){
-            result.add(new MatriculasActivasDto(trabajo.getIdTrabajo(), trabajo.getVehiculo().getMatricula(), trabajo.getPeritado()));
+            MatriculasActivasDto matriculaActiva = new MatriculasActivasDto(trabajo.getIdTrabajo(), trabajo.getVehiculo().getMatricula(), trabajo.getPeritado());
+            if (matriculaActiva.getPeritado())
+                matriculaActiva.setMatriculaPeritada(matriculaActiva.getMatricula() + " (Peritada)");
+            else
+                matriculaActiva.setMatriculaPeritada(matriculaActiva.getMatricula());
+            result.add(matriculaActiva);
         }
         return result;
     }

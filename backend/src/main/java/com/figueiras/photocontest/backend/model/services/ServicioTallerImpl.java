@@ -277,6 +277,9 @@ public class ServicioTallerImpl implements ServicioTaller{
             asistenciaPiezaDao.save(nuevaAp);
         }
 
+        asistencia.setPrecio(asistencia.getPrecio() + (pieza.get().getPrecio() * asistenciaNuevaPiezaDto.getNumeroPiezas()));
+        asistenciaDao.save(asistencia);
+
         return asistencia;
     }
 
