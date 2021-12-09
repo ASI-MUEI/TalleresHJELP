@@ -194,17 +194,19 @@ public class ServicioTallerImpl implements ServicioTaller{
         List<Horarios> hLElevador4 = new ArrayList<>();
         List<Horarios> hLElevador5 = new ArrayList<>();
         for (Asistencia asistencia:asistencias){
-            switch (String.valueOf(asistencia.getPuesto().getIdPuesto())){
-                case "1":
-                    hLElevador1.addAll(asistencia.getHorarios());
-                case "2":
-                    hLElevador2.addAll(asistencia.getHorarios());
-                case "3":
-                    hLElevador3.addAll(asistencia.getHorarios());
-                case "4":
-                    hLElevador4.addAll(asistencia.getHorarios());
-                case "5":
-                    hLElevador5.addAll(asistencia.getHorarios());
+            if(asistencia != null){
+                switch (String.valueOf(asistencia.getPuesto().getIdPuesto())){
+                    case "1":
+                        hLElevador1.addAll(asistencia.getHorarios());
+                    case "2":
+                        hLElevador2.addAll(asistencia.getHorarios());
+                    case "3":
+                        hLElevador3.addAll(asistencia.getHorarios());
+                    case "4":
+                        hLElevador4.addAll(asistencia.getHorarios());
+                    case "5":
+                        hLElevador5.addAll(asistencia.getHorarios());
+                }
             }
         }
 
