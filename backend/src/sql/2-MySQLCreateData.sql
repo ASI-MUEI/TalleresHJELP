@@ -290,7 +290,7 @@ VALUES
 INSERT INTO Pieza
 (idPieza, nombre, descripcion, manual, precio)
 VALUES
-(1, 'Tubo de escape (BMW M Performance)', 'Tubo de escape descripcion', 'https://rparts-sites.s3.amazonaws.com/c9da6b63e26b3287a6a68fe8ee3a4330/design/installation%20instructions/F2x%20F3x%20B58%20M%20Performance%20Exhaust%20Installation%20Intructions.PDF', 150);
+(1, 'Tubo de escape (BMW M Performance)', 'Tubo de escape descripcion', 'https://rparts-sites.s3.amazonaws.com/c9da6b63e26b3287a6a68fe8ee3a4330/design/installation%20instructions/F2x%20F3x%20B58%20M%20Performance%20Exhaust%20Installation%20Intructions.PDF', 5000);
 
 INSERT INTO Pieza
 (idPieza, nombre, descripcion, manual, precio)
