@@ -1,10 +1,7 @@
 package com.figueiras.photocontest.backend.rest.controllers;
 
 import com.figueiras.photocontest.backend.model.entities.*;
-import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
-import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
-import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
-import com.figueiras.photocontest.backend.model.exceptions.StateErrorException;
+import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.model.services.Block;
 import com.figueiras.photocontest.backend.model.services.ServicioTaller;
 import com.figueiras.photocontest.backend.rest.conversor.AsistenciaConversor;
@@ -16,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.InstanceAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class ControladorTaller {
 
     @PostMapping("/trabajo")
     public ResponseEntity registrarTrabajo(@RequestBody TrabajoDto trabajoDto)
-            throws CampoVacioException, InstanceNotFoundException {
+            throws CampoVacioException, InstanceNotFoundException, CamposIntroducidosNoValidosException {
         servicioTaller.createTrabajo(trabajoDto);
         return new ResponseEntity(HttpStatus.CREATED);
     }

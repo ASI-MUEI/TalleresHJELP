@@ -31,14 +31,6 @@ const FuncionesAdministrativas = () => {
                                         </Button>
                                     </form>
                                 </div>
-                                &nbsp;&nbsp;
-                                <div className="center">
-                                    <form onSubmit={() => history.push('/vehicle/newVehicle')}>
-                                        <Button type="submit" className="d-flex justify-content-center" variant="primary">
-                                            <FormattedMessage id="vehiculo.registroVehiculo" />
-                                        </Button>
-                                    </form>
-                                </div>
                             </div>
 
                         </Container>

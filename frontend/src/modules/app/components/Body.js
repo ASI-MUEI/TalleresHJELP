@@ -11,7 +11,6 @@ import RecoverUser from '../../user/components/RecoverUser';
 import ResetPassword from '../../user/components/ResetPassword';
 import PaginaHorario from '../../horario/components/PaginaHorario';
 import Reparacion from '../../reparacion/components/Reparacion';
-import NewVehicle from '../../vehicle/components/NewVehicle';
 import RegistrarMecanico from "../../user/components/RegistrarMecanico";
 import RegistrarCliente from "../../user/components/RegistrarCliente";
 import RegistrarAdministrativo from "../../user/components/RegistrarAdministrativo";
@@ -49,7 +48,6 @@ const Body = () => {
                 <Route exact path="/reparaciones/:idReparacion"><Reparacion/></Route>
                 <Route exact path="/reparaciones/:idReparacion/atraso"><AnadirAtraso/></Route>
                 <Route exact path="/reparaciones-atrasadas"><BuscarReparacionesAtrasadas/></Route>
-                <Route exact path="/vehicle/newVehicle"><NewVehicle/></Route>
                 <Route><Home/></Route>
             </Switch>
         </Container>

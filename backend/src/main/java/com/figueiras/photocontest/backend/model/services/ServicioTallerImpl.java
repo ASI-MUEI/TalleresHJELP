@@ -2,10 +2,7 @@ package com.figueiras.photocontest.backend.model.services;
 
 import com.figueiras.photocontest.backend.model.daos.*;
 import com.figueiras.photocontest.backend.model.entities.*;
-import com.figueiras.photocontest.backend.model.exceptions.CampoVacioException;
-import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
-import com.figueiras.photocontest.backend.model.exceptions.ParseFormatException;
-import com.figueiras.photocontest.backend.model.exceptions.StateErrorException;
+import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.rest.conversor.TallerConversor;
 import com.figueiras.photocontest.backend.rest.conversor.UsuarioConversor;
 import com.figueiras.photocontest.backend.rest.dtos.*;
@@ -16,6 +13,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.management.InstanceAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -341,17 +339,22 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException {
-        //Optional<Usuario> usuario = usuarioDao.findById(trabajoDto.getVehiculo());
-        //if(usuario.isEmpty())
-        //    throw new InstanceNotFoundException("entidades.usuario.idUsuario", trabajoDto.getVehiculo());
+    public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException,
+            CamposIntroducidosNoValidosException {
+
+        // Se verifica si ya existe un trabajo con dicha matrícula y con ese valor de peritaje
+        Optional<Trabajo> tOpt =
+                trabajoDao.findTrabajoWithMatriculaAndPeritaje(trabajoDto.getMatricula(), trabajoDto.getPeritado());
+        if(tOpt.isPresent()){
+            throw new CamposIntroducidosNoValidosException();
+        }
 
         Optional<Vehiculo> veh = vehiculoDao.findByMatricula(trabajoDto.getMatricula());
         if(veh.isEmpty()){
             throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", trabajoDto.getMatricula());
         }
 
-        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(new Long(1));
+        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(1L);
         EstadoTrabajo estadoAbierto = estadoOpt.get();
 
         Trabajo trabajo = new Trabajo();
