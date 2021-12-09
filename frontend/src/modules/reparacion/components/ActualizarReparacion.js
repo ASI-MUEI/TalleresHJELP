@@ -224,7 +224,7 @@ const ActualizarReparacion = () => {
                         <Form.Check
                             type="checkbox"
                             label={intl.formatMessage({id: 'paginaHorario.nuevaReparacion.checkBoxPeritaje'})}
-                            value={peritaje}
+                            checked={peritaje}
                             disabled={true}
                         />
                     </div>
