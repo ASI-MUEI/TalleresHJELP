@@ -137,6 +137,11 @@ INSERT INTO Modelo
 VALUES
 (2, 'A3', 'Hatchback de la marca Audi', 2, 'https://www.manualpdf.es/audi/a3-2019/manual');
 
+INSERT INTO Modelo
+(idModelo, nombre, descripcion, idMarca, manual)
+VALUES
+(3, 'M3', 'Modelo de competición BMW M3', 1, 'https://cdn.dealereprocess.org/cdn/servicemanuals/bmw/2016-m3.pdf');
+
 INSERT INTO Vehiculo
 (idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
 VALUES
@@ -146,6 +151,11 @@ INSERT INTO Vehiculo
 (idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
 VALUES
 (2, 5, 'AUDZZZ1MZ2R040807', '91234KLM', 2, NULL);
+
+INSERT INTO Vehiculo
+(idVehiculo, idUsuario, numBastidor, matricula, idModelo, idFlota)
+VALUES
+(3, 5, 'BMWZZZ1MZ2R040807', '91234JFK', 3, NULL);
 
 -- INSERCION DE REPARACIONES
 
