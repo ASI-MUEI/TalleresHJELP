@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/taller/elevadores").permitAll()
                 .antMatchers("/taller/tiposTarea").permitAll()
                 .antMatchers("/taller/horariosLibres/*").permitAll()
+                .antMatchers("/taller/asistencia/*").permitAll()
                 .anyRequest().hasRole("USER");
     }
 

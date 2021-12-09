@@ -7,6 +7,9 @@ const ReparacionesAtrasadas = ({listaReparacionesAtrasadas}) => {
             <thead>
             <tr>
                 <th scope="col">
+                    <FormattedMessage id='trabajos.nuevo.matricula'/>
+                </th>
+                <th scope="col">
                     <FormattedMessage id='reparacion.atrasada.fecha'/>
                 </th>
                 <th scope="col">
@@ -24,6 +27,9 @@ const ReparacionesAtrasadas = ({listaReparacionesAtrasadas}) => {
             <tbody>
             {listaReparacionesAtrasadas.map(reparacion =>
                 <tr key={reparacion.idAsistencia}>
+                    <td>
+                        {reparacion.matricula}
+                    </td>
                     <td>
                         <FormattedDate value={new Date(reparacion.fecha)}/>
                     </td>

@@ -173,8 +173,64 @@ public class ServicioTallerImpl implements ServicioTaller{
             asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getId()));
         }
 
-        for (PiezasAsistenciasDto pieza : asistenciasDto.getPiezasReparacion()) {
-            asistenciaPiezaDao.save(new AsistenciaPieza(asistencia.getIdAsistencia(),pieza.getIdPieza()));
+        return asistencia;
+    }
+
+    @Override
+    public Asistencia actualizarAsistencia(AsistenciasDto asistenciasDto, long idAsistencia) throws InstanceNotFoundException {
+
+        List<Usuario> mecanicos = new ArrayList<>();
+
+        for (MecanicoAsistenciaDto mDto : asistenciasDto.getMecanicos()) {
+            Optional<Usuario> usuario = usuarioDao.findById(mDto.getIdMecanico());
+            if(usuario.isEmpty()){
+                throw new InstanceNotFoundException("entidades.usuario.idUsuario", mDto.getIdMecanico());
+            }
+            mecanicos.add(usuario.get());
+        }
+
+        Optional<TipoAsistencias> tipo = tipoAsistenciasDao.findById(asistenciasDto.getTipo());
+        if(tipo.isEmpty()){
+            throw new InstanceNotFoundException("entidades.asistencias.tipo", asistenciasDto.getTipo());
+        }
+
+        Optional<PuestoTaller> puestoTaller = puestoTallerDao.findById(asistenciasDto.getElevador());
+        if(puestoTaller.isEmpty()){
+            throw new InstanceNotFoundException("entidades.puestoTaller.idPuestoTaller", asistenciasDto.getElevador());
+        }
+
+        Optional<Trabajo> trabajo = trabajoDao.findById(asistenciasDto.getIdTrabajo());
+        if(trabajo.isEmpty()){
+            throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", asistenciasDto.getIdTrabajo());
+        }
+
+        String[] fecha_tabla = asistenciasDto.getFecha().split("-");
+
+        LocalDateTime fecha = LocalDateTime.of(Integer.parseInt(fecha_tabla[0]), Integer.parseInt(fecha_tabla[1]),
+                Integer.parseInt(fecha_tabla[2]), 0, 0, 0, 0);
+
+        Optional<Asistencia> aOpt = asistenciaDao.findById(idAsistencia);
+
+        if(!aOpt.isPresent()){
+            throw new InstanceNotFoundException("entidades.asistencia.idAsistencia", idAsistencia);
+        }
+
+        Asistencia asistencia = aOpt.get();
+
+        asistencia.setMecanicos(mecanicos);
+        asistencia.setPuesto(puestoTaller.get());
+        asistencia.setFecha(fecha);
+        asistencia.setPrecio(asistenciasDto.getPrecio());
+        asistencia.setDuracionEstimada(asistenciasDto.getDuracionEstimada());
+        asistencia.setTrabajo(trabajo.get());
+        asistencia.setTipo(tipo.get());
+        asistencia.setDescripcion(asistenciasDto.getDescripcion());
+        asistencia.setPeritaje(asistenciasDto.getPeritaje());
+        asistencia = asistenciaDao.save(asistencia);
+
+        // Crea los nuevos horarios pero los antiguos se mantienen
+        for (HorariosAsistenciasDto horario : asistenciasDto.getHorasDeTrabajo()) {
+            asistenciaHorarioDao.save(new AsistenciaHorario(asistencia.getIdAsistencia(),horario.getId()));
         }
 
         return asistencia;
@@ -397,8 +453,6 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         return resultado;
     }
-
-
 
     @Override
     public Slice<Trabajo> getTrabajosAbiertos() {

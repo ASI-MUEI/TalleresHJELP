@@ -31,6 +31,13 @@ public class ControladorTaller {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @PutMapping("/asistencia/{idAsistencia}")
+    public ResponseEntity actualizarAsistencia(@RequestBody AsistenciasDto asistenciasDto,
+                                               @PathVariable long idAsistencia) throws InstanceNotFoundException {
+        servicioTaller.actualizarAsistencia(asistenciasDto, idAsistencia);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
     @PostMapping("/trabajo")
     public ResponseEntity registrarTrabajo(@RequestBody TrabajoDto trabajoDto)
             throws CampoVacioException, InstanceNotFoundException, CamposIntroducidosNoValidosException {

@@ -143,3 +143,10 @@ export const getTiposTarea = (onSuccess) => {
 
     appFetch(path, config('GET'), onSuccess);
 }
+
+export const actualizarAsistencia = (asistenciaDto, idAsistencia, onSuccess) => {
+
+    let path = `/taller/asistencia/${idAsistencia}`;
+
+    appFetch(path, config('PUT', asistenciaDto), onSuccess);
+}

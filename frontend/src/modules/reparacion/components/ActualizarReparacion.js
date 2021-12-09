@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import backend from "../../../backend";
 import {useHistory, useParams} from "react-router";
+import {actualizarAsistencia} from "../../../backend/tallerSercive";
 
 const ActualizarReparacion = () => {
 
@@ -32,8 +33,10 @@ const ActualizarReparacion = () => {
     const {idReparacion} = useParams()
 
     const handleSubmit = event => {
-        //TODO: Cambiar a actualizar asistencia
-        backend.tallerService.crearReparacion(
+
+        event.preventDefault()
+
+        backend.tallerService.actualizarAsistencia(
             {
                 fecha,
                 mecanicos,
@@ -44,9 +47,10 @@ const ActualizarReparacion = () => {
                 duracionEstimada,
                 descripcion,
                 peritaje,
-                horasDeTrabajo
-                // TODO: enviar tipo de reparación
+                horasDeTrabajo,
+                tipo : tipoTarea[0].idTipo
             },
+            idReparacion,
             () => history.push("/horario"),
         )
     }
@@ -57,15 +61,11 @@ const ActualizarReparacion = () => {
         backend.tallerService.buscarTrabajosActivos(result => setListaMatricula(result))
         backend.tallerService.buscarElevadores(result => setListaElevadores(result))
         backend.tallerService.buscarHorarios(result => setListaHorarios(result))
-        // TODO: cojer lista de tipo de reparaciones
+        backend.tallerService.getTiposTarea(result => setListaTipoTarea(result))
     }, [])
 
     useEffect(()=> {
         backend.tallerService.buscarReparacionPorId(idReparacion, resultado => setDatosReparacion(resultado))
-        //setListaMecanicos()
-        //setListaElevadores()
-        //setListaHorarios()
-        //setListaTipoTarea()
     }, [])
 
     useEffect(() => {
@@ -76,12 +76,12 @@ const ActualizarReparacion = () => {
         }
     }, [datosReparacion])
 
+    // Verifica si la reparacion debe ser peritada
     useEffect(() => {
-
-        // Si se selecciona un trabajo, hay que verificar si es de tipo peritado para actualizar
-        // el checkbox.
-        if(matricula !== "" && matricula !== undefined && matricula !== null){
-            // TODO: recuperar si el trabajo es peritado o no. setPeritaje()
+        if(matricula[0] !== undefined && matricula[0].peritado){
+            setPeritaje(true)
+        }else{
+            setPeritaje(false)
         }
     }, [matricula])
 
