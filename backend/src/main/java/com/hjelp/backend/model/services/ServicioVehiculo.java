@@ -15,6 +15,7 @@ public interface ServicioVehiculo {
     Vehiculo registrarVehiculo(VehiculoDto vehiculoDto) throws CampoDuplicadoException, InstanceNotFoundException; /*** US28 */
     List<String> getTodasMatriculas(); /*** US27 */
     List<MatrículasDispPorPerDto> getMatriculasByPer();
+    /**************Métodos para los test *****************/
     Marca registrarMarca(String nombre, String descripcion);
     Modelo registrarModelo(String nombre, String descripcion);
 }

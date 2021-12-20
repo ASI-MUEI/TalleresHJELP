@@ -4,20 +4,20 @@ import com.hjelp.backend.model.daos.UsuarioDao;
 import com.hjelp.backend.model.entities.Lenguaje;
 import com.hjelp.backend.model.entities.RolUsuarioSistema;
 import com.hjelp.backend.model.entities.Usuario;
-import com.hjelp.backend.model.exceptions.*;
+import com.hjelp.backend.model.exceptions.CampoDuplicadoException;
+import com.hjelp.backend.model.exceptions.IncorrectLoginException;
+import com.hjelp.backend.model.exceptions.IncorrectPasswordException;
+import com.hjelp.backend.model.exceptions.InstanceNotFoundException;
 import com.hjelp.backend.rest.common.JwtGenerator;
-import com.hjelp.backend.rest.common.JwtInfo;
 import com.hjelp.backend.rest.dtos.UsuarioCambioContraseñaDto;
 import com.hjelp.backend.rest.dtos.UsuarioDto;
 import com.hjelp.backend.rest.dtos.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,27 +34,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
     @Autowired
     JwtGenerator jwtGenerator;
-
-    @Override
-    public Block<Usuario> recuperarUsuarios(String nombre, int page, int size) {
-
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Slice<Usuario> sliceUsuario;
-
-        if (nombre == null) {
-            sliceUsuario = usuarioDao.findAndOrderByNombreUsuario(pageRequest);
-        } else {
-            sliceUsuario = usuarioDao.findByNombreUsuario(nombre, pageRequest);
-        }
-
-        return new Block<>(sliceUsuario.getContent(), sliceUsuario.hasNext());
-    }
-
-    @Override
-    public List<String> recuperarNombresUsuarios() {
-
-        return usuarioDao.findAllUserNames();
-    }
 
     @Override
     public Usuario recuperarUsuario(String nombreUsuario) throws InstanceNotFoundException {
@@ -74,13 +53,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
      * @throws CampoDuplicadoException Si el nombre de usuario o el correo electrónico ya existen en la aplicaciçon.
      */
     @Override
-    public void registrarUsuario(UsuarioDto usuarioDto) throws CampoDuplicadoException,
-            CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void registrarUsuario(UsuarioDto usuarioDto) throws CampoDuplicadoException{
 
-        // Petición no permitida en la aplicación.
-        //if(!esValidoFormRegistro(usuarioDto)){
-        //    throw new CamposIntroducidosNoValidosException();
-        //}
 
         Optional<Usuario> usuarioOptionalNombreUsuario = usuarioDao.findByNombreUsuario(usuarioDto.getNombreUsuario());
         Optional<Usuario> usuarioOptionalCorreoElectronico = usuarioDao.findByCorreoElectronicoUsuario(usuarioDto.getNombreUsuario());
@@ -88,10 +62,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         if(usuarioOptionalNombreUsuario.isPresent()){
             throw new CampoDuplicadoException("entidades.usuario.nombreusuario", usuarioDto.getNombreUsuario());
         }
-        // Se valida que el correo electrónico sea único
-        //if(usuarioOptionalCorreoElectronico.isPresent()){
-        //    throw new CampoDuplicadoException("entidades.usuario.correoelectronicousuario", usuarioDto.getEmail());
-        //}
 
         Usuario usuario = new Usuario();
 
@@ -107,17 +77,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         usuario.setDni(usuarioDto.getDni());
 
         usuarioDao.save(usuario);
-    }
-
-    private boolean esValidoFormRegistro(UsuarioDto usuarioDto){
-        if((usuarioDto.getNombreUsuario() == null || usuarioDto.getNombreUsuario() == "")
-        || (usuarioDto.getContraseña() == null || usuarioDto.getContraseña() == "")
-        || (usuarioDto.getNombrePilaUsuario() == null || usuarioDto.getNombrePilaUsuario() == "")
-        || (usuarioDto.getApellidosUsuario() == null || usuarioDto.getApellidosUsuario() == "")
-        || (usuarioDto.getEmail() == null || usuarioDto.getEmail() == "")){
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -146,8 +105,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     }
 
 
-     @Override
-    public void cambiarContraseñaUsuario(UsuarioCambioContraseñaDto usuarioCambioContraseñaDto, boolean isFromReset)
+    @Override
+    public void cambiarContrasenaUsuario(UsuarioCambioContraseñaDto usuarioCambioContraseñaDto, boolean isFromReset)
             throws IncorrectPasswordException {
 
         Optional<Usuario> usuarioOptional =
@@ -176,12 +135,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     }
 
     @Override
-    public Usuario actualizarDatosUsuario(UsuarioDto datosFormularioActualizacion) {
+    public Usuario actualizarDatosUsuario(UsuarioDto datosFormularioActualizacion) throws InstanceNotFoundException {
 
         Optional<Usuario> usuarioOptional = usuarioDao.findByNombreUsuario(datosFormularioActualizacion.getNombreUsuario());
 
         if (!usuarioOptional.isPresent()) {
-            // todo
+            throw new InstanceNotFoundException("usuario.idUsuario", datosFormularioActualizacion.getIdUsuario());
         }
         Usuario usuario = usuarioOptional.get();
 
@@ -192,66 +151,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
         usuarioDao.save(usuario);
         return usuario;
-    }
-
-    @Override
-    public void enviarEnlaceRecuperacionContrasena(String nombreUsuarioDestinatario) throws InstanceNotFoundException {
-
-        Optional<Usuario> usuarioOptional = usuarioDao.findByNombreUsuario(nombreUsuarioDestinatario);
-
-        if(!usuarioOptional.isPresent()){
-            throw new InstanceNotFoundException(null, null);
-        }
-
-        Usuario usuario = usuarioOptional.get();
-        Long idUsuario = usuario.getIdUsuario();
-
-        JwtInfo jwtInfoUsuario = new JwtInfo(idUsuario);
-
-        String jwtRecuperarContraseña = jwtGenerator.generateForPassword(jwtInfoUsuario);
-        String path = "http://localhost:3000/users/" + usuario.getNombreUsuario() + "/reset-password/" + jwtRecuperarContraseña;
-    }
-
-    @Override
-    public boolean comprobarEnlaceRecuperacionContrasena(String jwt) throws InstanceNotFoundException {
-
-        // Si el token no se decodifica bien y salta excepción o si el usuario no existe, se devuelve falso
-        // indicando que algo ha fallado.
-        try {
-            JwtInfo jwtInfo = jwtGenerator.getInfoForPassword(jwt);
-            Optional<Usuario> usuarioOptional = usuarioDao.findById(jwtInfo.getIdUsuario());
-            if(!usuarioOptional.isPresent()){
-                return false;
-            }
-        } catch(Exception e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void eliminarUsuario(String nombreUsuario) throws InstanceNotFoundException {
-
-        Optional<Usuario> usuarioOptional = usuarioDao.findByNombreUsuario(nombreUsuario);
-
-        if(!usuarioOptional.isPresent()){
-            throw new InstanceNotFoundException(null, null);
-        }
-
-        Usuario usuario = usuarioOptional.get();
-
-        // Borrado de datos personales en BBDD
-        usuario.setNombrePilaUsuario("");
-        usuario.setApellidosUsuario("");
-        usuario.setCorreoElectronicoUsuario(null);
-        usuario.setCuentaEliminada(true);
-
-        usuarioDao.save(usuario);
-    }
-
-    @Override
-    public Usuario actualizarUsuario(Usuario usuario) {
-        return usuarioDao.save(usuario);
     }
 
     @Override

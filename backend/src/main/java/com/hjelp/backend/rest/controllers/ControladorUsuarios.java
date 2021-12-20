@@ -1,8 +1,10 @@
 package com.hjelp.backend.rest.controllers;
 
 import com.hjelp.backend.model.entities.Usuario;
-import com.hjelp.backend.model.exceptions.*;
-import com.hjelp.backend.model.services.Block;
+import com.hjelp.backend.model.exceptions.CampoDuplicadoException;
+import com.hjelp.backend.model.exceptions.IncorrectLoginException;
+import com.hjelp.backend.model.exceptions.IncorrectPasswordException;
+import com.hjelp.backend.model.exceptions.InstanceNotFoundException;
 import com.hjelp.backend.model.services.ServicioUsuario;
 import com.hjelp.backend.rest.common.JwtGenerator;
 import com.hjelp.backend.rest.common.JwtInfo;
@@ -60,8 +62,7 @@ public class ControladorUsuarios {
      */
     @PostMapping("/registrarse")
     public ResponseEntity registrarUsuario(@RequestBody UsuarioDto usuarioDto)
-            throws CampoDuplicadoException, CamposIntroducidosNoValidosException,
-            InstanceNotFoundException {
+            throws CampoDuplicadoException{
 
         servicioUsuario.registrarUsuario(usuarioDto);
 
@@ -72,7 +73,7 @@ public class ControladorUsuarios {
      * US02
      */
     @PutMapping("/usuarios/{nombreUsuario}")
-    public UsuarioDto actualizarDatosUsuario(@RequestBody UsuarioDto datosFormularioActualizacion){
+    public UsuarioDto actualizarDatosUsuario(@RequestBody UsuarioDto datosFormularioActualizacion) throws InstanceNotFoundException {
 
         Usuario usuario = servicioUsuario.actualizarDatosUsuario(datosFormularioActualizacion);
 
@@ -122,25 +123,7 @@ public class ControladorUsuarios {
                                  @RequestParam(defaultValue = "false") boolean isFromReset)
             throws IncorrectPasswordException {
 
-        servicioUsuario.cambiarContraseñaUsuario(usuarioCambioContraseñaDto, isFromReset);
-    }
-
-    /***
-     * US04
-     */
-    @GetMapping("/usuarios/{nombreUsuario}/restablecer-contrasena/{token}")
-    public boolean esElTokenDeRestablecerContraseñaCorrecto(@PathVariable String token)
-            throws InstanceNotFoundException{
-
-        return servicioUsuario.comprobarEnlaceRecuperacionContrasena(token);
-    }
-
-    /***
-     * US04
-     */
-    @PostMapping("/usuarios/{nombreUsuario}/recuperar-cuenta")
-    public void recuperarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
-        servicioUsuario.enviarEnlaceRecuperacionContrasena(nombreUsuario);
+        servicioUsuario.cambiarContrasenaUsuario(usuarioCambioContraseñaDto, isFromReset);
     }
 
     /***
@@ -153,7 +136,7 @@ public class ControladorUsuarios {
 
     /*******************************************************************************************************************************/
 
-    @GetMapping("/usuarios")
+    /*@GetMapping("/usuarios")
     public Block<UsuarioTablaDto> buscarUsuarios(@RequestParam(required = false) String nombreUsuario,
                                                  @RequestParam(defaultValue = "0") int page,
                                                  @RequestParam(defaultValue = "5") int size){
@@ -174,4 +157,16 @@ public class ControladorUsuarios {
     public void eliminarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
         servicioUsuario.eliminarUsuario(nombreUsuario);
     }
+
+    @PostMapping("/usuarios/{nombreUsuario}/recuperar-cuenta")
+    public void recuperarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
+        servicioUsuario.enviarEnlaceRecuperacionContrasena(nombreUsuario);
+    }
+
+    @GetMapping("/usuarios/{nombreUsuario}/restablecer-contrasena/{token}")
+    public boolean esElTokenDeRestablecerContraseñaCorrecto(@PathVariable String token)
+            throws InstanceNotFoundException{
+
+        return servicioUsuario.comprobarEnlaceRecuperacionContrasena(token);
+    }*/
 }
