@@ -19,7 +19,17 @@ public class ControladorVehiculos {
     @Autowired
     private ServicioVehiculo servicioVehiculo;
 
+    /***
+     * US27
+     */
+    @GetMapping("/matriculas")
+    public List<String> recuperarMatriculas(){
+        return servicioVehiculo.getTodasMatriculas();
+    }
 
+    /***
+     * US28
+     */
     @PostMapping("/registrarVeh")
     public ResponseEntity registrarVehiculo(@RequestBody VehiculoDto vehiculoDto)
             throws CampoDuplicadoException,  InstanceNotFoundException {
@@ -27,10 +37,5 @@ public class ControladorVehiculos {
         servicioVehiculo.registrarVehiculo(vehiculoDto);
 
         return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/matriculas")
-    public List<String> recuperarMatriculas(){
-        return servicioVehiculo.getTodasMatriculas();
     }
 }

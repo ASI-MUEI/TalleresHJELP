@@ -1,10 +1,7 @@
 package com.figueiras.photocontest.backend.model.services;
 
 import com.figueiras.photocontest.backend.model.daos.*;
-import com.figueiras.photocontest.backend.model.entities.Flota;
-import com.figueiras.photocontest.backend.model.entities.Modelo;
-import com.figueiras.photocontest.backend.model.entities.Trabajo;
-import com.figueiras.photocontest.backend.model.entities.Vehiculo;
+import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.CampoDuplicadoException;
 import com.figueiras.photocontest.backend.model.exceptions.InstanceNotFoundException;
 import com.figueiras.photocontest.backend.rest.dtos.MatrículasDispPorPerDto;
@@ -36,7 +33,7 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
     private TrabajoDao trabajoDao;
 
     @Override
-    public void registrarVehiculo(VehiculoDto vehiculoDto) throws CampoDuplicadoException, InstanceNotFoundException {
+    public Vehiculo registrarVehiculo(VehiculoDto vehiculoDto) throws CampoDuplicadoException, InstanceNotFoundException {
 
         Optional<Vehiculo> vehOptionalByMatricula = vehiculoDao.findByMatricula(vehiculoDto.getMatricula());
         Optional<Vehiculo> vehOptionalByNumBastidor = vehiculoDao.findByNumBastidor(vehiculoDto.getMatricula());
@@ -71,6 +68,7 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         vehModelo.ifPresent(vehiculo::setModelo);
         vehFlota.ifPresent(vehiculo::setFlota);
         vehiculoDao.save(vehiculo);
+        return vehiculo;
     }
 
     @Override
@@ -89,6 +87,24 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
             }
         }
         return result;
+    }
+
+    @Override
+    public Marca registrarMarca(String nombre, String descripcion) {
+        Marca marca = new Marca();
+        marca.setNombre(nombre);
+        marca.setDescripcion(descripcion);
+        marcaDao.save(marca);
+        return marca;
+    }
+
+    @Override
+    public Modelo registrarModelo(String nombre, String descripcion) {
+        Modelo modelo = new Modelo();
+        modelo.setNombre(nombre);
+        modelo.setDescripcion(descripcion);
+        modeloDao.save(modelo);
+        return modelo;
     }
 
 }

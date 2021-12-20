@@ -55,6 +55,104 @@ public class ControladorUsuarios {
         return  new ErroresDto(mensajeExcepcion);
     }
 
+    /***
+     * US01, US19, US28
+     */
+    @PostMapping("/registrarse")
+    public ResponseEntity registrarUsuario(@RequestBody UsuarioDto usuarioDto)
+            throws CampoDuplicadoException, CamposIntroducidosNoValidosException,
+            InstanceNotFoundException {
+
+        servicioUsuario.registrarUsuario(usuarioDto);
+
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    /***
+     * US02
+     */
+    @PutMapping("/usuarios/{nombreUsuario}")
+    public UsuarioDto actualizarDatosUsuario(@RequestBody UsuarioDto datosFormularioActualizacion){
+
+        Usuario usuario = servicioUsuario.actualizarDatosUsuario(datosFormularioActualizacion);
+
+        return UsuarioConversor.toUsuarioDto(usuario);
+    }
+
+    /***
+     * US02
+     */
+    @GetMapping("/usuarios/{nombreUsuario}")
+    public UsuarioDto buscarUsuario(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
+        Usuario usuario = servicioUsuario.recuperarUsuario(nombreUsuario);
+
+        return UsuarioConversor.toUsuarioDto(usuario);
+    }
+
+    /***
+     * US03
+     */
+    @PostMapping("/iniciar-sesion")
+    public UsuarioAutenticadoDto iniciarSesion(@RequestBody UsuarioLoginDto usuarioLoginDto)
+            throws IncorrectLoginException {
+
+        Usuario usuario = servicioUsuario.iniciarSesionUsuario(usuarioLoginDto);
+        String jwt = generateServiceToken(usuario);
+
+        return UsuarioConversor.toUsuarioAutenticadoDto(usuario, jwt);
+    }
+
+    /***
+     * US03
+     */
+    private String generateServiceToken(Usuario usuario) {
+
+        JwtInfo jwtInfo = new JwtInfo(usuario.getIdUsuario(), usuario.getNombreUsuario(),
+                usuario.getRolUsuarioSistema().toString());
+
+        return jwtGenerator.generate(jwtInfo);
+    }
+
+
+    /***
+     * US04
+     */
+    @PostMapping("/usuarios/{nombreUsuario}/cambio-contrasena")
+    public void cambioContraseña(@RequestBody UsuarioCambioContraseñaDto usuarioCambioContraseñaDto,
+                                 @RequestParam(defaultValue = "false") boolean isFromReset)
+            throws IncorrectPasswordException {
+
+        servicioUsuario.cambiarContraseñaUsuario(usuarioCambioContraseñaDto, isFromReset);
+    }
+
+    /***
+     * US04
+     */
+    @GetMapping("/usuarios/{nombreUsuario}/restablecer-contrasena/{token}")
+    public boolean esElTokenDeRestablecerContraseñaCorrecto(@PathVariable String token)
+            throws InstanceNotFoundException{
+
+        return servicioUsuario.comprobarEnlaceRecuperacionContrasena(token);
+    }
+
+    /***
+     * US04
+     */
+    @PostMapping("/usuarios/{nombreUsuario}/recuperar-cuenta")
+    public void recuperarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
+        servicioUsuario.enviarEnlaceRecuperacionContrasena(nombreUsuario);
+    }
+
+    /***
+     * US06, US26
+     */
+    @GetMapping("/usuarios/mecanicos")
+    public List<MecanicoDto> getMecanicos(){
+        return UsuarioConversor.toMecanicoDto(servicioUsuario.findMecanicos());
+    }
+
+    /*******************************************************************************************************************************/
+
     @GetMapping("/usuarios")
     public Block<UsuarioTablaDto> buscarUsuarios(@RequestParam(required = false) String nombreUsuario,
                                                  @RequestParam(defaultValue = "0") int page,
@@ -72,76 +170,8 @@ public class ControladorUsuarios {
         return nombresDeUsuario;
     }
 
-    @GetMapping("/usuarios/{nombreUsuario}")
-    public UsuarioDto buscarUsuario(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
-        Usuario usuario = servicioUsuario.recuperarUsuario(nombreUsuario);
-
-        return UsuarioConversor.toUsuarioDto(usuario);
-    }
-
-    @PostMapping("/usuarios/{nombreUsuario}/cambio-contrasena")
-    public void cambioContraseña(@RequestBody UsuarioCambioContraseñaDto usuarioCambioContraseñaDto,
-                                @RequestParam(defaultValue = "false") boolean isFromReset)
-            throws IncorrectPasswordException {
-
-        servicioUsuario.cambiarContraseñaUsuario(usuarioCambioContraseñaDto, isFromReset);
-    }
-
-    @PostMapping("/registrarse")
-    public ResponseEntity registrarUsuario(@RequestBody UsuarioDto usuarioDto)
-            throws CampoDuplicadoException, CamposIntroducidosNoValidosException,
-            InstanceNotFoundException {
-
-        servicioUsuario.registrarUsuario(usuarioDto);
-
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    @PostMapping("/iniciar-sesion")
-    public UsuarioAutenticadoDto iniciarSesion(@RequestBody UsuarioLoginDto usuarioLoginDto)
-            throws IncorrectLoginException {
-
-        Usuario usuario = servicioUsuario.iniciarSesionUsuario(usuarioLoginDto);
-        String jwt = generateServiceToken(usuario);
-
-        return UsuarioConversor.toUsuarioAutenticadoDto(usuario, jwt);
-    }
-
-    @PutMapping("/usuarios/{nombreUsuario}")
-    public UsuarioDto actualizarDatosUsuario(@RequestBody UsuarioDto datosFormularioActualizacion){
-
-        Usuario usuario = servicioUsuario.actualizarDatosUsuario(datosFormularioActualizacion);
-
-        return UsuarioConversor.toUsuarioDto(usuario);
-    }
-
-    private String generateServiceToken(Usuario usuario) {
-
-        JwtInfo jwtInfo = new JwtInfo(usuario.getIdUsuario(), usuario.getNombreUsuario(),
-                usuario.getRolUsuarioSistema().toString());
-
-        return jwtGenerator.generate(jwtInfo);
-    }
-
-    @PostMapping("/usuarios/{nombreUsuario}/recuperar-cuenta")
-    public void recuperarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
-        servicioUsuario.enviarEnlaceRecuperacionContrasena(nombreUsuario);
-    }
-
-    @GetMapping("/usuarios/{nombreUsuario}/restablecer-contrasena/{token}")
-    public boolean esElTokenDeRestablecerContraseñaCorrecto(@PathVariable String token)
-            throws InstanceNotFoundException{
-
-        return servicioUsuario.comprobarEnlaceRecuperacionContrasena(token);
-    }
-
     @PostMapping("/usuarios/{nombreUsuario}/eliminar-cuenta")
     public void eliminarCuenta(@PathVariable String nombreUsuario) throws InstanceNotFoundException {
         servicioUsuario.eliminarUsuario(nombreUsuario);
-    }
-
-    @GetMapping("/usuarios/mecanicos")
-    public List<MecanicoDto> getMecanicos(){
-        return UsuarioConversor.toMecanicoDto(servicioUsuario.findMecanicos());
     }
 }
