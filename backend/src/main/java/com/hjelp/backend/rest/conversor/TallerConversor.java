@@ -4,7 +4,6 @@ import com.hjelp.backend.model.entities.EstadoTrabajo;
 import com.hjelp.backend.model.entities.PuestoTaller;
 import com.hjelp.backend.model.entities.TipoAsistencias;
 import com.hjelp.backend.model.entities.Trabajo;
-import com.figueiras.photocontest.backend.rest.dtos.*;
 import com.hjelp.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
 

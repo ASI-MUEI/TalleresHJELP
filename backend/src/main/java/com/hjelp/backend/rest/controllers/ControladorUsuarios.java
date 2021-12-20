@@ -1,14 +1,12 @@
 package com.hjelp.backend.rest.controllers;
 
 import com.hjelp.backend.model.entities.Usuario;
-import com.figueiras.photocontest.backend.model.exceptions.*;
+import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.model.services.Block;
 import com.hjelp.backend.model.services.ServicioUsuario;
 import com.hjelp.backend.rest.common.JwtGenerator;
 import com.hjelp.backend.rest.common.JwtInfo;
 import com.hjelp.backend.rest.conversor.UsuarioConversor;
-import com.figueiras.photocontest.backend.rest.dtos.*;
-import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

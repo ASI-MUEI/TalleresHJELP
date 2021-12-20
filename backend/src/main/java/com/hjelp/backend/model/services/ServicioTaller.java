@@ -1,8 +1,5 @@
 package com.hjelp.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.entities.*;
-import com.figueiras.photocontest.backend.model.exceptions.*;
-import com.figueiras.photocontest.backend.rest.dtos.*;
 import com.hjelp.backend.model.entities.*;
 import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.rest.dtos.*;

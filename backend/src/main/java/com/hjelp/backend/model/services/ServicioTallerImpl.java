@@ -1,14 +1,10 @@
 package com.hjelp.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.daos.*;
-import com.figueiras.photocontest.backend.model.entities.*;
-import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.hjelp.backend.model.daos.*;
 import com.hjelp.backend.model.entities.*;
 import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.rest.conversor.TallerConversor;
 import com.hjelp.backend.rest.conversor.UsuarioConversor;
-import com.figueiras.photocontest.backend.rest.dtos.*;
 import com.hjelp.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

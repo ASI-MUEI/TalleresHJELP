@@ -1,7 +1,6 @@
 package com.hjelp.backend.model.services;
 
 import com.hjelp.backend.model.entities.Usuario;
-import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.rest.dtos.UsuarioCambioContraseñaDto;
 import com.hjelp.backend.rest.dtos.UsuarioDto;

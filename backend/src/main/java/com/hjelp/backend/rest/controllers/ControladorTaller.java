@@ -1,14 +1,11 @@
 package com.hjelp.backend.rest.controllers;
 
-import com.figueiras.photocontest.backend.model.entities.*;
-import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.hjelp.backend.model.entities.*;
 import com.hjelp.backend.model.exceptions.*;
 import com.hjelp.backend.model.services.Block;
 import com.hjelp.backend.model.services.ServicioTaller;
 import com.hjelp.backend.rest.conversor.AsistenciaConversor;
 import com.hjelp.backend.rest.conversor.TallerConversor;
-import com.figueiras.photocontest.backend.rest.dtos.*;
 import com.hjelp.backend.rest.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;

@@ -1,7 +1,5 @@
 package com.hjelp.backend.model.services;
 
-import com.figueiras.photocontest.backend.model.daos.*;
-import com.figueiras.photocontest.backend.model.entities.*;
 import com.hjelp.backend.model.daos.*;
 import com.hjelp.backend.model.entities.*;
 import com.hjelp.backend.model.exceptions.CampoDuplicadoException;
