@@ -21,6 +21,9 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
     private VehiculoDao vehiculoDao;
 
     @Autowired
+    private UsuarioDao usuarioDao;
+
+    @Autowired
     private ModeloDao modeloDao;
 
     @Autowired
@@ -34,6 +37,11 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
 
     @Override
     public Vehiculo registrarVehiculo(VehiculoDto vehiculoDto) throws CampoDuplicadoException, InstanceNotFoundException {
+
+        Optional<Usuario> userOpt = usuarioDao.findById(vehiculoDto.getUsuario());
+        if (userOpt.isEmpty()){
+            throw new InstanceNotFoundException("entidades.usuario.idUsuario", vehiculoDto.getUsuario());
+        }
 
         Optional<Vehiculo> vehOptionalByMatricula = vehiculoDao.findByMatricula(vehiculoDto.getMatricula());
         Optional<Vehiculo> vehOptionalByNumBastidor = vehiculoDao.findByNumBastidor(vehiculoDto.getMatricula());
@@ -65,6 +73,7 @@ public class ServicioVehiculoImpl implements ServicioVehiculo{
         Vehiculo vehiculo = new Vehiculo();
         vehiculo.setMatricula(vehiculoDto.getMatricula());
         vehiculo.setNumBastidor(vehiculoDto.getNumBastidor());
+        vehiculo.setUsuario(userOpt.get());
         vehModelo.ifPresent(vehiculo::setModelo);
         vehFlota.ifPresent(vehiculo::setFlota);
         vehiculoDao.save(vehiculo);

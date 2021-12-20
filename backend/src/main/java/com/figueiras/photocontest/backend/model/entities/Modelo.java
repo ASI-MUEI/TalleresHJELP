@@ -11,6 +11,14 @@ public class Modelo {
     private Marca marca;
     private String manual;
 
+    public Modelo(Long idModelo, String nombre, String descripcion, Marca marca, String manual) {
+        this.idModelo = idModelo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.marca = marca;
+        this.manual = manual;
+    }
+
     public Modelo() {
     }
 

@@ -4,6 +4,7 @@ import com.figueiras.photocontest.backend.model.entities.*;
 import com.figueiras.photocontest.backend.model.exceptions.*;
 import com.figueiras.photocontest.backend.rest.dtos.*;
 import org.springframework.data.domain.Slice;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +15,11 @@ public interface ServicioTaller {
     AsistenciaCompletaFranjaHDto asignarAsistenciaFranjaHoraria(AsistenciaFranjaHorariaDto asistenciaFranjaHDto) throws InstanceNotFoundException; /*** US07  */
     Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException; /*** US06  */
     List<Horarios> getHorariosDisponibles(); /*** US06, US07  */
-    Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException; /*** US18, US39 */
+    Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CampoVacioException, CamposIntroducidosNoValidosException; /*** US18, US39 */
     Slice<Trabajo> getTrabajosAbiertos(); /*** US05  */
     Slice<PuestoTaller> getElevadores(); /*** US06  */
     Slice<Trabajo> getTrabajosOrderByFecha(int page, int size); /*** US25 */
     Slice<Asistencia> getAsistenciasOrderByFecha(Long idTrabajo, int page, int size); /*** US05, US29, US35  */
-    Trabajo getTrabajoByID(Long idTrabajo)throws InstanceNotFoundException; /*** US23, US30 */
     Asistencia getAsistenciaByID(Long idAsistencia)throws InstanceNotFoundException; /*** US09 */
     ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha);
     TipoAsistencias crearTipoAsistencia(String nombre, String descripcion);
@@ -34,4 +34,6 @@ public interface ServicioTaller {
     Slice<Asistencia> getAsistenciasRetrasadas(int page, int size); /*** US37 */
     void cambiarEstadoTrabajo(Long idTrabajo, String idEstado) throws InstanceNotFoundException; /*** US24, US31  */
     void actualizaFechaYHoraAsistencia(AsistenciaFranjaHorariaDto asistenciaFranjaHorariaDto) throws InstanceNotFoundException; /*** US07 */
+    Asistencia actualizarAsistencia(AsistenciasDto asistenciasDto, long idAsistencia) throws InstanceNotFoundException;
+    Trabajo getTrabajoByID(Long idTrabajo) throws InstanceNotFoundException; /*** US23, US30 */
 }

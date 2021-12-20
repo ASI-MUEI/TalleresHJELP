@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.InstanceAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +150,7 @@ public class ControladorTaller {
      */
     @PostMapping("/trabajo")
     public ResponseEntity registrarTrabajo(@RequestBody TrabajoDto trabajoDto)
-            throws CampoVacioException, InstanceNotFoundException {
+            throws CampoVacioException, InstanceNotFoundException, CamposIntroducidosNoValidosException {
         servicioTaller.createTrabajo(trabajoDto);
         return new ResponseEntity(HttpStatus.CREATED);
     }
