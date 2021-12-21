@@ -36,7 +36,7 @@ URL del repositorio: https://github.com/ASI-MUEI/TalleresHJELP
 
 
 Integrantes: 
-	Hilda Romero Velo
-	Paula Fernández Blanco
-	José Antonio Figueiras Martinez
+	Hilda Romero Velo,
+	Paula Fernández Blanco,
+	José Antonio Figueiras Martinez,
 	Laura Insua Regueiro
