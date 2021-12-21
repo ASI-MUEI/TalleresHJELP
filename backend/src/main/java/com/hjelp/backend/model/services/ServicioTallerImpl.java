@@ -336,7 +336,6 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         Asistencia asistencia = asisOptional.get();
         List<Pieza> piezas = getPiezasByAsistencia(asistencia.getIdAsistencia(),0, 100).getContent();
-        //if (piezas == null) piezas = new ArrayList<>();
         if(piezas.contains(pieza.get())){
             Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(pieza.get().getIdPieza(), asistencia.getIdAsistencia());
             if(apOpt.isPresent()){
@@ -349,12 +348,10 @@ public class ServicioTallerImpl implements ServicioTaller{
             nuevaAp.setIdPieza(pieza.get().getIdPieza());
             nuevaAp.setIdAsistencia(asistencia.getIdAsistencia());
             nuevaAp.setNumeroUnidades(asistenciaNuevaPiezaDto.getNumeroPiezas());
-            //piezas.add(new Pieza(pieza.get().getIdPieza(), pieza.get().getNombre(), pieza.get().getDescripcion(), pieza.get().getManual(), pieza.get().getPrecio()));
             asistenciaPiezaDao.save(nuevaAp);
         }
 
         asistencia.setPrecio(asistencia.getPrecio() + (pieza.get().getPrecio() * asistenciaNuevaPiezaDto.getNumeroPiezas()));
-        //asistencia.setPiezas(piezas);
         asistenciaDao.save(asistencia);
 
         return asistencia;

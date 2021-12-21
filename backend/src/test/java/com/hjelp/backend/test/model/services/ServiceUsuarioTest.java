@@ -47,7 +47,7 @@ public class ServiceUsuarioTest {
 
     /******** Métodos para los test *********************/
 
-    private Usuario registrarUsuario() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Usuario registrarUsuario() {
         Usuario user = new Usuario();
         user.setNombreUsuario("Laura");
         user.setApellidosUsuario("Insua Regueiro");
@@ -63,7 +63,7 @@ public class ServiceUsuarioTest {
 
      /*** US02  , T1.0*/
      @Test
-     public void recuperarUsuarioTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+     public void recuperarUsuarioTest() throws InstanceNotFoundException {
         Usuario user = registrarUsuario();
         assertEquals(user, servicioUsuario.recuperarUsuario(user.getNombreUsuario()));
     }
@@ -76,7 +76,7 @@ public class ServiceUsuarioTest {
 
     /*** US02  , T2.0*/
     @Test
-    public void actualizarDatosUsuarioTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarDatosUsuarioTest() throws InstanceNotFoundException{
         Usuario userPrimero = registrarUsuario();
 
         UsuarioDto user = new UsuarioDto();
@@ -106,7 +106,7 @@ public class ServiceUsuarioTest {
 
     /*** US03  , T3.0*/
     @Test
-    public void iniciarSesionUsuarioTest() throws IncorrectLoginException, CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void iniciarSesionUsuarioTest() throws IncorrectLoginException, CampoDuplicadoException{
         UsuarioDto user = new UsuarioDto();
         user.setApellidosUsuario("Insua Regueiro");
         user.setDni("48115948V");
@@ -124,7 +124,7 @@ public class ServiceUsuarioTest {
 
     /*** US03  , T3.1*/
     @Test
-    public void iniciarSesionUsuarioIncorrectException() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void iniciarSesionUsuarioIncorrectException(){
         Usuario userPrimero = registrarUsuario();
         UsuarioLoginDto usuario = new UsuarioLoginDto(userPrimero.getNombreUsuario(), "123");
 

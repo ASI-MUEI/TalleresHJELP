@@ -103,7 +103,7 @@ public class ServiceTallerTest {
         piezaDao.save(new Pieza("Electrónica grupo VAG ", "Revisión electrónica", "https://www.andinos.com.pe/wp-content/uploads/2019/05/MANUAL-DE-FALLAS-AUDI-VOLKSWAGEN-SEAT-2.pdf", 500));
     }
 
-    private void registrarInfoPrimera() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private void registrarInfoPrimera(){
         registrarModelo(registrarMarca());
         registrarTiposAsistencias();
         registrarEstadosTrabajo();
@@ -113,7 +113,7 @@ public class ServiceTallerTest {
         registrarPiezas();
     }
 
-    private Vehiculo registrarVehiculo(Usuario user, Modelo modelo) throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Vehiculo registrarVehiculo(Usuario user, Modelo modelo) {
         Vehiculo vehiculo = new Vehiculo();;
         vehiculo.setMatricula("6564GMP");
         vehiculo.setUsuario(user);
@@ -122,7 +122,7 @@ public class ServiceTallerTest {
         return vehiculoDao.save(vehiculo);
     }
 
-    private Vehiculo registrarVehiculo2(Usuario user, Modelo modelo) throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Vehiculo registrarVehiculo2(Usuario user, Modelo modelo) {
         Vehiculo vehiculo = new Vehiculo();;
         vehiculo.setMatricula("6564GMT");
         vehiculo.setUsuario(user);
@@ -137,7 +137,7 @@ public class ServiceTallerTest {
         estadoTrabajosDao.save(new EstadoTrabajo("Pagado", "Estado trabajo pagado"));
     }
 
-    private Trabajo registrarTrabajo(Vehiculo vehiculo, LocalDateTime fecha) throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Trabajo registrarTrabajo(Vehiculo vehiculo, LocalDateTime fecha){
         Trabajo trabajo = new Trabajo();
         trabajo.setDescripcion("Nuevo trabajo test");
         trabajo.setEstado(estadoTrabajosDao.findByNombre("Abierto").get());
@@ -187,7 +187,7 @@ public class ServiceTallerTest {
         horariosDao.save(new Horarios("20:00-20:30"));
     }
 
-    private Asistencia registrarAsistencia(String descripcion, Trabajo trabajo, LocalDateTime fecha, Usuario usuario) throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Asistencia registrarAsistencia(String descripcion, Trabajo trabajo, LocalDateTime fecha, Usuario usuario){
         Asistencia asistencia = new Asistencia();
         asistencia.setFecha(fecha);
         asistencia.setPuesto(puestoTallerDao.findByNombre("Elevador 1").get());
@@ -326,7 +326,7 @@ public class ServiceTallerTest {
 
     /*** US06  , T8.0*/
     @Test
-    public void createAsistenciaTest() throws InstanceNotFoundException, ParseFormatException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void createAsistenciaTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -359,7 +359,7 @@ public class ServiceTallerTest {
 
     /*** US06  , T8.2*/
     @Test
-    public void createAsistenciaNotFoundMecanicosTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void createAsistenciaNotFoundMecanicosTest()  {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -388,7 +388,7 @@ public class ServiceTallerTest {
 
     /*** US06  , T8.3*/
     @Test
-    public void createAsistenciaNotFoundTipoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void createAsistenciaNotFoundTipoTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -418,7 +418,7 @@ public class ServiceTallerTest {
 
     /*** US06  , T8.4*/
     @Test
-    public void createAsistenciaNotFoundPuestoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void createAsistenciaNotFoundPuestoTest(){
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -448,7 +448,7 @@ public class ServiceTallerTest {
 
     /*** US06  , T8.5*/
     @Test
-    public void createAsistenciaNotFoundTrabajoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void createAsistenciaNotFoundTrabajoTest() {
         registrarInfoPrimera();
         AsistenciasDto asistencia = new AsistenciasDto();
         asistencia.setDescripcion("Asistencia 1");
@@ -476,7 +476,7 @@ public class ServiceTallerTest {
 
     /*** US07 , T9.0*/
     @Test
-    public void asignarAsistenciaPuestoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPuestoTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -490,7 +490,7 @@ public class ServiceTallerTest {
 
     /*** US07 , T9.1*/
     @Test
-    public void asignarAsistenciaPuestoNotFoundPuestoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPuestoNotFoundPuestoTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -500,14 +500,14 @@ public class ServiceTallerTest {
 
     /*** US07 , T9.2*/
     @Test
-    public void asignarAsistenciaPuestoNotFoundAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPuestoNotFoundAsistenciaTest() {
         registrarPuestos();
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.asignarAsistenciaPuesto(new AsistenciaPuestoTDto(puestoTallerDao.findByNombre("Elevador 2").get().getIdPuesto(), 0L)));
     }
 
     /*** US07  , T9.3*/
     @Test
-    public void asignarAsistenciaFranjaHorariaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaFranjaHorariaTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -527,7 +527,7 @@ public class ServiceTallerTest {
 
     /*** US07  , T9.4*/
     @Test
-    public void asignarAsistenciaFranjaHorariaNotFoundTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaFranjaHorariaNotFoundTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -543,7 +543,7 @@ public class ServiceTallerTest {
 
     /*** US07 , T10.0*/
     @Test
-    public void actualizaFechaYHoraAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizaFechaYHoraAsistenciaTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -564,7 +564,7 @@ public class ServiceTallerTest {
 
     /*** US07 , T10.1*/
     @Test
-    public void actualizaFechaYHoraAsistenciaNotFoundTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizaFechaYHoraAsistenciaNotFoundTest() {
         registrarHorarios();
         Horarios hora = horariosDao.findByNombre("11:00-11:30").get();
         AsistenciaFranjaHorariaDto asiHor = new AsistenciaFranjaHorariaDto();
@@ -579,7 +579,7 @@ public class ServiceTallerTest {
 
     /*** US09 , T11.0*/
     @Test
-    public void getAsistenciaByIDTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void getAsistenciaByIDTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -592,13 +592,13 @@ public class ServiceTallerTest {
 
     /*** US09 , T11.1*/
     @Test
-    public void getAsistenciaByIDNotFoundTest()throws InstanceNotFoundException{
+    public void getAsistenciaByIDNotFoundTest(){
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.getAsistenciaByID(0L));
     }
 
     /*** US18, US39 , T12.0*/
     @Test
-    public void createTrabajoTest() throws InstanceNotFoundException, CampoVacioException, CamposIntroducidosNoValidosException, CampoDuplicadoException {
+    public void createTrabajoTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", vehiculo.getMatricula(), false);
@@ -610,7 +610,7 @@ public class ServiceTallerTest {
 
     /*** US18, US39 , T12.1*/
     @Test
-    public void createTrabajoNotFoundTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException, CampoDuplicadoException {
+    public void createTrabajoNotFoundTest()  {
         registrarInfoPrimera();
         TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", "1", false);
 
@@ -619,7 +619,7 @@ public class ServiceTallerTest {
 
     /*** US18, US39 , T12.2*/
     @Test
-    public void createTrabajoCamposInvalidosTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException, CampoDuplicadoException {
+    public void createTrabajoCamposInvalidosTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", vehiculo.getMatricula(), true);
@@ -632,7 +632,7 @@ public class ServiceTallerTest {
 
     /*** US23, US30 , T13.0*/
     @Test
-    public void getTrabajoByIDTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void getTrabajoByIDTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -650,7 +650,7 @@ public class ServiceTallerTest {
 
     /*** US24, US31  , T14.0*/
     @Test
-    public void cambiarEstadoTrabajoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void cambiarEstadoTrabajoTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajoAbierto = registrarTrabajo(vehiculo, null);
@@ -670,7 +670,7 @@ public class ServiceTallerTest {
 
     /*** US24, US31  , T15.2*/
     @Test
-    public void cambiarEstadoTrabajoNotFoundEstadoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void cambiarEstadoTrabajoNotFoundEstadoTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajoAbierto = registrarTrabajo(vehiculo, null);
@@ -679,7 +679,7 @@ public class ServiceTallerTest {
 
     /*** US25 , T15.0*/
     @Test
-    public void getTrabajosOrderByFechaTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void getTrabajosOrderByFechaTest() {
         registrarInfoPrimera();
         registrarUsuario2();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
@@ -713,7 +713,7 @@ public class ServiceTallerTest {
 
     /*** US32 , T17.0*/
     @Test
-    public void asignarAsistenciaPiezaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPiezaTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -731,7 +731,7 @@ public class ServiceTallerTest {
 
     /*** US32 , T17.1*/
     @Test
-    public void asignarAsistenciaPiezaNotFoundPiezaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPiezaNotFoundPiezaTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -741,14 +741,14 @@ public class ServiceTallerTest {
 
     /*** US32 , T17.1*/
     @Test
-    public void asignarAsistenciaPiezaNotFoundAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void asignarAsistenciaPiezaNotFoundAsistenciaTest() {
         registrarInfoPrimera();
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.asignarAsistenciaPieza(new AsistenciaNuevaPiezaDto(0L, piezaDao.findByNombre("Electrónica grupo VAG ").get().getIdPieza(), 2L)));
     }
 
     /*** US33 , T18.0*/
     @Test
-    public void getPiezasByAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void getPiezasByAsistenciaTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -775,7 +775,7 @@ public class ServiceTallerTest {
 
     /*** US34 , T19*/
     @Test
-    public void cambiarRetraso() throws InstanceNotFoundException, CampoVacioException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void cambiarRetraso() throws InstanceNotFoundException, CampoVacioException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -788,7 +788,7 @@ public class ServiceTallerTest {
 
     /*** US37 , T20.0*/
     @Test
-    public void getAsistenciasRetrasadasTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException, CampoVacioException {
+    public void getAsistenciasRetrasadasTest() throws InstanceNotFoundException, CampoVacioException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -811,7 +811,7 @@ public class ServiceTallerTest {
 
     /*** US37 , T20.1*/
     @Test
-    public void getAsistenciasRetrasadas0SizeTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException, CampoVacioException {
+    public void getAsistenciasRetrasadas0SizeTest() throws InstanceNotFoundException, CampoVacioException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -833,7 +833,7 @@ public class ServiceTallerTest {
 
     /*** US38 .T21.0*/
     @Test
-    public void getFacturaTest() throws InstanceNotFoundException, StateErrorException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void getFacturaTest() throws InstanceNotFoundException, StateErrorException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -856,7 +856,7 @@ public class ServiceTallerTest {
 
     /*** US38 ,T21.2*/
     @Test
-    public void getFacturaStateErrorTest() throws InstanceNotFoundException, StateErrorException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void getFacturaStateErrorTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -872,7 +872,7 @@ public class ServiceTallerTest {
 
     /*** US33 , T22.0*/
     @Test
-    public void getNumeroUnidadesPiezaAsistenciaTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void getNumeroUnidadesPiezaAsistenciaTest() throws InstanceNotFoundException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -895,7 +895,7 @@ public class ServiceTallerTest {
 
     /*** T23.0*/
     @Test
-    public void deleteAsistenciaPiezaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void deleteAsistenciaPiezaTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -918,7 +918,7 @@ public class ServiceTallerTest {
 
     /*** T23.2*/
     @Test
-    public void deleteAsistenciaPiezaNotFoundPiezaTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void deleteAsistenciaPiezaNotFoundPiezaTest()  {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -929,7 +929,7 @@ public class ServiceTallerTest {
 
     /*** T24.0*/
     @Test
-    public void getHorariosLibresporFechaTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void getHorariosLibresporFechaTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -958,7 +958,7 @@ public class ServiceTallerTest {
 
     /*** T26.0*/
     @Test
-    public void actualizarAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -999,7 +999,7 @@ public class ServiceTallerTest {
 
     /*** T26.1*/
     @Test
-    public void actualizarAsistenciaNotFoundUserTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaNotFoundUserTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -1030,7 +1030,7 @@ public class ServiceTallerTest {
 
     /*** T26.2*/
     @Test
-    public void actualizarAsistenciaNotFoundTATest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaNotFoundTATest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -1059,7 +1059,7 @@ public class ServiceTallerTest {
 
     /*** T26.3*/
     @Test
-    public void actualizarAsistenciaNotFoundPuestoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaNotFoundPuestoTest()  {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -1088,7 +1088,7 @@ public class ServiceTallerTest {
 
     /*** T26.4*/
     @Test
-    public void actualizarAsistenciaNotFoundTrabajoTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaNotFoundTrabajoTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
@@ -1118,7 +1118,7 @@ public class ServiceTallerTest {
 
     /*** T26.5*/
     @Test
-    public void actualizarAsistenciaNotFoundAsistenciaTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
+    public void actualizarAsistenciaNotFoundAsistenciaTest() {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
         Trabajo trabajo = registrarTrabajo(vehiculo, null);

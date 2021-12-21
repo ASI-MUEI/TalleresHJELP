@@ -47,7 +47,7 @@ public class ServiceVehiculoTest {
 
     /******** Métodos para los test *********************/
 
-    private Usuario registrarUsuario() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    private Usuario registrarUsuario(){
         Usuario user = new Usuario();
         user.setNombreUsuario("Laura");
         user.setApellidosUsuario("Insua Regueiro");
@@ -71,7 +71,7 @@ public class ServiceVehiculoTest {
 
     /*** US28 , T1.0*/
     @Test
-    public void registrarVehiculoTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void registrarVehiculoTest() throws CampoDuplicadoException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
         Marca marca = registrarMarca();
 
@@ -89,7 +89,7 @@ public class ServiceVehiculoTest {
 
     /*** US28 , T1.1*/
     @Test
-    public void registrarVehiculoTestExceptionCampoDuplicado() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void registrarVehiculoTestExceptionCampoDuplicado() throws CampoDuplicadoException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
         Marca marca = registrarMarca();
 
@@ -114,7 +114,7 @@ public class ServiceVehiculoTest {
 
     /*** US28 , T1.2*/
     @Test
-    public void registrarVehiculoTestExceptionInstanceNotFound() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void registrarVehiculoTestExceptionInstanceNotFound() {
         VehiculoDto vehiculo = new VehiculoDto();
         Marca marca = registrarMarca();
 
@@ -131,7 +131,7 @@ public class ServiceVehiculoTest {
 
     /*** US27 , T2.0*/
     @Test
-    public void getTodasMatriculasTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
+    public void getTodasMatriculasTest() throws CampoDuplicadoException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
         Marca marca = registrarMarca();
 
