@@ -17,6 +17,7 @@ Luego de su instalación:
 
 ```
 cd backend
+mvn install
 mvn sql:execute (only first time to create tables)
 mvn spring-boot:run
 ```
