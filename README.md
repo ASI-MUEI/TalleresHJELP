@@ -11,7 +11,10 @@ Se necesitan las siguientes dependencias:
 * Maven 3.6+.
 * MySQL 8+.
 
-Luego de su instalación:
+El backend hace uso de las siguientes tecnologías: Spring-boot, Maven, JPA, Hibernate
+El frontend hace uso de las siguientes tecnologías: NPM, React
+
+Una vez hayamos instalado las dependencias mencionadas para la instalación del proyecto se deben seguir los pasos siguientes:
 
 [Backend]
 
@@ -28,3 +31,12 @@ cd frontend
 npm install (only first time to download libraries)
 npm start
 ```
+
+URL del repositorio: https://github.com/ASI-MUEI/TalleresHJELP
+
+
+Integrantes: 
+	Hilda Romero Velo
+	Paula Fernández Blanco
+	José Antonio Figueiras Martinez
+	Laura Insua Regueiro
