@@ -14,6 +14,12 @@ public class PuestoTaller {
     public PuestoTaller() {
     }
 
+    public PuestoTaller(Long idPuesto, String nombre, String descripcion) {
+        this.idPuesto = idPuesto;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdPuesto() {

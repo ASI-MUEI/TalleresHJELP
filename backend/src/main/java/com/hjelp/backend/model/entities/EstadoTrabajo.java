@@ -14,6 +14,11 @@ public class EstadoTrabajo {
     public EstadoTrabajo() {
     }
 
+    public EstadoTrabajo(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdEstado() {

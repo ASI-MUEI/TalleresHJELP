@@ -45,6 +45,8 @@ public class ServiceUsuarioTest {
     @Autowired
     VehiculoDao vehiculoDao;
 
+    /******** Métodos para los test *********************/
+
     private Usuario registrarUsuario() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario user = new Usuario();
         user.setNombreUsuario("Laura");
@@ -57,20 +59,22 @@ public class ServiceUsuarioTest {
         return user;
     }
 
-     /*** US02  */
+    /********************************************************/
+
+     /*** US02  , T1.0*/
      @Test
      public void recuperarUsuarioTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
         Usuario user = registrarUsuario();
         assertEquals(user, servicioUsuario.recuperarUsuario(user.getNombreUsuario()));
     }
 
-    /*** US02  */
+    /*** US02  , T1.1*/
     @Test
     public void recuperarUsuarioNotFound(){
         assertThrows(InstanceNotFoundException.class, () -> servicioUsuario.recuperarUsuario("Laura"));
     }
 
-    /*** US02  */
+    /*** US02  , T2.0*/
     @Test
     public void actualizarDatosUsuarioTest() throws InstanceNotFoundException, CampoDuplicadoException, CamposIntroducidosNoValidosException {
         Usuario userPrimero = registrarUsuario();
@@ -92,7 +96,7 @@ public class ServiceUsuarioTest {
         assertEquals(userPrimero.getRolUsuarioSistema(), usuarioAct.getRolUsuarioSistema());
     }
 
-    /*** US02  */
+    /*** US02  , T2.1*/
     @Test
     public void actualizarDatosUsuarioNotFound() {
         UsuarioDto user = new UsuarioDto();
@@ -100,7 +104,7 @@ public class ServiceUsuarioTest {
         assertThrows(InstanceNotFoundException.class, () -> servicioUsuario.actualizarDatosUsuario(user));
     }
 
-    /*** US03  */
+    /*** US03  , T3.0*/
     @Test
     public void iniciarSesionUsuarioTest() throws IncorrectLoginException, CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         UsuarioDto user = new UsuarioDto();
@@ -118,7 +122,7 @@ public class ServiceUsuarioTest {
         assertEquals(usuarioLeguado.getNombreUsuario(), usuarioLeguado.getNombreUsuario());
     }
 
-    /*** US03  */
+    /*** US03  , T3.1*/
     @Test
     public void iniciarSesionUsuarioIncorrectException() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario userPrimero = registrarUsuario();
@@ -127,7 +131,7 @@ public class ServiceUsuarioTest {
         assertThrows(IncorrectLoginException.class, () -> servicioUsuario.iniciarSesionUsuario(usuario));
     }
 
-    /*** US04  */
+    /*** US04  , T4.0*/
     @Test
     public void cambiarContrasenaUsuarioTest() throws IncorrectPasswordException, CampoDuplicadoException {
         UsuarioDto user = new UsuarioDto();
@@ -148,7 +152,7 @@ public class ServiceUsuarioTest {
         servicioUsuario.cambiarContrasenaUsuario(usuario, false);
     }
 
-    /*** US04  */
+    /*** US04  , T4.1*/
     @Test
     public void cambiarContrasenaUsuarioIncorrectPasswd() throws CampoDuplicadoException {
         UsuarioDto user = new UsuarioDto();
@@ -169,7 +173,7 @@ public class ServiceUsuarioTest {
         assertThrows(IncorrectPasswordException.class, () -> servicioUsuario.cambiarContrasenaUsuario(usuario, false));
     }
 
-    /*** US01, US19, US28  */
+    /*** US01, US19, US28  , T5.0*/
     @Test
     public void registrarUsuarioTest() throws CampoDuplicadoException{
         UsuarioDto user = new UsuarioDto();
@@ -188,7 +192,7 @@ public class ServiceUsuarioTest {
 
     }
 
-    /*** US01, US19, US28  */
+    /*** US01, US19, US28  , T5.1*/
     @Test
     public void registrarUsuarioCampoDuplicado() throws CampoDuplicadoException{
         UsuarioDto user = new UsuarioDto();
@@ -212,7 +216,7 @@ public class ServiceUsuarioTest {
         assertThrows(CampoDuplicadoException.class, () -> servicioUsuario.registrarUsuario(user)) ;
     }
 
-    /*** US06, US26  */
+    /*** US06, US26  , T6.0*/
     @Test
     public void findMecanicosTest(){
         Usuario user = new Usuario();
@@ -243,7 +247,7 @@ public class ServiceUsuarioTest {
 
     }
 
-    /*** US06, US26  */
+    /*** US06, US26  , T6.1*/
     @Test
     public void findMecanicosSize0Test(){
         Usuario user = new Usuario();

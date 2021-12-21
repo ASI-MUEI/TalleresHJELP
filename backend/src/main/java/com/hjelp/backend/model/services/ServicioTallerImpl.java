@@ -2,7 +2,10 @@ package com.hjelp.backend.model.services;
 
 import com.hjelp.backend.model.daos.*;
 import com.hjelp.backend.model.entities.*;
-import com.hjelp.backend.model.exceptions.*;
+import com.hjelp.backend.model.exceptions.CampoVacioException;
+import com.hjelp.backend.model.exceptions.CamposIntroducidosNoValidosException;
+import com.hjelp.backend.model.exceptions.InstanceNotFoundException;
+import com.hjelp.backend.model.exceptions.StateErrorException;
 import com.hjelp.backend.rest.conversor.TallerConversor;
 import com.hjelp.backend.rest.conversor.UsuarioConversor;
 import com.hjelp.backend.rest.dtos.*;
@@ -100,7 +103,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         final Long[] idHorarioExcepcion = {-1L};
         asistenciaFranjaHDto.getFranjasHorarias().forEach((idHorario, franjaHoraria) -> {
             Optional<Horarios> horarioOpt = horariosDao.findById(idHorario);
-            if (horarioOpt.isEmpty()) {
+            if (horarioOpt.isPresent()) {
                 idHorarioExcepcion[0] = idHorario;
             }
         });
@@ -125,7 +128,7 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException, ParseFormatException {
+    public Asistencia createAsistencia(AsistenciasDto asistenciasDto) throws InstanceNotFoundException {
         List<Usuario> mecanicos = new ArrayList<>();
 
         for (MecanicoAsistenciaDto mDto : asistenciasDto.getMecanicos()) {
@@ -240,6 +243,16 @@ public class ServicioTallerImpl implements ServicioTaller{
         return horariosDao.getEtiquetasOrderById();
     }
 
+    private List<Horarios> eliminarOcupadas(List<Horarios> horariosOcupados){
+        List<Horarios> horariosTotales = getHorariosDisponibles();
+
+        for (Horarios hora : horariosOcupados){
+            horariosTotales.remove(hora);
+        }
+
+        return horariosTotales;
+    }
+
     @Override
     public ArrayList<List<Horarios>> getHorariosLibresporFecha(String fecha){
         List<Asistencia> asistencias = findAllAsistenciasPorFecha(fecha);
@@ -250,27 +263,33 @@ public class ServicioTallerImpl implements ServicioTaller{
         List<Horarios> hLElevador5 = new ArrayList<>();
         for (Asistencia asistencia:asistencias){
             if(asistencia != null){
-                switch (String.valueOf(asistencia.getPuesto().getIdPuesto())){
-                    case "1":
+                switch (asistencia.getPuesto().getNombre()){
+                    case "Elevador 1":
                         hLElevador1.addAll(asistencia.getHorarios());
-                    case "2":
+                        break;
+                    case "Elevador 2":
                         hLElevador2.addAll(asistencia.getHorarios());
-                    case "3":
+                        break;
+                    case "Elevador 3":
                         hLElevador3.addAll(asistencia.getHorarios());
-                    case "4":
+                        break;
+                    case "Elevador 4":
                         hLElevador4.addAll(asistencia.getHorarios());
-                    case "5":
+                        break;
+                    case "Elevador 5":
                         hLElevador5.addAll(asistencia.getHorarios());
+                        break;
+                    default: break;
                 }
             }
         }
 
         ArrayList result = new ArrayList();
-        result.add(hLElevador1);
-        result.add(hLElevador2);
-        result.add(hLElevador3);
-        result.add(hLElevador4);
-        result.add(hLElevador5);
+        result.add(eliminarOcupadas(hLElevador1));
+        result.add(eliminarOcupadas(hLElevador2));
+        result.add(eliminarOcupadas(hLElevador3));
+        result.add(eliminarOcupadas(hLElevador4));
+        result.add(eliminarOcupadas(hLElevador5));
         return result;
 
     }
@@ -316,7 +335,8 @@ public class ServicioTallerImpl implements ServicioTaller{
         }
 
         Asistencia asistencia = asisOptional.get();
-        List<Pieza> piezas = asistencia.getPiezas();
+        List<Pieza> piezas = getPiezasByAsistencia(asistencia.getIdAsistencia(),0, 100).getContent();
+        //if (piezas == null) piezas = new ArrayList<>();
         if(piezas.contains(pieza.get())){
             Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(pieza.get().getIdPieza(), asistencia.getIdAsistencia());
             if(apOpt.isPresent()){
@@ -329,10 +349,12 @@ public class ServicioTallerImpl implements ServicioTaller{
             nuevaAp.setIdPieza(pieza.get().getIdPieza());
             nuevaAp.setIdAsistencia(asistencia.getIdAsistencia());
             nuevaAp.setNumeroUnidades(asistenciaNuevaPiezaDto.getNumeroPiezas());
+            //piezas.add(new Pieza(pieza.get().getIdPieza(), pieza.get().getNombre(), pieza.get().getDescripcion(), pieza.get().getManual(), pieza.get().getPrecio()));
             asistenciaPiezaDao.save(nuevaAp);
         }
 
         asistencia.setPrecio(asistencia.getPrecio() + (pieza.get().getPrecio() * asistenciaNuevaPiezaDto.getNumeroPiezas()));
+        //asistencia.setPiezas(piezas);
         asistenciaDao.save(asistencia);
 
         return asistencia;
@@ -369,7 +391,7 @@ public class ServicioTallerImpl implements ServicioTaller{
         if (trabajoOpt.isEmpty())
             throw new InstanceNotFoundException("entidades.trabajo.idTrabajo", idTrabajo);
 
-        if (trabajoOpt.get().getEstado().getIdEstado() == 1){
+        if (trabajoOpt.get().getEstado().getIdEstado() == estadoTrabajosDao.findByNombre("Abierto").get().getIdEstado()){
             throw new StateErrorException("entidades.trabajo.estado", trabajoOpt.get().getEstado().getNombre());
         }
 
@@ -396,8 +418,7 @@ public class ServicioTallerImpl implements ServicioTaller{
     }
 
     @Override
-    public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException,
-            CamposIntroducidosNoValidosException {
+    public Trabajo createTrabajo(TrabajoDto trabajoDto) throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
 
         // Se verifica si ya existe un trabajo con dicha matrícula y con ese valor de peritaje
         Optional<Trabajo> tOpt =
@@ -411,7 +432,7 @@ public class ServicioTallerImpl implements ServicioTaller{
             throw new InstanceNotFoundException("entidades.vehiculo.idVehiculo", trabajoDto.getMatricula());
         }
 
-        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findById(1L);
+        Optional<EstadoTrabajo> estadoOpt = estadoTrabajosDao.findByNombre("Abierto");
         EstadoTrabajo estadoAbierto = estadoOpt.get();
 
         Trabajo trabajo = new Trabajo();
@@ -442,7 +463,12 @@ public class ServicioTallerImpl implements ServicioTaller{
                 Integer.valueOf(fecha_tabla[2]), 0, 0, 0, 0);
 
         List<Asistencia> asistencias = new ArrayList<>(101);
-        asistencias = asistenciaDao.findAsistenciasPorFecha(fechaFiltrado);
+        asistenciaDao.findAll().forEach(asistencia -> {
+            String fechaFilt = asistencia.getFecha().toString().split("T")[0];
+            if (fechaFilt.equals(fechaFiltrado.toString().split("T")[0])){
+                asistencias.add(asistencia);
+            }
+        });
 
         // Las asistencias se pasarán a un array en donde estén ordenadas por franja horaria
         // ** -> Las asistencias se repiten si están en varias franjas horarias <-- **

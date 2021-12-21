@@ -21,6 +21,13 @@ public class Pieza {
         this.precio = precio;
     }
 
+    public Pieza(String nombre, String descripcion, String manual, float precio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.manual = manual;
+        this.precio = precio;
+    }
+
     public Pieza() {
     }
 

@@ -150,7 +150,7 @@ public class ControladorTaller {
      */
     @PostMapping("/trabajo")
     public ResponseEntity registrarTrabajo(@RequestBody TrabajoDto trabajoDto)
-            throws CampoVacioException, InstanceNotFoundException, CamposIntroducidosNoValidosException {
+            throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
         servicioTaller.createTrabajo(trabajoDto);
         return new ResponseEntity(HttpStatus.CREATED);
     }

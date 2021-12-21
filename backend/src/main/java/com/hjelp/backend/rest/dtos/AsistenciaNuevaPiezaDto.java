@@ -10,6 +10,12 @@ public class AsistenciaNuevaPiezaDto {
         this.idPieza = idPieza;
     }
 
+    public AsistenciaNuevaPiezaDto(Long idAsistencia, Long idPieza, Long numeroPiezas) {
+        this.idAsistencia = idAsistencia;
+        this.idPieza = idPieza;
+        this.numeroPiezas = numeroPiezas;
+    }
+
     public Long getIdAsistencia() {
         return idAsistencia;
     }

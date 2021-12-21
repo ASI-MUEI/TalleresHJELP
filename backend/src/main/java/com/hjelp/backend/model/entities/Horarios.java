@@ -17,6 +17,10 @@ public class Horarios {
         this.franjaHoraria = franjaHoraria;
     }
 
+    public Horarios(String franjaHoraria) {
+        this.franjaHoraria = franjaHoraria;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdFranjaHoraria() {

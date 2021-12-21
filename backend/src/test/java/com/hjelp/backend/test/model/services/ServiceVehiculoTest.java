@@ -45,6 +45,8 @@ public class ServiceVehiculoTest {
     @Autowired
     VehiculoDao vehiculoDao;
 
+    /******** Métodos para los test *********************/
+
     private Usuario registrarUsuario() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario user = new Usuario();
         user.setNombreUsuario("Laura");
@@ -65,7 +67,9 @@ public class ServiceVehiculoTest {
         return modeloDao.save(new Modelo(1L, "Ford focus", "Descripcion Ford",marca, ""));
     }
 
-    /*** US28 */
+    /************************************************************/
+
+    /*** US28 , T1.0*/
     @Test
     public void registrarVehiculoTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
@@ -83,7 +87,7 @@ public class ServiceVehiculoTest {
 
     }
 
-    /*** US28 */
+    /*** US28 , T1.1*/
     @Test
     public void registrarVehiculoTestExceptionCampoDuplicado() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
@@ -108,7 +112,7 @@ public class ServiceVehiculoTest {
 
     }
 
-    /*** US28 */
+    /*** US28 , T1.2*/
     @Test
     public void registrarVehiculoTestExceptionInstanceNotFound() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         VehiculoDto vehiculo = new VehiculoDto();
@@ -125,7 +129,7 @@ public class ServiceVehiculoTest {
 
     }
 
-    /*** US27 */
+    /*** US27 , T2.0*/
     @Test
     public void getTodasMatriculasTest() throws CampoDuplicadoException, CamposIntroducidosNoValidosException, InstanceNotFoundException {
         Usuario user = registrarUsuario();
