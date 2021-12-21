@@ -2,7 +2,7 @@
 
 Práctica para la asignatura ASI del MUEI.
 
-## Ejecutar aplicación
+## Dependencias
 
 Se necesitan las siguientes dependencias:
 
@@ -11,9 +11,11 @@ Se necesitan las siguientes dependencias:
 * Maven 3.6+.
 * MySQL 8+.
 
-El backend hace uso de las siguientes tecnologías: Spring-boot, Maven, JPA, Hibernate
-El frontend hace uso de las siguientes tecnologías: NPM, React
+El backend hace uso de las siguientes tecnologías: Spring-boot, Maven, JPA, Hibernate.
 
+El frontend hace uso de las siguientes tecnologías: NPM, React.
+
+## Ejecutar la aplicación 
 Una vez hayamos instalado las dependencias mencionadas para la instalación del proyecto se deben seguir los pasos siguientes:
 
 [Backend]
@@ -34,7 +36,7 @@ npm start
 
 URL del repositorio: https://github.com/ASI-MUEI/TalleresHJELP
 
-
+## Información del grupo
 Integrantes: 
 	Hilda Romero Velo,
 	Paula Fernández Blanco,
