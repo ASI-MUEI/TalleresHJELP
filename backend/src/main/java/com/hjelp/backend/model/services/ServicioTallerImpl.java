@@ -371,11 +371,11 @@ public class ServicioTallerImpl implements ServicioTaller{
 
         Optional<AsistenciaPieza> apOpt = asistenciaPiezaDao.findByIdPiezaIdAsistencia(asistenciaNuevaPiezaDto.getIdPieza(), asistenciaNuevaPiezaDto.getIdAsistencia());
         apOpt.ifPresent(asistenciaPieza -> asistenciaPiezaDao.delete(asistenciaPieza));
-
         Asistencia asistencia = asisOptional.get();
         List<Pieza> piezas = asistencia.getPiezas();
         piezas.remove(pieza.get());
         asistencia.setPiezas(piezas);
+        asistencia.setPrecio(asistencia.getPrecio() - piezaDao.findById(apOpt.get().getIdPieza()).get().getPrecio());
         asistenciaDao.save(asistencia);
 
         return asistencia;

@@ -5,11 +5,6 @@ public class AsistenciaNuevaPiezaDto {
     private Long idPieza;
     private Long numeroPiezas;
 
-    public AsistenciaNuevaPiezaDto(Long idAsistencia, Long idPieza) {
-        this.idAsistencia = idAsistencia;
-        this.idPieza = idPieza;
-    }
-
     public AsistenciaNuevaPiezaDto(Long idAsistencia, Long idPieza, Long numeroPiezas) {
         this.idAsistencia = idAsistencia;
         this.idPieza = idPieza;

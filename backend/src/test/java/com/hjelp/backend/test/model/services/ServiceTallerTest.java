@@ -601,7 +601,9 @@ public class ServiceTallerTest {
     public void createTrabajoTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
-        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", vehiculo.getMatricula(), false);
+        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1");
+        trabajo.setMatricula(vehiculo.getMatricula());
+        trabajo.setPeritado(false);
         Trabajo trabajoResult = servicioTaller.createTrabajo(trabajo);
 
         assertEquals(trabajo.getNombre(), trabajoResult.getNombre());
@@ -612,7 +614,9 @@ public class ServiceTallerTest {
     @Test
     public void createTrabajoNotFoundTest()  {
         registrarInfoPrimera();
-        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", "1", false);
+        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1");
+        trabajo.setMatricula("1");
+        trabajo.setPeritado(false);
 
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.createTrabajo(trabajo));
     }
@@ -622,10 +626,14 @@ public class ServiceTallerTest {
     public void createTrabajoCamposInvalidosTest() throws InstanceNotFoundException, CamposIntroducidosNoValidosException {
         registrarInfoPrimera();
         Vehiculo vehiculo = registrarVehiculo(usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get(), modeloDao.findByNombre("Ford focus").get());
-        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", vehiculo.getMatricula(), true);
+        TrabajoDto trabajo = new TrabajoDto("Trabajo 1", "Trabajo Decr 1");
+        trabajo.setMatricula(vehiculo.getMatricula());
+        trabajo.setPeritado(true);
         servicioTaller.createTrabajo(trabajo);
 
-        TrabajoDto trabajo1 = new TrabajoDto("Trabajo 1", "Trabajo Decr 1", vehiculo.getMatricula(), true);
+        TrabajoDto trabajo1 = new TrabajoDto("Trabajo 1", "Trabajo Decr 1");
+        trabajo1.setMatricula(vehiculo.getMatricula());
+        trabajo1.setPeritado(true);
 
         assertThrows(CamposIntroducidosNoValidosException.class, () -> servicioTaller.createTrabajo(trabajo1));
     }
@@ -903,8 +911,12 @@ public class ServiceTallerTest {
         servicioTaller.asignarAsistenciaPieza(new AsistenciaNuevaPiezaDto(asistencia1.getIdAsistencia(), piezaDao.findByNombre("Electrónica grupo VAG ").get().getIdPieza(), 5L));
 
         List<Pieza> piezas = servicioTaller.getPiezasByAsistencia(asistencia1.getIdAsistencia(), 0,7).getContent();
-        List<PiezasAsistenciasDto> piezasUnidades = servicioTaller.getNumeroUnidadesPiezaAsistencia(AsistenciaConversor.toPiezasReparacion(piezas), asistencia1.getIdAsistencia());
+        AsistenciaNuevaPiezaDto asistenciaNuevaPiezaDto = new AsistenciaNuevaPiezaDto(asistencia1.getIdAsistencia(), piezaDao.findByNombre("Electrónica grupo VAG ").get().getIdPieza(), 5L);
+        servicioTaller.deleteAsistenciaPieza(asistenciaNuevaPiezaDto);
 
+        List<PiezasAsistenciasDto> piezasUnidades = servicioTaller.getNumeroUnidadesPiezaAsistencia(AsistenciaConversor.toPiezasReparacion(piezas), asistencia1.getIdAsistencia());
+        assertEquals("Electrónica grupo VAG ",piezasUnidades.get(0).getNombre());
+        assertNull(piezasUnidades.get(0).getNumeroUnidades());
 
 
     }
@@ -913,7 +925,7 @@ public class ServiceTallerTest {
     @Test
     public void deleteAsistenciaPiezaNotFoundAsistenciaTest(){
         registrarPiezas();
-        assertThrows(InstanceNotFoundException.class, () -> servicioTaller.deleteAsistenciaPieza(new AsistenciaNuevaPiezaDto(0L, piezaDao.findByNombre("Electrónica grupo VAG ").get().getIdPieza())));
+        assertThrows(InstanceNotFoundException.class, () -> servicioTaller.deleteAsistenciaPieza(new AsistenciaNuevaPiezaDto(0L, piezaDao.findByNombre("Electrónica grupo VAG ").get().getIdPieza(), 2L)));
     }
 
     /*** T23.2*/
@@ -924,7 +936,7 @@ public class ServiceTallerTest {
         Trabajo trabajo = registrarTrabajo(vehiculo, null);
         Asistencia asistencia1 = registrarAsistencia("Asistencia 1", trabajo, LocalDateTime.of(2021, 11, 10, 13, 15, 0, 0), usuarioDao.findByCorreoElectronicoUsuario("laura@gmail.com").get());
 
-        assertThrows(InstanceNotFoundException.class, () -> servicioTaller.deleteAsistenciaPieza(new AsistenciaNuevaPiezaDto(asistencia1.getIdAsistencia(), 0L)));
+        assertThrows(InstanceNotFoundException.class, () -> servicioTaller.deleteAsistenciaPieza(new AsistenciaNuevaPiezaDto(asistencia1.getIdAsistencia(), 0L, 2L)));
     }
 
     /*** T24.0*/

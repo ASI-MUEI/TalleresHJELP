@@ -11,13 +11,6 @@ public class TrabajoDto {
         this.descripcion = descripcion;
     }
 
-    public TrabajoDto(String nombre, String descripcion, String matricula, Boolean peritado) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.matricula = matricula;
-        this.peritado = peritado;
-    }
-
     public String getNombre() {
         return nombre;
     }
