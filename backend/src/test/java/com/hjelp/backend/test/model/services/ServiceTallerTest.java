@@ -968,7 +968,7 @@ public class ServiceTallerTest {
         assertEquals(descripcion, tipo.getDescripcion());
     }
 
-    /*** T26.0*/
+    /*** US07, T26.0*/
     @Test
     public void actualizarAsistenciaTest() throws InstanceNotFoundException{
         registrarInfoPrimera();
@@ -1009,7 +1009,7 @@ public class ServiceTallerTest {
 
     }
 
-    /*** T26.1*/
+    /*** US07, T26.1*/
     @Test
     public void actualizarAsistenciaNotFoundUserTest() {
         registrarInfoPrimera();
@@ -1040,7 +1040,7 @@ public class ServiceTallerTest {
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.actualizarAsistencia(asistenciaDto, asistencia1.getIdAsistencia()));
     }
 
-    /*** T26.2*/
+    /*** US07, T26.2*/
     @Test
     public void actualizarAsistenciaNotFoundTATest() {
         registrarInfoPrimera();
@@ -1069,7 +1069,7 @@ public class ServiceTallerTest {
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.actualizarAsistencia(asistenciaDto, asistencia1.getIdAsistencia()));
     }
 
-    /*** T26.3*/
+    /*** US07, T26.3*/
     @Test
     public void actualizarAsistenciaNotFoundPuestoTest()  {
         registrarInfoPrimera();
@@ -1098,7 +1098,7 @@ public class ServiceTallerTest {
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.actualizarAsistencia(asistenciaDto, asistencia1.getIdAsistencia()));
     }
 
-    /*** T26.4*/
+    /*** US07, T26.4*/
     @Test
     public void actualizarAsistenciaNotFoundTrabajoTest() {
         registrarInfoPrimera();
@@ -1128,7 +1128,7 @@ public class ServiceTallerTest {
         assertThrows(InstanceNotFoundException.class, () -> servicioTaller.actualizarAsistencia(asistenciaDto, asistencia1.getIdAsistencia()));
     }
 
-    /*** T26.5*/
+    /*** US07, T26.5*/
     @Test
     public void actualizarAsistenciaNotFoundAsistenciaTest() {
         registrarInfoPrimera();

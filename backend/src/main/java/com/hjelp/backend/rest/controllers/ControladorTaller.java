@@ -118,6 +118,16 @@ public class ControladorTaller {
         return servicioTaller.asignarAsistenciaFranjaHoraria(asistenciaFranjaHorariaDto);
     }
 
+    /***
+     * US07
+     */
+    @PutMapping("/asistencia/{idAsistencia}")
+    public ResponseEntity actualizarAsistencia(@RequestBody AsistenciasDto asistenciasDto,
+                                               @PathVariable long idAsistencia) throws InstanceNotFoundException {
+        servicioTaller.actualizarAsistencia(asistenciasDto, idAsistencia);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 
     /***
      * US07
@@ -244,10 +254,6 @@ public class ControladorTaller {
         resultado.setCuerpoFactura(servicioTaller.getFactura(idTrabajo));
         return resultado;
     }
-
-
-
-
 
 /************************************************************************************************************************/
     @PutMapping("/asistencias/removePieza")
